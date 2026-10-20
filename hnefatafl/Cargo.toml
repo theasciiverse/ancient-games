@@ -1,0 +1,17 @@
+[package]
+name = "hnefatafl"
+version = "0.1.0"
+description = "Hnefatafl, the Norse game of the king, in the terminal, with every living rule set"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "hnefatafl"
+path = "src/main.rs"
+
+[dependencies]
+ratatui = "0.30"
+log = "0.4"
+env_logger = "0.11"
+ancient-core = { path = "../core" }

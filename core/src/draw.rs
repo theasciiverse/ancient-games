@@ -88,12 +88,21 @@ pub fn wrap(text: &str, width: usize) -> Vec<String> {
     }
     let mut lines = Vec::new();
     let mut line = String::new();
-    for word in text.split_whitespace() {
-        if !line.is_empty() && line.chars().count() + 1 + word.chars().count() > width {
+    // Runs of spaces inside a line are kept (they set keys apart); at a
+    // break they go.
+    let mut gap = 0;
+    for word in text.split(' ') {
+        if word.is_empty() {
+            gap += 1;
+            continue;
+        }
+        let sep = gap + 1;
+        gap = 0;
+        if !line.is_empty() && line.chars().count() + sep + word.chars().count() > width {
             lines.push(std::mem::take(&mut line));
         }
         if !line.is_empty() {
-            line.push(' ');
+            line.push_str(&" ".repeat(sep));
         }
         line.push_str(word);
     }

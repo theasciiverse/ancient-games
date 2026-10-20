@@ -4,16 +4,27 @@ Terminal versions of the classic board games of the world, starting with
 the oldest: the Royal Game of Ur, Senet, Mehen, Hnefatafl and Fox &
 Geese (David, 2026-10-20). More to follow.
 
-**Status (2026-10-20):** the Royal Game of Ur is playable (`ur/`, binary
-`royal-ur`) with four rule sets: Finkel 2017, British Museum 1990s,
-R. C. Bell's betting game and the Babylonian tablet game; computer at
-three strengths or two players, keys and mouse, help. Git repo here, branch
-`main`, not on GitHub yet.
+**Status (2026-10-20):** four games playable, each its own binary, all
+with the computer at three strengths or two players at one keyboard, keys
+and mouse, a menu of rule sets with sources, and help:
+
+- Royal Game of Ur (`ur/`, `royal-ur`): Finkel 2017, British Museum
+  1990s, R. C. Bell's betting game, the Babylonian tablet game
+- Senet (`senet/`, `senet`): Kendall with five pieces (the modern
+  normative rules), Kendall with seven (Walker's account), Bell 1960
+- Fox & Geese (`fox-and-geese/`): Bell's 13 and 17 geese
+- Hnefatafl (`hnefatafl/`, `hnefatafl`): Copenhagen, Fetlar, Brandubh,
+  Tablut after Linnaeus, Tablut after Bell 1960
+
+Mehen is next. Git repo here, branch `main`, not on GitHub yet.
 
 ## Code
 
-Cargo workspace; `ur/` is the first game. No shared core yet: it is
-extracted when the second game needs it (validate before generalizing).
+Cargo workspace. `core/` (`ancient-core`) holds what the games share:
+the seedable RNG, players and strengths, drawing helpers and colours, and
+`shell` (command line, the menu, the help overlay, the terminal loop
+behind the `Program` trait). Each game has `rules.rs` (tested), `ai.rs`,
+`app.rs` (phases, the computer thinking), `ui.rs` and `main.rs`.
 
 - `ur/src/rules.rs`: board, Bell's path (positions 0 start, 1 to 14,
   15 home; 5 to 12 shared), lots, rule sets as data (`Rules`), moves;
@@ -32,8 +43,23 @@ extracted when the second game needs it (validate before generalizing).
 - `ur/src/ui.rs`: the board (lapis, shell, carnelian rosettes, the
   pieces' five dots), trays in the gaps of the outer rows, lots, menu,
   help; square size follows the terminal, 100x30 and up
-- Options: `--seed N`, `--demo` (hard against normal, restarts),
-  `--quit-after SECONDS`; `RUST_LOG=debug royal-ur 2>ur.log`
+- Hnefatafl: rules as data per rule set (`Rules`: escape to corners or
+  edge, king captured by four or like any piece, shield wall, exit fort,
+  encirclement, what a third repetition means); the throne may be passed
+  when empty; corners hostile to all, the king too only in Brandubh.
+  Setups from OpenTafl's source. Bell 1960 leaves out who moves first,
+  passing the throne, an armed king and repetitions; the help says what
+  was chosen. Copenhagen's "perpetual repetition" is read as a third
+  repetition. AI: alpha-beta with iterative deepening (easy depth 1 with
+  slips, normal 2, hard up to 8 in 1.5 s), judging king distance to an
+  escape in king moves, clear ways out, attackers beside the king,
+  material (a defender worth two attackers) and corner guards. Measured
+  2026-10-20 (one game each): in Copenhagen, Brandubh and Linnaeus' Tablut
+  hard beat easy and normal from both sides; in Fetlar hard attackers drew
+  with normal defenders; Bell's Tablut favours the king (his side won
+  every game but hard attackers against easy)
+- Options in every game: `--seed N`, `--demo` (computer against computer,
+  restarts), `--quit-after SECONDS`; `RUST_LOG=debug <binary> 2>game.log`
 
 ## Why build them
 

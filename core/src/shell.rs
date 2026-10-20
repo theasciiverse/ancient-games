@@ -175,7 +175,7 @@ pub fn draw_help(buf: &mut Buffer, area: Rect, lines: &[Help]) {
     let mut yy = y + 1;
     let mut write = |text: &str, style: Style| {
         for part in wrap(text, (w - 6) as usize) {
-            if yy >= y + h - 1 {
+            if yy >= y + h - 2 {
                 return;
             }
             put(buf, x + 3, yy, &part, style);
@@ -190,7 +190,7 @@ pub fn draw_help(buf: &mut Buffer, area: Rect, lines: &[Help]) {
             Help::Blank => write("", Style::new().bg(back)),
         }
     }
-    write("Esc or F1: back", Style::new().fg(DIM).bg(back));
+    put(buf, x + 3, y + h - 2, "Esc or F1: back", Style::new().fg(DIM).bg(back));
 }
 
 /// A game's program, as the loop drives it.
