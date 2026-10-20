@@ -18,7 +18,18 @@ and mouse, a menu of rule sets with sources, and help:
 - Mehen (`mehen/`, `mehen`): James Masters' 2024 reconstruction for two,
   four or six players (two teams; the person plays a whole team)
 
-All five games first planned are in. Own git repo, branch `main`, private at github.com/theasciiverse/ancient-games.
+All five games first planned are in. On the website mockup since 2026-10-20 as five
+separate titles in the collection `ancient-games` (hub's collections.toml;
+entries in the mockup's dev/mock-titles.toml with the other Asciiverse
+originals, licence undecided, NEW! banner), previews from each game's
+`--demo` recorded by `asciiverse/record-preview.sh` (casts in
+`asciiverse/casts/`, seed 3, Mehen seed 4), local Linux builds in the
+website's dev-releases/ancient-games (0.1.0-av.1, built from a fresh clone
+with --remap-path-prefix). Release workflow `.github/workflows/release.yml`:
+one archive per game for static musl Linux, macOS and Windows, x86-64 and
+ARM64; tag v0.1.0-av.1 pushed, no GitHub release while Actions billing
+blocks builds. Licence: the workspace Cargo.toml says MIT, set when the
+repo was started, not decided by David. Own git repo, branch `main`, private at github.com/theasciiverse/ancient-games.
 
 ## Code
 

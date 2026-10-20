@@ -1,0 +1,108 @@
+# Builds the Ancient Games for the Asciiverse catalog: each game is its own
+# title, so every target gets one archive per game, named
+# <id>-<target>.tar.gz (Linux, macOS) or .zip (Windows), plus one SHA256SUMS
+# for them all, attached to a GitHub release (hub/catalog/SCHEMA.md,
+# release.source = "github"). Tags look like v0.1.0-av.1.
+#
+# The games need nothing but a terminal, so Linux builds are static musl.
+
+name: release
+
+on:
+  push:
+    tags: ["*-av.*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "existing tag to build and release"
+        required: true
+
+env:
+  GAMES: royal-ur senet mehen hnefatafl fox-and-geese
+  TAG: ${{ inputs.tag || github.ref_name }}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { target: x86_64-unknown-linux-musl, runner: ubuntu-22.04 }
+          - { target: aarch64-unknown-linux-musl, runner: ubuntu-22.04-arm }
+          - { target: x86_64-apple-darwin, runner: macos-14 }
+          - { target: aarch64-apple-darwin, runner: macos-14 }
+          - { target: x86_64-pc-windows-msvc, runner: windows-2022 }
+          - { target: aarch64-pc-windows-msvc, runner: windows-2022 }
+    runs-on: ${{ matrix.runner }}
+    env:
+      MACOSX_DEPLOYMENT_TARGET: "11.0"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
+
+      - name: Build
+        shell: bash
+        run: |
+          if [[ "${{ matrix.target }}" == *linux-musl ]]; then
+            sudo apt-get update && sudo apt-get install -y musl-tools
+          fi
+          rustup update stable && rustup default stable
+          rustup target add ${{ matrix.target }}
+          # no paths of the build machine in the binaries
+          export RUSTFLAGS="--remap-path-prefix=$HOME=~ --remap-path-prefix=$PWD=."
+          cargo build --release --locked --target ${{ matrix.target }}
+
+      - name: Test
+        # the ARM64 Windows build is cross-compiled on an x86-64 runner
+        if: matrix.target != 'aarch64-pc-windows-msvc'
+        shell: bash
+        run: cargo test --release --locked --target ${{ matrix.target }}
+
+      - name: Package for av
+        shell: bash
+        run: |
+          # each binary at the top of its own archive, where av looks for it
+          mkdir -p dist
+          for game in $GAMES; do
+            rm -rf stage && mkdir stage
+            cp README.md stage/
+            if [[ "${{ matrix.target }}" == *windows* ]]; then
+              cp "target/${{ matrix.target }}/release/$game.exe" stage/
+              (cd stage && 7z a -tzip "../dist/$game-${{ matrix.target }}.zip" . > /dev/null)
+            else
+              cp "target/${{ matrix.target }}/release/$game" stage/
+              strip "stage/$game" || true
+              tar --owner=0 --group=0 --numeric-owner -czf "dist/$game-${{ matrix.target }}.tar.gz" -C stage . 2>/dev/null \
+                || tar -czf "dist/$game-${{ matrix.target }}.tar.gz" -C stage .
+            fi
+          done
+          ls -l dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.target }}
+          path: dist/*
+
+  release:
+    needs: build
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Checksums
+        run: cd dist && sha256sum * > SHA256SUMS && cat SHA256SUMS
+
+      - name: Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$TAG" dist/* --repo "${{ github.repository }}" \
+            --title "Ancient Games $TAG" \
+            --notes "The Royal Game of Ur, Senet, Mehen, Hnefatafl and Fox and Geese, one archive per game and platform."
