@@ -4,7 +4,35 @@ Terminal versions of the classic board games of the world, starting with
 the oldest: the Royal Game of Ur, Senet, Mehen, Hnefatafl and Fox &
 Geese (David, 2026-10-20). More to follow.
 
-**Status:** design notes only, 2026-10-20. No code.
+**Status (2026-10-20):** the Royal Game of Ur is playable (`ur/`, binary
+`royal-ur`): Finkel 2017 and British Museum 1990s rules, computer at three
+strengths or two players, keys and mouse, help. Git repo here, branch
+`main`, not on GitHub yet.
+
+## Code
+
+Cargo workspace; `ur/` is the first game. No shared core yet: it is
+extracted when the second game needs it (validate before generalizing).
+
+- `ur/src/rules.rs`: board, Bell's path (positions 0 start, 1 to 14,
+  15 home; 5 to 12 shared), lots, rule sets as data (`Rules`), moves;
+  tests
+- `ur/src/ai.rs`: `Strength::Easy` a beginner (takes, rosettes, else
+  the furthest piece), `Normal` a one-move judgement (progress, rosettes,
+  danger on the shared row), `Hard` expectimax two turns deep; extra
+  throws are free only twice in a row (chains of rosettes made the search
+  explode and the game stall, found in a demo run). Measured 2026-10-20:
+  easy beats random 189/200, normal beats easy 162/200, hard beats easy
+  81/100 and normal 53/100 (the dice decide much; a deeper search adds
+  little)
+- `ur/src/app.rs`: menu choices, phases (throw, tumble, choose, no move,
+  computer thinking, over), seedable RNG; test plays computer games to
+  the end through the phases
+- `ur/src/ui.rs`: the board (lapis, shell, carnelian rosettes, the
+  pieces' five dots), trays in the gaps of the outer rows, lots, menu,
+  help; square size follows the terminal, 100x30 and up
+- Options: `--seed N`, `--demo` (hard against normal, restarts),
+  `--quit-after SECONDS`; `RUST_LOG=debug royal-ur 2>ur.log`
 
 ## Why build them
 
@@ -155,6 +183,15 @@ seen to have a computer opponent. Nothing in the catalog either.
   variant: read there before building).
 - **Fox & Geese:** medieval; variants in number of geese and movement
   (to be checked before building).
+
+## Next for Ur
+
+- [ ] R. C. Bell's betting game (three lots read 0=4+again, 1=stop,
+      2=1+again, 3=5+again; enter on 5; fines; the pool)
+- [ ] Murray's and Masters' paths: need a square-by-square diagram first
+      (the Masters page describes them only in words)
+- [ ] The Babylonian tablet game on the Twenty Squares board
+- [ ] Move animation, sound, preview, release workflow, hub entry
 
 ## Open questions (David's to decide)
 
