@@ -44,7 +44,7 @@ pub fn choose(rules: &Rules, position: &Position, roll: u8, strength: Strength) 
     for mv in moves {
         let mut next = position.clone();
         next.play(rules, mv);
-        let value = value_after(rules, &next, side, strength.depth());
+        let value = value_after(rules, &next, side, strength.depth(), FREE_AGAINS);
         if best.is_none_or(|(v, _)| value > v) {
             best = Some((value, mv));
         }
@@ -72,9 +72,13 @@ fn naive(rules: &Rules, position: &Position, moves: &[Move]) -> Option<Move> {
         })
 }
 
+/// Throws again that do not use up a turn of lookahead, in a row. Without a
+/// limit, chains of rosettes multiply the search beyond any time.
+const FREE_AGAINS: u32 = 2;
+
 /// The expected value of `position` for `me`, with `depth` more turns of
-/// throws to look at (a throw again does not use one up).
-fn value_after(rules: &Rules, position: &Position, me: Side, depth: u32) -> f64 {
+/// throws to look at; a throw again is free up to `agains` times in a row.
+fn value_after(rules: &Rules, position: &Position, me: Side, depth: u32, agains: u32) -> f64 {
     if let Some(winner) = position.winner() {
         return if winner == me { 10_000.0 } else { -10_000.0 };
     }
@@ -91,13 +95,16 @@ fn value_after(rules: &Rules, position: &Position, me: Side, depth: u32) -> f64 
         let value = if moves.is_empty() {
             let mut next = position.clone();
             next.pass();
-            value_after(rules, &next, me, depth - 1)
+            value_after(rules, &next, me, depth - 1, FREE_AGAINS)
         } else {
             let values = moves.into_iter().map(|mv| {
                 let mut next = position.clone();
                 let out = next.play(rules, mv);
-                let left = if out.again { depth } else { depth - 1 };
-                value_after(rules, &next, me, left)
+                if out.again && agains > 0 {
+                    value_after(rules, &next, me, depth, agains - 1)
+                } else {
+                    value_after(rules, &next, me, depth - 1, FREE_AGAINS)
+                }
             });
             if mover == me {
                 values.fold(f64::NEG_INFINITY, f64::max)
@@ -283,5 +290,36 @@ mod measure {
         println!("normal vs easy {}/200", match_up(Some(Strength::Normal), Some(Strength::Easy), 200, 3));
         println!("hard vs easy {}/100", match_up(Some(Strength::Hard), Some(Strength::Easy), 100, 4));
         println!("hard vs normal {}/100", match_up(Some(Strength::Hard), Some(Strength::Normal), 100, 5));
+    }
+}
+
+#[cfg(test)]
+mod timing {
+    use super::*;
+    use crate::rules::Rules;
+    use std::time::Instant;
+
+    #[test]
+    fn hard_move_time() {
+        let rules = Rules::finkel_2017();
+        let mut p = Position::new(&rules, Side::Light);
+        p.pieces[0] = vec![0, 0, 2, 5, 7, 10, 13];
+        p.pieces[1] = vec![0, 1, 3, 6, 9, 11, 14];
+        // Many pieces able to hop between rosettes.
+        let mut q = Position::new(&rules, Side::Light);
+        q.pieces[0] = vec![0, 0, 0, 4, 6, 10, 12];
+        q.pieces[1] = vec![0, 0, 0, 0, 1, 2, 3];
+        for roll in 1..=4 {
+            let t = Instant::now();
+            choose(&rules, &q, roll, Strength::Hard);
+            println!("rosettes roll {roll}: {:?}", t.elapsed());
+        }
+        for strength in [Strength::Normal, Strength::Hard] {
+            for roll in 1..=4 {
+                let t = Instant::now();
+                let mv = choose(&rules, &p, roll, strength);
+                println!("{strength:?} roll {roll}: {:?} in {:?}", mv, t.elapsed());
+            }
+        }
     }
 }
