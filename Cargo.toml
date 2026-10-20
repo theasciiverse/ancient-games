@@ -1,0 +1,12 @@
+[workspace]
+resolver = "3"
+members = ["ur"]
+
+[workspace.package]
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/theasciiverse/ancient-games"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
