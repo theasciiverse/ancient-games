@@ -4,3 +4,4 @@
 pub mod draw;
 pub mod player;
 pub mod rng;
+pub mod shell;

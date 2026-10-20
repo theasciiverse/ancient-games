@@ -2,8 +2,9 @@
 //! lazuli, shell and red limestone), the pieces with their five dots, the
 //! throwing lots, the menu and the help.
 
-use crate::app::{Game, Phase, Setup};
-use ancient_core::draw::{AMBER, BG, DIM, TEXT, centre, fill, outline, put, wrap};
+use crate::app::{Game, Phase};
+use ancient_core::draw::{AMBER, BG, DIM, TEXT, centre, fill, outline, put};
+use ancient_core::shell::{Help, Menu};
 use ancient_core::player::Player;
 use crate::rules::{Board, Lots, Move, ROWS, Rules, START, Side, TABLET_TAGS};
 use ratatui::buffer::Buffer;
@@ -432,150 +433,57 @@ fn draw_bones(buf: &mut Buffer, area: Rect, y: u16, game: &Game) {
     );
 }
 
-/// The menu before a game.
-pub fn draw_menu(buf: &mut Buffer, area: Rect, setup: &Setup, row: usize, rules: &[Rules]) {
-    fill(buf, area, BG);
-    let w = area.width.min(76);
-    let x = area.x + (area.width - w) / 2;
-    let mut y = area.y + area.height.saturating_sub(22) / 2;
-    let panel = Rect::new(x, y, w, 1);
-
-    centre(
-        buf,
-        panel,
-        y,
-        "THE ROYAL GAME OF UR",
-        Style::new().fg(AMBER).bg(BG).add_modifier(Modifier::BOLD),
-    );
-    y += 1;
-    centre(
-        buf,
-        panel,
-        y,
-        "Ur, Mesopotamia, about 2600 BC. Rules from a Babylonian tablet of 177 BC.",
-        Style::new().fg(DIM).bg(BG),
-    );
-    y += 3;
-
-    let chosen = &rules[setup.rules];
-    let items = [
-        ("Rules", chosen.name.to_string()),
-        ("Play against", Setup::OPPONENTS[setup.opponent].to_string()),
-        (
-            "You play",
-            format!(
-                "{} ({})",
-                setup.side.name(),
-                if setup.side == Side::Light { "near side" } else { "far side" }
-            ),
-        ),
-    ];
-    for (i, (label, value)) in items.iter().enumerate() {
-        let active = i == row;
-        let style = if active {
-            Style::new().fg(AMBER).bg(BG).add_modifier(Modifier::BOLD)
-        } else {
-            Style::new().fg(TEXT).bg(BG)
-        };
-        put(buf, x + 4, y, if active { "▶" } else { " " }, style);
-        put(buf, x + 6, y, label, style);
-        put(buf, x + 22, y, &format!("◀ {value} ▶"), style);
-        y += 2;
+/// The menu's text.
+pub fn menu(rules: &[Rules], chosen: usize) -> Menu<'_> {
+    Menu {
+        title: "THE ROYAL GAME OF UR",
+        subtitle: "Ur, Mesopotamia, about 2600 BC. Rules from a Babylonian tablet of 177 BC.",
+        rules: rules.iter().map(|r| r.name).collect(),
+        source: rules[chosen].source,
+        sides: ["Light (near side)", "Dark (far side)"],
     }
-
-    // Where the chosen rules come from.
-    y += 1;
-    for line in wrap(chosen.source, (w - 8) as usize) {
-        put(buf, x + 6, y, &line, Style::new().fg(DIM).bg(BG));
-        y += 1;
-    }
-
-    y += 2;
-    let start = if row == 3 {
-        Style::new().fg(BG).bg(AMBER).add_modifier(Modifier::BOLD)
-    } else {
-        Style::new().fg(AMBER).bg(BG)
-    };
-    centre(buf, panel, y, "  Enter: play  ", start);
-    y += 2;
-    centre(
-        buf,
-        panel,
-        y,
-        "Up and down: choose   Left and right: change   F1: how to play   Q: quit",
-        Style::new().fg(DIM).bg(BG),
-    );
 }
 
-/// How to play, and what is known of the game, over the screen.
-pub fn draw_help(buf: &mut Buffer, area: Rect, rules: &Rules) {
-    let w = area.width.min(84);
-    let h = area.height.min(32);
-    let x = area.x + (area.width - w) / 2;
-    let y = area.y + (area.height - h) / 2;
-    let panel = Rect::new(x, y, w, h);
-    fill(buf, panel, Color::Rgb(18, 18, 26));
-    let title = Style::new().fg(AMBER).bg(Color::Rgb(18, 18, 26)).add_modifier(Modifier::BOLD);
-    let text = Style::new().fg(TEXT).bg(Color::Rgb(18, 18, 26));
-    let dim = Style::new().fg(DIM).bg(Color::Rgb(18, 18, 26));
-
-    let mut lines: Vec<(String, Style)> = vec![
-        ("HOW TO PLAY".into(), title),
-        (String::new(), text),
-        (
+/// How to play, and what is known of the game.
+pub fn help(rules: &Rules) -> Vec<Help> {
+    let mut lines = vec![
+        Help::Heading("HOW TO PLAY".into()),
+        Help::Blank,
+        Help::Text(
             "Race your pieces from the start, along your own row, down the shared middle \
-             row and back onto your own row, then off the board. First with every piece \
-             home wins. One piece per square."
+             row and on, then off the board. First with every piece home wins. One piece \
+             per square."
                 .into(),
-            text,
         ),
-        (
-            "Land on an enemy piece in the middle row and it goes back to the start. \
-             To bear a piece off you need the exact throw."
+        Help::Text(
+            "Land on an enemy piece in the middle row and it goes back to the start. To \
+             bear a piece off you need the exact throw."
                 .into(),
-            text,
         ),
-        (String::new(), text),
-        (format!("{} RULES", rules.name.to_uppercase()), title),
+        Help::Blank,
+        Help::Heading(format!("{} RULES", rules.name.to_uppercase())),
     ];
-    for line in rules.summary {
-        lines.push((line.to_string(), text));
-    }
+    lines.extend(rules.summary.iter().map(|l| Help::Text(l.to_string())));
     lines.extend([
-        (String::new(), text),
-        ("KEYS".into(), title),
-        (
-            "Space or Enter: throw   Arrows or Tab: choose a piece   Enter: move   \
-             Mouse: click a lit piece to move it   M: menu   Q: quit"
+        Help::Blank,
+        Help::Heading("KEYS".into()),
+        Help::Text(
+            "Space or Enter: throw   Arrows or Tab: choose a piece   Enter: move   D: dare \
+             the ox bone   Mouse: click a lit piece   M: menu   Q: quit"
                 .into(),
-            text,
         ),
-        (String::new(), text),
-        ("WHAT WE KNOW".into(), title),
-        (
+        Help::Blank,
+        Help::Heading("WHAT WE KNOW".into()),
+        Help::Quiet(
             "The game was played across the Near East for three thousand years. Its rules \
              were lost until Irving Finkel of the British Museum read a clay tablet written \
              by the Babylonian scribe Itti-Marduk-balatu in 177 BC, catalogued for decades \
              as bird omens. The rules here are reconstructions from that tablet and the \
              board; where scholars differ, the menu lets you choose."
                 .into(),
-            dim,
         ),
-        (String::new(), text),
-        ("Esc or F1: back".into(), dim),
+        Help::Blank,
     ]);
-    let mut yy = y + 1;
-    for (line, style) in lines.drain(..) {
-        for part in wrap(&line, (w - 6) as usize) {
-            if yy >= y + h - 1 {
-                break;
-            }
-            put(buf, x + 3, yy, &part, style);
-            yy += 1;
-        }
-        if line.is_empty() {
-            yy += 0;
-        }
-    }
+    lines
 }
 

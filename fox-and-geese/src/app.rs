@@ -4,46 +4,12 @@
 
 use crate::ai;
 use crate::rules::{Move, Point, Position, Rules, Side, on_board};
-pub use ancient_core::player::{Player, Strength};
+pub use ancient_core::player::Player;
 pub use ancient_core::rng::Rng;
 use log::info;
 use std::collections::HashMap;
 use std::thread::JoinHandle;
 use std::time::{Duration, Instant};
-
-/// The choices on the menu.
-#[derive(Clone, Debug)]
-pub struct Setup {
-    pub rules: usize,
-    /// 0 to 2: computer easy, normal, hard; 3: two players.
-    pub opponent: usize,
-    /// The side the (first) human plays.
-    pub side: Side,
-}
-
-impl Setup {
-    pub const OPPONENTS: [&'static str; 4] = [
-        "the computer, easy",
-        "the computer, normal",
-        "the computer, hard",
-        "a friend at this keyboard",
-    ];
-
-    /// Who plays the fox and who the geese.
-    pub fn players(&self) -> [Player; 2] {
-        let computer = match self.opponent {
-            0 => Some(Strength::Easy),
-            1 => Some(Strength::Normal),
-            2 => Some(Strength::Hard),
-            _ => None,
-        };
-        let them = computer.map_or(Player::Human, Player::Computer);
-        match self.side {
-            Side::Fox => [Player::Human, them],
-            Side::Geese => [them, Player::Human],
-        }
-    }
-}
 
 /// How the game stands.
 pub enum Phase {
@@ -249,6 +215,7 @@ impl Game {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use ancient_core::player::Strength;
 
     /// The person's picking: a goose, then where it goes.
     #[test]

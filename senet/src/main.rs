@@ -10,27 +10,15 @@ mod app;
 mod rules;
 mod ui;
 
-use app::{Game, Phase, Player, Rng, Setup, Strength};
+use ancient_core::player::{Player, Strength};
+use ancient_core::rng::Rng;
+use ancient_core::shell::{self, Program, Setup};
+use app::{Game, Phase};
 use log::{debug, info};
-use ratatui::crossterm::event::{
-    self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode, KeyEventKind, MouseButton,
-    MouseEventKind,
-};
-use ratatui::crossterm::execute;
-use rules::{Rules, Side};
+use ratatui::crossterm::event::KeyCode;
+use rules::Rules;
 use std::io;
-use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
-
-const FRAME: Duration = Duration::from_millis(33);
-
-fn arg(name: &str) -> Option<String> {
-    let args: Vec<String> = std::env::args().collect();
-    args.iter().position(|a| a == name).and_then(|i| args.get(i + 1)).cloned()
-}
-
-fn flag(name: &str) -> bool {
-    std::env::args().any(|a| a == name)
-}
+use std::time::{Duration, Instant};
 
 enum Screen {
     Menu { row: usize },
@@ -61,82 +49,51 @@ impl App {
         self.game = Some(Game::new(self.rules[self.setup.rules].clone(), players, rng));
         self.screen = Screen::Playing;
     }
+}
 
+impl Program for App {
     fn key(&mut self, code: KeyCode, now: Instant) {
         debug!("key {code:?}");
         if self.help {
-            if matches!(code, KeyCode::Esc | KeyCode::F(1) | KeyCode::Char('?')) {
-                self.help = false;
-            } else if matches!(code, KeyCode::Char('q') | KeyCode::Char('Q')) {
-                self.quit = true;
+            match code {
+                KeyCode::Esc | KeyCode::F(1) | KeyCode::Char('?') => self.help = false,
+                KeyCode::Char('q') | KeyCode::Char('Q') => self.quit = true,
+                _ => {}
             }
             return;
         }
         match code {
-            KeyCode::Char('q') | KeyCode::Char('Q') => {
-                self.quit = true;
-                return;
-            }
-            KeyCode::F(1) | KeyCode::Char('?') => {
-                self.help = true;
-                return;
-            }
+            KeyCode::Char('q') | KeyCode::Char('Q') => return self.quit = true,
+            KeyCode::F(1) | KeyCode::Char('?') => return self.help = true,
             _ => {}
         }
         match &mut self.screen {
-            Screen::Menu { row } => match code {
-                KeyCode::Up => *row = (*row + 3) % 4,
-                KeyCode::Down | KeyCode::Tab => *row = (*row + 1) % 4,
-                KeyCode::Left | KeyCode::Right => {
-                    let step: isize = if code == KeyCode::Left { -1 } else { 1 };
-                    match *row {
-                        0 => {
-                            let n = self.rules.len() as isize;
-                            self.setup.rules =
-                                (self.setup.rules as isize + step).rem_euclid(n) as usize;
-                        }
-                        1 => {
-                            self.setup.opponent =
-                                (self.setup.opponent as isize + step).rem_euclid(4) as usize;
-                        }
-                        2 => self.setup.side = self.setup.side.other(),
-                        _ => {}
-                    }
+            Screen::Menu { row } => {
+                if shell::menu_key(&mut self.setup, row, self.rules.len(), code) {
+                    self.start();
                 }
-                KeyCode::Enter | KeyCode::Char(' ') => self.start(),
-                _ => {}
-            },
+            }
             Screen::Playing => {
                 let Some(game) = self.game.as_mut() else { return };
-                match &game.phase {
-                    Phase::Over { .. } => match code {
+                if matches!(game.phase, Phase::Over { .. }) {
+                    match code {
                         KeyCode::Enter | KeyCode::Char(' ') => self.start(),
                         KeyCode::Char('m') | KeyCode::Char('M') | KeyCode::Esc => {
-                            self.screen = Screen::Menu { row: 3 };
-                        }
-                        _ => {}
-                    },
-                    Phase::Choosing { .. } => match code {
-                        KeyCode::Left | KeyCode::Up | KeyCode::BackTab => game.select(-1),
-                        KeyCode::Right | KeyCode::Down | KeyCode::Tab => game.select(1),
-                        KeyCode::Enter | KeyCode::Char(' ') => game.confirm(),
-                        KeyCode::Char('m') | KeyCode::Char('M') => {
                             self.screen = Screen::Menu { row: 3 }
                         }
                         _ => {}
-                    },
-                    _ => match code {
-                        KeyCode::Enter | KeyCode::Char(' ') if game.human_to_move() => {
-                            game.throw(now)
-                        }
-                        KeyCode::Char('r') | KeyCode::Char('R') if game.human_to_move() => {
-                            game.rescue()
-                        }
-                        KeyCode::Char('m') | KeyCode::Char('M') => {
-                            self.screen = Screen::Menu { row: 3 }
-                        }
-                        _ => {}
-                    },
+                    }
+                    return;
+                }
+                let choosing = matches!(game.phase, Phase::Choosing { .. });
+                match code {
+                    KeyCode::Left | KeyCode::Up | KeyCode::BackTab if choosing => game.select(-1),
+                    KeyCode::Right | KeyCode::Down | KeyCode::Tab if choosing => game.select(1),
+                    KeyCode::Enter | KeyCode::Char(' ') if choosing => game.confirm(),
+                    KeyCode::Enter | KeyCode::Char(' ') if game.human_to_move() => game.throw(now),
+                    KeyCode::Char('r') | KeyCode::Char('R') if game.human_to_move() => game.rescue(),
+                    KeyCode::Char('m') | KeyCode::Char('M') => self.screen = Screen::Menu { row: 3 },
+                    _ => {}
                 }
             }
         }
@@ -152,12 +109,7 @@ impl App {
         match &game.phase {
             Phase::ToThrow if game.human_to_move() => game.throw(now),
             Phase::Choosing { .. } => {
-                let house = self
-                    .hits
-                    .squares
-                    .iter()
-                    .find(|(r, _)| r.contains((x, y).into()))
-                    .map(|&(_, h)| h);
+                let house = self.hits.squares.iter().find(|(r, _)| r.contains((x, y).into())).map(|&(_, h)| h);
                 if let Some(house) = house
                     && game.select_from(house)
                 {
@@ -191,7 +143,9 @@ impl App {
         let area = frame.area();
         let buf = frame.buffer_mut();
         match &self.screen {
-            Screen::Menu { row } => ui::draw_menu(buf, area, &self.setup, *row, &self.rules),
+            Screen::Menu { row } => {
+                shell::draw_menu(buf, area, &ui::menu(&self.rules, self.setup.rules), &self.setup, *row)
+            }
             Screen::Playing => {
                 if let Some(game) = &self.game {
                     ui::draw_game(buf, area, game, &mut self.hits);
@@ -199,28 +153,23 @@ impl App {
             }
         }
         if self.help {
-            ui::draw_help(buf, area, &self.rules[self.setup.rules]);
+            shell::draw_help(buf, area, &ui::help(&self.rules[self.setup.rules]));
         }
+    }
+
+    fn quit(&self) -> bool {
+        self.quit
     }
 }
 
 fn main() -> io::Result<()> {
     env_logger::init();
-    let seed = arg("--seed").and_then(|s| s.parse().ok()).unwrap_or_else(|| {
-        SystemTime::now()
-            .duration_since(UNIX_EPOCH)
-            .map(|d| d.as_nanos() as u64)
-            .unwrap_or(1)
-    });
-    let quit_after = arg("--quit-after")
-        .and_then(|s| s.parse::<f64>().ok())
-        .map(Duration::from_secs_f64);
-    let demo = flag("--demo");
+    let seed = shell::seed();
+    let demo = shell::flag("--demo");
     info!("start: seed {seed}, demo {demo}");
-
     let mut app = App {
         rules: Rules::all(),
-        setup: Setup { rules: 0, opponent: 1, side: Side::White },
+        setup: Setup { rules: 0, opponent: 1, side: 0 },
         screen: Screen::Menu { row: 3 },
         game: None,
         help: false,
@@ -233,40 +182,7 @@ fn main() -> io::Result<()> {
     if demo {
         app.start();
     }
-
-    let mut terminal = ratatui::init();
-    execute!(io::stdout(), EnableMouseCapture)?;
-    let started = Instant::now();
-    let result = (|| -> io::Result<()> {
-        while !app.quit {
-            let now = Instant::now();
-            if quit_after.is_some_and(|q| now - started >= q) {
-                break;
-            }
-            app.tick(now);
-            terminal.draw(|frame| app.draw(frame))?;
-            if event::poll(FRAME)? {
-                match event::read()? {
-                    Event::Key(key) if key.kind == KeyEventKind::Press => {
-                        if key.code == KeyCode::Char('c')
-                            && key.modifiers.contains(event::KeyModifiers::CONTROL)
-                        {
-                            app.quit = true;
-                        } else {
-                            app.key(key.code, Instant::now());
-                        }
-                    }
-                    Event::Mouse(mouse) if mouse.kind == MouseEventKind::Down(MouseButton::Left) => {
-                        app.click(mouse.column, mouse.row, Instant::now());
-                    }
-                    _ => {}
-                }
-            }
-        }
-        Ok(())
-    })();
-    execute!(io::stdout(), DisableMouseCapture)?;
-    ratatui::restore();
+    let result = shell::run(&mut app);
     info!("quit");
     result
 }

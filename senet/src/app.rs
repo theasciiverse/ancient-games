@@ -3,43 +3,10 @@
 
 use crate::ai;
 use crate::rules::{Action, OFF, Outcome, Position, Rules, Side, Variant};
-pub use ancient_core::player::{Player, Strength};
+pub use ancient_core::player::Player;
 pub use ancient_core::rng::Rng;
 use log::{debug, info};
 use std::time::{Duration, Instant};
-
-/// The choices on the menu.
-#[derive(Clone, Debug)]
-pub struct Setup {
-    pub rules: usize,
-    /// 0 to 2: computer easy, normal, hard; 3: two players.
-    pub opponent: usize,
-    /// The side the (first) human plays.
-    pub side: Side,
-}
-
-impl Setup {
-    pub const OPPONENTS: [&'static str; 4] = [
-        "the computer, easy",
-        "the computer, normal",
-        "the computer, hard",
-        "a friend at this keyboard",
-    ];
-
-    pub fn players(&self) -> [Player; 2] {
-        let computer = match self.opponent {
-            0 => Some(Strength::Easy),
-            1 => Some(Strength::Normal),
-            2 => Some(Strength::Hard),
-            _ => None,
-        };
-        let them = computer.map_or(Player::Human, Player::Computer);
-        match self.side {
-            Side::White => [Player::Human, them],
-            Side::Black => [them, Player::Human],
-        }
-    }
-}
 
 /// What is happening in a game.
 #[derive(Clone, Debug, PartialEq)]
@@ -296,6 +263,7 @@ fn describe(side: Side, action: Action, out: Outcome) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use ancient_core::player::Strength;
 
     #[test]
     fn computer_games_run_to_the_end() {

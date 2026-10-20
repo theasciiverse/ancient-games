@@ -2,11 +2,12 @@
 //! houses, the pieces in ivory and ebony, the throwing sticks or the long
 //! die, the menu and the help.
 
-use crate::app::{Game, Phase, Setup};
+use crate::app::{Game, Phase};
 use crate::rules::{
     self, Action, BEAUTY, HORUS, OFF, RE_ATOUM, REBIRTH, Rules, Side, THREE_TRUTHS, Variant, WATER,
 };
-use ancient_core::draw::{AMBER, BG, DIM, TEXT, centre, fill, outline, put, wrap};
+use ancient_core::draw::{AMBER, BG, DIM, TEXT, centre, fill, outline, put};
+use ancient_core::shell::{Help, Menu};
 use ancient_core::player::Player;
 use ratatui::buffer::Buffer;
 use ratatui::layout::Rect;
@@ -222,118 +223,50 @@ fn draw_throw(buf: &mut Buffer, area: Rect, y: u16, game: &Game) {
     put(buf, x0 + 18, y + 1, &result, result_style);
 }
 
-pub fn draw_menu(buf: &mut Buffer, area: Rect, setup: &Setup, row: usize, rules: &[Rules]) {
-    fill(buf, area, BG);
-    let w = area.width.min(76);
-    let x = area.x + (area.width - w) / 2;
-    let mut y = area.y + area.height.saturating_sub(22) / 2;
-    let panel = Rect::new(x, y, w, 1);
-    centre(buf, panel, y, "SENET", Style::new().fg(AMBER).bg(BG).add_modifier(Modifier::BOLD));
-    y += 1;
-    centre(
-        buf,
-        panel,
-        y,
-        "The game of passing. Egypt, from about 3000 BC. Its rules are lost.",
-        Style::new().fg(DIM).bg(BG),
-    );
-    y += 3;
-    let chosen = &rules[setup.rules];
-    let items = [
-        ("Rules", chosen.name.to_string()),
-        ("Play against", Setup::OPPONENTS[setup.opponent].to_string()),
-        ("You play", setup.side.name().to_string()),
-    ];
-    for (i, (label, value)) in items.iter().enumerate() {
-        let active = i == row;
-        let style = if active {
-            Style::new().fg(AMBER).bg(BG).add_modifier(Modifier::BOLD)
-        } else {
-            Style::new().fg(TEXT).bg(BG)
-        };
-        put(buf, x + 4, y, if active { "▶" } else { " " }, style);
-        put(buf, x + 6, y, label, style);
-        put(buf, x + 22, y, &format!("◀ {value} ▶"), style);
-        y += 2;
+/// The menu's text.
+pub fn menu(rules: &[Rules], chosen: usize) -> Menu<'_> {
+    Menu {
+        title: "SENET",
+        subtitle: "The game of passing. Egypt, from about 3000 BC. Its rules are lost.",
+        rules: rules.iter().map(|r| r.name).collect(),
+        source: rules[chosen].source,
+        sides: ["White", "Black"],
     }
-    y += 1;
-    for line in wrap(chosen.source, (w - 8) as usize) {
-        put(buf, x + 6, y, &line, Style::new().fg(DIM).bg(BG));
-        y += 1;
-    }
-    y += 2;
-    let start = if row == 3 {
-        Style::new().fg(BG).bg(AMBER).add_modifier(Modifier::BOLD)
-    } else {
-        Style::new().fg(AMBER).bg(BG)
-    };
-    centre(buf, panel, y, "  Enter: play  ", start);
-    y += 2;
-    centre(
-        buf,
-        panel,
-        y,
-        "Up and down: choose   Left and right: change   F1: how to play   Q: quit",
-        Style::new().fg(DIM).bg(BG),
-    );
 }
 
-pub fn draw_help(buf: &mut Buffer, area: Rect, rules: &Rules) {
-    let back = Color::Rgb(18, 18, 26);
-    let w = area.width.min(84);
-    let h = area.height.min(34);
-    let x = area.x + (area.width - w) / 2;
-    let y = area.y + (area.height - h) / 2;
-    fill(buf, Rect::new(x, y, w, h), back);
-    let title = Style::new().fg(AMBER).bg(back).add_modifier(Modifier::BOLD);
-    let text = Style::new().fg(TEXT).bg(back);
-    let dim = Style::new().fg(DIM).bg(back);
-    let mut lines: Vec<(String, Style)> = vec![
-        ("HOW TO PLAY".into(), title),
-        (String::new(), text),
-        (
+/// How to play, and what is known of the game.
+pub fn help(rules: &Rules) -> Vec<Help> {
+    let mut lines = vec![
+        Help::Heading("HOW TO PLAY".into()),
+        Help::Blank,
+        Help::Text(
             "Race your pieces along the S: the top row left to right, the middle row \
              right to left, the bottom row left to right, and off the board."
                 .into(),
-            text,
         ),
-        (String::new(), text),
-        (format!("{} RULES", rules.name.to_uppercase()), title),
+        Help::Blank,
+        Help::Heading(format!("{} RULES", rules.name.to_uppercase())),
     ];
-    for line in rules.summary {
-        lines.push((line.to_string(), text));
-    }
+    lines.extend(rules.summary.iter().map(|l| Help::Text(l.to_string())));
     lines.extend([
-        (String::new(), text),
-        ("KEYS".into(), title),
-        (
+        Help::Blank,
+        Help::Heading("KEYS".into()),
+        Help::Text(
             "Space or Enter: throw   Arrows or Tab: choose   Enter: move   R: rescue from the \
              water   Mouse: click a lit piece   M: menu   Q: quit"
                 .into(),
-            text,
         ),
-        (String::new(), text),
-        ("WHAT WE KNOW".into(), title),
-        (
+        Help::Blank,
+        Help::Heading("WHAT WE KNOW".into()),
+        Help::Quiet(
             "Senet was played in Egypt for some three thousand years and became a game of \
              the soul's passage through the netherworld; boards were buried with the dead, \
              Tutankhamun among them. No rules survive. What you play here are modern \
              reconstructions from boards, pieces and tomb paintings: Timothy Kendall's \
              (1978) and R. C. Bell's (1960)."
                 .into(),
-            dim,
         ),
-        (String::new(), text),
-        ("Esc or F1: back".into(), dim),
+        Help::Blank,
     ]);
-    let mut yy = y + 1;
-    for (line, style) in lines {
-        for part in wrap(&line, (w - 6) as usize) {
-            if yy >= y + h - 1 {
-                break;
-            }
-            put(buf, x + 3, yy, &part, style);
-            yy += 1;
-        }
-    }
+    lines
 }

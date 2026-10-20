@@ -2,44 +2,11 @@
 //! a move, the computer's turns, and the end.
 
 use crate::ai;
-pub use ancient_core::player::{Player, Strength};
+pub use ancient_core::player::Player;
 pub use ancient_core::rng::Rng;
 use crate::rules::{Lots, Move, Outcome, Position, Rosettes, Rules, Side, TABLET_TOKENS, Throw};
 use log::{debug, info};
 use std::time::{Duration, Instant};
-
-/// The choices on the menu.
-#[derive(Clone, Debug)]
-pub struct Setup {
-    pub rules: usize,
-    /// 0 to 2: computer easy, normal, hard; 3: two players.
-    pub opponent: usize,
-    /// The side the (first) human plays.
-    pub side: Side,
-}
-
-impl Setup {
-    pub const OPPONENTS: [&'static str; 4] = [
-        "the computer, easy",
-        "the computer, normal",
-        "the computer, hard",
-        "a friend at this keyboard",
-    ];
-
-    pub fn players(&self) -> [Player; 2] {
-        let computer = match self.opponent {
-            0 => Some(Strength::Easy),
-            1 => Some(Strength::Normal),
-            2 => Some(Strength::Hard),
-            _ => None,
-        };
-        let them = computer.map_or(Player::Human, Player::Computer);
-        match self.side {
-            Side::Light => [Player::Human, them],
-            Side::Dark => [them, Player::Human],
-        }
-    }
-}
 
 /// What is happening in a game.
 #[derive(Clone, Debug, PartialEq)]
@@ -402,6 +369,7 @@ fn describe(who: &str, mv: Move, out: Outcome, throw_again: bool) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use ancient_core::player::Strength;
     use crate::rules::Rules;
 
     /// Two computers play whole games through the same phases the screen
@@ -434,6 +402,7 @@ mod tests {
 #[cfg(test)]
 mod length {
     use super::*;
+    use ancient_core::player::Strength;
     use crate::rules::Rules;
 
     #[test]
