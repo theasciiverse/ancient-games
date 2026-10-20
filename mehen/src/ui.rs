@@ -238,16 +238,14 @@ fn draw_hand(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     } else if let Some((hidden, guess)) = shown {
         let colour = Color::Rgb(232, 228, 216);
         let w = 2 * hidden as u16 + 3;
-        put(buf, x, y + 2, &" ".repeat(w as usize), Style::new().bg(palm));
+        for row in 2..5 {
+            put(buf, x, y + row, &" ".repeat(w as usize), Style::new().bg(palm));
+        }
         let mut mx = x + 2;
         for _ in 0..hidden {
             put(buf, mx, y + 3, "●", Style::new().fg(colour).bg(palm));
             mx += 2;
         }
-        put(buf, x, y + 3, " ", Style::new().bg(palm));
-        put(buf, x + 1, y + 3, " ", Style::new().bg(palm));
-        put(buf, mx, y + 3, " ", Style::new().bg(palm));
-        put(buf, x, y + 4, &" ".repeat(w as usize), Style::new().bg(palm));
         let verdict = if hidden == guess { "right!" } else { "wrong" };
         let style = Style::new().fg(AMBER).bg(BG).add_modifier(Modifier::BOLD);
         put(buf, x + w + 2, y + 3, &format!("{hidden} hidden, {guess} guessed: {verdict}"), style);
