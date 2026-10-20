@@ -15,8 +15,10 @@ and mouse, a menu of rule sets with sources, and help:
 - Fox & Geese (`fox-and-geese/`): Bell's 13 and 17 geese
 - Hnefatafl (`hnefatafl/`, `hnefatafl`): Copenhagen, Fetlar, Brandubh,
   Tablut after Linnaeus, Tablut after Bell 1960
+- Mehen (`mehen/`, `mehen`): James Masters' 2024 reconstruction for two,
+  four or six players (two teams; the person plays a whole team)
 
-Mehen is next. Git repo here, branch `main`, not on GitHub yet.
+All five games first planned are in. Git repo here, branch `main`, not on GitHub yet.
 
 ## Code
 
@@ -58,6 +60,21 @@ behind the `Program` trait). Each game has `rules.rs` (tested), `ai.rs`,
   hard beat easy and normal from both sides; in Fetlar hard attackers drew
   with normal defenders; Bell's Tablut favours the king (his side won
   every game but hard attackers against easy)
+- Mehen: the 70-square coil is generated (14 by 8 grid, one gap between
+  coils, head near the middle). Positions 0 (start), 1 to 70, 71 reborn.
+  Choices where Masters is silent: the side to start by a coin; a lion
+  sent back with its pharaoh stays on it; if every free pharaoh of the
+  guessing team is held by a lion, a right guess moves nobody (the lion
+  may still be set); the computer always sets a lion when it can (easy
+  forgets a third of the time). Two people at one keyboard get a "look
+  away" screen before each hiding. AI: the hiding and guessing mixes are
+  the equilibrium of the one-hand game (fictitious play; a right guess
+  costs the hider the steps plus about 6 squares for a lion), easy random,
+  hard half the time best-responds to the opponent's habits; finding:
+  with no lion at stake, hiding one marble never pays. Measured 2026-10-20
+  (400 games each): two players: normal beats easy 59%, hard beats easy
+  85% and normal 68%, about 60 hands a game; six players: hard beats easy
+  97%, about 150 hands
 - Options in every game: `--seed N`, `--demo` (computer against computer,
   restarts), `--quit-after SECONDS`; `RUST_LOG=debug <binary> 2>game.log`
 
