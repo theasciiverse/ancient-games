@@ -18,7 +18,7 @@ and mouse, a menu of rule sets with sources, and help:
 - Mehen (`mehen/`, `mehen`): James Masters' 2024 reconstruction for two,
   four or six players (two teams; the person plays a whole team)
 
-All five games first planned are in. Git repo here, branch `main`, not on GitHub yet.
+All five games first planned are in. Own git repo, branch `main`, private at github.com/theasciiverse/ancient-games.
 
 ## Code
 
