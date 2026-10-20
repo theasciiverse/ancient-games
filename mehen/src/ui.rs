@@ -127,7 +127,7 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
                 hits.pharaohs.push((rect, p));
                 draw_marble(buf, rect, marble(game, p), stone);
                 if let Some((team, _)) = game.state.attacker(p) {
-                    put(buf, rect.right() - 1, rect.y, "L", Style::new().fg(cat(team)).bg(stone).add_modifier(Modifier::BOLD));
+                    put(buf, rect.right() - 1, rect.y, "L", Style::new().fg(cat(team)).bg(DISC).add_modifier(Modifier::BOLD));
                 }
                 if choosable.contains(&p) {
                     frame(buf, rect, if chosen == Some(p) { AMBER } else { INCISED });
