@@ -4,7 +4,6 @@ members = ["core", "fox-and-geese", "hnefatafl", "mehen", "senet", "ur"]
 
 [workspace.package]
 edition = "2024"
-license = "MIT"
 repository = "https://github.com/theasciiverse/ancient-games"
 
 [profile.release]

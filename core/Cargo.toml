@@ -3,7 +3,6 @@ name = "ancient-core"
 version = "0.1.0"
 description = "The parts the Ancient Games share"
 edition.workspace = true
-license.workspace = true
 repository.workspace = true
 
 [dependencies]

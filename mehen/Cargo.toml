@@ -3,7 +3,6 @@ name = "mehen"
 version = "0.1.0"
 description = "Mehen, the Egyptian game of the coiled snake, in the terminal"
 edition.workspace = true
-license.workspace = true
 repository.workspace = true
 
 [[bin]]
