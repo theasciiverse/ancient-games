@@ -63,12 +63,6 @@ pub fn square(house: u8) -> (usize, usize) {
     (row, col)
 }
 
-/// The house at a grid square.
-pub fn house_at(row: usize, col: usize) -> u8 {
-    let col = if row == 1 { 9 - col } else { col };
-    (row * 10 + col + 1) as u8
-}
-
 /// The rule sets.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Variant {
@@ -567,6 +561,12 @@ mod tests {
         }
         p.to_move = to_move;
         p
+    }
+
+    /// The house at a grid square.
+    fn house_at(row: usize, col: usize) -> u8 {
+        let col = if row == 1 { 9 - col } else { col };
+        (row * 10 + col + 1) as u8
     }
 
     fn mv(from: u8, to: u8) -> Action {
