@@ -1,7 +1,7 @@
 //! The computer opponent: expectimax over the throws, looking a number of
 //! turns ahead, with a judgement of positions at the end.
 
-use crate::rules::{HOME, Move, PATH, Position, Rules, START, Side, is_shared};
+use crate::rules::{HOME, Move, PATH, Position, Rules, START, Side, Throw, is_shared};
 
 /// How hard the computer plays.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -32,18 +32,18 @@ impl Strength {
     }
 }
 
-/// The best move for the side to move with throw `roll`, or `None` if it
-/// has none.
-pub fn choose(rules: &Rules, position: &Position, roll: u8, strength: Strength) -> Option<Move> {
+/// The best move for the side to move with `throw`, or `None` if it has
+/// none.
+pub fn choose(rules: &Rules, position: &Position, throw: Throw, strength: Strength) -> Option<Move> {
     let side = position.to_move;
-    let moves = position.moves(rules, roll);
+    let moves = position.moves(rules, throw.moves);
     if strength == Strength::Easy {
         return naive(rules, position, &moves);
     }
     let mut best: Option<(f64, Move)> = None;
     for mv in moves {
         let mut next = position.clone();
-        next.play(rules, mv);
+        next.play(rules, mv, throw.again);
         let value = value_after(rules, &next, side, strength.depth(), FREE_AGAINS);
         if best.is_none_or(|(v, _)| value > v) {
             best = Some((value, mv));
@@ -88,23 +88,28 @@ fn value_after(rules: &Rules, position: &Position, me: Side, depth: u32, agains:
 
     let total: u32 = rules.lots.distribution().iter().map(|&(_, n)| n).sum();
     let mut expected = 0.0;
-    for (roll, chances) in rules.lots.distribution() {
+    // The side keeps the turn: free up to `agains` times, then it costs a
+    // turn of lookahead.
+    let next_value = |next: &Position, keeps: bool| {
+        if keeps && agains > 0 {
+            value_after(rules, next, me, depth, agains - 1)
+        } else {
+            value_after(rules, next, me, depth - 1, FREE_AGAINS)
+        }
+    };
+    for (throw, chances) in rules.lots.distribution() {
         let p = chances as f64 / total as f64;
         let mover = position.to_move;
-        let moves = position.moves(rules, roll);
+        let moves = position.moves(rules, throw.moves);
         let value = if moves.is_empty() {
             let mut next = position.clone();
-            next.pass();
-            value_after(rules, &next, me, depth - 1, FREE_AGAINS)
+            next.pass(throw.again);
+            next_value(&next, throw.again)
         } else {
             let values = moves.into_iter().map(|mv| {
                 let mut next = position.clone();
-                let out = next.play(rules, mv);
-                if out.again && agains > 0 {
-                    value_after(rules, &next, me, depth, agains - 1)
-                } else {
-                    value_after(rules, &next, me, depth - 1, FREE_AGAINS)
-                }
+                let out = next.play(rules, mv, throw.again);
+                next_value(&next, out.again || throw.again)
             });
             if mover == me {
                 values.fold(f64::NEG_INFINITY, f64::max)
@@ -128,7 +133,7 @@ fn side_value(rules: &Rules, position: &Position, side: Side) -> f64 {
     let total: u32 = dist.iter().map(|&(_, n)| n).sum();
     let chance_of = |steps: u8| -> f64 {
         dist.iter()
-            .filter(|&&(m, _)| m == steps)
+            .filter(|&&(t, _)| t.moves == steps)
             .map(|&(_, n)| n as f64 / total as f64)
             .sum()
     };
@@ -175,7 +180,7 @@ mod tests {
         p.pieces[1] = vec![0, 0, 0, 0, 0, 0, 9];
         for strength in [Strength::Easy, Strength::Normal, Strength::Hard] {
             assert_eq!(
-                choose(&rules, &p, 2, strength),
+                choose(&rules, &p, Throw { moves: 2, again: false }, strength),
                 Some(Move { from: 7, to: 9 }),
                 "{strength:?}"
             );
@@ -190,7 +195,7 @@ mod tests {
         p.pieces[1] = vec![0, 0, 0, 0, 0, 0, 0];
         // A two takes the last-but-one piece home.
         assert_eq!(
-            choose(&rules, &p, 2, Strength::Normal),
+            choose(&rules, &p, Throw { moves: 2, again: false }, Strength::Normal),
             Some(Move { from: 13, to: 15 })
         );
     }
@@ -208,7 +213,7 @@ mod tests {
                 seed ^= seed << 17;
                 marked += (seed & 1) as u32;
             }
-            rules.lots.moves(marked)
+            rules.lots.throw(marked)
         };
         let mut hard_wins = 0;
         let games = 40;
@@ -224,9 +229,9 @@ mod tests {
                 let r = roll();
                 match choose(&rules, &p, r, strength) {
                     Some(mv) => {
-                        p.play(&rules, mv);
+                        p.play(&rules, mv, r.again);
                     }
-                    None => p.pass(),
+                    None => p.pass(r.again),
                 }
             }
             if p.winner() == Some(Side::Light) {
@@ -259,20 +264,20 @@ mod measure {
             let mut p = Position::new(&rules, first);
             while p.winner().is_none() {
                 let marked = (0..4).map(|_| (rng(&mut seed) >> 33) as u32 & 1).sum();
-                let r = rules.lots.moves(marked);
+                let r = rules.lots.throw(marked);
                 let who = if p.to_move == Side::Light { a } else { b };
                 let mv = match who {
                     Some(s) => choose(&rules, &p, r, s),
                     None => {
-                        let ms = p.moves(&rules, r);
+                        let ms = p.moves(&rules, r.moves);
                         if ms.is_empty() { None } else { Some(ms[(rng(&mut seed) >> 40) as usize % ms.len()]) }
                     }
                 };
                 match mv {
                     Some(mv) => {
-                        p.play(&rules, mv);
+                        p.play(&rules, mv, r.again);
                     }
-                    None => p.pass(),
+                    None => p.pass(r.again),
                 }
             }
             if p.winner() == Some(Side::Light) {
@@ -311,13 +316,13 @@ mod timing {
         q.pieces[1] = vec![0, 0, 0, 0, 1, 2, 3];
         for roll in 1..=4 {
             let t = Instant::now();
-            choose(&rules, &q, roll, Strength::Hard);
+            choose(&rules, &q, Throw { moves: roll, again: false }, Strength::Hard);
             println!("rosettes roll {roll}: {:?}", t.elapsed());
         }
         for strength in [Strength::Normal, Strength::Hard] {
             for roll in 1..=4 {
                 let t = Instant::now();
-                let mv = choose(&rules, &p, roll, strength);
+                let mv = choose(&rules, &p, Throw { moves: roll, again: false }, strength);
                 println!("{strength:?} roll {roll}: {:?} in {:?}", mv, t.elapsed());
             }
         }

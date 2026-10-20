@@ -208,7 +208,19 @@ fn side_label(buf: &mut Buffer, bx: u16, y: u16, game: &Game, side: Side) {
     };
     put(buf, bx, y, marker, style);
     put(buf, bx + 2, y, "●", Style::new().fg(swatch).bg(SHELL_SHADE));
-    put(buf, bx + 4, y, &format!("{} ({who})", side.name()), style);
+    let name = format!("{} ({who})", side.name());
+    put(buf, bx + 4, y, &name, style);
+    // A betting game: the purse, and the pool by the far side's name.
+    if game.rules.stakes.is_some() {
+        let purse = format!("   purse {}", game.purses[side.index()]);
+        put(buf, bx + 4 + name.chars().count() as u16, y, &purse, Style::new().fg(AMBER).bg(BG));
+        if side == Side::Dark {
+            let pool = format!("pool {}", game.pool);
+            let width = (COLS as u16) * square_size(buf.area).0 + 2;
+            let x = bx + width.saturating_sub(pool.len() as u16);
+            put(buf, x, y, &pool, Style::new().fg(AMBER).bg(BG).add_modifier(Modifier::BOLD));
+        }
+    }
 }
 
 /// A shell square with its inlay: rosettes in carnelian and lapis, the other
@@ -365,7 +377,14 @@ fn draw_lots(buf: &mut Buffer, area: Rect, y: u16, game: &Game) {
     let result = match &game.phase {
         Phase::Throwing { .. } => "...".to_string(),
         Phase::ToThrow => "".to_string(),
-        _ => format!("= {}", game.roll()),
+        _ => {
+            let throw = game.throw_shown();
+            if throw.again {
+                format!("= {}, again", throw.moves)
+            } else {
+                format!("= {}", throw.moves)
+            }
+        }
     };
     put(
         buf,
@@ -469,16 +488,8 @@ pub fn draw_help(buf: &mut Buffer, area: Rect, rules: &Rules) {
         (
             "Race your pieces from the start, along your own row, down the shared middle \
              row and back onto your own row, then off the board. First with every piece \
-             home wins."
+             home wins. One piece per square."
                 .into(),
-            text,
-        ),
-        (
-            format!(
-                "Throw the lots: the number of marked tips up is how far you move, 0 to 4. \
-                 {} pieces each. One piece per square.",
-                rules.pieces
-            ),
             text,
         ),
         (
@@ -487,17 +498,13 @@ pub fn draw_help(buf: &mut Buffer, area: Rect, rules: &Rules) {
                 .into(),
             text,
         ),
-        (
-            format!(
-                "Rosettes ✿ give you another throw.{}",
-                if rules.middle_rosette_safe {
-                    " A piece on the middle rosette cannot be taken."
-                } else {
-                    " No square is safe in the middle row."
-                }
-            ),
-            text,
-        ),
+        (String::new(), text),
+        (format!("{} RULES", rules.name.to_uppercase()), title),
+    ];
+    for line in rules.summary {
+        lines.push((line.to_string(), text));
+    }
+    lines.extend([
         (String::new(), text),
         ("KEYS".into(), title),
         (
@@ -519,7 +526,7 @@ pub fn draw_help(buf: &mut Buffer, area: Rect, rules: &Rules) {
         ),
         (String::new(), text),
         ("Esc or F1: back".into(), dim),
-    ];
+    ]);
     let mut yy = y + 1;
     for (line, style) in lines.drain(..) {
         for part in wrap(&line, (w - 6) as usize) {

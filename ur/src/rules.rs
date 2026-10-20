@@ -89,12 +89,24 @@ pub fn is_shared(pos: u8) -> bool {
     (5..=12).contains(&pos)
 }
 
+/// What a throw of the lots gives: squares to move, and whether the side
+/// throws again after it.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Throw {
+    pub moves: u8,
+    pub again: bool,
+}
+
 /// The throwing lots, and what each count of marked tips means.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Lots {
     /// Four tetrahedra, each with two of four tips marked: the count of
     /// marked tips up, 0 to 4, is the move; 0 loses the turn.
     FourBinary,
+    /// R. C. Bell's reading of three: all three jewelled tips up, 5 and
+    /// throw again; none, 4 and throw again; two, 1 and throw again; one,
+    /// nothing, and the turn is over.
+    BellThree,
 }
 
 impl Lots {
@@ -102,21 +114,56 @@ impl Lots {
     pub fn count(self) -> u32 {
         match self {
             Lots::FourBinary => 4,
+            Lots::BellThree => 3,
         }
     }
 
-    /// The move for `marked` tips up.
-    pub fn moves(self, marked: u32) -> u8 {
+    /// The throw for `marked` tips up.
+    pub fn throw(self, marked: u32) -> Throw {
         match self {
-            Lots::FourBinary => marked as u8,
+            Lots::FourBinary => Throw { moves: marked as u8, again: false },
+            Lots::BellThree => match marked {
+                3 => Throw { moves: 5, again: true },
+                0 => Throw { moves: 4, again: true },
+                2 => Throw { moves: 1, again: true },
+                _ => Throw { moves: 0, again: false },
+            },
         }
     }
 
-    /// Every possible move with its chance out of `2^count`.
-    pub fn distribution(self) -> Vec<(u8, u32)> {
+    /// Every possible throw with its chance out of `2^count`.
+    pub fn distribution(self) -> Vec<(Throw, u32)> {
         let n = self.count();
-        (0..=n).map(|k| (self.moves(k), binomial(n, k))).collect()
+        (0..=n).map(|k| (self.throw(k), binomial(n, k))).collect()
     }
+}
+
+/// How pieces come onto the board.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Entry {
+    /// Any throw brings a piece on, that many squares along.
+    ByThrow,
+    /// Only a throw of five brings a piece on, onto its first square
+    /// (R. C. Bell: "it moves forward by the indicated numbers on the
+    /// additional throws").
+    OnFive,
+}
+
+/// What landing on a rosette does.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Rosettes {
+    /// The side throws again.
+    ThrowAgain,
+    /// The opponent pays a fine into the pool (R. C. Bell).
+    OpponentPays,
+}
+
+/// A betting game: what each side puts into the pool at the start, and the
+/// fine for a rosette. The winner takes the pool.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Stakes {
+    pub stake: u32,
+    pub fine: u32,
 }
 
 fn binomial(n: u32, k: u32) -> u32 {
@@ -132,10 +179,13 @@ pub struct Rules {
     pub source: &'static str,
     pub pieces: u8,
     pub lots: Lots,
-    /// Landing on any rosette gives another throw.
-    pub rosette_throws_again: bool,
+    pub entry: Entry,
+    pub rosettes: Rosettes,
     /// A piece on the middle rosette cannot be taken.
     pub middle_rosette_safe: bool,
+    pub stakes: Option<Stakes>,
+    /// How to play, a line each, for the help.
+    pub summary: &'static [&'static str],
 }
 
 impl Rules {
@@ -150,8 +200,15 @@ impl Rules {
                      and the shape of the board.",
             pieces: 7,
             lots: Lots::FourBinary,
-            rosette_throws_again: true,
+            entry: Entry::ByThrow,
+            rosettes: Rosettes::ThrowAgain,
             middle_rosette_safe: true,
+            stakes: None,
+            summary: &[
+                "Throw four lots: the marked tips up, 0 to 4, are how far you move. A throw of 0 loses the turn.",
+                "Bring pieces on with any throw. Seven pieces each.",
+                "A rosette gives you another throw. A piece on the middle rosette cannot be taken.",
+            ],
         }
     }
 
@@ -165,13 +222,45 @@ impl Rules {
                      and no rosette is safe.",
             pieces: 5,
             lots: Lots::FourBinary,
-            rosette_throws_again: true,
+            entry: Entry::ByThrow,
+            rosettes: Rosettes::ThrowAgain,
             middle_rosette_safe: false,
+            stakes: None,
+            summary: &[
+                "Throw four lots: the marked tips up, 0 to 4, are how far you move. A throw of 0 loses the turn.",
+                "Bring pieces on with any throw. Five pieces each.",
+                "A rosette gives you another throw. No square in the middle row is safe.",
+            ],
+        }
+    }
+
+    /// R. C. Bell's suggested rules, a betting game (Board and Table Games
+    /// from Many Civilizations, 1960, second edition 1969, pp. 24-25).
+    pub fn bell() -> Rules {
+        Rules {
+            id: "bell",
+            name: "R. C. Bell",
+            source: "R. C. Bell's suggested rules from Board and Table Games \
+                     from Many Civilizations (1960): a betting game played with \
+                     three lots, where you throw until a dead throw ends your \
+                     turn.",
+            pieces: 7,
+            lots: Lots::BellThree,
+            entry: Entry::OnFive,
+            rosettes: Rosettes::OpponentPays,
+            middle_rosette_safe: false,
+            stakes: Some(Stakes { stake: 5, fine: 1 }),
+            summary: &[
+                "Throw three lots. All three jewelled tips up: 5 and throw again. None: 4 and throw again. Two: 1 and throw again. One: nothing, and your turn is over.",
+                "A piece comes on only with a 5, onto its first square. A piece that is taken needs a 5 again.",
+                "Both sides put 5 into the pool. Land on a rosette and your opponent pays 1 into it. First with every piece home takes the pool; your purse carries on to the next game.",
+                "Bell does not say where a piece entered on a 5 stands, nor whether an unusable throw still throws again: here it stands on its first square, and the throw again stands.",
+            ],
         }
     }
 
     pub fn all() -> Vec<Rules> {
-        vec![Rules::finkel_2017(), Rules::british_museum()]
+        vec![Rules::finkel_2017(), Rules::british_museum(), Rules::bell()]
     }
 
     /// Whether `pos` on the path is a rosette.
@@ -202,6 +291,8 @@ pub struct Outcome {
     pub took: bool,
     /// The side throws again.
     pub again: bool,
+    /// The move landed on a rosette where the opponent pays a fine.
+    pub fine: bool,
     /// A piece went home.
     pub home: bool,
     /// The side has brought every piece home.
@@ -252,7 +343,11 @@ impl Position {
             if from == HOME || moves.iter().any(|m| m.from == from) {
                 continue;
             }
-            let to = from + roll;
+            let to = match (from, rules.entry) {
+                (START, Entry::OnFive) if roll == 5 => 1,
+                (START, Entry::OnFive) => continue,
+                _ => from + roll,
+            };
             // Off the board by an exact throw only.
             if to > HOME {
                 continue;
@@ -273,8 +368,8 @@ impl Position {
     }
 
     /// Plays `mv` for the side to move, and passes the turn unless the side
-    /// throws again.
-    pub fn play(&mut self, rules: &Rules, mv: Move) -> Outcome {
+    /// throws again, by a rosette or because the throw (`keep`) says so.
+    pub fn play(&mut self, rules: &Rules, mv: Move, keep: bool) -> Outcome {
         let side = self.to_move;
         let mut outcome = Outcome::default();
 
@@ -294,17 +389,21 @@ impl Position {
             outcome.took = true;
         }
 
-        outcome.again =
-            !outcome.won && rules.rosette_throws_again && rules.is_rosette_pos(mv.to);
-        if !outcome.again {
+        let rosette = !outcome.won && mv.to != HOME && rules.is_rosette_pos(mv.to);
+        outcome.again = rosette && rules.rosettes == Rosettes::ThrowAgain;
+        outcome.fine = rosette && rules.rosettes == Rosettes::OpponentPays;
+        if !outcome.won && !outcome.again && !keep {
             self.to_move = side.other();
         }
         outcome
     }
 
-    /// Passes the turn (a throw of no use).
-    pub fn pass(&mut self) {
-        self.to_move = self.to_move.other();
+    /// A throw with no move: the turn passes, unless the throw says to
+    /// throw again (`keep`).
+    pub fn pass(&mut self, keep: bool) {
+        if !keep {
+            self.to_move = self.to_move.other();
+        }
     }
 
     /// The side that has brought every piece home, if any.
@@ -361,10 +460,43 @@ mod tests {
 
     #[test]
     fn four_lots_give_one_four_six_four_one() {
-        assert_eq!(
-            Lots::FourBinary.distribution(),
-            vec![(0, 1), (1, 4), (2, 6), (3, 4), (4, 1)]
-        );
+        let moves: Vec<(u8, u32)> = Lots::FourBinary
+            .distribution()
+            .into_iter()
+            .map(|(t, n)| (t.moves, n))
+            .collect();
+        assert_eq!(moves, vec![(0, 1), (1, 4), (2, 6), (3, 4), (4, 1)]);
+        assert!(Lots::FourBinary.distribution().iter().all(|(t, _)| !t.again));
+    }
+
+    #[test]
+    fn bells_three_lots() {
+        // Out of 8: none up 1 (4, again), one up 3 (nothing, turn over),
+        // two up 3 (1, again), three up 1 (5, again).
+        let d = Lots::BellThree.distribution();
+        assert_eq!(d[0], (Throw { moves: 4, again: true }, 1));
+        assert_eq!(d[1], (Throw { moves: 0, again: false }, 3));
+        assert_eq!(d[2], (Throw { moves: 1, again: true }, 3));
+        assert_eq!(d[3], (Throw { moves: 5, again: true }, 1));
+    }
+
+    #[test]
+    fn bell_enters_on_five_and_fines_on_rosettes() {
+        let rules = Rules::bell();
+        let mut p = Position::new(&rules, Side::Light);
+        // Only a five brings a piece on, onto the first square.
+        assert!(p.moves(&rules, 4).is_empty());
+        assert!(p.moves(&rules, 1).is_empty());
+        assert_eq!(p.moves(&rules, 5), vec![Move { from: 0, to: 1 }]);
+        let out = p.play(&rules, Move { from: 0, to: 1 }, true);
+        assert!(!out.again && !out.fine);
+        assert_eq!(p.to_move, Side::Light, "the throw said throw again");
+        // A rosette: no throw again from it, but a fine.
+        let out = p.play(&rules, Move { from: 1, to: 4 }, false);
+        assert!(out.fine && !out.again);
+        assert_eq!(p.to_move, Side::Dark);
+        // The middle rosette is not safe.
+        assert!(!rules.is_safe_pos(8));
     }
 
     #[test]
@@ -374,7 +506,7 @@ mod tests {
         p.pieces[0] = vec![13, 15, 15, 15, 15, 15, 15];
         assert_eq!(p.moves(&rules, 2), vec![Move { from: 13, to: 15 }]);
         assert!(p.moves(&rules, 3).is_empty());
-        let out = p.play(&rules, Move { from: 13, to: 15 });
+        let out = p.play(&rules, Move { from: 13, to: 15 }, false);
         assert!(out.won && out.home);
         assert_eq!(p.winner(), Some(Side::Light));
     }
@@ -390,7 +522,7 @@ mod tests {
         // Dark sits on the middle rosette: Light cannot land there.
         assert!(!p.moves(&rules, 2).iter().any(|m| m.to == 8));
         // Landing on the corner rosette throws again.
-        let out = p.play(&rules, Move { from: 0, to: 4 });
+        let out = p.play(&rules, Move { from: 0, to: 4 }, false);
         assert!(out.again);
         assert_eq!(p.to_move, Side::Light);
 
@@ -402,7 +534,7 @@ mod tests {
         let mut q = Position::new(&bm, Side::Light);
         q.pieces[1] = vec![0, 0, 0, 0, 0, 0, 8];
         q.pieces[0] = vec![0, 0, 0, 0, 0, 0, 6];
-        let out = q.play(&bm, Move { from: 6, to: 8 });
+        let out = q.play(&bm, Move { from: 6, to: 8 }, false);
         assert!(out.took && out.again);
         assert_eq!(q.count_at(Side::Dark, START), 7);
     }
@@ -414,14 +546,14 @@ mod tests {
         // Both at their own position 3: different squares, nothing taken.
         p.pieces[0] = vec![0, 0, 0, 0, 0, 0, 1];
         p.pieces[1] = vec![0, 0, 0, 0, 0, 0, 3];
-        let out = p.play(&rules, Move { from: 1, to: 3 });
+        let out = p.play(&rules, Move { from: 1, to: 3 }, false);
         assert!(!out.took);
         assert_eq!(p.count_at(Side::Dark, 3), 1);
         // On the shared row a piece is taken.
         let mut q = Position::new(&rules, Side::Light);
         q.pieces[0] = vec![0, 0, 0, 0, 0, 0, 5];
         q.pieces[1] = vec![0, 0, 0, 0, 0, 0, 7];
-        let out = q.play(&rules, Move { from: 5, to: 7 });
+        let out = q.play(&rules, Move { from: 5, to: 7 }, false);
         assert!(out.took && !out.again);
         assert_eq!(q.to_move, Side::Dark);
     }

@@ -2,7 +2,7 @@
 //! a move, the computer's turns, and the end.
 
 use crate::ai::{self, Strength};
-use crate::rules::{Move, Outcome, Position, Rules, Side};
+use crate::rules::{Move, Outcome, Position, Rules, Side, Throw};
 use log::{debug, info};
 use std::time::{Duration, Instant};
 
@@ -77,11 +77,12 @@ pub enum Phase {
     /// The lots are tumbling; they land at `until`.
     Throwing { until: Instant },
     /// The throw is shown; the side picks one of `moves` (`selected`).
-    Choosing { roll: u8, moves: Vec<Move>, selected: usize },
-    /// A throw with no move: shown until `until`, then the turn passes.
-    NoMove { roll: u8, until: Instant },
+    Choosing { throw: Throw, moves: Vec<Move>, selected: usize },
+    /// A throw with no move: shown until `until`, then the turn passes,
+    /// unless the throw says to throw again.
+    NoMove { throw: Throw, until: Instant },
     /// The computer is thinking about its move (shown a moment).
-    Thinking { roll: u8, until: Instant },
+    Thinking { throw: Throw, until: Instant },
     /// Somebody won.
     Over { winner: Side },
 }
@@ -99,7 +100,13 @@ pub struct Game {
     /// The last move, to show where it went.
     pub last: Option<(Side, Move)>,
     pub rng: Rng,
+    /// In a betting game: each side's purse and the pool.
+    pub purses: [u32; 2],
+    pub pool: u32,
 }
+
+/// What each side has in its purse when a session starts, for betting games.
+pub const PURSE: u32 = 20;
 
 /// How long things take on screen.
 const TUMBLE: Duration = Duration::from_millis(650);
@@ -107,11 +114,23 @@ const PAUSE: Duration = Duration::from_millis(900);
 const THINK: Duration = Duration::from_millis(550);
 
 impl Game {
-    pub fn new(rules: Rules, players: [Player; 2], mut rng: Rng) -> Game {
+    /// A new game; `purses` carry over from earlier betting games.
+    pub fn new(rules: Rules, players: [Player; 2], mut rng: Rng, purses: [u32; 2]) -> Game {
         let first = if rng.coin() { Side::Light } else { Side::Dark };
         let lots = vec![false; rules.lots.count() as usize];
         info!("new game: {} {:?}, {} starts", rules.id, players, first.name());
+        let mut purses = purses;
+        let mut pool = 0;
+        if let Some(stakes) = rules.stakes {
+            for purse in &mut purses {
+                let paid = stakes.stake.min(*purse);
+                *purse -= paid;
+                pool += paid;
+            }
+        }
         Game {
+            purses,
+            pool,
             position: Position::new(&rules, first),
             rules,
             players,
@@ -137,9 +156,9 @@ impl Game {
     }
 
     /// The throw shown on the lots.
-    pub fn roll(&self) -> u8 {
+    pub fn throw_shown(&self) -> Throw {
         let marked = self.lots.iter().filter(|&&m| m).count() as u32;
-        self.rules.lots.moves(marked)
+        self.rules.lots.throw(marked)
     }
 
     /// Throws the lots, if it is time to.
@@ -171,18 +190,32 @@ impl Game {
 
     /// Plays the selected move.
     pub fn confirm(&mut self) {
-        if let Phase::Choosing { moves, selected, .. } = &self.phase {
-            let mv = moves[*selected];
-            self.play(mv);
+        if let Phase::Choosing { throw, moves, selected } = &self.phase {
+            let (throw, mv) = (*throw, moves[*selected]);
+            self.play(mv, throw);
         }
     }
 
-    fn play(&mut self, mv: Move) {
+    fn play(&mut self, mv: Move, throw: Throw) {
         let side = self.to_move();
-        let out = self.position.play(&self.rules, mv);
+        let out = self.position.play(&self.rules, mv, throw.again);
         info!("{} plays {}->{} {:?}", side.name(), mv.from, mv.to, out);
         self.last = Some((side, mv));
-        self.message = describe(side, mv, out);
+        self.message = describe(side, mv, out, throw.again);
+        if let (true, Some(stakes)) = (out.fine, self.rules.stakes) {
+            let payer = side.other().index();
+            let paid = stakes.fine.min(self.purses[payer]);
+            self.purses[payer] -= paid;
+            self.pool += paid;
+            self.message
+                .push_str(&format!(" {} pays {paid} into the pool.", side.other().name()));
+        }
+        if out.won && self.rules.stakes.is_some() {
+            self.purses[side.index()] += self.pool;
+            self.message
+                .push_str(&format!(" {} takes the pool of {}.", side.name(), self.pool));
+            self.pool = 0;
+        }
         self.phase = match out {
             Outcome { won: true, .. } => Phase::Over { winner: side },
             _ => Phase::ToThrow,
@@ -208,45 +241,50 @@ impl Game {
                 for lot in &mut self.lots {
                     *lot = self.rng.coin();
                 }
-                let roll = self.roll();
+                let throw = self.throw_shown();
+                let roll = throw.moves;
                 let side = self.to_move();
                 let moves = self.position.moves(&self.rules, roll);
-                debug!("{} threw {roll}, {} moves", side.name(), moves.len());
+                debug!("{} threw {throw:?}, {} moves", side.name(), moves.len());
+                let again = if throw.again { " and throws again" } else { "" };
                 if moves.is_empty() {
-                    self.message = if roll == 0 {
-                        format!("{} threw nothing. The turn passes.", side.name())
-                    } else {
-                        format!("{} threw {roll} but cannot move.", side.name())
+                    self.message = match (roll, throw.again) {
+                        (0, false) => format!("{} threw nothing. The turn passes.", side.name()),
+                        (_, false) => format!("{} threw {roll} but cannot move.", side.name()),
+                        (_, true) => format!(
+                            "{} threw {roll} but cannot move, and throws again.",
+                            side.name()
+                        ),
                     };
-                    self.phase = Phase::NoMove { roll, until: now + PAUSE };
+                    self.phase = Phase::NoMove { throw, until: now + PAUSE };
                 } else if self.human_to_move() {
                     self.message = format!(
-                        "{} threw {roll}. Choose a piece{}.",
+                        "{} threw {roll}{again}. Choose a piece{}.",
                         side.name(),
                         if moves.len() > 1 { " (arrows, Enter)" } else { " (Enter)" }
                     );
-                    self.phase = Phase::Choosing { roll, moves, selected: 0 };
+                    self.phase = Phase::Choosing { throw, moves, selected: 0 };
                 } else {
-                    self.message = format!("{} threw {roll}.", side.name());
-                    self.phase = Phase::Thinking { roll, until: now + THINK };
+                    self.message = format!("{} threw {roll}{again}.", side.name());
+                    self.phase = Phase::Thinking { throw, until: now + THINK };
                 }
             }
-            Phase::NoMove { until, .. } => {
+            Phase::NoMove { throw, until } => {
                 if now >= until {
-                    self.position.pass();
+                    self.position.pass(throw.again);
                     self.phase = Phase::ToThrow;
                     self.message = format!("{} to throw.", self.to_move().name());
                 }
             }
-            Phase::Thinking { roll, until } => {
+            Phase::Thinking { throw, until } => {
                 if now >= until {
                     let Player::Computer(strength) = self.player(self.to_move()) else {
                         return;
                     };
-                    match ai::choose(&self.rules, &self.position, roll, strength) {
-                        Some(mv) => self.play(mv),
+                    match ai::choose(&self.rules, &self.position, throw, strength) {
+                        Some(mv) => self.play(mv, throw),
                         None => {
-                            self.position.pass();
+                            self.position.pass(throw.again);
                             self.phase = Phase::ToThrow;
                         }
                     }
@@ -257,7 +295,7 @@ impl Game {
     }
 }
 
-fn describe(side: Side, mv: Move, out: Outcome) -> String {
+fn describe(side: Side, mv: Move, out: Outcome, throw_again: bool) -> String {
     let who = side.name();
     if out.won {
         return format!("{who} brings the last piece home and wins!");
@@ -274,6 +312,11 @@ fn describe(side: Side, mv: Move, out: Outcome) -> String {
     }
     if out.again {
         text.push_str(" A rosette: throw again.");
+    } else if out.fine {
+        text.push_str(" A rosette!");
+    }
+    if throw_again && !out.again {
+        text.push_str(" Throw again.");
     }
     text
 }
@@ -293,7 +336,7 @@ mod tests {
                     Player::Computer(Strength::Normal),
                     Player::Computer(Strength::Hard),
                 ];
-                let mut game = Game::new(rules.clone(), players, Rng::new(seed * 7 + i as u64));
+                let mut game = Game::new(rules.clone(), players, Rng::new(seed * 7 + i as u64), [PURSE; 2]);
                 let mut now = Instant::now();
                 let mut steps = 0;
                 while !matches!(game.phase, Phase::Over { .. }) {
@@ -306,6 +349,36 @@ mod tests {
                 assert_eq!(game.position.winner(), Some(winner));
                 assert!(game.message.contains("wins"));
             }
+        }
+    }
+}
+
+#[cfg(test)]
+mod length {
+    use super::*;
+    use crate::rules::Rules;
+
+    #[test]
+    #[ignore]
+    fn game_lengths() {
+        for rules in Rules::all() {
+            let mut throws_total = 0;
+            let games = 30;
+            for seed in 0..games {
+                let players = [Player::Computer(Strength::Normal); 2];
+                let mut game = Game::new(rules.clone(), players, Rng::new(seed + 11), [PURSE; 2]);
+                let mut now = Instant::now();
+                let mut throws = 0;
+                while !matches!(game.phase, Phase::Over { .. }) {
+                    if game.phase == Phase::ToThrow {
+                        throws += 1;
+                    }
+                    now += Duration::from_millis(100);
+                    game.tick(now);
+                }
+                throws_total += throws;
+            }
+            println!("{}: {} throws a game on average", rules.id, throws_total / games);
         }
     }
 }

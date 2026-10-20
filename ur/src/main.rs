@@ -10,7 +10,7 @@ mod rules;
 mod ui;
 
 use crate::ai::Strength;
-use app::{Game, Phase, Player, Rng, Setup};
+use app::{Game, PURSE, Phase, Player, Rng, Setup};
 use log::{debug, info};
 use ratatui::crossterm::event::{
     self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode, KeyEventKind, MouseButton,
@@ -60,7 +60,9 @@ impl App {
             self.setup.players()
         };
         let rng = Rng::new(self.rng.next());
-        self.game = Some(Game::new(self.rules[self.setup.rules].clone(), players, rng));
+        // Purses carry on from game to game in a session's betting games.
+        let purses = self.game.as_ref().map_or([PURSE; 2], |g| g.purses);
+        self.game = Some(Game::new(self.rules[self.setup.rules].clone(), players, rng, purses));
         self.screen = Screen::Playing;
     }
 
