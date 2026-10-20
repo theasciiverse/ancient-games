@@ -1,7 +1,7 @@
 //! The computer opponent: expectimax over the throws, looking a number of
 //! turns ahead, with a judgement of positions at the end.
 
-use crate::rules::{HOME, Move, PATH, Position, Rules, START, Side, Throw, is_shared};
+use crate::rules::{Lots, Move, Position, Rules, START, Side, Throw};
 
 /// How hard the computer plays.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -56,14 +56,15 @@ pub fn choose(rules: &Rules, position: &Position, throw: Throw, strength: Streng
 /// else bring the furthest piece on.
 fn naive(rules: &Rules, position: &Position, moves: &[Move]) -> Option<Move> {
     let side = position.to_move;
-    let takes = |mv: &Move| is_shared(mv.to) && position.of(side.other()).contains(&mv.to);
+    let takes =
+        |mv: &Move| rules.board.is_shared(mv.to) && position.of(side.other()).contains(&mv.to);
     moves
         .iter()
         .copied()
         .max_by_key(|mv| {
             let score = if takes(mv) {
                 3
-            } else if mv.to != HOME && rules.is_rosette_pos(mv.to) {
+            } else if mv.to != rules.home() && rules.is_rosette_pos(mv.to) {
                 2
             } else {
                 1
@@ -79,7 +80,7 @@ const FREE_AGAINS: u32 = 2;
 /// The expected value of `position` for `me`, with `depth` more turns of
 /// throws to look at; a throw again is free up to `agains` times in a row.
 fn value_after(rules: &Rules, position: &Position, me: Side, depth: u32, agains: u32) -> f64 {
-    if let Some(winner) = position.winner() {
+    if let Some(winner) = position.winner(rules) {
         return if winner == me { 10_000.0 } else { -10_000.0 };
     }
     if depth == 0 {
@@ -97,29 +98,76 @@ fn value_after(rules: &Rules, position: &Position, me: Side, depth: u32, agains:
             value_after(rules, next, me, depth - 1, FREE_AGAINS)
         }
     };
-    for (throw, chances) in rules.lots.distribution() {
-        let p = chances as f64 / total as f64;
-        let mover = position.to_move;
+    let mover = position.to_move;
+    let pick = |a: f64, b: f64| if mover == me { a.max(b) } else { a.min(b) };
+    // The value of playing `throw` as well as the mover can.
+    let play_throw = |throw: Throw| -> f64 {
         let moves = position.moves(rules, throw.moves);
-        let value = if moves.is_empty() {
+        if moves.is_empty() {
             let mut next = position.clone();
             next.pass(throw.again);
-            next_value(&next, throw.again)
+            return next_value(&next, throw.again);
+        }
+        let values = moves.into_iter().map(|mv| {
+            let mut next = position.clone();
+            let out = next.play(rules, mv, throw.again);
+            next_value(&next, out.again || throw.again)
+        });
+        if mover == me {
+            values.fold(f64::NEG_INFINITY, f64::max)
         } else {
-            let values = moves.into_iter().map(|mv| {
-                let mut next = position.clone();
-                let out = next.play(rules, mv, throw.again);
-                next_value(&next, out.again || throw.again)
-            });
-            if mover == me {
-                values.fold(f64::NEG_INFINITY, f64::max)
-            } else {
-                values.fold(f64::INFINITY, f64::min)
-            }
-        };
+            values.fold(f64::INFINITY, f64::min)
+        }
+    };
+    for (throw, chances) in rules.lots.distribution() {
+        let p = chances as f64 / total as f64;
+        let mut value = play_throw(throw);
+        // The knucklebones: the mover may dare the ox bone instead, an even
+        // chance of the bigger number or of nothing.
+        if rules.lots == Lots::Astragals {
+            let mut wasted = position.clone();
+            wasted.pass(false);
+            let dared = 0.5
+                * play_throw(Throw { moves: Lots::doubled(throw.moves), again: false })
+                + 0.5 * next_value(&wasted, false);
+            value = pick(value, dared);
+        }
         expected += p * value;
     }
     expected
+}
+
+/// Whether to dare the ox bone after the sheep bone showed `sheep`: when an
+/// even chance of the bigger number or of nothing is worth more than the
+/// throw in hand. A beginner dares only when the throw in hand is no use.
+pub fn wants_ox(rules: &Rules, position: &Position, sheep: u8, strength: Strength) -> bool {
+    let in_hand = Throw { moves: sheep, again: false };
+    let doubled = Throw { moves: Lots::doubled(sheep), again: false };
+    if strength == Strength::Easy {
+        return position.moves(rules, sheep).is_empty();
+    }
+    let me = position.to_move;
+    let depth = strength.depth();
+    let best = |throw: Throw| -> f64 {
+        let moves = position.moves(rules, throw.moves);
+        if moves.is_empty() {
+            let mut next = position.clone();
+            next.pass(false);
+            return value_after(rules, &next, me, depth, FREE_AGAINS);
+        }
+        moves
+            .into_iter()
+            .map(|mv| {
+                let mut next = position.clone();
+                next.play(rules, mv, false);
+                value_after(rules, &next, me, depth, FREE_AGAINS)
+            })
+            .fold(f64::NEG_INFINITY, f64::max)
+    };
+    let mut wasted = position.clone();
+    wasted.pass(false);
+    let dared = 0.5 * best(doubled) + 0.5 * value_after(rules, &wasted, me, depth, FREE_AGAINS);
+    dared > best(in_hand)
 }
 
 /// How good `position` looks for `me`: progress along the path, pieces home,
@@ -139,10 +187,11 @@ fn side_value(rules: &Rules, position: &Position, side: Side) -> f64 {
     };
 
     let theirs = position.of(side.other());
+    let home = rules.home();
     let mut value = 0.0;
     for &pos in position.of(side) {
-        if pos == HOME {
-            value += PATH as f64 + 6.0;
+        if pos == home {
+            value += rules.board.path_len() as f64 + 6.0;
             continue;
         }
         if pos == START {
@@ -154,10 +203,10 @@ fn side_value(rules: &Rules, position: &Position, side: Side) -> f64 {
         }
         // On the shared row and not safe: weigh the chance of being taken
         // by an opposing piece behind it (on its own row or the shared row).
-        if is_shared(pos) && !rules.is_safe_pos(pos) {
+        if rules.board.is_shared(pos) && !rules.is_safe_pos(pos) {
             let mut risk = 0.0;
             for &q in theirs {
-                if q != START && q != HOME && q < pos && pos - q <= 4 {
+                if q != START && q != home && q < pos && pos - q <= 4 {
                     risk += chance_of(pos - q);
                 }
             }
@@ -181,7 +230,7 @@ mod tests {
         for strength in [Strength::Easy, Strength::Normal, Strength::Hard] {
             assert_eq!(
                 choose(&rules, &p, Throw { moves: 2, again: false }, strength),
-                Some(Move { from: 7, to: 9 }),
+                Some(Move { piece: 6, from: 7, to: 9 }),
                 "{strength:?}"
             );
         }
@@ -196,7 +245,7 @@ mod tests {
         // A two takes the last-but-one piece home.
         assert_eq!(
             choose(&rules, &p, Throw { moves: 2, again: false }, Strength::Normal),
-            Some(Move { from: 13, to: 15 })
+            Some(Move { piece: 1, from: 13, to: 15 })
         );
     }
 
@@ -220,7 +269,7 @@ mod tests {
         for g in 0..games {
             let first = if g % 2 == 0 { Side::Light } else { Side::Dark };
             let mut p = Position::new(&rules, first);
-            while p.winner().is_none() {
+            while p.winner(&rules).is_none() {
                 let strength = if p.to_move == Side::Light {
                     Strength::Hard
                 } else {
@@ -234,7 +283,7 @@ mod tests {
                     None => p.pass(r.again),
                 }
             }
-            if p.winner() == Some(Side::Light) {
+            if p.winner(&rules) == Some(Side::Light) {
                 hard_wins += 1;
             }
         }
@@ -262,7 +311,7 @@ mod measure {
         for g in 0..games {
             let first = if g % 2 == 0 { Side::Light } else { Side::Dark };
             let mut p = Position::new(&rules, first);
-            while p.winner().is_none() {
+            while p.winner(&rules).is_none() {
                 let marked = (0..4).map(|_| (rng(&mut seed) >> 33) as u32 & 1).sum();
                 let r = rules.lots.throw(marked);
                 let who = if p.to_move == Side::Light { a } else { b };
@@ -280,7 +329,7 @@ mod measure {
                     None => p.pass(r.again),
                 }
             }
-            if p.winner() == Some(Side::Light) {
+            if p.winner(&rules) == Some(Side::Light) {
                 wins += 1;
             }
         }

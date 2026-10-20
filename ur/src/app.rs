@@ -2,7 +2,7 @@
 //! a move, the computer's turns, and the end.
 
 use crate::ai::{self, Strength};
-use crate::rules::{Move, Outcome, Position, Rules, Side, Throw};
+use crate::rules::{Lots, Move, Outcome, Position, Rosettes, Rules, Side, TABLET_TOKENS, Throw};
 use log::{debug, info};
 use std::time::{Duration, Instant};
 
@@ -76,8 +76,12 @@ pub enum Phase {
     ToThrow,
     /// The lots are tumbling; they land at `until`.
     Throwing { until: Instant },
-    /// The throw is shown; the side picks one of `moves` (`selected`).
-    Choosing { throw: Throw, moves: Vec<Move>, selected: usize },
+    /// The throw is shown; the side picks one of `moves` (`selected`). With
+    /// the knucklebones the side may first dare the ox bone (`can_dare`);
+    /// then `moves` may be empty, and confirming lets the throw pass.
+    Choosing { throw: Throw, moves: Vec<Move>, selected: usize, can_dare: bool },
+    /// The ox bone is tumbling after the sheep bone showed `sheep`.
+    Daring { sheep: u8, until: Instant },
     /// A throw with no move: shown until `until`, then the turn passes,
     /// unless the throw says to throw again.
     NoMove { throw: Throw, until: Instant },
@@ -93,8 +97,14 @@ pub struct Game {
     pub players: [Player; 2],
     pub position: Position,
     pub phase: Phase,
-    /// The four lots as they lie: marked tip up or not.
+    /// The lots as they lie: marked tip up or not.
     pub lots: Vec<bool>,
+    /// The knucklebones as they lie: the sheep bone's face, and the ox
+    /// bone's answer once thrown.
+    pub sheep: u8,
+    pub ox: Option<bool>,
+    /// The throw being played.
+    pub shown: Throw,
     /// The last thing that happened, for the message line.
     pub message: String,
     /// The last move, to show where it went.
@@ -104,9 +114,6 @@ pub struct Game {
     pub purses: [u32; 2],
     pub pool: u32,
 }
-
-/// What each side has in its purse when a session starts, for betting games.
-pub const PURSE: u32 = 20;
 
 /// How long things take on screen.
 const TUMBLE: Duration = Duration::from_millis(650);
@@ -136,6 +143,9 @@ impl Game {
             players,
             phase: Phase::ToThrow,
             lots,
+            sheep: 1,
+            ox: None,
+            shown: Throw { moves: 0, again: false },
             message: format!("{} throws first.", first.name()),
             last: None,
             rng,
@@ -155,63 +165,112 @@ impl Game {
         self.player(self.to_move()) == Player::Human
     }
 
-    /// The throw shown on the lots.
-    pub fn throw_shown(&self) -> Throw {
-        let marked = self.lots.iter().filter(|&&m| m).count() as u32;
-        self.rules.lots.throw(marked)
+    fn knucklebones(&self) -> bool {
+        self.rules.lots == Lots::Astragals
     }
 
     /// Throws the lots, if it is time to.
     pub fn throw(&mut self, now: Instant) {
         if self.phase == Phase::ToThrow {
             debug!("{} throws", self.to_move().name());
+            self.ox = None;
             self.phase = Phase::Throwing { until: now + TUMBLE };
+        }
+    }
+
+    /// Dares the ox bone, if the throw allows it.
+    pub fn dare(&mut self, now: Instant) {
+        if let Phase::Choosing { throw, can_dare: true, .. } = self.phase {
+            debug!("{} dares the ox bone on {}", self.to_move().name(), throw.moves);
+            self.message = format!("{} dares the ox bone...", self.to_move().name());
+            self.phase = Phase::Daring { sheep: throw.moves, until: now + TUMBLE };
         }
     }
 
     /// Moves the selection among the legal moves.
     pub fn select(&mut self, step: isize) {
-        if let Phase::Choosing { moves, selected, .. } = &mut self.phase {
+        if let Phase::Choosing { moves, selected, .. } = &mut self.phase
+            && !moves.is_empty()
+        {
             let n = moves.len() as isize;
             *selected = ((*selected as isize + step).rem_euclid(n)) as usize;
         }
     }
 
-    /// Picks the move starting from path position `from`, if legal.
+    /// Picks the move starting from path position `from`, if legal; a
+    /// second click on a piece with several targets (the Swallow) cycles.
     pub fn select_from(&mut self, from: u8) -> bool {
-        if let Phase::Choosing { moves, selected, .. } = &mut self.phase
-            && let Some(i) = moves.iter().position(|m| m.from == from)
-        {
-            *selected = i;
-            return true;
+        if let Phase::Choosing { moves, selected, .. } = &mut self.phase {
+            let n = moves.len();
+            for k in 1..=n {
+                let i = (*selected + k) % n;
+                if moves[i].from == from {
+                    *selected = i;
+                    return true;
+                }
+            }
         }
         false
     }
 
-    /// Plays the selected move.
-    pub fn confirm(&mut self) {
-        if let Phase::Choosing { throw, moves, selected } = &self.phase {
-            let (throw, mv) = (*throw, moves[*selected]);
-            self.play(mv, throw);
+    /// Plays the selected move, or lets a useless throw pass.
+    pub fn confirm(&mut self, now: Instant) {
+        if let Phase::Choosing { throw, moves, selected, .. } = &self.phase {
+            let throw = *throw;
+            if moves.is_empty() {
+                self.message = format!("{} lets the throw pass.", self.to_move().name());
+                self.phase = Phase::NoMove { throw, until: now };
+            } else {
+                let mv = moves[*selected];
+                self.play(mv, throw);
+            }
+        }
+    }
+
+    fn piece_label(&self, side: Side, mv: Move) -> String {
+        match self.rules.piece_name(mv.piece) {
+            Some(name) => format!("{}'s {name}", side.name()),
+            None => side.name().to_string(),
         }
     }
 
     fn play(&mut self, mv: Move, throw: Throw) {
         let side = self.to_move();
         let out = self.position.play(&self.rules, mv, throw.again);
-        info!("{} plays {}->{} {:?}", side.name(), mv.from, mv.to, out);
+        info!("{} plays {} {}->{} {:?}", side.name(), mv.piece, mv.from, mv.to, out);
         self.last = Some((side, mv));
-        self.message = describe(side, mv, out, throw.again);
-        if let (true, Some(stakes)) = (out.fine, self.rules.stakes) {
-            let payer = side.other().index();
-            let paid = stakes.fine.min(self.purses[payer]);
-            self.purses[payer] -= paid;
-            self.pool += paid;
-            self.message
-                .push_str(&format!(" {} pays {paid} into the pool.", side.other().name()));
+        self.message = describe(&self.piece_label(side, mv), mv, out, throw.again);
+        let me = side.index();
+        let them = side.other().index();
+        match self.rules.rosettes {
+            Rosettes::OpponentPays if out.rosette => {
+                let fine = self.rules.stakes.map_or(0, |s| s.fine);
+                let paid = fine.min(self.purses[them]);
+                self.purses[them] -= paid;
+                self.pool += paid;
+                self.message
+                    .push_str(&format!(" {} pays {paid} into the pool.", side.other().name()));
+            }
+            Rosettes::Tokens => {
+                let value = TABLET_TOKENS[mv.piece];
+                if out.passed > 0 {
+                    let due = value * out.passed as u32;
+                    let paid = due.min(self.purses[me]);
+                    self.purses[me] -= paid;
+                    self.pool += paid;
+                    self.message.push_str(&format!(" Passing a rosette costs {paid}."));
+                }
+                if out.rosette {
+                    let won = value.min(self.pool);
+                    self.pool -= won;
+                    self.purses[me] += won;
+                    self.message.push_str(&format!(" {} wins {won} from the pool.", side.name()));
+                }
+            }
+            _ => {}
         }
         if out.won && self.rules.stakes.is_some() {
-            self.purses[side.index()] += self.pool;
+            self.purses[me] += self.pool;
             self.message
                 .push_str(&format!(" {} takes the pool of {}.", side.name(), self.pool));
             self.pool = 0;
@@ -220,6 +279,46 @@ impl Game {
             Outcome { won: true, .. } => Phase::Over { winner: side },
             _ => Phase::ToThrow,
         };
+    }
+
+    /// The throw is known: offer it to the side, the computer or a person.
+    fn offer(&mut self, throw: Throw, can_dare: bool, now: Instant) {
+        self.shown = throw;
+        let roll = throw.moves;
+        let side = self.to_move();
+        let moves = self.position.moves(&self.rules, roll);
+        debug!("{} has {throw:?}, {} moves", side.name(), moves.len());
+        let again = if throw.again { " and throws again" } else { "" };
+        let who = side.name();
+
+        if let Player::Computer(strength) = self.player(side) {
+            if can_dare && ai::wants_ox(&self.rules, &self.position, roll, strength) {
+                self.message = format!("{who} threw {roll} and dares the ox bone...");
+                self.phase = Phase::Daring { sheep: roll, until: now + TUMBLE };
+            } else if moves.is_empty() {
+                self.message = no_move(who, roll, throw.again);
+                self.phase = Phase::NoMove { throw, until: now + PAUSE };
+            } else {
+                self.message = format!("{who} threw {roll}{again}.");
+                self.phase = Phase::Thinking { throw, until: now + THINK };
+            }
+            return;
+        }
+
+        if moves.is_empty() && !can_dare {
+            self.message = no_move(who, roll, throw.again);
+            self.phase = Phase::NoMove { throw, until: now + PAUSE };
+            return;
+        }
+        self.message = match (moves.is_empty(), can_dare) {
+            (true, _) => format!("{who} threw {roll} and cannot move: D dares the ox bone, Enter lets it pass."),
+            (false, true) => format!("{who} threw {roll}: choose a piece, or D to dare the ox bone."),
+            (false, false) => format!(
+                "{who} threw {roll}{again}. Choose a piece{}.",
+                if moves.len() > 1 { " (arrows, Enter)" } else { " (Enter)" }
+            ),
+        };
+        self.phase = Phase::Choosing { throw, moves, selected: 0, can_dare };
     }
 
     /// Advances timed phases and the computer's turns.
@@ -231,42 +330,41 @@ impl Game {
                 }
             }
             Phase::Throwing { until } => {
-                if now < until {
-                    // Tumbling: the tips flicker.
-                    for lot in &mut self.lots {
-                        *lot = self.rng.coin();
-                    }
-                    return;
-                }
+                // Tumbling: the tips flicker, the bone turns.
                 for lot in &mut self.lots {
                     *lot = self.rng.coin();
                 }
-                let throw = self.throw_shown();
-                let roll = throw.moves;
-                let side = self.to_move();
-                let moves = self.position.moves(&self.rules, roll);
-                debug!("{} threw {throw:?}, {} moves", side.name(), moves.len());
-                let again = if throw.again { " and throws again" } else { "" };
-                if moves.is_empty() {
-                    self.message = match (roll, throw.again) {
-                        (0, false) => format!("{} threw nothing. The turn passes.", side.name()),
-                        (_, false) => format!("{} threw {roll} but cannot move.", side.name()),
-                        (_, true) => format!(
-                            "{} threw {roll} but cannot move, and throws again.",
-                            side.name()
-                        ),
-                    };
-                    self.phase = Phase::NoMove { throw, until: now + PAUSE };
-                } else if self.human_to_move() {
-                    self.message = format!(
-                        "{} threw {roll}{again}. Choose a piece{}.",
-                        side.name(),
-                        if moves.len() > 1 { " (arrows, Enter)" } else { " (Enter)" }
-                    );
-                    self.phase = Phase::Choosing { throw, moves, selected: 0 };
+                self.sheep = 1 + (self.rng.next() % 4) as u8;
+                if now < until {
+                    return;
+                }
+                if self.knucklebones() {
+                    let throw = self.rules.lots.throw(self.sheep as u32);
+                    self.offer(throw, true, now);
                 } else {
-                    self.message = format!("{} threw {roll}{again}.", side.name());
-                    self.phase = Phase::Thinking { throw, until: now + THINK };
+                    let marked = self.lots.iter().filter(|&&m| m).count() as u32;
+                    let throw = self.rules.lots.throw(marked);
+                    self.offer(throw, false, now);
+                }
+            }
+            Phase::Daring { sheep, until } => {
+                self.ox = Some(self.rng.coin());
+                if now < until {
+                    return;
+                }
+                let who = self.to_move().name();
+                if self.ox == Some(true) {
+                    let doubled = Lots::doubled(sheep);
+                    self.message = format!("The ox bone says yes: {sheep} becomes {doubled}.");
+                    let throw = Throw { moves: doubled, again: false };
+                    self.offer(throw, false, now);
+                    if !self.human_to_move() || matches!(self.phase, Phase::NoMove { .. }) {
+                        self.message = format!("The ox bone says yes: {who} moves {doubled}.");
+                    }
+                } else {
+                    self.message = format!("The ox bone says no: {who}'s throw is wasted.");
+                    self.shown = Throw { moves: 0, again: false };
+                    self.phase = Phase::NoMove { throw: self.shown, until: now + PAUSE };
                 }
             }
             Phase::NoMove { throw, until } => {
@@ -295,24 +393,32 @@ impl Game {
     }
 }
 
-fn describe(side: Side, mv: Move, out: Outcome, throw_again: bool) -> String {
-    let who = side.name();
+fn no_move(who: &str, roll: u8, again: bool) -> String {
+    match (roll, again) {
+        (0, false) => format!("{who} threw nothing. The turn passes."),
+        (_, false) => format!("{who} threw {roll} but cannot move."),
+        (_, true) => format!("{who} threw {roll} but cannot move, and throws again."),
+    }
+}
+
+fn describe(who: &str, mv: Move, out: Outcome, throw_again: bool) -> String {
     if out.won {
-        return format!("{who} brings the last piece home and wins!");
+        return format!("{who} comes home, and that is the last: the game is won!");
     }
     let mut text = if out.home {
-        format!("{who} brings a piece home.")
+        format!("{who} comes home.")
     } else if mv.from == 0 {
-        format!("{who} enters a piece.")
+        format!("{who} comes on.")
     } else {
-        format!("{who} moves {} squares.", mv.to - mv.from)
+        let n = mv.to - mv.from;
+        format!("{who} moves {n} square{}.", if n == 1 { "" } else { "s" })
     };
     if out.took {
         text.push_str(" A piece is taken and sent back!");
     }
     if out.again {
         text.push_str(" A rosette: throw again.");
-    } else if out.fine {
+    } else if out.rosette {
         text.push_str(" A rosette!");
     }
     if throw_again && !out.again {
@@ -336,7 +442,7 @@ mod tests {
                     Player::Computer(Strength::Normal),
                     Player::Computer(Strength::Hard),
                 ];
-                let mut game = Game::new(rules.clone(), players, Rng::new(seed * 7 + i as u64), [PURSE; 2]);
+                let mut game = Game::new(rules.clone(), players, Rng::new(seed * 7 + i as u64), [40; 2]);
                 let mut now = Instant::now();
                 let mut steps = 0;
                 while !matches!(game.phase, Phase::Over { .. }) {
@@ -346,8 +452,8 @@ mod tests {
                     assert!(steps < 200_000, "{} seed {seed}: no end", rules.id);
                 }
                 let Phase::Over { winner } = game.phase else { unreachable!() };
-                assert_eq!(game.position.winner(), Some(winner));
-                assert!(game.message.contains("wins"));
+                assert_eq!(game.position.winner(&game.rules), Some(winner));
+                assert!(game.message.contains("won"));
             }
         }
     }
@@ -366,7 +472,7 @@ mod length {
             let games = 30;
             for seed in 0..games {
                 let players = [Player::Computer(Strength::Normal); 2];
-                let mut game = Game::new(rules.clone(), players, Rng::new(seed + 11), [PURSE; 2]);
+                let mut game = Game::new(rules.clone(), players, Rng::new(seed + 11), [40; 2]);
                 let mut now = Instant::now();
                 let mut throws = 0;
                 while !matches!(game.phase, Phase::Over { .. }) {

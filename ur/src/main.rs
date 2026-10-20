@@ -10,7 +10,7 @@ mod rules;
 mod ui;
 
 use crate::ai::Strength;
-use app::{Game, PURSE, Phase, Player, Rng, Setup};
+use app::{Game, Phase, Player, Rng, Setup};
 use log::{debug, info};
 use ratatui::crossterm::event::{
     self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode, KeyEventKind, MouseButton,
@@ -18,7 +18,7 @@ use ratatui::crossterm::event::{
 };
 use ratatui::crossterm::execute;
 use ratatui::layout::Rect;
-use rules::{HOME, Rules, START, Side};
+use rules::{Rules, START, Side};
 use std::io;
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
@@ -60,9 +60,14 @@ impl App {
             self.setup.players()
         };
         let rng = Rng::new(self.rng.next());
-        // Purses carry on from game to game in a session's betting games.
-        let purses = self.game.as_ref().map_or([PURSE; 2], |g| g.purses);
-        self.game = Some(Game::new(self.rules[self.setup.rules].clone(), players, rng, purses));
+        // Purses carry on from game to game under the same betting rules.
+        let rules = self.rules[self.setup.rules].clone();
+        let fresh = [rules.stakes.map_or(0, |s| s.purse); 2];
+        let purses = match &self.game {
+            Some(g) if g.rules.id == rules.id => g.purses,
+            _ => fresh,
+        };
+        self.game = Some(Game::new(rules, players, rng, purses));
         self.screen = Screen::Playing;
     }
 
@@ -123,7 +128,8 @@ impl App {
                     Phase::Choosing { .. } => match code {
                         KeyCode::Left | KeyCode::Up | KeyCode::BackTab => game.select(-1),
                         KeyCode::Right | KeyCode::Down | KeyCode::Tab => game.select(1),
-                        KeyCode::Enter | KeyCode::Char(' ') => game.confirm(),
+                        KeyCode::Enter | KeyCode::Char(' ') => game.confirm(now),
+                        KeyCode::Char('d') | KeyCode::Char('D') => game.dare(now),
                         KeyCode::Char('m') | KeyCode::Char('M') => {
                             self.screen = Screen::Menu { row: 3 }
                         }
@@ -165,12 +171,12 @@ impl App {
                 let from = if row == own && col == 4 {
                     Some(START)
                 } else {
-                    (1..HOME).find(|&p| rules::square(side, p) == (row, col))
+                    game.rules.board.pos_at(side, row, col)
                 };
                 if let Some(from) = from
                     && game.select_from(from)
                 {
-                    game.confirm();
+                    game.confirm(now);
                 }
             }
             _ => {}

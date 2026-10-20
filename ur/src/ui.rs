@@ -3,7 +3,7 @@
 //! throwing lots, the menu and the help.
 
 use crate::app::{Game, Phase, Player, Setup};
-use crate::rules::{self, COLS, HOME, Move, ROWS, Rules, START, Side};
+use crate::rules::{Board, Lots, Move, ROWS, Rules, START, Side, TABLET_TAGS};
 use ratatui::buffer::Buffer;
 use ratatui::layout::Rect;
 use ratatui::style::{Color, Modifier, Style};
@@ -29,11 +29,25 @@ pub struct Hits {
 
 /// The size of one board square for an area: about twice as wide as tall,
 /// so squares look square.
-fn square_size(area: Rect) -> (u16, u16) {
-    let by_height = (area.height.saturating_sub(12) / ROWS as u16).clamp(3, 7);
-    let by_width = (area.width.saturating_sub(6) / COLS as u16 / 2).clamp(3, 7);
-    let h = by_height.min(by_width);
-    (h * 2, h)
+fn square_size(area: Rect, board: Board) -> (u16, u16) {
+    let cols = board.cols() as u16;
+    // The board plus eleven rows: title, names, lots, message and keys.
+    let by_height = (area.height.saturating_sub(13) / ROWS as u16).clamp(3, 7);
+    let width = (area.width.saturating_sub(2) / cols).clamp(6, 14);
+    let h = by_height.min(width.div_ceil(2));
+    (width.min(h * 2), h)
+}
+
+/// The tray for a side's waiting pieces (`home` false) or finished ones:
+/// the gap squares of the Ur board, or four cells each beside the short
+/// rows of Twenty Squares.
+fn tray_cols(board: Board, home: bool) -> (usize, usize) {
+    match (board, home) {
+        (Board::Ur, false) => (4, 1),
+        (Board::Ur, true) => (5, 1),
+        (Board::TwentySquares, false) => (4, 4),
+        (Board::TwentySquares, true) => (8, 4),
+    }
 }
 
 fn fill(buf: &mut Buffer, area: Rect, bg: Color) {
@@ -72,8 +86,11 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     fill(buf, area, BG);
     hits.squares.clear();
 
-    let (sw, sh) = square_size(area);
-    let board_w = sw * COLS as u16 + 2;
+    let board = game.rules.board;
+    let home = game.rules.home();
+    let (sw, sh) = square_size(area, board);
+    let cols = board.cols();
+    let board_w = sw * cols as u16 + 2;
     let board_h = sh * ROWS as u16 + 2;
     let bx = area.x + area.width.saturating_sub(board_w) / 2;
     let top = area.y + area.height.saturating_sub(board_h + 9) / 2;
@@ -105,26 +122,35 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     };
 
     for row in 0..ROWS {
-        for col in 0..COLS {
+        for col in 0..cols {
             let x = bx + 1 + col as u16 * sw;
             let y = by + 1 + row as u16 * sh;
             let cell = Rect::new(x, y, sw, sh);
-            if rules::on_board(row, col) {
-                draw_square(buf, cell, row, col);
+            if board.on_board(row, col) {
+                draw_square(buf, cell, row, col, board);
                 hits.squares.push((cell, row, col));
             } else {
-                draw_tray(buf, cell, row, col, game);
-                hits.squares.push((cell, row, col));
+                for home in [false, true] {
+                    let (first, span) = tray_cols(board, home);
+                    if col == first {
+                        let tray = Rect::new(x, y, sw * span as u16, sh);
+                        draw_tray(buf, tray, row, home, game);
+                    }
+                    if (first..first + span).contains(&col) {
+                        hits.squares.push((cell, row, first));
+                    }
+                }
             }
         }
     }
 
     // Pieces on the board.
     for side in [Side::Light, Side::Dark] {
-        for &pos in game.position.of(side) {
-            if pos != START && pos != HOME {
-                let (row, col) = rules::square(side, pos);
-                draw_piece(buf, cell_of(bx, by, sw, sh, row, col), side, false);
+        for (piece, &pos) in game.position.of(side).iter().enumerate() {
+            if pos != START && pos != home {
+                let (row, col) = board.square(side, pos);
+                let name = game.rules.piece_name(piece).map(|n| (n, TABLET_TAGS[piece]));
+                draw_piece(buf, cell_of(bx, by, sw, sh, row, col), side, name);
             }
         }
     }
@@ -134,17 +160,17 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
         let side = game.to_move();
         for (i, mv) in moves.iter().enumerate() {
             let chosen = i == selected;
-            let from = place_cell(bx, by, sw, sh, side, mv.from, true);
+            let from = place_cell(bx, by, sw, sh, board, side, mv.from);
             outline(buf, from, if chosen { AMBER } else { SHELL_SHADE }, chosen);
             if chosen {
-                let to = place_cell(bx, by, sw, sh, side, mv.to, false);
+                let to = place_cell(bx, by, sw, sh, board, side, mv.to);
                 outline(buf, to, AMBER, false);
-                mark_target(buf, to, mv);
+                mark_target(buf, to, mv, home);
             }
         }
     } else if let Some((side, mv)) = game.last {
         // Where the last move went.
-        let to = place_cell(bx, by, sw, sh, side, mv.to, false);
+        let to = place_cell(bx, by, sw, sh, board, side, mv.to);
         outline(buf, to, DIM, false);
     }
 
@@ -162,6 +188,9 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     );
     let keys = match game.phase {
         Phase::Over { .. } => "Enter: play again   M: menu   F1: help   Q: quit",
+        Phase::Choosing { can_dare: true, .. } => {
+            "D: dare the ox bone   Arrows: choose   Enter: move   F1: help   Q: quit"
+        }
         Phase::Choosing { .. } => "Arrows or Tab: choose   Enter: move   F1: help   Q: quit",
         _ if game.human_to_move() => "Space: throw   F1: help   Q: quit",
         _ => "F1: help   Q: quit",
@@ -174,19 +203,17 @@ fn cell_of(bx: u16, by: u16, sw: u16, sh: u16, row: usize, col: usize) -> Rect {
 }
 
 /// The screen cell for a path position: a board square, or the side's tray
-/// (start in the fifth column, home in the sixth).
-fn place_cell(bx: u16, by: u16, sw: u16, sh: u16, side: Side, pos: u8, _from: bool) -> Rect {
-    let own = match side {
-        Side::Light => 2,
-        Side::Dark => 0,
-    };
-    match pos {
-        START => cell_of(bx, by, sw, sh, own, 4),
-        HOME => cell_of(bx, by, sw, sh, own, 5),
-        _ => {
-            let (row, col) = rules::square(side, pos);
-            cell_of(bx, by, sw, sh, row, col)
-        }
+/// (start in the fifth column, home in the sixth, off the outer rows on
+/// both boards).
+fn place_cell(bx: u16, by: u16, sw: u16, sh: u16, board: Board, side: Side, pos: u8) -> Rect {
+    let own = side.row();
+    if pos == START || pos == board.home() {
+        let (first, span) = tray_cols(board, pos != START);
+        let cell = cell_of(bx, by, sw, sh, own, first);
+        Rect::new(cell.x, cell.y, sw * span as u16, sh)
+    } else {
+        let (row, col) = board.square(side, pos);
+        cell_of(bx, by, sw, sh, row, col)
     }
 }
 
@@ -216,7 +243,8 @@ fn side_label(buf: &mut Buffer, bx: u16, y: u16, game: &Game, side: Side) {
         put(buf, bx + 4 + name.chars().count() as u16, y, &purse, Style::new().fg(AMBER).bg(BG));
         if side == Side::Dark {
             let pool = format!("pool {}", game.pool);
-            let width = (COLS as u16) * square_size(buf.area).0 + 2;
+            let board = game.rules.board;
+            let width = (board.cols() as u16) * square_size(buf.area, board).0 + 2;
             let x = bx + width.saturating_sub(pool.len() as u16);
             put(buf, x, y, &pool, Style::new().fg(AMBER).bg(BG).add_modifier(Modifier::BOLD));
         }
@@ -225,14 +253,14 @@ fn side_label(buf: &mut Buffer, bx: u16, y: u16, game: &Game, side: Side) {
 
 /// A shell square with its inlay: rosettes in carnelian and lapis, the other
 /// squares with dot and diamond motifs.
-fn draw_square(buf: &mut Buffer, cell: Rect, row: usize, col: usize) {
+fn draw_square(buf: &mut Buffer, cell: Rect, row: usize, col: usize, board: Board) {
     let inner = Rect::new(cell.x, cell.y, cell.width - 1, cell.height - 1);
     fill(buf, inner, SHELL);
     let cx = inner.x + inner.width / 2;
     let cy = inner.y + inner.height / 2;
     let red = Style::new().fg(CARNELIAN).bg(SHELL);
     let blue = Style::new().fg(LAPIS).bg(SHELL);
-    if rules::is_rosette(row, col) {
+    if board.is_rosette(row, col) {
         if inner.height >= 3 {
             put(buf, cx - 1, cy - 1, "╲│╱", blue);
             put(buf, cx - 1, cy, "─", blue);
@@ -258,9 +286,9 @@ fn draw_square(buf: &mut Buffer, cell: Rect, row: usize, col: usize) {
 
 /// The gaps in the outer rows hold a side's waiting pieces (fifth column)
 /// and the pieces that have gone home (sixth).
-fn draw_tray(buf: &mut Buffer, cell: Rect, row: usize, col: usize, game: &Game) {
+fn draw_tray(buf: &mut Buffer, cell: Rect, row: usize, home: bool, game: &Game) {
     let side = if row == 0 { Side::Dark } else { Side::Light };
-    let (pos, label) = if col == 4 { (START, "to go") } else { (HOME, "home") };
+    let (pos, label) = if home { (game.rules.home(), "home") } else { (START, "to go") };
     let count = game.position.count_at(side, pos);
     let inner = Rect::new(cell.x, cell.y, cell.width - 1, cell.height - 1);
     let colour = match side {
@@ -277,16 +305,34 @@ fn draw_tray(buf: &mut Buffer, cell: Rect, row: usize, col: usize, game: &Game) 
     let shown = count.min((inner.width as usize).saturating_sub(2).div_ceil(2));
     let len = (shown * 2).saturating_sub(1) as u16;
     let x = inner.x + inner.width.saturating_sub(len) / 2;
-    for i in 0..shown as u16 {
-        put(buf, x + i * 2, cy.saturating_sub(1), "•", Style::new().fg(dot).bg(colour));
+    // Distinct pieces (the tablet's birds) show their tags.
+    if game.rules.distinct() {
+        let tags: Vec<&str> = game
+            .position
+            .of(side)
+            .iter()
+            .enumerate()
+            .filter(|&(_, &p)| p == pos)
+            .map(|(i, _)| TABLET_TAGS[i])
+            .collect();
+        let len = (tags.len() * 3).saturating_sub(1) as u16;
+        let tx = inner.x + inner.width.saturating_sub(len) / 2;
+        for (i, tag) in tags.iter().enumerate() {
+            put(buf, tx + i as u16 * 3, cy.saturating_sub(1), tag, Style::new().fg(dot).bg(colour));
+        }
+    } else {
+        for i in 0..shown as u16 {
+            put(buf, x + i * 2, cy.saturating_sub(1), "•", Style::new().fg(dot).bg(colour));
+        }
     }
     let text = format!("{count} {label}");
     let tx = inner.x + inner.width.saturating_sub(text.len() as u16) / 2;
     put(buf, tx, cy + 1, &text, Style::new().fg(SHELL_SHADE).bg(LAPIS_DARK));
 }
 
-/// A piece: a disc of shell or black stone with five dots.
-fn draw_piece(buf: &mut Buffer, cell: Rect, side: Side, _ghost: bool) {
+/// A piece: a disc of shell or black stone with five dots, or a bird of the
+/// tablet with its name.
+fn draw_piece(buf: &mut Buffer, cell: Rect, side: Side, name: Option<(&str, &str)>) {
     let inner = Rect::new(cell.x, cell.y, cell.width - 1, cell.height - 1);
     let (bg, dot) = match side {
         Side::Light => (LIGHT_PIECE, DARK_PIECE),
@@ -302,6 +348,13 @@ fn draw_piece(buf: &mut Buffer, cell: Rect, side: Side, _ghost: bool) {
     fill(buf, Rect::new(x, y, w, h), bg);
     let style = Style::new().fg(dot).bg(bg);
     let cx = x + w / 2;
+    if let Some((name, tag)) = name {
+        // The full name where it fits, else the tag.
+        let label = if name.len() <= w as usize { name } else { tag };
+        let lx = x + w.saturating_sub(label.chars().count() as u16) / 2;
+        put(buf, lx, y + (h - 1) / 2, label, style.add_modifier(Modifier::BOLD));
+        return;
+    }
     match h {
         3 => {
             put(buf, cx - 2, y, "•   •", style);
@@ -349,15 +402,20 @@ fn outline(buf: &mut Buffer, cell: Rect, colour: Color, bold: bool) {
     }
 }
 
-fn mark_target(buf: &mut Buffer, cell: Rect, mv: &Move) {
+fn mark_target(buf: &mut Buffer, cell: Rect, mv: &Move, home: u8) {
     let r = Rect::new(cell.x, cell.y, cell.width - 1, cell.height - 1);
-    let label = if mv.to == HOME { "home" } else { "here" };
+    let label = if mv.to == home { "home" } else { "here" };
     let x = r.x + r.width.saturating_sub(label.len() as u16) / 2;
     put(buf, x, r.bottom() - 1, label, Style::new().fg(AMBER).bg(LAPIS_DARK));
 }
 
-/// The throwing lots: little pyramids, the marked tip white when up.
+/// The throwing lots: little pyramids, the marked tip white when up; or the
+/// tablet's two knucklebones.
 fn draw_lots(buf: &mut Buffer, area: Rect, y: u16, game: &Game) {
+    if game.rules.lots == Lots::Astragals {
+        draw_bones(buf, area, y, game);
+        return;
+    }
     let n = game.lots.len() as u16;
     let width = n * 6 + 8;
     let x0 = area.x + area.width.saturating_sub(width) / 2;
@@ -378,7 +436,7 @@ fn draw_lots(buf: &mut Buffer, area: Rect, y: u16, game: &Game) {
         Phase::Throwing { .. } => "...".to_string(),
         Phase::ToThrow => "".to_string(),
         _ => {
-            let throw = game.throw_shown();
+            let throw = game.shown;
             if throw.again {
                 format!("= {}, again", throw.moves)
             } else {
@@ -389,6 +447,47 @@ fn draw_lots(buf: &mut Buffer, area: Rect, y: u16, game: &Game) {
     put(
         buf,
         x0 + n * 6 + 1,
+        y + 1,
+        &result,
+        Style::new().fg(AMBER).bg(BG).add_modifier(Modifier::BOLD),
+    );
+}
+
+/// The sheep and ox knucklebones: the sheep bone's face, and the ox bone's
+/// answer when it has been dared.
+fn draw_bones(buf: &mut Buffer, area: Rect, y: u16, game: &Game) {
+    let x0 = area.x + area.width.saturating_sub(44) / 2;
+    let bone = Style::new().fg(BG).bg(SHELL);
+    let label = Style::new().fg(DIM).bg(BG);
+    let tumbling = matches!(game.phase, Phase::Throwing { .. });
+    let sheep = if matches!(game.phase, Phase::ToThrow) {
+        "  ".to_string()
+    } else {
+        format!("{}", game.sheep)
+    };
+    put(buf, x0, y, "sheep", label);
+    put(buf, x0, y + 1, &format!(" ({sheep:^3}) "), bone);
+    let daring = matches!(game.phase, Phase::Daring { .. });
+    let ox = match game.ox {
+        None => "   ".to_string(),
+        Some(true) => "yes".to_string(),
+        Some(false) => "no".to_string(),
+    };
+    let ox_style = if game.ox.is_some() || daring {
+        Style::new().fg(BG).bg(SHELL_SHADE).add_modifier(Modifier::BOLD)
+    } else {
+        Style::new().fg(DIM).bg(LAPIS_DARK)
+    };
+    put(buf, x0 + 12, y, "ox", label);
+    put(buf, x0 + 12, y + 1, &format!(" ( {ox:^3} ) "), ox_style);
+    let result = match &game.phase {
+        _ if tumbling || daring => "...".to_string(),
+        Phase::ToThrow => String::new(),
+        _ => format!("= {}", game.shown.moves),
+    };
+    put(
+        buf,
+        x0 + 26,
         y + 1,
         &result,
         Style::new().fg(AMBER).bg(BG).add_modifier(Modifier::BOLD),
