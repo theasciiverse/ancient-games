@@ -135,6 +135,46 @@ seen to have a computer opponent. Nothing in the catalog either.
   draw fine beer"). Movement direction is not fully clear from the
   tablet. Sources: en.wikipedia.org/wiki/Royal_Game_of_Ur, Finkel's "On
   the Rules for the Royal Game of Ur".
+- **Senet rule sets to offer** (read 2026-10-20):
+  - Kendall, seven pieces (Timothy Kendall, Passing Through the
+    Netherworld, Kirk Game Company 1978; the booklet is not online, read
+    through Damian Walker's account, psion.snigfarp.karoo.net/senet,
+    printed 2007 and kept at cs.brandeis.edu/~storer/JimPuzzles/GAMES/
+    Senet/SenetReferences/WalkersRulesKendal.pdf): 7 each alternating on
+    1-14, white on 1, black first; sticks: light sides up, none = 5; land on
+    an isolated enemy piece and it is bumped back to where the mover came
+    from; a piece next to a friend is protected; only if no forward move,
+    a piece must move backwards; 26 House of Beauty must be landed on; 27
+    House of Humiliation (water): the turn ends, no other piece of that
+    player may move until it is rescued (to 15 instead of throwing, unless
+    15 is occupied, or borne off on an exact 4); bear off from the last
+    five squares on an exact throw; 28 only off on 3, 29 only on 2, 30 on
+    any throw; bumping on 28-30 sends the piece to 27 (or 26 if 27 is
+    taken); pieces on 27 never protected; throw again after moving on 1,
+    4, 5; first with all off wins
+  - Modern Kendall, five pieces (devinokeefe/senet RULES.md, MIT, 2026:
+    "the exact, normative ruleset"; most modern sets and online versions):
+    5 each, white on 1 3 5 7 9, black on 2 4 6 8 10, white first;
+    protection by an adjacent friend, blockade by three or more in a row
+    (no passing), swap capture, backwards only if no forward move, 26 must
+    be landed on, 27 sends the piece to 15 (or the highest empty square
+    below), 28/29/30 leave only on exact 3/2/1, 26 bears off on 5; throw
+    again after 1, 4, 5; a forfeit ends the turn. That project solved the
+    game (8.56 billion positions; White, throwing first, wins 50.25% with
+    perfect play) and has a 0.8 MB network that plays almost perfectly;
+    MIT, so usable as the hard opponent for this rule set, credited
+  - R. C. Bell 1960 ("The Game of Thirty Squares", Board and Table Games
+    from Many Civilizations, 2nd ed. 1969, pp. 27-28): 10 men each placed
+    alternately on the first two rows; a long die (1 to 4); forward only;
+    landing on an enemy man captures and removes it; not onto your own;
+    squares X, III, II, I (27-30) are safe and a man leaves from them on
+    an exact throw; the door square (26) is safe but must be left for a
+    marked square as soon as possible; a man must leave a marked square
+    at the first possible throw; most men off wins
+  - R. C. Bell 1979 (The Boardgame Book): a different game (sticks 1-4,
+    none = 5; men enter on the marked squares; odd and even goals), known
+    here only from the Game Cabinet's short summary; read the book before
+    building it
 - **Senet:** no rules survive. Jéquier's conjectural rules were replaced
   by R. C. Bell's and Timothy Kendall's reconstructions (Kendall's
   published 1978, not verified), which sellers of sets use. Source:
