@@ -1,0 +1,26 @@
+# Ancient Games
+
+The oldest board games of the world, in the terminal, each with every
+honest reconstruction of its rules to choose from and a computer opponent
+at three strengths.
+
+| Game | Binary | Rule sets |
+|---|---|---|
+| Royal Game of Ur | `royal-ur` | Finkel 2017, British Museum 1990s, R. C. Bell's betting game, the Babylonian tablet game |
+| Senet | `senet` | Kendall with five pieces, Kendall with seven, Bell 1960 |
+| Mehen | `mehen` | James Masters' 2024 reconstruction, for two, four or six players |
+| Hnefatafl | `hnefatafl` | Copenhagen, Fetlar, Brandubh, Tablut after Linnaeus, Tablut after Bell 1960 |
+| Fox and Geese | `fox-and-geese` | R. C. Bell's 13 and 17 geese |
+
+Every game: play the computer (easy, normal or hard) or a friend at the
+same keyboard; keys and mouse; F1 for the rules, where each one comes
+from, and what is known of the game. Made for terminals of 100x30 and
+up, with true colour and UTF-8.
+
+Options: `--seed N`, `--demo` (the computer plays both sides),
+`--quit-after SECONDS`. For a session log:
+`RUST_LOG=debug <binary> 2>game.log`.
+
+Build: `cargo build --release` (Rust 1.88 or newer).
+
+Part of [Asciiverse](https://asciiverse.sh).
