@@ -5,8 +5,9 @@ the oldest: the Royal Game of Ur, Senet, Mehen, Hnefatafl and Fox &
 Geese (David, 2026-10-20). More to follow.
 
 **Status (2026-10-20):** the Royal Game of Ur is playable (`ur/`, binary
-`royal-ur`): Finkel 2017 and British Museum 1990s rules, computer at three
-strengths or two players, keys and mouse, help. Git repo here, branch
+`royal-ur`) with four rule sets: Finkel 2017, British Museum 1990s,
+R. C. Bell's betting game and the Babylonian tablet game; computer at
+three strengths or two players, keys and mouse, help. Git repo here, branch
 `main`, not on GitHub yet.
 
 ## Code
@@ -186,11 +187,28 @@ seen to have a computer opponent. Nothing in the catalog either.
 
 ## Next for Ur
 
-- [ ] R. C. Bell's betting game (three lots read 0=4+again, 1=stop,
-      2=1+again, 3=5+again; enter on 5; fines; the pool)
+- [x] R. C. Bell's betting game, from his own text (Board and Table Games
+      from Many Civilizations, 2nd ed. 1969, pp. 24-25, read on the Internet
+      Archive, item B-001-002-771, not kept here): three lots, jewelled tips
+      up 3 = 5 and again, 0 = 4 and again, 2 = 1 and again, 1 = nothing and
+      the turn ends; enter only on 5; a rosette makes the OPPONENT pay a
+      fine (Masters' summary says the mover pays; Bell's text wins); eight
+      fighting squares, no safe ones; exact throw off; first home takes the
+      pool. Bell is silent on where a piece entered on 5 stands (here: its
+      first square) and whether an unusable throw still throws again
+      (here: yes); the help says so. Games run about 220 throws against
+      about 150 for Finkel 2017
 - [ ] Murray's and Masters' paths: need a square-by-square diagram first
       (the Masters page describes them only in words)
-- [ ] The Babylonian tablet game on the Twenty Squares board
+- [x] The Babylonian tablet game: Finkel's Fig. 3.4 (rendered from the
+      PDF) shows the later board, rosettes at houses 4, 8, 12, 16 and
+      immunity from capture on them. Swallow enters on 2 on the FIRST
+      rosette (his other reading, before any rosette, let it enter on 15
+      and be home two throws later, found in a playtest); others on 5, 6,
+      7, 10. Knucklebones: sheep 1 to 4, then dare the ox bone (yes:
+      5, 6, 7, 10; no: wasted); the computer dares by expected value.
+      Tokens (Finkel's Table 3.1 values) won on landing, paid for passing;
+      purse 40 (20 ran dry within a few moves). About 80 throws a game
 - [ ] Move animation, sound, preview, release workflow, hub entry
 
 ## Open questions (David's to decide)
