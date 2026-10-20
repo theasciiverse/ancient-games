@@ -2,7 +2,9 @@
 //! lazuli, shell and red limestone), the pieces with their five dots, the
 //! throwing lots, the menu and the help.
 
-use crate::app::{Game, Phase, Player, Setup};
+use crate::app::{Game, Phase, Setup};
+use ancient_core::draw::{AMBER, BG, DIM, TEXT, centre, fill, outline, put, wrap};
+use ancient_core::player::Player;
 use crate::rules::{Board, Lots, Move, ROWS, Rules, START, Side, TABLET_TAGS};
 use ratatui::buffer::Buffer;
 use ratatui::layout::Rect;
@@ -15,10 +17,6 @@ const SHELL_SHADE: Color = Color::Rgb(176, 158, 120);
 const CARNELIAN: Color = Color::Rgb(178, 52, 40);
 const LIGHT_PIECE: Color = Color::Rgb(250, 246, 236);
 const DARK_PIECE: Color = Color::Rgb(36, 30, 38);
-const AMBER: Color = Color::Rgb(255, 176, 0);
-const TEXT: Color = Color::Rgb(200, 196, 186);
-const DIM: Color = Color::Rgb(120, 116, 108);
-const BG: Color = Color::Rgb(10, 10, 14);
 
 /// Where things were drawn, for mouse clicks.
 #[derive(Default, Clone)]
@@ -50,36 +48,8 @@ fn tray_cols(board: Board, home: bool) -> (usize, usize) {
     }
 }
 
-fn fill(buf: &mut Buffer, area: Rect, bg: Color) {
-    let area = area.intersection(buf.area);
-    for y in area.top()..area.bottom() {
-        for x in area.left()..area.right() {
-            buf[(x, y)].set_char(' ').set_bg(bg).set_fg(TEXT);
-        }
-    }
-}
 
-fn put(buf: &mut Buffer, x: u16, y: u16, text: &str, style: Style) {
-    if y >= buf.area.bottom() {
-        return;
-    }
-    let mut x = x;
-    for ch in text.chars() {
-        if x >= buf.area.right() {
-            break;
-        }
-        if x >= buf.area.left() {
-            buf[(x, y)].set_char(ch).set_style(style);
-        }
-        x += 1;
-    }
-}
 
-fn centre(buf: &mut Buffer, area: Rect, y: u16, text: &str, style: Style) {
-    let len = text.chars().count() as u16;
-    let x = area.x + area.width.saturating_sub(len) / 2;
-    put(buf, x, y, text, style);
-}
 
 /// Draws the whole game screen.
 pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
@@ -369,38 +339,6 @@ fn draw_piece(buf: &mut Buffer, cell: Rect, side: Side, name: Option<(&str, &str
     }
 }
 
-/// A frame around a square, to show it can be chosen or where a piece goes.
-fn outline(buf: &mut Buffer, cell: Rect, colour: Color, bold: bool) {
-    let r = Rect::new(cell.x, cell.y, cell.width - 1, cell.height - 1);
-    let style = if bold {
-        Style::new().fg(colour).add_modifier(Modifier::BOLD)
-    } else {
-        Style::new().fg(colour)
-    };
-    let (tl, tr, bl, br, hz, vt) = if bold {
-        ("┏", "┓", "┗", "┛", "━", "┃")
-    } else {
-        ("┌", "┐", "└", "┘", "─", "│")
-    };
-    let right = r.right() - 1;
-    let bottom = r.bottom() - 1;
-    for x in r.left()..=right {
-        for y in [r.top(), bottom] {
-            let ch = match (x, y) {
-                (x, y) if x == r.left() && y == r.top() => tl,
-                (x, y) if x == right && y == r.top() => tr,
-                (x, y) if x == r.left() && y == bottom => bl,
-                (x, _) if x == right => br,
-                _ => hz,
-            };
-            buf[(x, y)].set_symbol(ch).set_style(style);
-        }
-    }
-    for y in r.top() + 1..bottom {
-        buf[(r.left(), y)].set_symbol(vt).set_style(style);
-        buf[(right, y)].set_symbol(vt).set_style(style);
-    }
-}
 
 fn mark_target(buf: &mut Buffer, cell: Rect, mv: &Move, home: u8) {
     let r = Rect::new(cell.x, cell.y, cell.width - 1, cell.height - 1);
@@ -641,24 +579,3 @@ pub fn draw_help(buf: &mut Buffer, area: Rect, rules: &Rules) {
     }
 }
 
-/// Breaks `text` into lines of at most `width` characters.
-pub fn wrap(text: &str, width: usize) -> Vec<String> {
-    if text.is_empty() {
-        return vec![String::new()];
-    }
-    let mut lines = Vec::new();
-    let mut line = String::new();
-    for word in text.split_whitespace() {
-        if !line.is_empty() && line.chars().count() + 1 + word.chars().count() > width {
-            lines.push(std::mem::take(&mut line));
-        }
-        if !line.is_empty() {
-            line.push(' ');
-        }
-        line.push_str(word);
-    }
-    if !line.is_empty() {
-        lines.push(line);
-    }
-    lines
-}

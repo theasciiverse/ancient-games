@@ -1,40 +1,12 @@
 //! The game around the rules: the menu, whose turn it is, throwing, choosing
 //! a move, the computer's turns, and the end.
 
-use crate::ai::{self, Strength};
+use crate::ai;
+pub use ancient_core::player::{Player, Strength};
+pub use ancient_core::rng::Rng;
 use crate::rules::{Lots, Move, Outcome, Position, Rosettes, Rules, Side, TABLET_TOKENS, Throw};
 use log::{debug, info};
 use std::time::{Duration, Instant};
-
-/// A small, seedable random number generator (xorshift64*), so a game can
-/// be repeated with `--seed`.
-pub struct Rng(u64);
-
-impl Rng {
-    pub fn new(seed: u64) -> Rng {
-        Rng(seed.max(1))
-    }
-
-    pub fn next(&mut self) -> u64 {
-        let mut x = self.0;
-        x ^= x >> 12;
-        x ^= x << 25;
-        x ^= x >> 27;
-        self.0 = x;
-        x.wrapping_mul(0x2545_f491_4f6c_dd1d)
-    }
-
-    pub fn coin(&mut self) -> bool {
-        self.next() >> 63 == 1
-    }
-}
-
-/// Who plays a side.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub enum Player {
-    Human,
-    Computer(Strength),
-}
 
 /// The choices on the menu.
 #[derive(Clone, Debug)]

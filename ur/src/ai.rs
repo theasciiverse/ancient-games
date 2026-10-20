@@ -1,34 +1,14 @@
 //! The computer opponent: expectimax over the throws, looking a number of
 //! turns ahead, with a judgement of positions at the end.
 
+pub use ancient_core::player::Strength;
 use crate::rules::{Lots, Move, Position, Rules, START, Side, Throw};
 
-/// How hard the computer plays.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub enum Strength {
-    /// A beginner: advances and takes pieces, never thinks about danger.
-    Easy,
-    /// Weighs progress, safety and danger for the move at hand.
-    Normal,
-    /// Also looks at the throws and replies of the next two turns.
-    Hard,
-}
-
-impl Strength {
-    pub fn name(self) -> &'static str {
-        match self {
-            Strength::Easy => "easy",
-            Strength::Normal => "normal",
-            Strength::Hard => "hard",
-        }
-    }
-
-    /// Turns of throws looked ahead after the move.
-    fn depth(self) -> u32 {
-        match self {
-            Strength::Easy | Strength::Normal => 0,
-            Strength::Hard => 2,
-        }
+/// Turns of throws looked ahead after the move.
+fn depth(strength: Strength) -> u32 {
+    match strength {
+        Strength::Easy | Strength::Normal => 0,
+        Strength::Hard => 2,
     }
 }
 
@@ -44,7 +24,7 @@ pub fn choose(rules: &Rules, position: &Position, throw: Throw, strength: Streng
     for mv in moves {
         let mut next = position.clone();
         next.play(rules, mv, throw.again);
-        let value = value_after(rules, &next, side, strength.depth(), FREE_AGAINS);
+        let value = value_after(rules, &next, side, depth(strength), FREE_AGAINS);
         if best.is_none_or(|(v, _)| value > v) {
             best = Some((value, mv));
         }
@@ -147,7 +127,7 @@ pub fn wants_ox(rules: &Rules, position: &Position, sheep: u8, strength: Strengt
         return position.moves(rules, sheep).is_empty();
     }
     let me = position.to_move;
-    let depth = strength.depth();
+    let depth = depth(strength);
     let best = |throw: Throw| -> f64 {
         let moves = position.moves(rules, throw.moves);
         if moves.is_empty() {
