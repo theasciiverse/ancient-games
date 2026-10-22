@@ -292,7 +292,7 @@ pub struct Rules {
     /// A piece on a rosette of the middle row cannot be taken.
     pub rosettes_safe: bool,
     pub stakes: Option<Stakes>,
-    /// The heading of this rule set in the rulebook chapter (RULES.txt),
+    /// The heading of this rule set in the rulebook chapter (in HELP.txt and RULES.txt),
     /// where the help opens.
     pub section: &'static str,
 }

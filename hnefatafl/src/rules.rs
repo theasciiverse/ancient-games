@@ -101,7 +101,7 @@ pub struct Rules {
     /// The attackers win by enclosing the king and all his defenders.
     pub encirclement: bool,
     pub repetition: Repetition,
-    /// The heading of this rule set in the rulebook chapter (RULES.txt),
+    /// The heading of this rule set in the rulebook chapter (in HELP.txt and RULES.txt),
     /// where the help opens.
     pub section: &'static str,
 }

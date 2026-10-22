@@ -14,6 +14,14 @@ crate: mehen
 | Program        | `mehen`                                               |
 | Rule sets      | Masters 2024, for two, four or six players            |
 
+::: brief
+A race along a coiled snake, moved by guessing. Each team has one, two
+or three pharaohs; the side to move hides 1 to 5 marbles and the other
+side guesses how many. Squares run from 1 at the tail to 70 at the head.
+The rules in short follow; the full rules, their sources and the history
+are in RULES.txt and the rulebook.
+:::
+
 ## What survives
 
 **The name.** Mehen is the name of a snake god of ancient Egyptian
@@ -147,6 +155,27 @@ Our choice: the old boards are round and their spaces wedge-shaped. The
 program draws the coil square, on a grid, to fit a terminal.
 
 ## Masters 2024
+
+::: brief
+- Two teams, lions and lionesses, each with three cats. All pharaohs
+  start off the board beside the tail; a coin picks who goes first.
+- Your turn: choose a pharaoh still on its way. You hide 1 to 5
+  marbles; the other team guesses.
+- Wrong guess: your pharaoh moves as many squares as you hid.
+- Right guess: they move one of their own free pharaohs that many
+  instead, and may set a cat on your pharaoh. If all theirs are held,
+  nobody moves, but the cat may still be set.
+- A held pharaoh must first kill its cat: the cat's team hides 1 to 3,
+  you guess. Right: the cat dies and you take a normal turn. Wrong:
+  your turn ends.
+- Two right guesses in a row (for a move, not in a cat fight) bring
+  back one of the guessing team's dead cats.
+- Ending on an opposing pharaoh: swap; it goes back to the square you
+  came from (to the start if you were entering), its cat with it.
+  Ending on a teammate: step on one square.
+- Reaching or passing square 70 is rebirth; no exact count needed.
+  The first team with all its pharaohs reborn wins.
+:::
 
 James Masters' rules, published on his company's website
 [@masters-mehen]. He bases them on the findings of his 2024 papers and
@@ -286,6 +315,16 @@ gives moves too short to be satisfying [@masters-mehen-play, 77].
 None of these is in the program.
 
 ## Playing it in the terminal
+
+::: brief
+- 1 to 5 (1 to 3 in a cat fight): hide or guess that many; or Left,
+  Right, Up, Down, Tab to choose and Enter or Space to confirm.
+- Choosing a pharaoh: arrows or Tab, then Enter; or click it.
+- Set a cat? Y or Enter: yes; N: no. The mouse clicks numbers and
+  answers too.
+- Two people at one keyboard: the guessing team looks away, then Enter.
+- After a game: Enter plays again. M: menu; F1: this help; Q: quit.
+:::
 
 Start `mehen`, choose two, four or six players and who plays each team:
 the computer (easy, normal or hard) or a person at the same keyboard.

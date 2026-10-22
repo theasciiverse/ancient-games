@@ -11,6 +11,8 @@ One source, several outputs. `./build.sh` writes to `out/`:
 - `<game>.html`: one game's chapter, for its catalog page
 - `<game>.txt`: one game's chapter as plain text, meant for `RULES.txt`
   in that game's release archive
+- `<game>-help.txt`: the chapter's short form, copied to the game's crate
+  as `HELP.txt`, which the game shows under F1
 
 Needs pandoc 3.1.2 or newer, Typst, Python 3 and cargo (the build compiles
 the games to draw their examples and screens). `RULEBOOK_OUT=dir` builds
@@ -42,6 +44,26 @@ elsewhere and leaves the crates' `RULES.txt` alone.
 - `style/rulebook.css`: the HTML pages
 
 ## Writing a chapter
+
+**Every game's chapter has a short form for F1** (David, 2026-10-22). The
+chapter is the full story; a player who presses F1 mid-game wants the
+rules in seconds. Write it into the chapter in fenced divs of class
+`brief`:
+
+    ::: brief
+    - 6 pits a side, 4 seeds each. Sow anticlockwise ...
+    :::
+
+one before `## What survives` (how the game is played at all, and that
+the full rules, sources and history are in RULES.txt and the rulebook),
+one in each rule set's section under its facts table (3 to 8 bullets;
+the heading must match the rule set's `section` in `rules.rs`, where F1
+opens), one for any shared basics a rule set's brief leans on, and the
+keys at the start of `## Playing it in the terminal`. The briefs say what
+the program does, "Our choice" included. `build.sh` gathers them, under
+their headings, into `HELP.txt` (`filters/help.lua`) and leaves them out
+of the book and of `RULES.txt` (`filters/no-brief.lua`); it stops with an
+error if a game's chapter has none. Mancala's chapter is the model.
 
 Keep "what survives", "what is reconstructed" and "Our choice" apart, and
 mark every choice of ours with those words. Cite with pandoc's

@@ -409,14 +409,15 @@ pub fn menu(rules: &[Rules], chosen: usize) -> Menu<'_> {
     }
 }
 
-/// The game's chapter of the rulebook, as plain text: the help, and
-/// RULES.txt in the release archives. Written by `rulebook/build.sh`.
-pub const RULES: &str = include_str!("../RULES.txt");
+/// The short form of the game's rulebook chapter (its "brief" blocks), as
+/// plain text: the F1 help. The full chapter is RULES.txt in the release
+/// archives. Both are written by `rulebook/build.sh`.
+pub const HELP: &str = include_str!("../HELP.txt");
 
-/// How to play: the rulebook chapter, and the line where the rule set
+/// How to play: the rules in short, and the line where the rule set
 /// `rules` begins (every Mehen rule set is "Masters 2024").
 pub fn help(_rules: &Rules) -> (Vec<Help>, usize) {
-    let lines = shell::rules_help(RULES);
+    let lines = shell::rules_help(HELP);
     let at = shell::help_find(&lines, "Masters 2024").unwrap_or(0);
     (lines, at)
 }
@@ -427,7 +428,7 @@ mod help_tests {
 
     #[test]
     fn the_help_opens_at_every_rule_set() {
-        let lines = shell::rules_help(RULES);
+        let lines = shell::rules_help(HELP);
         for _rules in Rules::all() {
             assert!(shell::help_find(&lines, "Masters 2024").is_some(), "Masters 2024");
         }
@@ -437,7 +438,7 @@ mod help_tests {
     fn the_rulebook_text_fits_the_help() {
         // The help is 84 columns wide with 3 on each side. Only a single
         // word, a web address, may be wider (the help runs it on).
-        for line in RULES.lines() {
+        for line in HELP.lines() {
             let word = !line.trim().contains(' ');
             assert!(line.chars().count() <= 78 || word, "too wide: {line}");
         }

@@ -14,6 +14,15 @@ crate: ur
 | Program        | `royal-ur`                                            |
 | Rule sets      | Finkel 2017, British Museum 1990s, R. C. Bell, the Babylonian tablet |
 
+::: brief
+A race for two, Light and Dark. Throw, then move one piece that many
+squares along your path; the first side to bring every piece home wins.
+Each side starts on its own outer row, runs along the shared middle row
+and goes off the board. Pieces are taken only on the middle row. The
+rules of each set in short follow; the full rules, their sources and the
+history are in RULES.txt and the rulebook.
+:::
+
 ## What survives
 
 **The boards.** Leonard Woolley found the first boards in the Royal
@@ -86,6 +95,17 @@ fills those gaps in its own way.
 
 ## The board
 
+::: brief
+- The Ur board (Finkel 2017, British Museum, Bell): enter on your own
+  row at the fourth square from the left and run left (squares 1 to 4),
+  along the whole middle row the other way (5 to 12), back into your own
+  row (13, 14), then off: bearing off is the 15th step.
+- Squares 1 to 4, 13 and 14 are yours alone. Pieces are taken only on the
+  middle row.
+- Rosettes on squares 4, 8 and 14; square 8, the middle rosette, is the
+  only one on the shared row.
+:::
+
 ![The third-millennium board from Ur, with the path used by every rule
 set on this board. Light starts from the near side; Dark's path is the
 mirror image on the far row. Rosettes on squares 4, 8 and
@@ -105,6 +125,16 @@ taken. The middle rosette, square 8, is the only rosette on the shared
 row.
 
 ## The throws
+
+::: brief
+- Four lots (Finkel 2017, British Museum): the marked tips up, 0 to 4,
+  are the move. 0 loses the turn.
+- Three lots (Bell): 3 tips up, 5; none, 4; two, 1; each moves and then
+  throws again. One tip up: no move, and the turn ends.
+- Two knucklebones (the tablet): the sheep's gives 1 to 4. Use it, or
+  dare the ox's: yes turns 1, 2, 3, 4 into 5, 6, 7, 10; no wastes the
+  throw. The ox says yes half the time.
+:::
 
 **Four lots** (Finkel 2017, British Museum 1990s). Four tetrahedra, each
 with two of its four tips marked. Count the marked tips pointing up: that
@@ -145,6 +175,18 @@ equipment list [@finkel2007, 27], and the ox says yes half the time.
 A real knucklebone does not fall evenly.
 
 ## Finkel 2017
+
+::: brief
+- 7 pieces each, off the board. Who throws first is chosen at random.
+- Four lots; 0 loses the turn. Any throw brings a new piece on, that
+  many squares along.
+- Not onto your own piece. Landing on an enemy on the middle row sends it
+  back to the start; taking is never forced.
+- Landing on any rosette (4, 8, 14): throw again.
+- A piece on the middle rosette cannot be taken, so nothing lands there.
+- Bear off with the exact throw: from 14 a 1, from 13 a 2. You must move
+  if you can. All 7 home wins.
+:::
 
 The rules Irving Finkel played against Tom Scott for the British
 Museum's video for International Tabletop Day 2017, and the version most
@@ -199,6 +241,13 @@ Bearing off needs the exact throw: from square 13, a 2.
 
 ## British Museum 1990s
 
+::: brief
+- As Finkel 2017, but 5 pieces each.
+- No square is safe: a piece on the middle rosette can be taken too.
+- Four lots, 0 loses the turn; any throw brings a piece on; any rosette
+  gives another throw; exact throw to bear off. All 5 home wins.
+:::
+
 The rules Finkel published with the British Museum's replica board in
 the late 1990s [@masters-ur]. They are those of Finkel 2017, with two
 differences:
@@ -218,6 +267,18 @@ the piece on it can be taken.
 ```
 
 ## R. C. Bell's betting game
+
+::: brief
+- 7 pieces each. Purses start at 20 and carry on from game to game; each
+  side puts 5 into the pool at the start.
+- Three lots: 5, 4 or 1 moves and you throw again, even when it could
+  not be used. One tip up ends the turn.
+- A piece comes on only with a 5, onto your first square. A taken piece
+  needs a 5 again.
+- Landing on an enemy on the middle row takes it; no square is safe.
+- A rosette gives no extra throw: the opponent pays 1 into the pool.
+- Exact throw to bear off. The first with all 7 home takes the pool.
+:::
 
 From R. C. Bell's *Board and Table Games from Many Civilizations*
 [-@bell1969, 24-25], first published in 1960, read in the second edition
@@ -258,6 +319,24 @@ for Finkel 2017.
 ```
 
 ## The Babylonian tablet
+
+::: brief
+- The later board: houses 1 to 4 on your own row, the 12 houses of the
+  middle row (5 to 16), then off. Rosettes on houses 4, 8, 12 and 16.
+- 5 birds each, each brought on only by its own throw: Swallow 2 (onto
+  house 4, the rosette), Storm-bird 5, Raven 6, Rooster 7, Eagle 10 (onto
+  that house).
+- Throw the sheep's knucklebone (1 to 4); use it, or press D to dare the
+  ox's: yes makes 5, 6, 7 or 10, no wastes the throw.
+- One piece per square. Landing on an enemy on the middle row knocks it
+  off; a bird on a rosette cannot be knocked off.
+- Purses start at 40 and carry on; each side puts 5 into the pool.
+  Landing on a rosette wins the bird's tokens from the pool, passing over
+  one pays them in: Swallow 3, Storm-bird, Raven and Rooster 4, Eagle 5.
+  No extra throw.
+- Exact throw to bear off; you must move if you can (or dare). The first
+  with all 5 home takes the pool.
+:::
 
 The game of tablet BM 33333B, as Irving Finkel reconstructs it in "On
 the Rules for the Royal Game of Ur" [@finkel2007]. The tablet gives the
@@ -400,6 +479,16 @@ Two more routes for the Ur board are described by James Masters
   = 4, 1, 2, 3; rosettes give another throw; exact throws to bear off.
 
 ## Playing it in the terminal
+
+::: brief
+- Space or Enter: throw (or click).
+- Arrows or Tab: choose a lit piece; Enter or Space: move it. Or click a
+  lit piece; the tray of waiting pieces brings a new one on.
+- D: dare the ox's knucklebone (the tablet). With no move, Enter lets
+  the throw pass.
+- Game over: Enter plays again, M goes to the menu.
+- M: menu; F1 or ?: this help; Q: quit.
+:::
 
 Start `royal-ur`, choose a rule set and who plays each side: the computer
 (easy, normal or hard) or a person at the same keyboard.

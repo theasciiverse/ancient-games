@@ -12,6 +12,14 @@ crate: senet
 | Program        | `senet`                                               |
 | Rule sets      | Kendall with five pieces, Kendall with seven pieces, R. C. Bell 1960 |
 
+::: brief
+Senet is a race over thirty houses: throw, then move one piece forward
+that many houses, and be the first to bring your pieces off the end.
+Both sides travel the same way, so pieces block, bump and pass each
+other. The rules of each rule set in short follow; the full rules, their
+sources and the history are in RULES.txt and the rulebook.
+:::
+
 ## What survives
 
 **The boards.** Senet is a board of thirty squares in three rows of ten.
@@ -71,6 +79,14 @@ restrictions.](images/senet-amenhotep-iii-brooklyn.jpg){width=65%}
 
 ## The board
 
+::: brief
+- Houses 1 to 10 run left to right along the top row, 11 to 20 back
+  along the middle row, 21 to 30 left to right along the bottom row.
+- Kendall's named houses: 15 Rebirth, 26 Beauty, 27 Water, 28 the Three
+  Truths, 29 Re-Atoum, 30 Horus. Bell: 26 is the door, 27 to 30 the
+  marked houses.
+:::
+
 ![The thirty houses of Senet in the order the pieces travel, with the
 named houses of Kendall's rules.](figures/senet-board.svg){#fig-senet-board width=100%}
 
@@ -97,6 +113,13 @@ and O'Keefe the House of Water; Walker leaves 30 unnamed.
 
 ## The throws
 
+::: brief
+- Kendall: four sticks, count the light sides up; none up is 5. After
+  moving on a 1, 4 or 5, throw again.
+- Bell: a long die, 1 to 4, one throw a turn.
+- A throw with no move ends the turn.
+:::
+
 **Four sticks** (both Kendall rule sets). Each stick has a light side and
 a dark side. Count the light sides up; none up counts as 5. After moving
 on a 1, 4 or 5, the player throws again.
@@ -115,6 +138,20 @@ Our choice: Bell does not describe the die beyond its four faces; in the
 program each comes up equally often.
 
 ## Kendall, five pieces
+
+::: brief
+- Five each: White on 1, 3, 5, 7, 9, Black on 2, 4, 6, 8, 10; White
+  first.
+- Move one piece forward by the throw; you must move if you can. Only if
+  no piece can go forward, move one backward.
+- Not onto your own piece. A piece with a friend beside it is safe.
+  Landing on a lone enemy swaps the two.
+- Three or more of a side in a row: the other side may not pass them.
+- Every piece must stop on 26. From 26 a 1 falls into the water (27):
+  back to 15, or the highest empty house below it, and the turn ends.
+- 26 bears off on a 5; 28, 29, 30 only on an exact 3, 2, 1.
+- First to bear off all five wins.
+:::
 
 Timothy Kendall published his reconstruction in 1978 in a booklet sold
 with his Senet set, *Passing Through the Netherworld*
@@ -194,6 +231,21 @@ empty house below it:
 
 ## Kendall, seven pieces
 
+::: brief
+- Seven each, alternating on 1 to 14, White on 1; Black first.
+- As five pieces, but no blockades, and a lone enemy landed on goes to
+  the house you came from.
+- Every piece must stop on 26. A piece landing in the water (27) ends
+  the turn, and your other pieces are frozen until it is out.
+- Out of the water: press R to move it to 15 instead of throwing (not
+  while 15 is taken; the turn ends), or throw and bear off on a 4.
+- A piece in the water is never safe. Landed on in 28 to 30, a piece
+  goes into the water, or back to 26 if the water is taken.
+- 26 bears off on a 5, 28 on a 3, 29 on a 2, 30 on any throw. Your last
+  piece, stuck on 28 or 29, falls back into an empty water.
+- First to bear off all seven wins.
+:::
+
 Kendall's original rules, with seven pieces each, as Damian Walker sets
 them out from Kendall's booklet [@walker-senet]. They differ from the
 five-piece rules in these ways:
@@ -231,6 +283,19 @@ read as "this is the side's last piece on the board". A piece on 28 or
 ```
 
 ## R. C. Bell 1960
+
+::: brief
+- Ten men each on houses 1 to 20; a coin picks who starts, and the
+  starter's men stand on the even houses.
+- A long die, 1 to 4, one move a turn, forward only. Not onto your own
+  man.
+- Landing on an enemy man captures it; it leaves the game. Men on the
+  door (26) and the marked houses (27 to 30) cannot be taken.
+- A man on 26 to 30 must move at the first throw that allows it, before
+  any other move. From 26 it goes onto an empty marked house.
+- From 27 a 4 bears off, from 28 a 3, from 29 a 2, from 30 a 1.
+- When the board is empty, the most men borne off wins; equal is a draw.
+:::
 
 R. C. Bell's suggested rules for "the Game of Thirty Squares", from
 *Board and Table Games from Many Civilizations*, first published in 1960
@@ -282,6 +347,14 @@ chance, before any other move:
 ```
 
 ## Playing it in the terminal
+
+::: brief
+- Space or Enter: throw; or click.
+- Arrows or Tab: choose a piece; Enter: move it; or click a lit piece.
+- R: rescue a piece from the water (Kendall, seven pieces).
+- After the game, Enter plays again.
+- M: menu; F1: this help; Q: quit.
+:::
 
 Start `senet`, choose a rule set and who plays each side: the computer
 (easy, normal or hard) or a person at the same keyboard.

@@ -1,0 +1,45 @@
+Fox and Geese
+Asciiverse
+2026-10-22
+
+
+
+One player has a single fox, the other a flock of geese, on a cross of 33
+points joined by lines along the rows and columns (no diagonals). The fox
+kills geese by jumping them; the geese try to hem him in until he cannot
+move. The rules of each form in short follow; the full rules, their sources
+and the history are in RULES.txt and the rulebook.
+
+Bell, thirteen geese
+--------------------
+
+- 13 geese fill the row below the middle and the bottom arm; the fox starts
+  two points above the middle goose. The geese move first.
+- One piece a turn, one step along a line to an empty point. Geese may step
+  any way.
+- The fox may instead jump a goose next to him onto the empty point beyond,
+  killing it. He may jump again and again in one move, turning between jumps
+  and stopping when he likes. Jumping is never forced.
+- The fox cannot move: the geese win. Three geese or fewer left, or the
+  geese cannot move: the fox wins.
+- The same position with the same side to move a third time: a draw.
+
+Bell, seventeen geese
+---------------------
+
+- As thirteen geese, with 17 geese: two more on the outer edge of each side
+  arm, just above the long row of geese.
+- A goose moves up or sideways, never down towards where the geese started.
+  The fox still moves any way.
+- Geese left with no move lose: the fox wins.
+
+Playing it in the terminal
+--------------------------
+
+- Arrows: move the cursor; Enter or Space: pick up a piece, then put it down
+  on a lit point; Esc: let go. Or click a piece, then a point.
+- Geese a jump would kill turn red when the cursor is on its landing point.
+  Where several series of jumps end on the same point, the one killing the
+  most geese is played.
+- When the game is over, Enter plays again.
+- M: menu; F1: this help; Q: quit.

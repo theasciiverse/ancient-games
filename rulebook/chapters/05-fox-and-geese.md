@@ -12,6 +12,14 @@ crate: fox-and-geese
 | Program        | `fox-and-geese`                                       |
 | Rule sets      | Bell, thirteen geese; Bell, seventeen geese           |
 
+::: brief
+One player has a single fox, the other a flock of geese, on a cross of
+33 points joined by lines along the rows and columns (no diagonals).
+The fox kills geese by jumping them; the geese try to hem him in until
+he cannot move. The rules of each form in short follow; the full rules,
+their sources and the history are in RULES.txt and the rulebook.
+:::
+
 ## What survives
 
 **The game.** One player has a single fox, the other a flock of geese.
@@ -82,6 +90,19 @@ names.
 
 ## Bell, thirteen geese
 
+::: brief
+- 13 geese fill the row below the middle and the bottom arm; the fox
+  starts two points above the middle goose. The geese move first.
+- One piece a turn, one step along a line to an empty point. Geese may
+  step any way.
+- The fox may instead jump a goose next to him onto the empty point
+  beyond, killing it. He may jump again and again in one move, turning
+  between jumps and stopping when he likes. Jumping is never forced.
+- The fox cannot move: the geese win. Three geese or fewer left, or the
+  geese cannot move: the fox wins.
+- The same position with the same side to move a third time: a draw.
+:::
+
 Bell's early form [@bell1969, 76]:
 
 1. Thirteen geese stand on the seven points of row 5 and the six points
@@ -150,6 +171,14 @@ Our choices:
 
 ## Bell, seventeen geese
 
+::: brief
+- As thirteen geese, with 17 geese: two more on the outer edge of each
+  side arm, just above the long row of geese.
+- A goose moves up or sideways, never down towards where the geese
+  started. The fox still moves any way.
+- Geese left with no move lose: the fox wins.
+:::
+
 "In later forms of the game the geese were increased to seventeen, but
 were deprived of the power of moving backwards" [@bell1969, 76]. The
 rules are those of the thirteen-geese game, with all its choices, but
@@ -214,6 +243,16 @@ filling the fortress. An officer who fails to make a capture he could
 have made is removed ("huffed") [@wiki-asalto].
 
 ## Playing it in the terminal
+
+::: brief
+- Arrows: move the cursor; Enter or Space: pick up a piece, then put it
+  down on a lit point; Esc: let go. Or click a piece, then a point.
+- Geese a jump would kill turn red when the cursor is on its landing
+  point. Where several series of jumps end on the same point, the one
+  killing the most geese is played.
+- When the game is over, Enter plays again.
+- M: menu; F1: this help; Q: quit.
+:::
 
 Start `fox-and-geese`, choose a rule set, whom to play against (the
 computer, easy, normal or hard, or a friend at the same keyboard) and

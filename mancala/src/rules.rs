@@ -177,7 +177,7 @@ pub struct Rules {
     pub name: &'static str,
     /// Where it comes from, for the menu.
     pub source: &'static str,
-    /// The heading of this rule set in the rulebook chapter (RULES.txt),
+    /// The heading of this rule set in the rulebook chapter (in HELP.txt and RULES.txt),
     /// where the help opens.
     pub section: &'static str,
     /// Pits on each side.

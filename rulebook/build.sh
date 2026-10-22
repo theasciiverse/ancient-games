@@ -4,12 +4,14 @@
 #   ancient-games-rules.html   the whole book, one self-contained page
 #   <game>.html                one game's chapter, for its catalog page
 #   <game>.txt                 one game's chapter as plain text, also copied
-#                              to the game's crate as RULES.txt (its F1 help,
-#                              and part of its release archive)
+#                              to the game's crate as RULES.txt (part of its
+#                              release archive)
+#   <game>-help.txt            the chapter's short form (its "brief" blocks),
+#                              copied to the crate as HELP.txt, the game's F1
 # Needs pandoc 3.1.2 or newer, typst, python3 and cargo.
 #
 # RULEBOOK_OUT=dir builds into another folder and leaves the crates'
-# RULES.txt alone, so builds can run side by side.
+# RULES.txt and HELP.txt alone, so builds can run side by side.
 set -eu
 
 cd "$(dirname "$0")"
@@ -19,19 +21,24 @@ mkdir -p "$out"
 
 python3 figures/make_figures.py
 
-# Worked examples and screens from the games themselves (pictures.txt).
-# A game includes its chapter as RULES.txt (and its short form as
-# HELP.txt, if the chapter has one), so a new chapter's crate gets empty
-# ones to compile with; the real text replaces them below.
+# A game shows its chapter's short form under F1 (HELP.txt) and ships the
+# whole chapter as RULES.txt. Every game's chapter must have a short form:
+# fenced divs of class "brief", one at least under each rule set's
+# heading. A new chapter's crate gets empty files to compile with; the
+# real text replaces them below.
 for chapter in chapters/[0-9][0-9]-*.md; do
     crate=$(sed -n '1,/^---$/{s/^crate: *//p}' "$chapter" | head -n 1)
-    if [ -n "$crate" ] && [ ! -f "../$crate/RULES.txt" ]; then
-        : > "../$crate/RULES.txt"
+    [ -n "$crate" ] || continue
+    if ! grep -q '^::: *{\{0,1\}\.\{0,1\}brief' "$chapter"; then
+        echo "error: $chapter has no short form for the game's F1 (::: brief blocks)" >&2
+        exit 1
     fi
-    if [ -n "$crate" ] && grep -q '^::: *{\{0,1\}\.\{0,1\}brief' "$chapter" && [ ! -f "../$crate/HELP.txt" ]; then
-        : > "../$crate/HELP.txt"
-    fi
+    for f in RULES.txt HELP.txt; do
+        [ -f "../$crate/$f" ] || : > "../$crate/$f"
+    done
 done
+
+# Worked examples and screens from the games themselves (pictures.txt).
 cargo build --release --quiet --manifest-path ../Cargo.toml --workspace
 bin=../target/release
 grep -v '^#' pictures.txt | while read -r kind package name rules seed seconds; do
@@ -101,12 +108,12 @@ for chapter in $games; do
     if [ -n "$crate" ] && [ -z "${RULEBOOK_OUT:-}" ]; then
         cp "$out/$game.txt" "../$crate/RULES.txt"
     fi
-    # The short form for the game's F1, if the chapter has one: the
-    # "brief" blocks under their section headings (filters/help.lua).
-    if grep -q '^::: *{\{0,1\}\.\{0,1\}brief' "$chapter"; then
+    # The short form for the game's F1: the "brief" blocks under their
+    # section headings (filters/help.lua).
+    if [ -n "$crate" ]; then
         pandoc $common --lua-filter=filters/help.lua --metadata=title:"$title" \
             "$chapter" --standalone -t plain --columns=76 -o "$out/$game-help.txt"
-        if [ -n "$crate" ] && [ -z "${RULEBOOK_OUT:-}" ]; then
+        if [ -z "${RULEBOOK_OUT:-}" ]; then
             cp "$out/$game-help.txt" "../$crate/HELP.txt"
         fi
     fi

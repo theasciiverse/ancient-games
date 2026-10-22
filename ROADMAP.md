@@ -83,4 +83,6 @@ Several competing reconstructions each, which suits the rule-set menu.
 Each new game follows the first five: its own binary in this workspace,
 the computer at three strengths or two players, every honest rule set in
 the menu, a rulebook chapter with sources, worked examples and screens,
-and its own catalog title in the `ancient-games` collection.
+the chapter's short form under F1 ("brief" blocks, see
+`rulebook/README.md`), and its own catalog title in the `ancient-games`
+collection.

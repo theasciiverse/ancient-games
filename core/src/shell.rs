@@ -166,7 +166,7 @@ pub enum Help {
     Blank,
 }
 
-/// The help from a game's rulebook chapter (its RULES.txt, written by
+/// The help from a game's rulebook chapter (its HELP.txt, written by
 /// `rulebook/build.sh` already wrapped to fit the help): the first line
 /// (the title) and every underlined line are headings, the underlines go,
 /// and every other line is kept as it is.

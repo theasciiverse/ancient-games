@@ -82,7 +82,7 @@ pub struct Rules {
     pub source: &'static str,
     pub variant: Variant,
     pub pieces: u8,
-    /// The heading of this rule set in the rulebook chapter (RULES.txt),
+    /// The heading of this rule set in the rulebook chapter (in HELP.txt and RULES.txt),
     /// where the help opens.
     pub section: &'static str,
 }

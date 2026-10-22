@@ -162,14 +162,17 @@ repetition, the WTF text says "for the third time in a row", and no
 two-game match. Fox & Geese: the fox always starts on D3 (Bell: any
 vacant point); a third repetition is a draw (Bell silent).
 
-The F1 help is generated from the chapters (David, 2026-10-22): a chapter
-names its crate in its front matter (`crate: ur`), build.sh copies its
-text to `<crate>/RULES.txt`, the game `include_str!`s it and shows it
-scrollable (`shell::rules_help`, `draw_help_at`, `help_key`), opened at
-the heading named by the rule set's `section`; a test checks every
-section is there and no line is wider than the help. The release
-workflow puts RULES.txt in the archive. Games without a chapter keep
-their hand-written help until theirs is written.
+The F1 help is the short form of the chapter (David, 2026-10-22: "we
+need an abbreviated form in the F1"): each chapter carries "brief"
+blocks (fenced divs, `::: brief`), one under each rule set's heading plus
+an opening and the keys; build.sh gathers them into `<crate>/HELP.txt`,
+which the game `include_str!`s (`ui::HELP`) and shows scrollable
+(`shell::rules_help`, `draw_help_at`, `help_key`), opened at the heading
+named by the rule set's `section`; tests check every section is there and
+no line is wider than the help. The full chapter goes to
+`<crate>/RULES.txt` for the release archive, without the briefs. **Every
+future game's chapter must have briefs**; build.sh fails without them
+(see `rulebook/README.md`, "Writing a chapter").
 
 ## Code
 

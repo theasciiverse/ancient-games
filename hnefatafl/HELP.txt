@@ -1,0 +1,92 @@
+Hnefatafl
+Asciiverse
+2026-10-22
+
+
+
+Two unequal sides: the king and his defenders in the middle, twice as many
+attackers round the edges. The attackers move first. Every piece moves like
+a rook in chess, any number of empty squares along a row or column, never
+jumping. You capture an enemy piece by closing it in between two of yours
+along a row or column; only the moving side captures. The king escapes to
+win; the attackers win by taking him. The rules of each set in short follow;
+the full rules, their sources and the history are in RULES.txt and the
+rulebook.
+
+Copenhagen 11x11
+----------------
+
+- 11x11; 24 attackers against the king and 12 defenders. Attackers first.
+- Only the king may stop on the throne and the corners; anyone may pass over
+  the empty throne. The king helps capture.
+- Corners are hostile to all; the throne always to the attackers, to the
+  defenders when empty: they capture like an enemy piece.
+- Shield wall: moving onto the edge to close a row of two or more enemy
+  pieces along it, each with one of yours in front of it, takes the row (a
+  corner may close the far end; the king is never taken this way).
+- The king is taken by attackers on all four sides (three beside the
+  throne), never on the edge.
+- Defenders win when the king reaches a corner, or sits on the edge, able to
+  move, in a fort the attackers can never break.
+- Attackers win by taking the king or shutting in every defender. The same
+  position a third time loses for the defenders; a side that cannot move
+  loses.
+
+Fetlar 11x11
+------------
+
+- As Copenhagen: board, setup, moves, captures, hostile squares, the ring,
+  attackers first.
+- No shield wall and no exit fort: the king wins only by a corner.
+- The king is taken by attackers on all four sides (three beside the
+  throne); on the edge only if he is the last of his side and attackers
+  stand on every side of him.
+- The same position a third time is a draw. A side that cannot move loses.
+
+Brandubh 7x7
+------------
+
+- 7x7; 8 attackers against the king and 4 defenders. Attackers first.
+- Moves and captures as Copenhagen; only the king may stop on the throne and
+  the corners.
+- The king escapes to any corner. Corners are hostile to everyone, the king
+  too.
+- The king is taken like any piece, between two attackers or an attacker and
+  a corner; on the throne it takes all four sides. The empty throne is never
+  hostile to him.
+- Attackers also win by shutting in every defender. The same position a
+  third time loses for whoever made it; a side that cannot move loses.
+
+Tablut 9x9 (Linnaeus)
+---------------------
+
+- 9x9; 16 attackers (Muscovites) against the king and 8 defenders (Swedes).
+  Attackers first.
+- No special corners. Only the king may stop on the throne; anyone may pass
+  over it empty. It is hostile to the attackers, and to the defenders when
+  empty.
+- The king is taken like any piece, between two attackers; on the throne it
+  takes four, beside it three with the throne the fourth.
+- The king escapes to any square on the edge.
+- Attackers also win by shutting in every defender. The same position a
+  third time loses for the defenders; a side that cannot move loses.
+
+Tablut 9x9 (Bell 1960)
+----------------------
+
+- As Linnaeus’ Tablut: board, setup, moves, captures, the throne, the king
+  escaping to the edge, attackers first.
+- The king is taken only by attackers on all four sides, or three with the
+  empty throne the fourth.
+- No ring rule: the attackers win only by taking the king.
+- The game calls Raichi! when the king has one clear way to the edge,
+  Tuichi! with two.
+- The same position a third time is a draw. A side that cannot move loses.
+
+Playing it in the terminal
+--------------------------
+
+- Arrows move the cursor; Enter or Space picks up a piece, then puts it on a
+  lit square. Or click a piece, then a square. Esc puts it down.
+- After a game: Enter or Space plays again; M or Esc goes to the menu.
+- M: menu; F1 or ?: this help (Up, Down, PgUp, PgDn scroll); Q: quit.

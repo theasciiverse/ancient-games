@@ -74,7 +74,7 @@ pub struct Rules {
     pub geese: &'static [Point],
     /// Whether geese may move back, away from the fox's end (row 0).
     pub geese_back: bool,
-    /// The heading of this rule set in the rulebook chapter (RULES.txt),
+    /// The heading of this rule set in the rulebook chapter (in HELP.txt and RULES.txt),
     /// where the help opens.
     pub section: &'static str,
 }
