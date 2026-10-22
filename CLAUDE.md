@@ -31,6 +31,14 @@ ARM64; tag v0.1.0-av.1 pushed, no GitHub release while Actions billing
 blocks builds. Licence: not chosen; David chooses licences case by case
 (2026-10-20), so the Cargo.toml files name none until he does. Own git repo, branch `main`, private at github.com/theasciiverse/ancient-games.
 
+## Roadmap
+
+`ROADMAP.md` (2026-10-22): ancient games from around the world that could
+join the collection (Hounds and Jackals, mancala, the Roman games, Patolli,
+Liubo, the morris family and more), with what a GitHub search found for
+each and a suggested order. David: eventually perhaps all of them. Its
+history notes are unchecked; verify before building.
+
 ## Rulebook
 
 `rulebook/` (started 2026-10-22): the rules of each game with sources,
