@@ -7,10 +7,13 @@
 #                              to the game's crate as RULES.txt (its F1 help,
 #                              and part of its release archive)
 # Needs pandoc 3.1.2 or newer, typst and python3.
+#
+# RULEBOOK_OUT=dir builds into another folder and leaves the crates'
+# RULES.txt alone, so builds can run side by side.
 set -eu
 
 cd "$(dirname "$0")"
-out=out
+out=${RULEBOOK_OUT:-out}
 rm -rf "$out"
 mkdir -p "$out"
 
@@ -19,7 +22,13 @@ python3 figures/make_figures.py
 date=$(git log -1 --format=%cs -- . 2>/dev/null || true)
 [ -n "$date" ] || date=$(date +%F)
 
-common="--metadata-file=metadata.yaml --metadata=date:$date --citeproc --lua-filter=filters/no-dashes.lua"
+# references.bib holds the shared sources, bib/<game>.bib each chapter's own.
+bibs="--bibliography=references.bib"
+for bib in bib/*.bib; do
+    [ -f "$bib" ] && bibs="$bibs --bibliography=$bib"
+done
+
+common="--metadata-file=metadata.yaml --metadata=date:$date $bibs --citeproc --lua-filter=filters/no-dashes.lua"
 
 intro=chapters/00-introduction.md
 games=$(ls chapters/[0-9][0-9]-*.md | grep -v "^$intro\$")
@@ -52,7 +61,7 @@ for chapter in $games; do
         --standalone -t plain --columns=76 -o "$out/$game.txt"
     # The game's help and the RULES.txt of its release archive.
     crate=$(sed -n '1,/^---$/{s/^crate: *//p}' "$chapter" | head -n 1)
-    if [ -n "$crate" ]; then
+    if [ -n "$crate" ] && [ -z "${RULEBOOK_OUT:-}" ]; then
         cp "$out/$game.txt" "../$crate/RULES.txt"
     fi
 done
