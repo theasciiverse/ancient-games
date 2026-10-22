@@ -1,6 +1,6 @@
 [package]
 name = "mancala"
-version = "0.1.0"
+version = "0.2.0"
 description = "Mancala in the terminal: the regional sowing games of the world, each with its own rules"
 edition.workspace = true
 repository.workspace = true

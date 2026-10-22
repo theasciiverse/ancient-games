@@ -19,7 +19,7 @@ checksum = "683d7910e743518b0e34f1186f92494becacb047c7b6bf616c96772180fef923"
 
 [[package]]
 name = "ancient-core"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "ratatui",
 ]
@@ -511,7 +511,7 @@ checksum = "77ce24cb58228fbb8aa041425bb1050850ac19177686ea6e0f41a70416f56fdb"
 
 [[package]]
 name = "fox-and-geese"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "ancient-core",
  "env_logger",
@@ -601,7 +601,7 @@ checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
 
 [[package]]
 name = "hnefatafl"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "ancient-core",
  "env_logger",
@@ -798,7 +798,7 @@ dependencies = [
 
 [[package]]
 name = "mancala"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "ancient-core",
  "env_logger",
@@ -808,7 +808,7 @@ dependencies = [
 
 [[package]]
 name = "mehen"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "ancient-core",
  "env_logger",
@@ -1320,7 +1320,7 @@ checksum = "d6f6ff9a378485b298a5286656da665ba74413d36db0979633275d2e708145d4"
 
 [[package]]
 name = "royal-ur"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "ancient-core",
  "env_logger",
@@ -1376,7 +1376,7 @@ checksum = "8a7852d02fc848982e0c167ef163aaff9cd91dc640ba85e263cb1ce46fae51cd"
 
 [[package]]
 name = "senet"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "ancient-core",
  "env_logger",

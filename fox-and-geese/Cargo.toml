@@ -1,6 +1,6 @@
 [package]
 name = "fox-and-geese"
-version = "0.1.0"
+version = "0.2.0"
 description = "Fox and Geese in the terminal, as R. C. Bell gives it"
 edition.workspace = true
 repository.workspace = true

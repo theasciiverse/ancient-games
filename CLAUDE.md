@@ -5,7 +5,7 @@ the oldest: the Royal Game of Ur, Senet, Mehen, Hnefatafl and Fox &
 Geese (David, 2026-10-20), then the mancala games (2026-10-22). More to
 follow.
 
-**Status (2026-10-20):** four games playable, each its own binary, all
+**Status (2026-10-22):** six games playable, each its own binary, all
 with the computer at three strengths or two players at one keyboard, keys
 and mouse, a menu of rule sets with sources, and help:
 
@@ -24,21 +24,19 @@ and mouse, a menu of rule sets with sources, and help:
   mankal'ah, Kalah after Champion's patent, Congkak after Hellier,
   Pallanguli after Durai, Toguz Kumalak, Bohnenspiel; see "Mancala" below
 
-All five games first planned are in, and Mancala since 2026-10-22 (on
-the mockup as a sixth title, NEW! banner, cast `asciiverse/casts/mancala.cast`
-seed 3, dev-releases archive built at `e8d1891`, with the other five rebuilt there too under the same 0.1.0-av.1;
-the pushed tag v0.1.0-av.1 predates it, so the next release needs a new
-tag). On the website mockup since 2026-10-20 as five
-separate titles in the collection `ancient-games` (hub's collections.toml;
-entries in the mockup's dev/mock-titles.toml with the other Asciiverse
-originals, licence undecided, NEW! banner), previews from each game's
-`--demo` recorded by `asciiverse/record-preview.sh` (casts in
-`asciiverse/casts/`, seed 3, Mehen seed 4), local Linux builds in the
-website's dev-releases/ancient-games (0.1.0-av.1, built from a fresh clone
-with --remap-path-prefix). Release workflow `.github/workflows/release.yml`:
-one archive per game for static musl Linux, macOS and Windows, x86-64 and
-ARM64; tag v0.1.0-av.1 pushed, no GitHub release while Actions billing
-blocks builds. Licence: not chosen; David chooses licences case by case
+All five games first planned are in, and Mancala since 2026-10-22. On
+the website mockup as six separate titles in the collection
+`ancient-games` (hub's collections.toml; entries in the mockup's
+dev/mock-titles.toml with the other Asciiverse originals, licence
+undecided, NEW! banner), previews from each game's `--demo` recorded by
+`asciiverse/record-preview.sh` (casts in `asciiverse/casts/`, seed 3,
+Mehen seed 4), local Linux builds in the website's
+dev-releases/ancient-games, built from a fresh clone with
+--remap-path-prefix. Version 0.2.0 (David, 2026-10-22: Mancala, the short
+F1 help, the Senet water fix, the title page), tag v0.2.0-av.1; v0.1.0-av.1
+was the first five. Release workflow `.github/workflows/release.yml`: one
+archive per game for static musl Linux, macOS and Windows, x86-64 and
+ARM64; no GitHub release while Actions billing blocks builds. Licence: not chosen; David chooses licences case by case
 (2026-10-20), so the Cargo.toml files name none until he does. Own git repo, branch `main`, private at github.com/theasciiverse/ancient-games.
 
 ## Mancala

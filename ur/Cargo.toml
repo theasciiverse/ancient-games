@@ -1,6 +1,6 @@
 [package]
 name = "royal-ur"
-version = "0.1.0"
+version = "0.2.0"
 description = "The Royal Game of Ur in the terminal, with every honest rule set"
 edition.workspace = true
 repository.workspace = true

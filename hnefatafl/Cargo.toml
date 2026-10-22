@@ -1,6 +1,6 @@
 [package]
 name = "hnefatafl"
-version = "0.1.0"
+version = "0.2.0"
 description = "Hnefatafl, the Norse game of the king, in the terminal, with every living rule set"
 edition.workspace = true
 repository.workspace = true

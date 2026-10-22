@@ -1,6 +1,6 @@
 [package]
 name = "senet"
-version = "0.1.0"
+version = "0.2.0"
 description = "Senet, the game of passing, in the terminal, with every honest rule set"
 edition.workspace = true
 repository.workspace = true
