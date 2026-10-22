@@ -2,8 +2,6 @@ Fox and Geese
 Asciiverse
 2026-10-22
 
-
-
 One player has a single fox, the other a flock of geese, on a cross of 33
 points joined by lines along the rows and columns (no diagonals). The fox
 kills geese by jumping them; the geese try to hem him in until he cannot

@@ -42,6 +42,13 @@ elsewhere and leaves the crates' `RULES.txt` alone.
   build also fails if one slips through), `text-figures.lua` (ASCII
   boards and capital headings in the text output)
 - `style/rulebook.css`: the HTML pages
+- `style/book.typ`: the PDF's Typst set-up (chapter titles over the
+  ornament, each on a new page; "About this book" at the foot of its page;
+  no number on page 1), passed to pandoc with `-H`; it is not in
+  `metadata.yaml`, because pandoc's `-H` replaces the metadata's
+  header-includes
+- `style/titlepage.typ`: the PDF's title page; build.sh fills in the
+  games (from the chapters' headings) and the date
 
 ## Writing a chapter
 

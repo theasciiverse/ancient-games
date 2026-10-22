@@ -88,7 +88,7 @@ sed -e "s|@GAMES@|$listing|" -e "s|@DATE@|$written|" style/titlepage.typ > "$out
 book=$(echo "$full" | sed "s| --metadata=date:$date||")
 pandoc $book $intro $games --toc --standalone \
     --metadata=title: --metadata=subtitle: --metadata=author: --metadata=date: \
-    --include-in-header="$out/titlepage.typ" --include-before-body=style/document.typ \
+    --include-in-header=style/book.typ --include-before-body="$out/titlepage.typ" \
     --wrap=none -t typst -o "$out/ancient-games-rules.typ"
 # Typst reads images relative to the file and only inside its root, so
 # compile a copy that sits here, beside figures/ and images/. (Unwrapped

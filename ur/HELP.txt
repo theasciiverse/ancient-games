@@ -2,8 +2,6 @@ The Royal Game of Ur
 Asciiverse
 2026-10-22
 
-
-
 A race for two, Light and Dark. Throw, then move one piece that many squares
 along your path; the first side to bring every piece home wins. Each side
 starts on its own outer row, runs along the shared middle row and goes off
