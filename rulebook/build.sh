@@ -37,9 +37,12 @@ games=$(ls chapters/[0-9][0-9]-*.md | grep -v "^$intro\$")
 # collects at the end.
 pandoc $common $intro $games --toc --standalone \
     -t typst -o "$out/ancient-games-rules.typ"
-# Typst reads images relative to the project root given by --root.
-sed -i 's#image("\(figures\|images\)/#image("/\1/#' "$out/ancient-games-rules.typ"
-typst compile --root . "$out/ancient-games-rules.typ" "$out/ancient-games-rules.pdf"
+# Typst reads images relative to the file and only inside its root, so
+# compile a copy that sits here, beside figures/ and images/.
+tmp=".book-$$.typ"
+cp "$out/ancient-games-rules.typ" "$tmp"
+typst compile --root . "$tmp" "$out/ancient-games-rules.pdf" || { rm -f "$tmp"; exit 1; }
+rm -f "$tmp"
 pandoc $common $intro $games --toc --standalone --embed-resources \
     --css=style/rulebook.css -o "$out/ancient-games-rules.html"
 
