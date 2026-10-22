@@ -298,11 +298,12 @@ pub fn left_is_lower(game: &Game, side: Side) -> bool {
     (side == Side::South) != game.rules.clockwise
 }
 
-/// The game's chapter of the rulebook, as plain text: the help, and
-/// RULES.txt in the release archives. Written by `rulebook/build.sh`.
-pub const RULES: &str = include_str!("../RULES.txt");
+/// The short form of the game's rulebook chapter (its "brief" blocks), as
+/// plain text: the F1 help. The full chapter is RULES.txt in the release
+/// archives. Both are written by `rulebook/build.sh`.
+pub const RULES: &str = include_str!("../HELP.txt");
 
-/// How to play: the rulebook chapter, and the line where the rule set
+/// How to play: the rules in short, and the line where the rule set
 /// `rules` begins.
 pub fn help(rules: &Rules) -> (Vec<Help>, usize) {
     let lines = shell::rules_help(RULES);

@@ -1,0 +1,125 @@
+Mancala
+Asciiverse
+2026-10-22
+
+
+
+Every game here is sown the same way: lift all the seeds of one of your pits
+and drop them one by one into the pits that follow. Where the last seed
+falls decides what happens next. South’s pits are A, B, C … along the
+bottom, North’s a, b, c … along the top, each in the order of sowing. The
+rules of each game in short follow; the full rules, their sources and the
+history are in RULES.txt and the rulebook.
+
+Oware, Abapa
+------------
+
+- 6 pits a side, 4 seeds each. Sow anticlockwise from any pit of yours; 12
+  seeds or more pass over the pit they came from.
+- Capture: the last seed makes a pit on the other side 2 or 3; take it, and
+  the pits before it on that side holding 2 or 3.
+- A capture that would leave the other side with nothing takes nothing.
+- If the other side has no seeds, you must give it some. If you cannot, the
+  game ends and you take your own seeds.
+- 25 seeds win; 24 each is a draw. A position seen three times ends the
+  game, each side taking its own seeds.
+
+Wari, after Bell
+----------------
+
+- As Oware: 6 pits, 4 seeds; captures of 2 or 3 on the other side and back
+  along it; 12 seeds or more pass over their own pit.
+- A move that would take every seed on the other side may not be played
+  (unless every move would).
+- Feed a side that has nothing; if you cannot, you take what is left.
+- The game ends when a side to move has nothing; the most seeds wins.
+
+Mankal’ah, the game of the ignorant
+-----------------------------------
+
+- One player sets out the 72 pebbles unevenly, uncounted; the other may turn
+  the board round, and then the setter begins.
+- You always play from your last pit, F, or the loaded pit nearest it.
+- Where the last pebble falls: making 1, the turn ends; making 2 or 4, take
+  it and the pit facing it, and so with each pit before it holding 2 or 4
+  (either side); making 3, 5 or more, lift it and sow on.
+- A side with none is given one pebble in its first pit; a single pebble
+  left belongs to its side.
+- A board ends when it is empty: the winner scores the difference. 60 points
+  win.
+
+Mankal’ah, the game of the wise
+-------------------------------
+
+- As the game of the ignorant, but the pebbles go into matching pits on both
+  sides (commonly the four middle pits, or half in A and half in a), and you
+  may play from any pit of yours.
+- Last pebble making 1 ends the turn; 2 or 4 captures with the pits facing;
+  3, 5 or more sows on. 60 points win.
+
+Kalah
+-----
+
+- 6 pits, 4 seeds. Sow anticlockwise into your own store as you pass it,
+  never into the other’s.
+- The last seed in your own store: move again.
+- The last seed in an empty pit of yours: take it and the pit facing it (if
+  that has seeds).
+- When one side is empty, each side’s seeds go to its owner’s store. A game
+  scores the seeds won beyond 24; 40 points win.
+
+Congkak, after Hellier
+----------------------
+
+- 7 holes, 7 seeds. Sow clockwise (right to left along your row) into your
+  own store, never the other’s.
+- The last seed in a hole with seeds: lift them and sow on. In your own
+  store: sow again from any hole of yours.
+- The last seed in an empty hole ends your turn (“dead”); if the hole is
+  yours, take the seeds of the hole facing it.
+- When your row is empty, fill it again from your store, 7 to a hole; holes
+  you cannot fill are ruined wells, out of play. Who cannot fill a single
+  hole has lost.
+
+Pallanguli, after Durai
+-----------------------
+
+- 7 holes, 6 seeds. Sow anticlockwise; after the last seed, lift the next
+  hole and sow on.
+- If the hole after the last seed is empty, take the hole beyond it; the
+  move ends. Two empty holes: the move ends with nothing.
+- Any hole reaching 4 is a cow: it goes at once to the owner of the hole.
+- When the board is empty, refill 6 to a hole from your store; holes you
+  cannot fill stay closed for the round. The first move alternates. Who
+  cannot fill one hole has lost.
+
+Toguz Kumalak
+-------------
+
+- 9 holes, 9 stones. Lift a hole, put the first stone back in it, sow the
+  rest anticlockwise. A single stone moves on to the next hole.
+- The last stone makes a hole on the other side even: take it.
+- The last stone makes a hole on the other side 3: it becomes your tuzdyk,
+  and every stone sown into it later is yours. Once a game; not the ninth
+  hole; not the hole matching the other’s tuzdyk.
+- 82 stones win; 81 each is a draw. A side with no move ends the game, and
+  the other takes the stones left.
+
+Bohnenspiel
+-----------
+
+- 6 pits, 6 beans. Sow anticlockwise; the stores are not sown into.
+- The last bean makes a pit (either side) 2, 4 or 6: take it, and the pits
+  before it holding 2, 4 or 6.
+- A side with no move ends the game; the beans left go to the other. The
+  most beans wins.
+
+Playing it in the terminal
+--------------------------
+
+- Left, Right: choose a pit; Enter: sow it; or click a pit.
+- Any key or click while seeds move: finish the move.
+- Lane’s games, setting out: Left, Right (Tab: the other row) choose a pit;
+  Up, Down: a pebble more or less; R: the rest at random; Enter: done. Then
+  T turns the board round, Enter keeps it.
+- M: menu; F1: this help; Q: quit.

@@ -12,6 +12,15 @@ crate: mancala
 | Program        | `mancala`                                             |
 | Rule sets      | Oware (Abapa), Wari (Bell), Mankal'ah of the ignorant and of the wise (Lane), Kalah (Champion), Congkak (Hellier), Pallanguli (Durai), Toguz Kumalak, Bohnenspiel |
 
+::: brief
+Every game here is sown the same way: lift all the seeds of one of your
+pits and drop them one by one into the pits that follow. Where the last
+seed falls decides what happens next. South's pits are A, B, C ... along
+the bottom, North's a, b, c ... along the top, each in the order of
+sowing. The rules of each game in short follow; the full rules, their
+sources and the history are in RULES.txt and the rulebook.
+:::
+
 ## What survives
 
 Mancala is not one game but a family of hundreds. All of them are played
@@ -188,6 +197,18 @@ The words used in every section:
 | Capture        | Last seed makes 2 or 3 on the other side, and back along it |
 | Goal           | 25 seeds                                              |
 
+::: brief
+- 6 pits a side, 4 seeds each. Sow anticlockwise from any pit of yours;
+  12 seeds or more pass over the pit they came from.
+- Capture: the last seed makes a pit on the other side 2 or 3; take it,
+  and the pits before it on that side holding 2 or 3.
+- A capture that would leave the other side with nothing takes nothing.
+- If the other side has no seeds, you must give it some. If you cannot,
+  the game ends and you take your own seeds.
+- 25 seeds win; 24 each is a draw. A position seen three times ends the
+  game, each side taking its own seeds.
+:::
+
 Oware is the game of the Akan of Ghana, and under many names (*awale*,
 *ayo*, *wari*, *warri*) the most widely played mancala of West Africa
 and the Caribbean. The Oware Society calls Abapa "a traditional variant
@@ -254,6 +275,15 @@ coming round for the third time to be that point.
 | Capture        | Last seed makes 2 or 3 on the other side, and back along it |
 | Goal           | The most seeds                                        |
 
+::: brief
+- As Oware: 6 pits, 4 seeds; captures of 2 or 3 on the other side and
+  back along it; 12 seeds or more pass over their own pit.
+- A move that would take every seed on the other side may not be played
+  (unless every move would).
+- Feed a side that has nothing; if you cannot, you take what is left.
+- The game ends when a side to move has nothing; the most seeds wins.
+:::
+
 R. C. Bell gives Wari from Ghana, with a board drawn from R. S.
 Rattray's *Religion and Art in Ashanti*, and his own six rules, with
 worked examples, tactics and a notation for recording games
@@ -298,6 +328,19 @@ choice:* the program plays single games.
 | Sowing         | Always from the last loaded pit; 3, 5 or more sow on    |
 | Capture        | Last pebble makes 2 or 4, on either side, with the pits facing |
 | Goal           | 60 points over several boards                          |
+
+::: brief
+- One player sets out the 72 pebbles unevenly, uncounted; the other may
+  turn the board round, and then the setter begins.
+- You always play from your last pit, F, or the loaded pit nearest it.
+- Where the last pebble falls: making 1, the turn ends; making 2 or 4,
+  take it and the pit facing it, and so with each pit before it holding
+  2 or 4 (either side); making 3, 5 or more, lift it and sow on.
+- A side with none is given one pebble in its first pit; a single pebble
+  left belongs to its side.
+- A board ends when it is empty: the winner scores the difference. 60
+  points win.
+:::
 
 E. W. Lane describes mankal'ah as "one of the games most common among
 the Egyptians", played on a board of twelve holes with seventy-two
@@ -361,6 +404,14 @@ follows Lane.
 | Capture        | Last pebble makes 2 or 4, on either side, with the pits facing |
 | Goal           | 60 points over several boards                          |
 
+::: brief
+- As the game of the ignorant, but the pebbles go into matching pits on
+  both sides (commonly the four middle pits, or half in A and half in a),
+  and you may play from any pit of yours.
+- Last pebble making 1 ends the turn; 2 or 4 captures with the pits
+  facing; 3, 5 or more sows on. 60 points win.
+:::
+
 The game "the wise, or intelligent" play differs in two things
 [@lane1836, 315]:
 
@@ -392,6 +443,16 @@ every number.
 | Sowing         | One lap, anticlockwise, through your own store         |
 | Capture        | Last seed in an empty pit of your own takes the pit facing it |
 | Goal           | 40 points over several games                           |
+
+::: brief
+- 6 pits, 4 seeds. Sow anticlockwise into your own store as you pass it,
+  never into the other's.
+- The last seed in your own store: move again.
+- The last seed in an empty pit of yours: take it and the pit facing it
+  (if that has seeds).
+- When one side is empty, each side's seeds go to its owner's store. A
+  game scores the seeds won beyond 24; 40 points win.
+:::
 
 Kalah is not an old game but a modern American one, and the one most
 people now call Mancala. W. J. Champion of Mystic, Connecticut, filed for
@@ -435,6 +496,18 @@ players", and four to six for adults; the program plays four.
 | Sowing         | Clockwise; the last seed in a loaded hole or your own store goes on |
 | Capture        | Last seed in an empty hole of your own takes the hole facing it |
 | Goal           | Leave the other player unable to fill a single hole    |
+
+::: brief
+- 7 holes, 7 seeds. Sow clockwise (right to left along your row) into
+  your own store, never the other's.
+- The last seed in a hole with seeds: lift them and sow on. In your own
+  store: sow again from any hole of yours.
+- The last seed in an empty hole ends your turn ("dead"); if the hole is
+  yours, take the seeds of the hole facing it.
+- When your row is empty, fill it again from your store, 7 to a hole;
+  holes you cannot fill are ruined wells, out of play. Who cannot fill a
+  single hole has lost.
+:::
 
 Congkak is the mancala of the Malay world, played on a board "shaped
 like a junk or boat"; it is *congklak* and *dakon* in Indonesia and
@@ -516,6 +589,17 @@ kind is played in one round, and a last shell in the store ends the turn
 | Capture        | An empty hole after the last seed: the hole beyond it; a hole of four, to its owner |
 | Goal           | Leave the other player unable to fill a single hole    |
 
+::: brief
+- 7 holes, 6 seeds. Sow anticlockwise; after the last seed, lift the
+  next hole and sow on.
+- If the hole after the last seed is empty, take the hole beyond it; the
+  move ends. Two empty holes: the move ends with nothing.
+- Any hole reaching 4 is a cow: it goes at once to the owner of the hole.
+- When the board is empty, refill 6 to a hole from your store; holes you
+  cannot fill stay closed for the round. The first move alternates. Who
+  cannot fill one hole has lost.
+:::
+
 Pallanguli is the Tamil game of South India and Sri Lanka. In 1928 Mrs
 H. G. Durai described it in *Man*, the journal of the Royal
 Anthropological Institute [@durai1928, 185-186]. R. C. Bell's account
@@ -588,6 +672,17 @@ program does not offer them.
 | Capture        | Last stone makes a hole on the other side even; three makes a tuzdyk |
 | Goal           | 82 stones                                             |
 
+::: brief
+- 9 holes, 9 stones. Lift a hole, put the first stone back in it, sow the
+  rest anticlockwise. A single stone moves on to the next hole.
+- The last stone makes a hole on the other side even: take it.
+- The last stone makes a hole on the other side 3: it becomes your
+  tuzdyk, and every stone sown into it later is yours. Once a game; not
+  the ninth hole; not the hole matching the other's tuzdyk.
+- 82 stones win; 81 each is a draw. A side with no move ends the game,
+  and the other takes the stones left.
+:::
+
 Toguz Kumalak, "nine stones" (in Kyrgyz Toguz Korgool), is the game of
 the Kazakh and Kyrgyz steppe, played in national federations and world
 championships and inscribed on UNESCO's list of intangible heritage in
@@ -646,6 +741,14 @@ neither.
 | Capture        | Last bean makes 2, 4 or 6, on either side, and back along the row |
 | Goal           | The most beans                                        |
 
+::: brief
+- 6 pits, 6 beans. Sow anticlockwise; the stores are not sown into.
+- The last bean makes a pit (either side) 2, 4 or 6: take it, and the
+  pits before it holding 2, 4 or 6.
+- A side with no move ends the game; the beans left go to the other. The
+  most beans wins.
+:::
+
 Fritz Jahn tells in *Alte deutsche Spiele*, *Old German Games*, of 1917
 how he rediscovered the bean game, "this age-old, most original and
 interesting board game, entirely forgotten", in 1908, visiting Baron von
@@ -677,6 +780,15 @@ igGameCenter gives [@igg-bohnenspiel]:
 ```
 
 ## Playing it in the terminal
+
+::: brief
+- Left, Right: choose a pit; Enter: sow it; or click a pit.
+- Any key or click while seeds move: finish the move.
+- Lane's games, setting out: Left, Right (Tab: the other row) choose a
+  pit; Up, Down: a pebble more or less; R: the rest at random; Enter:
+  done. Then T turns the board round, Enter keeps it.
+- M: menu; F1: this help; Q: quit.
+:::
 
 The program draws the board with South along the bottom and North along
 the top, as in the figures of this chapter; in Congkak, which goes

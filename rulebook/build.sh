@@ -20,12 +20,16 @@ mkdir -p "$out"
 python3 figures/make_figures.py
 
 # Worked examples and screens from the games themselves (pictures.txt).
-# A game includes its chapter as RULES.txt, so a new chapter's crate gets
-# an empty one to compile with; the real text replaces it below.
+# A game includes its chapter as RULES.txt (and its short form as
+# HELP.txt, if the chapter has one), so a new chapter's crate gets empty
+# ones to compile with; the real text replaces them below.
 for chapter in chapters/[0-9][0-9]-*.md; do
     crate=$(sed -n '1,/^---$/{s/^crate: *//p}' "$chapter" | head -n 1)
     if [ -n "$crate" ] && [ ! -f "../$crate/RULES.txt" ]; then
         : > "../$crate/RULES.txt"
+    fi
+    if [ -n "$crate" ] && grep -q '^::: *{\{0,1\}\.\{0,1\}brief' "$chapter" && [ ! -f "../$crate/HELP.txt" ]; then
+        : > "../$crate/HELP.txt"
     fi
 done
 cargo build --release --quiet --manifest-path ../Cargo.toml --workspace
@@ -56,13 +60,15 @@ for bib in bib/*.bib; do
 done
 
 common="--metadata-file=metadata.yaml --metadata=date:$date $bibs --citeproc --lua-filter=filters/examples.lua --lua-filter=filters/glance.lua --lua-filter=filters/no-dashes.lua"
+# The book, its pages and RULES.txt leave out the short form for F1.
+full="$common --lua-filter=filters/no-brief.lua"
 
 intro=chapters/00-introduction.md
 games=$(ls chapters/[0-9][0-9]-*.md | grep -v "^$intro\$")
 
 # The whole book. Chapters are top-level headings; the bibliography
 # collects at the end.
-pandoc $common $intro $games --toc --standalone \
+pandoc $full $intro $games --toc --standalone \
     -t typst -o "$out/ancient-games-rules.typ"
 # Typst reads images relative to the file and only inside its root, so
 # compile a copy that sits here, beside figures/ and images/.
@@ -70,7 +76,7 @@ tmp=".book-$$.typ"
 cp "$out/ancient-games-rules.typ" "$tmp"
 typst compile --root . "$tmp" "$out/ancient-games-rules.pdf" || { rm -f "$tmp"; exit 1; }
 rm -f "$tmp"
-pandoc $common $intro $games --toc --standalone --embed-resources \
+pandoc $full $intro $games --toc --standalone --embed-resources \
     --css=style/rulebook.css -o "$out/ancient-games-rules.html"
 
 # One page and one text file per game: the chapter heading becomes the
@@ -83,10 +89,10 @@ for chapter in $games; do
                  !yaml && /^# / { sub(/^# /, ""); print; exit }' "$chapter")
     # The page keeps the chapter's own heading as its title, styled as in
     # the book, so no title block above it.
-    pandoc $common --metadata=title: --metadata=pagetitle:"$title" \
+    pandoc $full --metadata=title: --metadata=pagetitle:"$title" \
         "$chapter" --standalone --embed-resources --css=style/rulebook.css \
         -o "$out/$game.html"
-    pandoc $common --shift-heading-level-by=-1 --metadata=title:"$title" \
+    pandoc $full --shift-heading-level-by=-1 --metadata=title:"$title" \
         --metadata=subtitle:"The rules, and where they come from" \
         --lua-filter=filters/text-figures.lua "$chapter" \
         --standalone -t plain --columns=76 -o "$out/$game.txt"
@@ -94,6 +100,15 @@ for chapter in $games; do
     crate=$(sed -n '1,/^---$/{s/^crate: *//p}' "$chapter" | head -n 1)
     if [ -n "$crate" ] && [ -z "${RULEBOOK_OUT:-}" ]; then
         cp "$out/$game.txt" "../$crate/RULES.txt"
+    fi
+    # The short form for the game's F1, if the chapter has one: the
+    # "brief" blocks under their section headings (filters/help.lua).
+    if grep -q '^::: *{\{0,1\}\.\{0,1\}brief' "$chapter"; then
+        pandoc $common --lua-filter=filters/help.lua --metadata=title:"$title" \
+            "$chapter" --standalone -t plain --columns=76 -o "$out/$game-help.txt"
+        if [ -n "$crate" ] && [ -z "${RULEBOOK_OUT:-}" ]; then
+            cp "$out/$game-help.txt" "../$crate/HELP.txt"
+        fi
     fi
 done
 
