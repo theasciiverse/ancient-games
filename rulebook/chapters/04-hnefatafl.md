@@ -346,6 +346,9 @@ Our choices:
 - Any third occurrence of a position, with the same side to move,
   counts, not only three in a row; the side whose move made it loses.
 - The program plays single games, not the two-game match.
+- The ring is judged as in Copenhagen: it counts when no defender has a
+  path to any edge square. So a ring that uses the edge never counts, in
+  Brandubh or in any other set.
 
 ![The program playing Brandubh.](screens/hnefatafl/brandubh.svg){width=100%}
 
@@ -493,8 +496,9 @@ which side you take.
 | Enter or Space | Pick up a piece, then put it on a lit square |
 | Mouse | Click a piece, then a lit square |
 | Esc | Put the piece down again |
-| F1 or ? | These rules |
-| M | Back to the menu |
+| F1 or ? | The rules in short (F1, ? or Esc closes them) |
+| Enter or Space, after a game | Play again |
+| M, or Esc after a game | Back to the menu |
 | Q | Quit |
 
 After a game, Enter or Space starts another. `hnefatafl --demo` lets

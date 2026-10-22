@@ -269,8 +269,8 @@ the piece on it can be taken.
 ## R. C. Bell's betting game
 
 ::: brief
-- 7 pieces each. Purses start at 20 and carry on from game to game; each
-  side puts 5 into the pool at the start.
+- 7 pieces each. Purses start at 20 and carry on while you keep this
+  rule set; each side puts 5 into the pool at the start.
 - Three lots: 5, 4 or 1 moves and you throw again, even when it could
   not be used. One tip up ends the turn.
 - A piece comes on only with a 5, onto your first square. A taken piece
@@ -308,7 +308,9 @@ Our choices:
 - Bell does not say whether a throw that cannot be used still gives
   another throw. Here it does.
 - Bell gives no amounts. Here each purse starts at 20, the stake is 5 and
-  the fine 1, and the purses carry on from game to game.
+  the fine 1. The purses carry on from game to game while the same rule
+  set is played; choosing another starts fresh purses. A side never pays
+  more than is left in its purse: a purse that runs dry pays nothing.
 
 A game under Bell's rules runs to about 220 throws, against about 150
 for Finkel 2017.
@@ -330,7 +332,8 @@ for Finkel 2017.
   ox's: yes makes 5, 6, 7 or 10, no wastes the throw.
 - One piece per square. Landing on an enemy on the middle row knocks it
   off; a bird on a rosette cannot be knocked off.
-- Purses start at 40 and carry on; each side puts 5 into the pool.
+- Purses start at 40 and carry on while you keep this rule set; each
+  side puts 5 into the pool.
   Landing on a rosette wins the bird's tokens from the pool, passing over
   one pays them in: Swallow 3, Storm-bird, Raven and Rooster 4, Eagle 5.
   No extra throw.
@@ -436,6 +439,13 @@ Where the program departs from Finkel, or fills a gap:
   takes the pool, and there is no fine for pieces left behind.
 - Our choice: the side to throw first is chosen at random; Finkel has
   the higher throw take white and play first.
+- Our choice: Finkel's piece "forced to pass over a rosette without
+  landing on it" [@finkel2007, 23] is read as any piece the throw carries
+  past a rosette, whether or not its player had another move; it pays
+  for each rosette it passes.
+- Our choice: as in Bell's game, the purses carry on only while the same
+  rule set is played, and no one pays more than is in their purse. A
+  piece landing on a rosette wins only what is left in the pool.
 - Our choice: a Swallow entering on the rosette at house 4 wins its
   tokens, as any landing on a rosette does. Coming onto the board is not
   passing a rosette, so a bird entering at house 5 or beyond pays
@@ -500,8 +510,9 @@ Start `royal-ur`, choose a rule set and who plays each side: the computer
 | Enter | Move it |
 | D | Dare the ox's knucklebone (the tablet) |
 | Mouse | Click a lit piece |
-| F1 | These rules, in short |
-| M | Back to the menu |
+| F1 or ? | The rules in short (F1, ? or Esc closes them) |
+| Enter or Space, after a game | Play again |
+| M, or Esc after a game | Back to the menu |
 | Q | Quit |
 
 `royal-ur --demo` lets the computer play both sides; `--seed N` repeats a

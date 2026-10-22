@@ -264,8 +264,9 @@ which side you play.
 | Enter or Space | Pick up a piece, then put it down on a lit point |
 | Esc | Let go of the piece |
 | Mouse | Click a piece, then a point |
-| F1 | These rules |
-| M | Back to the menu |
+| F1 or ? | The rules in short (F1, ? or Esc closes them) |
+| Enter or Space, after a game | Play again |
+| M, or Esc after a game | Back to the menu |
 | Q | Quit |
 
 When a piece is picked up, the points it can go to are lit, and the

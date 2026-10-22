@@ -148,7 +148,8 @@ program each comes up equally often.
   Landing on a lone enemy swaps the two.
 - Three or more of a side in a row: the other side may not pass them.
 - Every piece must stop on 26. From 26 a 1 falls into the water (27):
-  back to 15, or the highest empty house below it, and the turn ends.
+  back to 15, or the highest empty house below it; the 1 still throws
+  again.
 - 26 bears off on a 5; 28, 29, 30 only on an exact 3, 2, 1.
 - First to bear off all five wins.
 :::
@@ -172,12 +173,13 @@ his text [@okeefe-senet].
 5. Landing on a lone enemy piece swaps the two: the enemy goes to the
    house the mover came from.
 6. Three or more pieces of one side in a row form a blockade: no enemy
-   piece may pass over it.
+   piece may pass over it, forward or (rule 10) backward.
 7. Every piece must stop on the House of Beauty (26): no move may jump
    past it.
 8. A piece that reaches the House of Water (27), from 26 on a 1, is sent
    back to the House of Rebirth (15), or if that is taken to the highest
-   empty house below it. House 27 is therefore always empty.
+   empty house below it. House 27 is therefore always empty. This is an
+   ordinary move: the 1 throws again, as rule 11 says.
 9. Pieces on 28, 29 and 30 do not move on: they leave the board only on
    an exact 3, 2 or 1. A piece on 26 leaves on a 5.
 10. Only if no piece can move forward must one move backward by the
@@ -366,8 +368,9 @@ Start `senet`, choose a rule set and who plays each side: the computer
 | Enter | Move it |
 | R | Rescue a piece from the water (Kendall, seven pieces) |
 | Mouse | Click a lit piece |
-| F1 | These rules |
-| M | Back to the menu |
+| F1 or ? | The rules in short (F1, ? or Esc closes them) |
+| Enter or Space, after a game | Play again |
+| M, or Esc after a game | Back to the menu |
 | Q | Quit |
 
 `senet --demo` lets the computer play both sides; `--seed N` repeats a

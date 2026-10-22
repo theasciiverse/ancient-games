@@ -251,15 +251,16 @@ Start fox-and-geese, choose a rule set, whom to play against (the computer,
 easy, normal or hard, or a friend at the same keyboard) and which side you
 play.
 
-  Key              
-  ---------------- --------------------------------------------------
-  Arrows           Move the cursor
-  Enter or Space   Pick up a piece, then put it down on a lit point
-  Esc              Let go of the piece
-  Mouse            Click a piece, then a point
-  F1               These rules
-  M                Back to the menu
-  Q                Quit
+  Key                            
+  ------------------------------ --------------------------------------------------
+  Arrows                         Move the cursor
+  Enter or Space                 Pick up a piece, then put it down on a lit point
+  Esc                            Let go of the piece
+  Mouse                          Click a piece, then a point
+  F1 or ?                        The rules in short (F1, ? or Esc closes them)
+  Enter or Space, after a game   Play again
+  M, or Esc after a game         Back to the menu
+  Q                              Quit
 
 When a piece is picked up, the points it can go to are lit, and the geese a
 jump would kill turn red under the cursor.

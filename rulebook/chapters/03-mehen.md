@@ -227,7 +227,9 @@ hiding hand is below it.](screens/mehen/two-players.svg){width=100%}
 time the book is built: the pharaohs are set on the snake, one moves,
 and the squares that matter are drawn before and after. Four players
 here, so each team has two pharaohs. L is a pharaoh of the lions' team,
-S one of the lionesses', . an empty square.
+S one of the lionesses', . an empty square. (These letters are the
+book's; on the game's screen an L marks a cat, and the pharaohs are
+drawn in their team's colour.)
 
 Ending a move on an opposing pharaoh changes places with it (rule 8):
 
@@ -336,8 +338,9 @@ the computer (easy, normal or hard) or a person at the same keyboard.
 | Enter or Space | Confirm |
 | Y or N | Set a cat on the pharaoh, or not |
 | Mouse | Click a pharaoh, a number or an answer |
-| F1 | These rules |
-| M | Back to the menu |
+| F1 or ? | The rules in short (F1, ? or Esc closes them) |
+| Enter or Space, after a game | Play again |
+| M, or Esc after a game | Back to the menu |
 | Q | Quit |
 
 `mehen --demo` lets the computer play both teams; `--seed N` repeats a

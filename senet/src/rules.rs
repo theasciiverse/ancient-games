@@ -444,8 +444,11 @@ impl Position {
             }
         }
         out.over = self.winner(rules).is_some() || self.finished(rules);
+        // Only Kendall's seven-piece rules end the turn in the water; in the
+        // five-piece rules falling in is an ordinary move, and a 1 throws
+        // again as always (O'Keefe's RULES.md, turn structure, step 3).
         out.again = !out.over
-            && !out.water
+            && !(out.water && rules.variant == Variant::Kendall7)
             && matches!(action, Action::Move { .. })
             && rules.throws_again(t);
         if !out.again {
@@ -636,7 +639,7 @@ mod tests {
         let mut q = with(&rules, &[26], &[1], Side::White);
         assert!(q.moves(&rules, 5).contains(&mv(26, OFF)));
         let out = q.play(&rules, mv(26, WATER), 1);
-        assert!(out.water && !out.again);
+        assert!(out.water && out.again, "a 1 into the water still throws again");
         assert_eq!(q.at(REBIRTH), Some(Side::White));
         // 28 leaves only on 3, 29 on 2, 30 on 1.
         let r = with(&rules, &[28, 29, 30], &[1], Side::White);

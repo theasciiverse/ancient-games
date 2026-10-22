@@ -37,7 +37,7 @@ Kendall, five pieces
   on a lone enemy swaps the two.
 - Three or more of a side in a row: the other side may not pass them.
 - Every piece must stop on 26. From 26 a 1 falls into the water (27): back
-  to 15, or the highest empty house below it, and the turn ends.
+  to 15, or the highest empty house below it; the 1 still throws again.
 - 26 bears off on a 5; 28, 29, 30 only on an exact 3, 2, 1.
 - First to bear off all five wins.
 

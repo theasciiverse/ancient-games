@@ -58,8 +58,8 @@ British Museum 1990s
 R. C. Bell’s betting game
 -------------------------
 
-- 7 pieces each. Purses start at 20 and carry on from game to game; each
-  side puts 5 into the pool at the start.
+- 7 pieces each. Purses start at 20 and carry on while you keep this rule
+  set; each side puts 5 into the pool at the start.
 - Three lots: 5, 4 or 1 moves and you throw again, even when it could not be
   used. One tip up ends the turn.
 - A piece comes on only with a 5, onto your first square. A taken piece
@@ -80,10 +80,10 @@ The Babylonian tablet
   ox’s: yes makes 5, 6, 7 or 10, no wastes the throw.
 - One piece per square. Landing on an enemy on the middle row knocks it off;
   a bird on a rosette cannot be knocked off.
-- Purses start at 40 and carry on; each side puts 5 into the pool. Landing
-  on a rosette wins the bird’s tokens from the pool, passing over one pays
-  them in: Swallow 3, Storm-bird, Raven and Rooster 4, Eagle 5. No extra
-  throw.
+- Purses start at 40 and carry on while you keep this rule set; each side
+  puts 5 into the pool. Landing on a rosette wins the bird’s tokens from the
+  pool, passing over one pays them in: Swallow 3, Storm-bird, Raven and
+  Rooster 4, Eagle 5. No extra throw.
 - Exact throw to bear off; you must move if you can (or dare). The first
   with all 5 home takes the pool.
 
