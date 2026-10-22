@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784 272" width="784" height="272" font-family="Libertinus Serif, Georgia, serif">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b5432a"/></marker>
+</defs>
+<rect x="40" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="104" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="168" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="232" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="296" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="360" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="424" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="488" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="552" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="616" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="40" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="104" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="168" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="232" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="296" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="360" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="363" y="107" width="58" height="58" fill="#2b4c8c" opacity="0.15"/>
+<text x="392.0" y="159" font-size="12" text-anchor="middle" fill="#2b4c8c">Rebirth</text>
+<rect x="424" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="488" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="552" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="616" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="40" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="104" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="168" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="232" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="296" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="360" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="363" y="171" width="58" height="58" fill="#2b4c8c" opacity="0.15"/>
+<text x="392.0" y="223" font-size="12" text-anchor="middle" fill="#2b4c8c">Beauty</text>
+<rect x="424" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="427" y="171" width="58" height="58" fill="#2b4c8c" opacity="0.15"/>
+<text x="456.0" y="223" font-size="12" text-anchor="middle" fill="#2b4c8c">Water</text>
+<rect x="488" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="491" y="171" width="58" height="58" fill="#2b4c8c" opacity="0.15"/>
+<text x="520.0" y="223" font-size="12" text-anchor="middle" fill="#2b4c8c">III</text>
+<rect x="552" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="555" y="171" width="58" height="58" fill="#2b4c8c" opacity="0.15"/>
+<text x="584.0" y="223" font-size="12" text-anchor="middle" fill="#2b4c8c">II</text>
+<rect x="616" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="619" y="171" width="58" height="58" fill="#2b4c8c" opacity="0.15"/>
+<text x="648.0" y="223" font-size="12" text-anchor="middle" fill="#2b4c8c">I</text>
+<polyline points="8.0,72.0 72.0,72.0 136.0,72.0 200.0,72.0 264.0,72.0 328.0,72.0 392.0,72.0 456.0,72.0 520.0,72.0 584.0,72.0 648.0,72.0 648.0,136.0 584.0,136.0 520.0,136.0 456.0,136.0 392.0,136.0 328.0,136.0 264.0,136.0 200.0,136.0 136.0,136.0 72.0,136.0 72.0,200.0 136.0,200.0 200.0,200.0 264.0,200.0 328.0,200.0 392.0,200.0 456.0,200.0 520.0,200.0 584.0,200.0 648.0,200.0 712.0,200.0" fill="none" stroke="#b5432a" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.8" marker-end="url(#arrow)"/>
+<text x="45" y="56" font-size="14" fill="#2b2b2b">1</text>
+<text x="109" y="56" font-size="14" fill="#2b2b2b">2</text>
+<text x="173" y="56" font-size="14" fill="#2b2b2b">3</text>
+<text x="237" y="56" font-size="14" fill="#2b2b2b">4</text>
+<text x="301" y="56" font-size="14" fill="#2b2b2b">5</text>
+<text x="365" y="56" font-size="14" fill="#2b2b2b">6</text>
+<text x="429" y="56" font-size="14" fill="#2b2b2b">7</text>
+<text x="493" y="56" font-size="14" fill="#2b2b2b">8</text>
+<text x="557" y="56" font-size="14" fill="#2b2b2b">9</text>
+<text x="621" y="56" font-size="14" fill="#2b2b2b">10</text>
+<text x="621" y="120" font-size="14" fill="#2b2b2b">11</text>
+<text x="557" y="120" font-size="14" fill="#2b2b2b">12</text>
+<text x="493" y="120" font-size="14" fill="#2b2b2b">13</text>
+<text x="429" y="120" font-size="14" fill="#2b2b2b">14</text>
+<text x="365" y="120" font-size="14" fill="#2b2b2b">15</text>
+<text x="301" y="120" font-size="14" fill="#2b2b2b">16</text>
+<text x="237" y="120" font-size="14" fill="#2b2b2b">17</text>
+<text x="173" y="120" font-size="14" fill="#2b2b2b">18</text>
+<text x="109" y="120" font-size="14" fill="#2b2b2b">19</text>
+<text x="45" y="120" font-size="14" fill="#2b2b2b">20</text>
+<text x="45" y="184" font-size="14" fill="#2b2b2b">21</text>
+<text x="109" y="184" font-size="14" fill="#2b2b2b">22</text>
+<text x="173" y="184" font-size="14" fill="#2b2b2b">23</text>
+<text x="237" y="184" font-size="14" fill="#2b2b2b">24</text>
+<text x="301" y="184" font-size="14" fill="#2b2b2b">25</text>
+<text x="365" y="184" font-size="14" fill="#2b2b2b">26</text>
+<text x="429" y="184" font-size="14" fill="#2b2b2b">27</text>
+<text x="493" y="184" font-size="14" fill="#2b2b2b">28</text>
+<text x="557" y="184" font-size="14" fill="#2b2b2b">29</text>
+<text x="621" y="184" font-size="14" fill="#2b2b2b">30</text>
+<text x="8.0" y="102.0" font-size="13" text-anchor="middle" fill="#2b2b2b">in</text>
+<text x="712.0" y="230.0" font-size="13" text-anchor="middle" fill="#2b2b2b">off</text>
+<text x="758" y="77.0" font-size="15" fill="#2b2b2b"></text>
+<text x="758" y="141.0" font-size="15" fill="#2b2b2b"></text>
+<text x="758" y="205.0" font-size="15" fill="#2b2b2b"></text>
+</svg>

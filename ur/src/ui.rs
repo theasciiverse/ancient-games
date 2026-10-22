@@ -471,9 +471,11 @@ mod tests {
 
     #[test]
     fn the_rulebook_text_fits_the_help() {
-        // The help is 84 columns wide with 3 on each side.
+        // The help is 84 columns wide with 3 on each side. Only a single
+        // word, a web address, may be wider (the help runs it on).
         for line in RULES.lines() {
-            assert!(line.chars().count() <= 78, "too wide: {line}");
+            let word = !line.trim().contains(' ');
+            assert!(line.chars().count() <= 78 || word, "too wide: {line}");
         }
     }
 }

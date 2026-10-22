@@ -82,8 +82,9 @@ pub struct Rules {
     pub source: &'static str,
     pub variant: Variant,
     pub pieces: u8,
-    /// How to play, a line each, for the help.
-    pub summary: &'static [&'static str],
+    /// The heading of this rule set in the rulebook chapter (RULES.txt),
+    /// where the help opens.
+    pub section: &'static str,
 }
 
 impl Rules {
@@ -96,13 +97,7 @@ impl Rules {
                      exactly by Devin O'Keefe for his solution of the game (2026).",
             variant: Variant::Kendall5,
             pieces: 5,
-            summary: &[
-                "Throw four sticks: the light sides up are how far you move, 1 to 4; none up is 5. After moving on 1, 4 or 5 you throw again.",
-                "Land on a lone enemy piece and you swap places. A piece next to a friend is protected; three or more in a row form a blockade nobody passes.",
-                "If no piece can move forward, one must move backward. A throw with no move at all ends your turn.",
-                "Every piece must stop on the House of Beauty (26). The House of Water (27) sends a piece back to the House of Rebirth (15). From 28, 29 and 30 a piece leaves only on exactly 3, 2 or 1; from 26 on a 5.",
-                "First to bear off all five pieces wins.",
-            ],
+            section: "Kendall, five pieces",
         }
     }
 
@@ -115,13 +110,7 @@ impl Rules {
                      Damian Walker sets it out.",
             variant: Variant::Kendall7,
             pieces: 7,
-            summary: &[
-                "Throw four sticks: the light sides up are how far you move, 1 to 4; none up is 5. After moving on 1, 4 or 5 you throw again.",
-                "Land on a lone enemy piece and it goes back to where you came from. A piece next to a friend is protected. If no piece can move forward, one must move backward.",
-                "Every piece must stop on the House of Beauty (26). A piece falling into the House of Humiliation, the water (27), ends your turn and freezes your other pieces until it is rescued: move it to the House of Rebirth (15) instead of throwing (R), or bear it off on an exact 4.",
-                "Pieces bear off from the last five houses on an exact throw; from 28 only on 3, from 29 only on 2, from 30 on any throw.",
-                "First to bear off all seven pieces wins.",
-            ],
+            section: "Kendall, seven pieces",
         }
     }
 
@@ -135,13 +124,7 @@ impl Rules {
                      game.",
             variant: Variant::Bell,
             pieces: 10,
-            summary: &[
-                "Throw the long die, 1 to 4, and move one man forward that far.",
-                "Land on an enemy man and it is captured and leaves the game. You cannot land on your own.",
-                "The door (26) and the marked houses X, III, II, I (27 to 30) are safe. A man on a marked house leaves the board on the exact throw (4, 3, 2, 1) and scores; a man must leave a marked house, or the door, at the first throw that allows it.",
-                "When the board is empty, the player who brought more men off wins.",
-                "Bell does not give the long die's faces beyond 1 to 4; here each is as likely.",
-            ],
+            section: "R. C. Bell 1960",
         }
     }
 

@@ -21,7 +21,7 @@ PAD = 40
 
 
 class Board:
-    def __init__(self, name, cols, on_board, rosettes, path, marks=None):
+    def __init__(self, name, cols, on_board, rosettes, path, marks=None, special=None):
         self.name = name
         self.cols = cols
         self.on_board = on_board
@@ -30,6 +30,8 @@ class Board:
         self.path = path
         # Extra labels drawn in squares: (row, col) -> text.
         self.marks = marks or {}
+        # Named squares, shaded, with a label: (row, col) -> text.
+        self.special = special or {}
 
     def squares(self):
         return [(r, c) for r in range(3) for c in range(self.cols) if self.on_board(r, c)]
@@ -54,6 +56,15 @@ def twenty_squares():
     return Board("twenty-squares", 12, on, rosettes, path, marks)
 
 
+def senet():
+    # The S-shaped track: 1 to 10 on the top row, 11 to 20 back along the
+    # middle, 21 to 30 on the bottom row (senet/src/rules.rs).
+    path = [(0, c) for c in range(10)] + [(1, c) for c in range(9, -1, -1)] + [(2, c) for c in range(10)]
+    names = {15: "Rebirth", 26: "Beauty", 27: "Water", 28: "III", 29: "II", 30: "I"}
+    special = {path[h - 1]: name for h, name in names.items()}
+    return Board("senet", 10, lambda r, c: True, set(), path, special=special)
+
+
 def rosette_svg(cx, cy, r):
     out = []
     for i in range(8):
@@ -72,7 +83,7 @@ def centre(r, c):
 def to_svg(board, entry_from, exit_to, row_labels):
     # Row labels go right of the board and of the "off" arrow.
     label_col = max(board.cols, exit_to[1] + 1)
-    w = PAD * 2 + label_col * CELL + 120
+    w = PAD * 2 + label_col * CELL + (120 if any(row_labels) else 0)
     h = PAD * 2 + 3 * CELL
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" '
@@ -91,6 +102,15 @@ def to_svg(board, entry_from, exit_to, row_labels):
         if (r, c) in board.rosettes:
             cx, cy = centre(r, c)
             parts.append(rosette_svg(cx, cy, CELL * 0.36))
+        if (r, c) in board.special:
+            parts.append(
+                f'<rect x="{x + 3}" y="{y + 3}" width="{CELL - 6}" height="{CELL - 6}" '
+                f'fill="{LAPIS}" opacity="0.15"/>'
+            )
+            parts.append(
+                f'<text x="{x + CELL / 2}" y="{y + CELL - 9}" font-size="12" text-anchor="middle" '
+                f'fill="{LAPIS}">{board.special[(r, c)]}</text>'
+            )
 
     # Light's path, through the square centres, with arrows in and out.
     pts = [centre(*entry_from)] + [centre(r, c) for r, c in board.path] + [centre(*exit_to)]
@@ -131,7 +151,7 @@ def to_text(board, row_labels, entry_note):
     width = 5  # characters per cell including its left border
 
     def cell_text(r, c):
-        mark = "*" if (r, c) in board.rosettes else ""
+        mark = "*" if (r, c) in board.rosettes or (r, c) in board.special else ""
         if (r, c) in board.path:
             mark += str(board.path.index((r, c)) + 1)
         return mark.center(width - 1)
@@ -157,7 +177,7 @@ def to_text(board, row_labels, entry_note):
             row += "|" if left or right else " "
             if c < board.cols:
                 row += cell_text(r, c) if right else " " * (width - 1)
-        lines.append(f"{row}  {row_labels[r]}")
+        lines.append(f"{row}  {row_labels[r]}".rstrip())
     lines.append("")
     lines.append(entry_note)
     return "\n".join(lines) + "\n"
@@ -177,6 +197,18 @@ def main():
     )
 
     ts = twenty_squares()
+    sn = senet()
+    blank = ["", "", ""]
+    (HERE / "senet-board.svg").write_text(to_svg(sn, (0, -1), (2, 10), blank))
+    (HERE / "senet-board.txt").write_text(
+        to_text(
+            sn,
+            blank,
+            "Numbers: the houses, 1 to 30, along an S; both sides run the same way.\n"
+            "* named houses: 15 Rebirth, 26 Beauty, 27 Water, 28 III, 29 II, 30 I.",
+        )
+    )
+
     (HERE / "twenty-squares.svg").write_text(to_svg(ts, (2, 4), (1, 12), labels))
     (HERE / "twenty-squares.txt").write_text(
         to_text(

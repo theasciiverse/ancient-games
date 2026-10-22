@@ -39,7 +39,12 @@ one Markdown chapter per game plus a BibTeX file, built by
 per game) and plain text per game (meant for `RULES.txt` in the release
 archives). Board figures come from
 `rulebook/figures/make_figures.py` as SVG and ASCII. Done: introduction,
-Royal Game of Ur. To do: Senet, Fox & Geese, Hnefatafl, Mehen.
+Royal Game of Ur, Senet. To do: Fox & Geese, Hnefatafl, Mehen.
+Illustrations (David, 2026-10-22): photographs of the real objects in the
+PDF and HTML, each with source, author and licence in
+`rulebook/images/CREDITS.md` and its caption (CC0 museum images first:
+the Met, the Brooklyn Museum, CC0 Commons photos); the text and F1 help
+leave them out.
 
 The F1 help is generated from the chapters (David, 2026-10-22): a chapter
 names its crate in its front matter (`crate: ur`), build.sh copies its

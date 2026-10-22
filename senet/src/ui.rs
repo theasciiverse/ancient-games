@@ -7,7 +7,7 @@ use crate::rules::{
     self, Action, BEAUTY, HORUS, OFF, RE_ATOUM, REBIRTH, Rules, Side, THREE_TRUTHS, Variant, WATER,
 };
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, centre, fill, outline, put};
-use ancient_core::shell::{Help, Menu};
+use ancient_core::shell::{self, Help, Menu};
 use ancient_core::player::Player;
 use ratatui::buffer::Buffer;
 use ratatui::layout::Rect;
@@ -234,39 +234,37 @@ pub fn menu(rules: &[Rules], chosen: usize) -> Menu<'_> {
     }
 }
 
-/// How to play, and what is known of the game.
-pub fn help(rules: &Rules) -> Vec<Help> {
-    let mut lines = vec![
-        Help::Heading("HOW TO PLAY".into()),
-        Help::Blank,
-        Help::Text(
-            "Race your pieces along the S: the top row left to right, the middle row \
-             right to left, the bottom row left to right, and off the board."
-                .into(),
-        ),
-        Help::Blank,
-        Help::Heading(format!("{} RULES", rules.name.to_uppercase())),
-    ];
-    lines.extend(rules.summary.iter().map(|l| Help::Text(l.to_string())));
-    lines.extend([
-        Help::Blank,
-        Help::Heading("KEYS".into()),
-        Help::Text(
-            "Space or Enter: throw   Arrows or Tab: choose   Enter: move   R: rescue from the \
-             water   Mouse: click a lit piece   M: menu   Q: quit"
-                .into(),
-        ),
-        Help::Blank,
-        Help::Heading("WHAT WE KNOW".into()),
-        Help::Quiet(
-            "Senet was played in Egypt for some three thousand years and became a game of \
-             the soul's passage through the netherworld; boards were buried with the dead, \
-             Tutankhamun among them. No rules survive. What you play here are modern \
-             reconstructions from boards, pieces and tomb paintings: Timothy Kendall's \
-             (1978) and R. C. Bell's (1960)."
-                .into(),
-        ),
-        Help::Blank,
-    ]);
-    lines
+/// The game's chapter of the rulebook, as plain text: the help, and
+/// RULES.txt in the release archives. Written by `rulebook/build.sh`.
+pub const RULES: &str = include_str!("../RULES.txt");
+
+/// How to play: the rulebook chapter, and the line where the rule set
+/// `rules` begins.
+pub fn help(rules: &Rules) -> (Vec<Help>, usize) {
+    let lines = shell::rules_help(RULES);
+    let at = shell::help_find(&lines, rules.section).unwrap_or(0);
+    (lines, at)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn the_help_opens_at_every_rule_set() {
+        let lines = shell::rules_help(RULES);
+        for rules in Rules::all() {
+            assert!(shell::help_find(&lines, rules.section).is_some(), "{}", rules.section);
+        }
+    }
+
+    #[test]
+    fn the_rulebook_text_fits_the_help() {
+        // The help is 84 columns wide with 3 on each side. Only a single
+        // word, a web address, may be wider (the help runs it on).
+        for line in RULES.lines() {
+            let word = !line.trim().contains(' ');
+            assert!(line.chars().count() <= 78 || word, "too wide: {line}");
+        }
+    }
 }

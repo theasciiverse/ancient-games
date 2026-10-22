@@ -257,7 +257,15 @@ pub fn draw_help_at(buf: &mut Buffer, area: Rect, lines: &[Help], scroll: &mut u
             Help::Text(t) => (t, text),
             Help::Quiet(t) => (t, quiet),
             Help::Pre(t) => {
-                rows.push((t.clone(), text));
+                // Kept as it is, but a line too wide (a long web address)
+                // goes on over the next rows rather than being cut off.
+                let chars: Vec<char> = t.chars().collect();
+                for part in chars.chunks((w - 6).max(1) as usize) {
+                    rows.push((part.iter().collect(), text));
+                }
+                if chars.is_empty() {
+                    rows.push((String::new(), text));
+                }
                 continue;
             }
             Help::Blank => {
