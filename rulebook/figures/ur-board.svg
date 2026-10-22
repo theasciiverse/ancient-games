@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 712 272" width="712" height="272" font-family="Libertinus Serif, Georgia, serif">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b5432a"/></marker>
+</defs>
+<rect x="40" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<ellipse cx="72.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(0 72.0 72.0)"/>
+<ellipse cx="72.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(45 72.0 72.0)"/>
+<ellipse cx="72.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(90 72.0 72.0)"/>
+<ellipse cx="72.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(135 72.0 72.0)"/>
+<ellipse cx="72.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(180 72.0 72.0)"/>
+<ellipse cx="72.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(225 72.0 72.0)"/>
+<ellipse cx="72.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(270 72.0 72.0)"/>
+<ellipse cx="72.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(315 72.0 72.0)"/>
+<circle cx="72.0" cy="72.0" r="5.1" fill="#2b4c8c"/>
+<rect x="104" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="168" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="232" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="424" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<ellipse cx="456.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(0 456.0 72.0)"/>
+<ellipse cx="456.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(45 456.0 72.0)"/>
+<ellipse cx="456.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(90 456.0 72.0)"/>
+<ellipse cx="456.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(135 456.0 72.0)"/>
+<ellipse cx="456.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(180 456.0 72.0)"/>
+<ellipse cx="456.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(225 456.0 72.0)"/>
+<ellipse cx="456.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(270 456.0 72.0)"/>
+<ellipse cx="456.0" cy="60.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(315 456.0 72.0)"/>
+<circle cx="456.0" cy="72.0" r="5.1" fill="#2b4c8c"/>
+<rect x="488" y="40" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="40" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="104" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="168" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="232" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<ellipse cx="264.0" cy="124.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(0 264.0 136.0)"/>
+<ellipse cx="264.0" cy="124.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(45 264.0 136.0)"/>
+<ellipse cx="264.0" cy="124.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(90 264.0 136.0)"/>
+<ellipse cx="264.0" cy="124.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(135 264.0 136.0)"/>
+<ellipse cx="264.0" cy="124.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(180 264.0 136.0)"/>
+<ellipse cx="264.0" cy="124.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(225 264.0 136.0)"/>
+<ellipse cx="264.0" cy="124.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(270 264.0 136.0)"/>
+<ellipse cx="264.0" cy="124.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(315 264.0 136.0)"/>
+<circle cx="264.0" cy="136.0" r="5.1" fill="#2b4c8c"/>
+<rect x="296" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="360" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="424" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="488" y="104" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="40" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<ellipse cx="72.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(0 72.0 200.0)"/>
+<ellipse cx="72.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(45 72.0 200.0)"/>
+<ellipse cx="72.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(90 72.0 200.0)"/>
+<ellipse cx="72.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(135 72.0 200.0)"/>
+<ellipse cx="72.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(180 72.0 200.0)"/>
+<ellipse cx="72.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(225 72.0 200.0)"/>
+<ellipse cx="72.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(270 72.0 200.0)"/>
+<ellipse cx="72.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(315 72.0 200.0)"/>
+<circle cx="72.0" cy="200.0" r="5.1" fill="#2b4c8c"/>
+<rect x="104" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="168" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="232" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="424" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<ellipse cx="456.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(0 456.0 200.0)"/>
+<ellipse cx="456.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(45 456.0 200.0)"/>
+<ellipse cx="456.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(90 456.0 200.0)"/>
+<ellipse cx="456.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(135 456.0 200.0)"/>
+<ellipse cx="456.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(180 456.0 200.0)"/>
+<ellipse cx="456.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(225 456.0 200.0)"/>
+<ellipse cx="456.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(270 456.0 200.0)"/>
+<ellipse cx="456.0" cy="188.5" rx="4.6" ry="11.5" fill="#b5432a" transform="rotate(315 456.0 200.0)"/>
+<circle cx="456.0" cy="200.0" r="5.1" fill="#2b4c8c"/>
+<rect x="488" y="168" width="64" height="64" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2"/>
+<polyline points="328.0,200.0 264.0,200.0 200.0,200.0 136.0,200.0 72.0,200.0 72.0,136.0 136.0,136.0 200.0,136.0 264.0,136.0 328.0,136.0 392.0,136.0 456.0,136.0 520.0,136.0 520.0,200.0 456.0,200.0 392.0,200.0" fill="none" stroke="#b5432a" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.8" marker-end="url(#arrow)"/>
+<text x="237" y="184" font-size="14" fill="#2b2b2b">1</text>
+<text x="173" y="184" font-size="14" fill="#2b2b2b">2</text>
+<text x="109" y="184" font-size="14" fill="#2b2b2b">3</text>
+<text x="45" y="184" font-size="14" fill="#2b2b2b">4</text>
+<text x="45" y="120" font-size="14" fill="#2b2b2b">5</text>
+<text x="109" y="120" font-size="14" fill="#2b2b2b">6</text>
+<text x="173" y="120" font-size="14" fill="#2b2b2b">7</text>
+<text x="237" y="120" font-size="14" fill="#2b2b2b">8</text>
+<text x="301" y="120" font-size="14" fill="#2b2b2b">9</text>
+<text x="365" y="120" font-size="14" fill="#2b2b2b">10</text>
+<text x="429" y="120" font-size="14" fill="#2b2b2b">11</text>
+<text x="493" y="120" font-size="14" fill="#2b2b2b">12</text>
+<text x="493" y="184" font-size="14" fill="#2b2b2b">13</text>
+<text x="429" y="184" font-size="14" fill="#2b2b2b">14</text>
+<text x="328.0" y="230.0" font-size="13" text-anchor="middle" fill="#2b2b2b">in</text>
+<text x="392.0" y="230.0" font-size="13" text-anchor="middle" fill="#2b2b2b">off</text>
+<text x="566" y="77.0" font-size="15" fill="#2b2b2b">Dark's row</text>
+<text x="566" y="141.0" font-size="15" fill="#2b2b2b">shared row</text>
+<text x="566" y="205.0" font-size="15" fill="#2b2b2b">Light's row</text>
+</svg>

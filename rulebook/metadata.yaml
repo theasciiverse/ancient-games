@@ -1,0 +1,22 @@
+title: "Ancient Games"
+subtitle: "The rules, and where they come from"
+author: "Asciiverse"
+lang: en-GB
+bibliography: references.bib
+link-citations: true
+reference-section-title: References
+papersize: a4
+mainfont: "Libertinus Serif"
+fontsize: 11pt
+margin:
+  x: 2.4cm
+  y: 2.6cm
+header-includes:
+  - |
+    ```{=typst}
+    // Each chapter starts on a new page.
+    #show heading.where(level: 1): it => pagebreak(weak: true) + it
+    // Tables and their cells to the left, like the text.
+    #set table(align: left)
+    #show table: set align(left)
+    ```

@@ -1,0 +1,352 @@
+# The Royal Game of Ur
+
+|                |                                                       |
+|:---------------|:------------------------------------------------------|
+| Played         | Mesopotamia and the Near East, about 2600 BC to the first millennium BC |
+| Players        | Two                                                   |
+| Kind           | Race game, in two of its versions a betting game      |
+| Program        | `royal-ur`                                            |
+| Rule sets      | Finkel 2017, British Museum 1990s, R. C. Bell, the Babylonian tablet |
+
+## What survives
+
+**The boards.** Leonard Woolley found the first boards in the Royal
+Cemetery at Ur, in what is now southern Iraq, during his excavations of
+1922 to 1934, and they gave the game its modern name [@wiki-ur]. He
+published them in *The Royal Cemetery* [@woolley1934; as cited in
+@finkel2007, 17]. They date from the middle of the third
+millennium BC. One of them is in the British Museum, ME 120834
+[@wiki-ur]. Only
+one comparable board of that age has been found elsewhere, a carved
+wooden one from Shahr-i Sokhta in Iran [@finkel2007, 17].
+
+The board has twenty squares: a block of four by three joined to a block
+of two by three by a bridge of two squares. Five squares carry a rosette.
+Scholars also call it the Game of Twenty Squares, because the game
+outlived the Ur design by more than two thousand years. Over a hundred
+boards are known from Iraq, Iran, Israel, Syria, Jordan, Lebanon,
+Turkey, Cyprus, Egypt and Crete. Early in the second millennium BC the
+board changed shape: the small block was straightened out into a single
+run, so that the middle row became twelve squares long [@finkel2007, 17].
+
+**The pieces and dice.** At Ur each player had seven identical pieces.
+The dice found with the boards were tetrahedra of stone or lapis lazuli,
+two of whose four corners are marked with inlaid points, so that a single
+die scores with two chances in four. Ten four-sided stick dice numbered
+one to four were also found at Ur [@finkel2007, 17].
+
+**The tablet.** On 3 November 177 or 176 BC, in Babylon, the scribe
+Itti-Marduk-balāṭu finished copying a tablet that had belonged to a
+scholar called Iddin-Bēl. It came to the British Museum around 1880 and
+is now BM 33333B. T. G. Pinches catalogued it in 1886 as bird omens:
+the text names a swallow and a raven. Weidner read it in 1956 as
+fortune-telling by lots, and Bottéro in the same year published a second
+tablet with partly the same material, since destroyed (a photographer's
+studio holding it was lost in the First World War; the photograph
+survived). A note on that second tablet calls its subject a game, and
+names the game "Pack of Dogs". Landsberger showed in 1960 that both
+tablets concern a game [@weidner1956; @bottero1956; @landsberger1960;
+all as cited in @finkel2007, 16].
+
+The back of the British Museum tablet is the oldest known set of rules
+for any board game [@finkel2007, 19]. It does not explain the game from
+the start: it says there are five different pieces, named after birds,
+and two knucklebones, one from a sheep and one from an ox; which throw
+brings each piece onto the board; and what good or bad fortune follows
+when a piece lands on a rosette or fails to. The front carries twelve
+fortune-telling phrases, one for each sign of the zodiac. That is all.
+
+**After antiquity.** The Jews of Kochi in India played a version of the
+game, called *asha*, until the 1950s, when they began emigrating to
+Israel [@wiki-ur].
+
+**What is not known.** The route the pieces take, how the dice were read,
+whether pieces could be captured, and how the game was won. Irving
+Finkel, curator at the British Museum, says of his own route that "there
+is no evidence on the point" [@finkel2007, 27]. Every rule set below
+fills those gaps in its own way.
+
+## The board
+
+![The third-millennium board from Ur, with the path used by every rule
+set on this board. Light starts from the near side; Dark's path is the
+mirror image on the far row. Rosettes on squares 4, 8 and
+14.](figures/ur-board.svg){#fig-ur-board width=100%}
+
+The three rule sets for the Ur board all use the path R. C. Bell
+proposed, the one most people play today [@masters-ur]. Each side enters
+on its own outer row at the fourth square from the left, runs left to
+the corner (squares 1 to 4), turns into the middle row and runs its whole
+length the other way (squares 5 to 12), turns back into its own row
+(squares 13 and 14), and goes off the board. Bearing a piece off counts
+as the fifteenth step.
+
+Squares 1 to 4, 13 and 14 belong to one side only: no enemy can reach a
+piece there. Squares 5 to 12 are shared, and that is where pieces are
+taken. The middle rosette, square 8, is the only rosette on the shared
+row.
+
+## The throws
+
+**Four lots** (Finkel 2017, British Museum 1990s). Four tetrahedra, each
+with two of its four tips marked. Count the marked tips pointing up: that
+is the move.
+
+| Marked tips up | Move | Chance in 16 |
+|:--|:--|:--|
+| 0 | none, the turn is lost | 1 |
+| 1 | 1 | 4 |
+| 2 | 2 | 6 |
+| 3 | 3 | 4 |
+| 4 | 4 | 1 |
+
+**Three lots** (R. C. Bell). Three tetrahedra, jewelled tips counted.
+Every throw but one gives another throw, so a turn runs on until a dead
+throw ends it.
+
+| Jewelled tips up | Move | Chance in 8 |
+|:--|:--|:--|
+| 3 | 5, and throw again | 1 |
+| 0 | 4, and throw again | 1 |
+| 2 | 1, and throw again | 3 |
+| 1 | none, and the turn ends | 3 |
+
+**Two knucklebones** (the Babylonian tablet), as Finkel reads them. The
+sheep's knucklebone gives 1, 2, 3 or 4. The player may then use that
+throw, or dare the ox's knucklebone, which has two "yes" faces and two
+"no" faces. Yes turns 1, 2, 3, 4 into 5, 6, 7, 10; no wastes the throw
+[@finkel2007, 22, 27].
+
+| Sheep's knucklebone | 1 | 2 | 3 | 4 |
+|:--|:--|:--|:--|:--|
+| After the ox says yes | 5 | 6 | 7 | 10 |
+
+Our choice: in the program each face of the sheep's knucklebone comes up
+equally often, as on the four-sided die Finkel uses in his own
+equipment list [@finkel2007, 27], and the ox says yes half the time.
+A real knucklebone does not fall evenly.
+
+## Finkel 2017
+
+The rules Irving Finkel played against Tom Scott for the British
+Museum's video for International Tabletop Day 2017, and the version most
+people play today [@scottfinkel2017; @masters-ur; @wiki-ur].
+
+1. Each side has seven pieces, off the board at the start.
+2. Throw the four lots and move one piece that many squares along the
+   path. A throw of 0 loses the turn.
+3. A piece may come onto the board with any throw, onto the square that
+   many steps along, if it is free.
+4. One piece per square. A piece may not land on another of its own side.
+5. Landing on an enemy piece on the shared row sends it back off the
+   board, to start again. Taking is never forced: the player may move
+   another piece instead.
+6. Landing on any rosette gives another throw.
+7. A piece on the middle rosette cannot be taken, so no enemy piece may
+   land there while it stands on it.
+8. A piece bears off with the exact throw: from square 14 a throw of 1,
+   from square 13 a throw of 2, and so on [@wiki-ur].
+9. A player who can move must move.
+10. The first side to bear off all seven pieces wins.
+
+Our choice: the side that throws first is chosen at random.
+
+## British Museum 1990s
+
+The rules Finkel published with the British Museum's replica board in
+the late 1990s [@masters-ur]. They are those of Finkel 2017, with two
+differences:
+
+- Five pieces each instead of seven.
+- No square is safe: a piece on the middle rosette can be taken like any
+  other.
+
+James Masters, whose page is the source for this set, dates it both to
+"1990" and to "the late 1990s" [@masters-ur]. We have not seen the
+leaflet itself.
+
+## R. C. Bell's betting game
+
+From R. C. Bell's *Board and Table Games from Many Civilizations*
+[-@bell1969, 24-25], first published in 1960, read in the second edition
+of 1969. A game played for stakes, with three lots.
+
+1. Each side has seven pieces. Each player puts a stake into a pool.
+2. Throw the three lots (see the table above). A throw of 5, 4 or 1
+   moves a piece and the player throws again; the one dead throw ends the
+   turn.
+3. A piece comes onto the board only with a throw of 5. A piece that has
+   been taken needs a 5 again to come back on.
+4. Landing on an enemy piece on the shared row takes it, as in the
+   Finkel 2017 rules. No square is safe.
+5. Landing on a rosette does not give another throw. Instead the
+   opponent pays a fine into the pool.
+6. A piece bears off with the exact throw.
+7. The first side to bear off all its pieces takes the pool.
+
+James Masters' summary has the player who lands on a rosette pay the fine
+[@masters-ur]. Bell's own text has the opponent pay, and the program
+follows Bell.
+
+Our choices:
+
+- Bell does not say where a piece entered with a 5 stands. Here it stands
+  on its first square.
+- Bell does not say whether a throw that cannot be used still gives
+  another throw. Here it does.
+- Bell gives no amounts. Here each purse starts at 20, the stake is 5 and
+  the fine 1, and the purses carry on from game to game.
+
+A game under Bell's rules runs to about 220 throws, against about 150
+for Finkel 2017.
+
+## The Babylonian tablet
+
+The game of tablet BM 33333B, as Irving Finkel reconstructs it in "On
+the Rules for the Royal Game of Ur" [@finkel2007]. The tablet gives the
+pieces, the dice, the throw that brings each piece onto the board, and
+the fortune of each piece on the rosettes. Everything else (the board,
+the route, the reading of the dice, the tokens, capture) is Finkel's
+proposal, which he presents as such.
+
+![The later Game of Twenty Squares, as Finkel draws it for the tablet's
+rules, with his route for Light. Houses 4, 8, 12 and 16 carry rosettes.
+The marks show where each bird comes onto the board: Swallow (Sw),
+Storm-bird (St), Raven (Ra), Rooster (Ro), Eagle
+(Ea).](figures/twenty-squares.svg){#fig-twenty-squares width=100%}
+
+**The board and route.** The tablet calls the squares "houses" and the
+marked squares, Finkel argues, "shining things": rosettes. It names no
+board. Finkel argues it is the later Game of Twenty Squares, whose run of
+twelve squares matches the tablet's twelve zodiac phrases, and proposes
+this route: houses 1 to 4 on the player's own row, then the twelve
+houses of the middle row, then off [@finkel2007, 23-27].
+
+**The pieces.** Five different pieces each, all birds: the Swallow, the
+Storm-bird, the Raven, the Rooster and the Eagle. The tablet calls the
+Swallow, alone of the five, a "lazy" piece, and Finkel suggests something
+like a wild card [@finkel2007, 19-20].
+
+**What the tablet says**, in Finkel's translation [@finkel2007, 20]:
+
+- **The Swallow**, with a throw of 2, "sits at the head of a rosette (or:
+  at the first rosette)". On a rosette, "a woman will love those who
+  linger in a tavern; regarding their pack, well-being falls to them". If
+  not, "a woman will reject those who linger in a tavern; regarding their
+  pack, as a group well-being will not fall to them".
+- **The Storm-bird**, with 5, "sits at the fifth house". On a rosette,
+  "there will be enough food for the pack"; if not, "starvation for the
+  pack".
+- **The Raven**, with 6, "sits in the sixth house". On a rosette, "there
+  will be enough food for the pack"; if not, "starvation for the pack".
+- **The Rooster**, with 7, "sits in the seventh house". On a rosette,
+  "there will be an abundance(?) of fine beer for the pack"; if not,
+  "[there will be a deficiency of] fine beer for the pack".
+- **The Eagle**, with 10, "sits in the tenth house". On a rosette, "their
+  pack will eat its fill [of meat]"; if not, "there will be a deficiency
+  of meat".
+
+The "pack" is a side: the game's Babylonian name is "Pack of Dogs", and
+the word for pack also means troops [@finkel2007, 23].
+
+**The rules as played.** Following Finkel's own playing rules
+[@finkel2007, 27]:
+
+1. Throw the sheep's knucklebone; use it, or dare the ox's (see "The
+   throws").
+2. Each bird comes onto the board only with its own throw: the Swallow
+   with 2, the Storm-bird with 5, the Raven with 6, the Rooster with 7,
+   the Eagle with 10.
+3. The Swallow comes on at house 4, the first rosette. The Storm-bird,
+   Raven, Rooster and Eagle come on at houses 5, 6, 7 and 10.
+4. A piece landing on an enemy piece on the shared row knocks it off; it
+   must start again with its own throw.
+5. Pieces on a rosette cannot be knocked off.
+6. A player who can move must move.
+7. A piece bears off with the exact throw.
+8. A piece that lands on a rosette wins tokens from the pool; a piece
+   forced to pass over a rosette pays the same number in. Finkel's scale,
+   by the piece's chances of reaching a rosette: Swallow 3, Storm-bird 4,
+   Raven 4, Rooster 4, Eagle 5.^[Finkel's Table 3.1 gives the Eagle's
+   starting throw as 9; the tablet and his own text say 10
+   [@finkel2007, 20, 22, 24].]
+
+Finkel offers two readings of where the Swallow comes on: at the first
+rosette (house 4), or on the square before any rosette, perhaps the
+second only when it re-enters after being knocked off [@finkel2007, 20,
+27]. The program uses the first. Under the second, a Swallow could come
+on at house 15 and be home two throws later.
+
+Where the program departs from Finkel, or fills a gap:
+
+- Our choice: Finkel has the pieces enter in a fixed order. The program
+  does not enforce one.
+- Our choice: Finkel wonders whether two pieces of one side might share a
+  rosette. The program allows one piece per square.
+- Our choice: Finkel has both players put 10 counters into the pool from
+  25 each, and the winner fine the loser for each piece still on the
+  board. The program starts each purse at 40 (20 ran dry within a few
+  moves in testing), both sides put 5 into the pool each game, the winner
+  takes the pool, and there is no fine for pieces left behind.
+- Our choice: the side to throw first is chosen at random; Finkel has
+  the higher throw take white and play first.
+- Our choice: a Swallow entering on the rosette at house 4 wins its
+  tokens, as any landing on a rosette does. Coming onto the board is not
+  passing a rosette, so a bird entering at house 5 or beyond pays
+  nothing for house 4.
+- In this reading no bird ever stands on houses 1 to 3: every one comes
+  on at house 4 or later.
+
+**The twelve phrases.** The front of the tablet divides twelve fields,
+each with a sign of the zodiac and a phrase. Finkel identifies them with
+the twelve houses of the middle row, and suggests the board doubled as a
+fortune-telling board [@finkel2007, 18, 24-25]. In his translation:
+
+| | Sign | Phrase |
+|:--|:--|:--|
+| I | Pegasus | One who sits in a tavern |
+| II | Aries | A beer vat(?) will turn away |
+| III | Pleiades/Taurus | I will pour out the dregs for you |
+| IV | Gemini | You will find a friend |
+| V | Cancer | You will stand in exalted places |
+| VI | Leo | You will be powerful like a lion |
+| VII | Virgo | You will go up the path |
+| VIII | Libra | Like one who weighs up silver |
+| IX | Scorpius | You will draw fine beer |
+| X | Sagittarius | You will cross the ditch |
+| XI | Capricornus | Like one who owns a herd |
+| XII | Aquarius | You will cut meat |
+
+The program does not use the phrases in play.
+
+## Other reconstructions
+
+Two more routes for the Ur board are described by James Masters
+[@masters-ur]; neither is in the program yet:
+
+- **H. J. R. Murray's**: round the outside of the small block, back down
+  the middle row and off where the piece came on: 27 squares, bearing
+  off on the 28th step.
+- **James Masters'**: Murray's route shortened, crossing to the opposite
+  row and round the small block, off from the starting square on the
+  other side: 16 squares, bearing off on the 17th. Three lots read as 0
+  = 4, 1, 2, 3; rosettes give another throw; exact throws to bear off.
+
+## Playing it in the terminal
+
+Start `royal-ur`, choose a rule set and who plays each side: the computer
+(easy, normal or hard) or a person at the same keyboard.
+
+| Key | |
+|:--|:--|
+| Space or Enter | Throw |
+| Arrows or Tab | Choose a piece |
+| Enter | Move it |
+| D | Dare the ox's knucklebone (the tablet) |
+| Mouse | Click a lit piece |
+| F1 | These rules, in short |
+| M | Back to the menu |
+| Q | Quit |
+
+`royal-ur --demo` lets the computer play both sides; `--seed N` repeats a
+game exactly.

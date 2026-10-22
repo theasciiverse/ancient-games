@@ -1,0 +1,10 @@
++----+----+----+----+         +----+----+
+| *  |    |    |    |         | *  |    |  Dark's row
++----+----+----+----+----+----+----+----+
+| 5  | 6  | 7  | *8 | 9  | 10 | 11 | 12 |  shared row
++----+----+----+----+----+----+----+----+
+| *4 | 3  | 2  | 1  |         |*14 | 13 |  Light's row
++----+----+----+----+         +----+----+
+
+Numbers: Light's path, 1 to 14; off the board is the 15th step.
+* rosette. Dark's path is the mirror image on the far row.

@@ -1,0 +1,63 @@
+/* The rulebook's HTML pages: shell and lapis, carnelian for the rosettes. */
+
+:root {
+  --bg: #fbf7ee;
+  --fg: #2b2b2b;
+  --muted: #6b6457;
+  --rule: #d9cfbb;
+  --accent: #2b4c8c;
+  --mark: #b5432a;
+  --panel: #f4ecdc;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17181b;
+    --fg: #e7e2d6;
+    --muted: #a39d90;
+    --rule: #3a3b40;
+    --accent: #8fb0ea;
+    --mark: #e07c62;
+    --panel: #22242a;
+  }
+  figure img { background: #f4ecdc; border-radius: 4px; }
+}
+
+html { background: var(--bg); }
+
+body {
+  color: var(--fg);
+  background: var(--bg);
+  font-family: "Libertinus Serif", Georgia, "Times New Roman", serif;
+  font-size: 1.125rem;
+  line-height: 1.55;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+h1, h2, h3 { line-height: 1.2; font-weight: 600; }
+h1 { font-size: 2rem; margin-top: 3rem; }
+h2 { font-size: 1.4rem; margin-top: 2.2rem; border-bottom: 1px solid var(--rule); padding-bottom: .2rem; }
+header h1.title { margin-top: 1rem; }
+header .subtitle { color: var(--muted); font-style: italic; margin-top: -.6rem; }
+header .author, header .date { color: var(--muted); margin: .2rem 0; }
+
+a { color: var(--accent); }
+strong { font-weight: 600; }
+code { font-family: "DejaVu Sans Mono", Menlo, Consolas, monospace; font-size: .88em; }
+pre { background: var(--panel); padding: .8rem 1rem; overflow-x: auto; border-radius: 4px; }
+
+table { border-collapse: collapse; margin: 1rem 0; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { border-bottom: 1px solid var(--rule); padding: .35rem .7rem .35rem 0; text-align: left; vertical-align: top; }
+thead th { border-bottom: 2px solid var(--fg); }
+
+figure { margin: 1.5rem 0; }
+figure img { max-width: 100%; height: auto; }
+figcaption { color: var(--muted); font-size: .95rem; margin-top: .4rem; }
+
+nav#TOC { background: var(--panel); padding: .5rem 1.2rem; border-radius: 4px; }
+nav#TOC ul { padding-left: 1.2rem; }
+
+.footnotes, #refs { font-size: .95rem; }
+#refs .csl-entry { margin-bottom: .5rem; padding-left: 1.5rem; text-indent: -1.5rem; }

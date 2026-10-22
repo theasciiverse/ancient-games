@@ -31,6 +31,18 @@ ARM64; tag v0.1.0-av.1 pushed, no GitHub release while Actions billing
 blocks builds. Licence: not chosen; David chooses licences case by case
 (2026-10-20), so the Cargo.toml files name none until he does. Own git repo, branch `main`, private at github.com/theasciiverse/ancient-games.
 
+## Rulebook
+
+`rulebook/` (started 2026-10-22): the rules of each game with sources,
+one Markdown chapter per game plus a BibTeX file, built by
+`rulebook/build.sh` into a PDF (pandoc and Typst), HTML (book and one page
+per game) and plain text per game (meant for `RULES.txt` in the release
+archives, not wired into the workflow yet). Board figures come from
+`rulebook/figures/make_figures.py` as SVG and ASCII. Done: introduction,
+Royal Game of Ur. To do: Senet, Fox & Geese, Hnefatafl, Mehen. Open
+question for David: generate the in-game F1 help from the chapters, or
+keep the two separate and checked against each other.
+
 ## Code
 
 Cargo workspace. `core/` (`ancient-core`) holds what the games share:
