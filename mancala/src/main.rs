@@ -242,8 +242,7 @@ fn main() -> io::Result<()> {
         return Ok(());
     }
     if demo {
-        // The demo goes through the rule sets in turn, from a random one.
-        app.setup.rules = (app.rng.next() % app.rules.len() as u64) as usize;
+        // The demo begins with Oware and goes through the rule sets in turn.
         app.start();
     }
     let result = shell::run(&mut app);
