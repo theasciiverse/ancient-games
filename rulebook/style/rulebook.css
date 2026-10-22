@@ -37,11 +37,26 @@ body {
 }
 
 h1, h2, h3 { line-height: 1.2; font-weight: 600; }
-h1 { font-size: 2rem; margin-top: 3rem; }
+/* A chapter's title, large and centred over an ornament: a carnelian rule
+   with a lapis diamond, as in the PDF. */
+h1, header h1.title {
+  font-size: 2.6rem; font-weight: 400; text-align: center;
+  margin: 4rem 0 2rem; padding-bottom: 1.1rem;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='10'%3E%3Cpath d='M0 5H120M140 5H260' stroke='%23b5432a' stroke-width='1.2'/%3E%3Cpath d='M130 1L134 5L130 9L126 5Z' fill='%234a6fb5'/%3E%3C/svg%3E") center bottom / 260px 10px no-repeat;
+}
+
+/* The "at a glance" box under each title. */
+table.glance {
+  display: table; width: 100%; background: var(--panel);
+  border: 1px solid var(--mark); border-radius: 6px; border-collapse: separate;
+  padding: .4rem .9rem; margin: 0 0 2rem;
+}
+table.glance thead { display: none; }
+table.glance td { border-bottom: none; padding: .2rem .8rem .2rem 0; }
+table.glance td:first-child { font-variant: small-caps; color: var(--muted); white-space: nowrap; }
 h2 { font-size: 1.4rem; margin-top: 2.2rem; border-bottom: 1px solid var(--rule); padding-bottom: .2rem; }
-header h1.title { margin-top: 1rem; }
-header .subtitle { color: var(--muted); font-style: italic; margin-top: -.6rem; }
-header .author, header .date { color: var(--muted); margin: .2rem 0; }
+header .subtitle { color: var(--muted); font-style: italic; text-align: center; margin-top: -1rem; }
+header .author, header .date { color: var(--muted); margin: .2rem 0; text-align: center; }
 
 a { color: var(--accent); }
 strong { font-weight: 600; }

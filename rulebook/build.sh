@@ -55,7 +55,7 @@ for bib in bib/*.bib; do
     [ -f "$bib" ] && bibs="$bibs --bibliography=$bib"
 done
 
-common="--metadata-file=metadata.yaml --metadata=date:$date $bibs --citeproc --lua-filter=filters/examples.lua --lua-filter=filters/no-dashes.lua"
+common="--metadata-file=metadata.yaml --metadata=date:$date $bibs --citeproc --lua-filter=filters/examples.lua --lua-filter=filters/glance.lua --lua-filter=filters/no-dashes.lua"
 
 intro=chapters/00-introduction.md
 games=$(ls chapters/[0-9][0-9]-*.md | grep -v "^$intro\$")
@@ -81,8 +81,9 @@ for chapter in $games; do
     title=$(awk 'NR == 1 && /^---$/ { yaml = 1; next }
                  yaml && /^---$/ { yaml = 0; next }
                  !yaml && /^# / { sub(/^# /, ""); print; exit }' "$chapter")
-    pandoc $common --shift-heading-level-by=-1 --metadata=title:"$title" \
-        --metadata=subtitle:"The rules, and where they come from" \
+    # The page keeps the chapter's own heading as its title, styled as in
+    # the book, so no title block above it.
+    pandoc $common --metadata=title: --metadata=pagetitle:"$title" \
         "$chapter" --standalone --embed-resources --css=style/rulebook.css \
         -o "$out/$game.html"
     pandoc $common --shift-heading-level-by=-1 --metadata=title:"$title" \
