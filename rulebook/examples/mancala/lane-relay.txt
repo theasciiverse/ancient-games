@@ -1,0 +1,17 @@
+The last pebble makes C three, so C is lifted and sown on; its last
+pebble makes F two, which is taken with a, facing it.
+
+Before, South to move:
+      f  e  d  c  b  a
+      7  0  0  0  3  5
+      2  0  2  0  0  1
+      A  B  C  D  E  F
+
+South sows 2 seeds from A. Captures 7 seeds!
+The seeds go: lift A, B, C, lift C, D, E, F, take F, take a.
+
+After:
+      f  e  d  c  b  a
+  0   7  0  0  0  3  0
+      0  1  0  1  1  0  7
+      A  B  C  D  E  F

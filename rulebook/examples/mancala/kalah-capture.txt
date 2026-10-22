@@ -1,0 +1,17 @@
+The last seed falls in D, which was empty: it is taken with the five
+seeds of c, facing it.
+
+Before, South to move:
+      f  e  d  c  b  a
+  0   5  5  1  5  6  6
+      0  2  0  0  5  5  0
+      A  B  C  D  E  F
+
+South sows 2 seeds from B. Captures 6 seeds!
+The seeds go: lift B, C, D, take D, take c.
+
+After:
+      f  e  d  c  b  a
+  0   5  5  1  0  6  6
+      0  0  1  0  5  5  6
+      A  B  C  D  E  F

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 866 280" width="866" height="280" font-family="Libertinus Serif, Georgia, serif">
+<defs><marker id="head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b5432a"/></marker></defs>
+<rect x="30" y="56" width="806" height="168" rx="30" fill="#e8d9bc" stroke="#2b2b2b" stroke-width="2"/>
+<circle cx="153.0" cy="105.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="153.0" y="48" font-size="18" text-anchor="middle" fill="#2b2b2b">i</text>
+<circle cx="223.0" cy="105.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="223.0" y="48" font-size="18" text-anchor="middle" fill="#2b2b2b">h</text>
+<circle cx="293.0" cy="105.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="293.0" y="48" font-size="18" text-anchor="middle" fill="#2b2b2b">g</text>
+<circle cx="363.0" cy="105.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="363.0" y="48" font-size="18" text-anchor="middle" fill="#2b2b2b">f</text>
+<circle cx="433.0" cy="105.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="433.0" y="48" font-size="18" text-anchor="middle" fill="#2b2b2b">e</text>
+<circle cx="503.0" cy="105.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="503.0" y="48" font-size="18" text-anchor="middle" fill="#2b2b2b">d</text>
+<circle cx="573.0" cy="105.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="573.0" y="48" font-size="18" text-anchor="middle" fill="#2b2b2b">c</text>
+<circle cx="643.0" cy="105.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="643.0" y="48" font-size="18" text-anchor="middle" fill="#2b2b2b">b</text>
+<circle cx="713.0" cy="105.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="713.0" y="48" font-size="18" text-anchor="middle" fill="#2b2b2b">a</text>
+<circle cx="153.0" cy="175.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="153.0" y="244" font-size="18" text-anchor="middle" fill="#2b2b2b">A</text>
+<circle cx="223.0" cy="175.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="223.0" y="244" font-size="18" text-anchor="middle" fill="#2b2b2b">B</text>
+<circle cx="293.0" cy="175.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="293.0" y="244" font-size="18" text-anchor="middle" fill="#2b2b2b">C</text>
+<circle cx="363.0" cy="175.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="363.0" y="244" font-size="18" text-anchor="middle" fill="#2b2b2b">D</text>
+<circle cx="433.0" cy="175.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="433.0" y="244" font-size="18" text-anchor="middle" fill="#2b2b2b">E</text>
+<circle cx="503.0" cy="175.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="503.0" y="244" font-size="18" text-anchor="middle" fill="#2b2b2b">F</text>
+<circle cx="573.0" cy="175.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="573.0" y="244" font-size="18" text-anchor="middle" fill="#2b2b2b">G</text>
+<circle cx="643.0" cy="175.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="643.0" y="244" font-size="18" text-anchor="middle" fill="#2b2b2b">H</text>
+<circle cx="713.0" cy="175.0" r="28.0" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="713.0" y="244" font-size="18" text-anchor="middle" fill="#2b2b2b">I</text>
+<rect x="40" y="74" width="64" height="132" rx="28" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="72.0" y="138" font-size="14" text-anchor="middle" fill="#2b2b2b">North</text>
+<text x="72.0" y="156" font-size="14" text-anchor="middle" fill="#2b2b2b">kazan</text>
+<rect x="762" y="74" width="64" height="132" rx="28" fill="#f8f2e6" stroke="#2b2b2b" stroke-width="2"/>
+<text x="794.0" y="138" font-size="14" text-anchor="middle" fill="#2b2b2b">South</text>
+<text x="794.0" y="156" font-size="14" text-anchor="middle" fill="#2b2b2b">kazan</text>
+<path d="M 139.0 150 L 727.0 150 Q 745.0 140 727.0 130 L 139.0 130" fill="none" stroke="#b5432a" stroke-width="2.5" marker-end="url(#head)"/>
+<text x="433.0" y="268" font-size="16" text-anchor="middle" fill="#2b2b2b">South</text>
+<text x="433.0" y="22" font-size="16" text-anchor="middle" fill="#2b2b2b">North</text>
+</svg>

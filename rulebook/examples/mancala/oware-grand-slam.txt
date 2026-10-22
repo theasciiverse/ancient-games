@@ -1,0 +1,18 @@
+Taking c, b and a would leave North with nothing at all, so under
+the Abapa rules nothing is taken.
+
+Before, South to move:
+      f  e  d  c  b  a
+      0  0  0  1  2  1
+      1  0  2  0  0  3
+      A  B  C  D  E  F
+
+South sows 3 seeds from F. That would take every seed on the other
+side, so it takes none.
+The seeds go: lift F, a, b, c.
+
+After:
+      f  e  d  c  b  a
+      0  0  0  2  3  2
+      1  0  2  0  0  0
+      A  B  C  D  E  F

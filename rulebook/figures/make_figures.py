@@ -189,6 +189,11 @@ def main():
 
     fox_and_geese.write(HERE)
 
+    # The mancala boards: pits and stores, their own drawing.
+    import mancala
+
+    mancala.write(HERE)
+
     ur = ur_board()
     labels = ["Dark's row", "shared row", "Light's row"]
     (HERE / "ur-board.svg").write_text(to_svg(ur, (2, 4), (2, 5), labels))

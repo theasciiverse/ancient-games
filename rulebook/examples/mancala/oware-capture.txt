@@ -1,0 +1,17 @@
+The last seed makes c three; b before it is three and a two, so all
+three are taken.
+
+Before, South to move:
+      f  e  d  c  b  a
+      0  3  1  2  2  1
+      2  1  0  3  0  3
+      A  B  C  D  E  F
+
+South sows 3 seeds from F. Captures 8 seeds!
+The seeds go: lift F, a, b, c, take c, take b, take a.
+
+After:
+      f  e  d  c  b  a
+  0   0  3  1  0  0  0
+      2  1  0  3  0  0  8
+      A  B  C  D  E  F

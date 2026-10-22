@@ -1,0 +1,18 @@
+Four stones from H: the first goes back into H, then I, a and b.
+North's b now holds three: it becomes South's tuzdyk, and its stones
+go to South's kazan.
+
+Before, South to move:
+      i  h  g  f  e  d  c  b  a
+      9  9  9  9  9  9  9  2  9
+      9  9  9  9  9  9  9  4  9
+      A  B  C  D  E  F  G  H  I
+
+South sows 4 seeds from H. b becomes South's tuzdyk!
+The seeds go: lift H, H, I, a, b, b becomes a tuzdyk.
+
+After:
+      i  h  g  f  e  d  c  b  a
+  0   9  9  9  9  9  9  9  X 10
+      9  9  9  9  9  9  9  1 10  3
+      A  B  C  D  E  F  G  H  I

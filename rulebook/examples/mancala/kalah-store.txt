@@ -1,0 +1,17 @@
+From C, four seeds reach South's store exactly: South moves again.
+
+Before, South to move:
+      f  e  d  c  b  a
+  0   4  4  4  4  4  4
+      4  4  4  4  4  4  0
+      A  B  C  D  E  F
+
+South sows 4 seeds from C. The last seed fell in the store: another
+move.
+The seeds go: lift C, D, E, F, South's store.
+
+After:
+      f  e  d  c  b  a
+  0   4  4  4  4  4  4
+      4  4  0  5  5  5  1
+      A  B  C  D  E  F

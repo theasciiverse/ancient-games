@@ -1,0 +1,17 @@
+Thirteen seeds go once round the board; C itself is passed over, so
+the last seed lands in E.
+
+Before, South to move:
+      f  e  d  c  b  a
+      2  1  0  2  1  1
+      0  0 13  1  0  2
+      A  B  C  D  E  F
+
+South sows 13 seeds from C.
+The seeds go: lift C, D, E, F, a, b, c, d, e, f, A, B, D, E.
+
+After:
+      f  e  d  c  b  a
+      3  2  1  3  2  2
+      1  1  0  3  2  3
+      A  B  C  D  E  F

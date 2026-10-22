@@ -1,0 +1,16 @@
+The opening move of Bell's example: South lifts the four seeds of C.
+
+Before, South to move:
+      f  e  d  c  b  a
+      4  4  4  4  4  4
+      4  4  4  4  4  4
+      A  B  C  D  E  F
+
+South sows 4 seeds from C.
+The seeds go: lift C, D, E, F, a.
+
+After:
+      f  e  d  c  b  a
+      4  4  4  4  4  5
+      4  4  0  5  5  5
+      A  B  C  D  E  F

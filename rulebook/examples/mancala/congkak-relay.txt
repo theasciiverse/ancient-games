@@ -1,0 +1,20 @@
+Congkak sows clockwise, so South's holes run from A on the right to
+G on the left, and South's store is on the left. The last seed from
+B falls in D, which holds a seed: D is lifted and sown on, into E
+and F. F was empty: the seven seeds of the hole facing it are taken,
+and South is "dead".
+
+Before, South to move:
+      a  b  c  d  e  f  g
+  0   7  7  7  7  7  7  7
+      0  0  0  1  0  2  0  0
+      G  F  E  D  C  B  A
+
+South sows 2 seeds from B. Captures 7 seeds!
+The seeds go: lift B, C, D, lift D, E, F, take b.
+
+After:
+      a  b  c  d  e  f  g
+  7   7  0  7  7  7  7  7
+      0  1  1  0  1  0  0  0
+      G  F  E  D  C  B  A

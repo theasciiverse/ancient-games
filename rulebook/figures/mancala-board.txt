@@ -1,0 +1,12 @@
+               North
+       f    e    d    c    b    a
+     +----+----+----+----+----+----+
+ (N) |    |    |    |    |    |    | (S)
+     +----+----+----+----+----+----+
+     |    |    |    |    |    |    |
+     +----+----+----+----+----+----+
+       A    B    C    D    E    F
+               South
+
+Sowing runs A to F, then a to f, and round again. (N) and (S): the
+stores, in the games that have them. a faces F, and A faces f.

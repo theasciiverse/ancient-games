@@ -1,0 +1,17 @@
+The last bean makes c six; b before it is four and a two, so all
+three are taken.
+
+Before, South to move:
+      f  e  d  c  b  a
+      6  6  6  5  3  1
+      6  6  6  6  6  3
+      A  B  C  D  E  F
+
+South sows 3 seeds from F. Captures 12 seeds!
+The seeds go: lift F, a, b, c, take c, take b, take a.
+
+After:
+      f  e  d  c  b  a
+  0   6  6  6  0  0  0
+      6  6  6  6  6  0  12
+      A  B  C  D  E  F

@@ -1,0 +1,20 @@
+South lifts A's two seeds. The first makes B four, a cow, which goes
+to South as B's owner. The last falls in C, and D after it is lifted
+and sown: E, F. After F comes the empty G, so a beyond it is
+captured, and the move ends.
+
+Before, South to move:
+      g  f  e  d  c  b  a
+      0  0  0  3  0  0  3
+      2  3  0  2  0  5  0
+      A  B  C  D  E  F  G
+
+South sows 2 seeds from A. Captures 3 seeds! 4 seeds go to their
+owners as cows.
+The seeds go: lift A, B, cow in B to South, C, lift D, E, F, take a.
+
+After:
+      g  f  e  d  c  b  a
+  0   0  0  0  3  0  0  0
+      0  0  1  0  1  6  0  7
+      A  B  C  D  E  F  G
