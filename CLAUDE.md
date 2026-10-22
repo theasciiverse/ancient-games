@@ -26,7 +26,7 @@ and mouse, a menu of rule sets with sources, and help:
 
 All five games first planned are in, and Mancala since 2026-10-22 (on
 the mockup as a sixth title, NEW! banner, cast `asciiverse/casts/mancala.cast`
-seed 3, dev-releases archive built at `834cc29` under the same 0.1.0-av.1;
+seed 3, dev-releases archive built at `55065b3` under the same 0.1.0-av.1;
 the pushed tag v0.1.0-av.1 predates it, so the next release needs a new
 tag). On the website mockup since 2026-10-20 as five
 separate titles in the collection `ancient-games` (hub's collections.toml;
