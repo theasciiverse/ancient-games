@@ -6,7 +6,7 @@
 #   <game>.txt                 one game's chapter as plain text, also copied
 #                              to the game's crate as RULES.txt (its F1 help,
 #                              and part of its release archive)
-# Needs pandoc 3.1.2 or newer, typst and python3.
+# Needs pandoc 3.1.2 or newer, typst, python3 and cargo.
 #
 # RULEBOOK_OUT=dir builds into another folder and leaves the crates'
 # RULES.txt alone, so builds can run side by side.
@@ -19,6 +19,25 @@ mkdir -p "$out"
 
 python3 figures/make_figures.py
 
+# Worked examples and screens from the games themselves (pictures.txt).
+cargo build --release --quiet --manifest-path ../Cargo.toml --workspace
+bin=../target/release
+grep -v '^#' pictures.txt | while read -r kind package name rules seed seconds; do
+    case "$kind" in
+        examples)
+            rm -rf "examples/$package" && mkdir -p "examples/$package"
+            "$bin/$package" --rulebook-examples | awk -v dir="examples/$package" '
+                /^=== / { file = dir "/" substr($0, 5) ".txt"; next }
+                { print > file }'
+            ;;
+        screen)
+            mkdir -p "screens/$package"
+            "$bin/$package" --seed "$seed" --rulebook-screen "$rules:$seconds" \
+                > "screens/$package/$name.svg"
+            ;;
+    esac
+done
+
 date=$(git log -1 --format=%cs -- . 2>/dev/null || true)
 [ -n "$date" ] || date=$(date +%F)
 
@@ -28,7 +47,7 @@ for bib in bib/*.bib; do
     [ -f "$bib" ] && bibs="$bibs --bibliography=$bib"
 done
 
-common="--metadata-file=metadata.yaml --metadata=date:$date $bibs --citeproc --lua-filter=filters/no-dashes.lua"
+common="--metadata-file=metadata.yaml --metadata=date:$date $bibs --citeproc --lua-filter=filters/examples.lua --lua-filter=filters/no-dashes.lua"
 
 intro=chapters/00-introduction.md
 games=$(ls chapters/[0-9][0-9]-*.md | grep -v "^$intro\$")

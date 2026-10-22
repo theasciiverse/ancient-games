@@ -154,6 +154,44 @@ O'Keefe computed the chance of winning from all 8,560,690,670 positions
 of this game: with perfect play White, who throws first, wins 50.25% of
 games [@okeefe-senet].
 
+![The program playing Kendall's five-piece rules, the computer against
+itself, thirty seconds in. Black (■) has just thrown 2: two of the four
+sticks show their light sides.](screens/senet/kendall-5.svg){width=100%}
+
+**Examples.** These are made by the program's own rules engine each
+time the book is built: the position is set up, the engine lists the
+moves it allows, and the first is played. ▲ is White, ■ Black, . an empty
+house; only the houses that matter are shown.
+
+Landing on a lone piece swaps the two:
+
+```{.example file="senet/swap"}
+```
+
+A piece with a friend beside it is protected. White has no forward move,
+so it must move backward:
+
+```{.example file="senet/protected"}
+```
+
+Three in a row form a blockade that cannot be passed:
+
+```{.example file="senet/blockade"}
+```
+
+No move may jump past the House of Beauty (26); again White must move
+backward:
+
+```{.example file="senet/beauty"}
+```
+
+From 26 a throw of 1 falls into the water (27). The piece goes back to
+the House of Rebirth (15), or as here, with 15 taken, to the highest
+empty house below it:
+
+```{.example file="senet/water"}
+```
+
 ## Kendall, seven pieces
 
 Kendall's original rules, with seven pieces each, as Damian Walker sets
@@ -186,6 +224,11 @@ five-piece rules in these ways:
 Our choice: Walker's "there are no other pieces on the board to move" is
 read as "this is the side's last piece on the board". A piece on 28 or
 29 falls back only then, and only if the water is empty.
+
+**Example.** A piece in the water freezes the side's other pieces:
+
+```{.example file="senet/drowning"}
+```
 
 ## R. C. Bell 1960
 
@@ -221,6 +264,22 @@ Our choices:
   chooses.
 - Bell does not say when the game ends. Here it ends when the board is
   empty, and equal scores are a draw.
+
+![The program playing Bell's rules: ten men each, the long die below the
+board, and the count of men borne off and taken by each player's
+name.](screens/senet/bell.svg){width=100%}
+
+**Examples.** Under Bell's rules a man is captured even when it has a
+friend beside it:
+
+```{.example file="senet/bell-capture"}
+```
+
+A man on the door (26) must move onto a marked house at the first
+chance, before any other move:
+
+```{.example file="senet/bell-forced"}
+```
 
 ## Playing it in the terminal
 

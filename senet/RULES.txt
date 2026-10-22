@@ -149,6 +149,55 @@ O’Keefe computed the chance of winning from all 8,560,690,670 positions of
 this game: with perfect play White, who throws first, wins 50.25% of games
 (O’Keefe 2026).
 
+Examples. These are made by the program’s own rules engine each time the
+book is built: the position is set up, the engine lists the moves it allows,
+and the first is played. ▲ is White, ■ Black, . an empty house; only the
+houses that matter are shown.
+
+Landing on a lone piece swaps the two:
+
+    Kendall, five pieces: White (▲) to move, throw 3.
+    house     11  12  13  14  15  16  17
+    before     .   ▲   .   .   ■   .   .
+    after      .   ■   .   .   ▲   .   .
+    Moves allowed: 12 to 15.
+
+A piece with a friend beside it is protected. White has no forward move, so
+it must move backward:
+
+    Kendall, five pieces: White (▲) to move, throw 3.
+    house      8   9  10  11  12  13  14  15  16  17
+    before     .   .   .   .   ▲   .   .   ■   ■   .
+    after      .   ▲   .   .   .   .   .   ■   ■   .
+    Moves allowed: 12 back to 9.
+
+Three in a row form a blockade that cannot be passed:
+
+    Kendall, five pieces: White (▲) to move, throw 5.
+    house      6   7   8   9  10  11  12  13  14  15  16  17  18
+    before     .   .   .   .   .   .   ▲   .   ■   ■   ■   .   .
+    after      .   ▲   .   .   .   .   .   .   ■   ■   ■   .   .
+    Moves allowed: 12 back to 7.
+
+No move may jump past the House of Beauty (26); again White must move
+backward:
+
+    Kendall, five pieces: White (▲) to move, throw 3.
+    house     20  21  22  23  24  25  26  27  28
+    before     .   .   .   .   ▲   .   .   .   .
+    after      .   ▲   .   .   .   .   .   .   .
+    Moves allowed: 24 back to 21.
+
+From 26 a throw of 1 falls into the water (27). The piece goes back to the
+House of Rebirth (15), or as here, with 15 taken, to the highest empty house
+below it:
+
+    Kendall, five pieces: White (▲) to move, throw 1.
+    house     13  14  15  16  17  18  19  20  21  22  23  24  25  26  27
+    before     .   .   ■   .   .   .   .   .   .   .   .   .   .   ▲   .
+    after      .   ▲   ■   .   .   .   .   .   .   .   .   .   .   .   .
+    Moves allowed: 26 to 27.
+
 Kendall, seven pieces
 ---------------------
 
@@ -180,6 +229,15 @@ rules in these ways:
 Our choice: Walker’s “there are no other pieces on the board to move” is
 read as “this is the side’s last piece on the board”. A piece on 28 or 29
 falls back only then, and only if the water is empty.
+
+Example. A piece in the water freezes the side’s other pieces:
+
+    Kendall, seven pieces: White (▲) has a piece in the water (27).
+    house     13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28
+    before     .   .   .   .   .   .   .   .   .   .   .   ▲   .   .   ▲   .
+    Throw 2. Moves allowed: none.
+    Throw 4. Moves allowed: 27 off the board.
+    Instead of throwing, rescue to 15: allowed.
 
 R. C. Bell 1960
 ---------------
@@ -215,6 +273,24 @@ Our choices:
   chooses.
 - Bell does not say when the game ends. Here it ends when the board is
   empty, and equal scores are a draw.
+
+Examples. Under Bell’s rules a man is captured even when it has a friend
+beside it:
+
+    R. C. Bell 1960: White (▲) to move, throw 3.
+    house     11  12  13  14  15  16  17
+    before     .   ▲   .   .   ■   ■   .
+    after      .   .   .   .   ▲   ■   .
+    Moves allowed: 12 to 15.
+
+A man on the door (26) must move onto a marked house at the first chance,
+before any other move:
+
+    R. C. Bell 1960: White (▲) to move, throw 2.
+    house     21  22  23  24  25  26  27  28  29  30
+    before     .   ▲   .   .   .   ▲   .   .   .   .
+    after      .   ▲   .   .   .   .   .   ▲   .   .
+    Moves allowed: 26 to 28.
 
 Playing it in the terminal
 --------------------------

@@ -1,0 +1,6 @@
+Kendall, seven pieces: White (▲) has a piece in the water (27).
+house     13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28
+before     .   .   .   .   .   .   .   .   .   .   .   ▲   .   .   ▲   .
+Throw 2. Moves allowed: none.
+Throw 4. Moves allowed: 27 off the board.
+Instead of throwing, rescue to 15: allowed.

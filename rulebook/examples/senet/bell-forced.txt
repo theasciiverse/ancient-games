@@ -1,0 +1,5 @@
+R. C. Bell 1960: White (▲) to move, throw 2.
+house     21  22  23  24  25  26  27  28  29  30
+before     .   ▲   .   .   .   ▲   .   .   .   .
+after      .   ▲   .   .   .   .   .   ▲   .   .
+Moves allowed: 26 to 28.

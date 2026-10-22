@@ -15,6 +15,9 @@ header-includes:
     ```{=typst}
     // Each chapter starts on a new page.
     #show heading.where(level: 1): it => pagebreak(weak: true) + it
+    // Worked examples line up in columns: one monospaced font with every
+    // symbol they use, no fallback.
+    #show raw: set text(font: "DejaVu Sans Mono", fallback: false, size: 0.82em)
     // Tables and their cells to the left, like the text.
     #set table(align: left)
     #show table: set align(left)

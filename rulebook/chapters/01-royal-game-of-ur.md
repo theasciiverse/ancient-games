@@ -169,6 +169,34 @@ people play today [@scottfinkel2017; @masters-ur; @wiki-ur].
 
 Our choice: the side that throws first is chosen at random.
 
+![The program playing Finkel 2017: the computer against itself, twenty
+seconds into a game. Light has just thrown a 1 with the four lots below
+the board; the trays in the gaps show pieces waiting and pieces
+home.](screens/royal-ur/finkel-2017.svg){width=100%}
+
+**Examples.** These are made by the program's own rules engine each
+time the book is built: the position is set up, the engine lists the
+moves it allows, and the first is played. ○ is Light, ● Dark, \* an
+empty rosette.
+
+Light throws 3 with a piece on square 6 of its path, the second square of
+the shared row. Three squares on is Dark's lone piece: it is taken and
+goes back to wait at the start.
+
+```{.example file="royal-ur/capture"}
+```
+
+The same throw, but Dark's piece stands on the middle rosette, square 8.
+It cannot be taken, so the only move left is to bring a new piece on.
+
+```{.example file="royal-ur/middle-rosette"}
+```
+
+Bearing off needs the exact throw: from square 13, a 2.
+
+```{.example file="royal-ur/bear-off"}
+```
+
 ## British Museum 1990s
 
 The rules Finkel published with the British Museum's replica board in
@@ -182,6 +210,12 @@ differences:
 James Masters, whose page is the source for this set, dates it both to
 "1990" and to "the late 1990s" [@masters-ur]. We have not seen the
 leaflet itself.
+
+**Example.** The middle rosette position from Finkel 2017 again: here
+the piece on it can be taken.
+
+```{.example file="royal-ur/middle-rosette-museum"}
+```
 
 ## R. C. Bell's betting game
 
@@ -217,6 +251,11 @@ Our choices:
 
 A game under Bell's rules runs to about 220 throws, against about 150
 for Finkel 2017.
+
+**Example.** Only a 5 brings a piece onto the board.
+
+```{.example file="royal-ur/bell-entry"}
+```
 
 ## The Babylonian tablet
 
@@ -300,6 +339,10 @@ rosette (house 4), or on the square before any rosette, perhaps the
 second only when it re-enters after being knocked off [@finkel2007, 20,
 27]. The program uses the first. Under the second, a Swallow could come
 on at house 15 and be home two throws later.
+
+![The program playing the tablet's game: the birds are marked Sw, St,
+Ra, Ro and Ea, the purses and the pool stand by the players' names, and
+the two knucklebones lie below the board.](screens/royal-ur/tablet.svg){width=100%}
 
 Where the program departs from Finkel, or fills a gap:
 

@@ -172,6 +172,53 @@ today (The British Museum 2017; Masters 2025; Wikipedia 2026).
 
 Our choice: the side that throws first is chosen at random.
 
+Examples. These are made by the program’s own rules engine each time the
+book is built: the position is set up, the engine lists the moves it allows,
+and the first is played. ○ is Light, ● Dark, * an empty rosette.
+
+Light throws 3 with a piece on square 6 of its path, the second square of
+the shared row. Three squares on is Dark’s lone piece: it is taken and goes
+back to wait at the start.
+
+    Finkel 2017: Light (○) to move, throw 3.
+    Squares are counted along Light's path.
+    Before:
+       *  .  .  .        *  .   Dark's row
+       .  ○  .  *  ●  .  .  .   shared row
+       *  .  .  .        *  .   Light's row
+      waiting: Light 6, Dark 6; home: Light 0, Dark 0
+    Moves allowed: 6 to 9, enter to 3.
+    After 6 to 9:
+       *  .  .  .        *  .   Dark's row
+       .  .  .  *  ○  .  .  .   shared row
+       *  .  .  .        *  .   Light's row
+      waiting: Light 6, Dark 7; home: Light 0, Dark 0
+
+The same throw, but Dark’s piece stands on the middle rosette, square 8. It
+cannot be taken, so the only move left is to bring a new piece on.
+
+    Finkel 2017: Light (○) to move, throw 3.
+    Squares are counted along Light's path.
+    Before:
+       *  .  .  .        *  .   Dark's row
+       ○  .  .  ●  .  .  .  .   shared row
+       *  .  .  .        *  .   Light's row
+      waiting: Light 6, Dark 6; home: Light 0, Dark 0
+    Moves allowed: enter to 3.
+
+Bearing off needs the exact throw: from square 13, a 2.
+
+    Finkel 2017: Light (○) has a piece on square 13.
+    Before:
+       *  .  .  .        *  .   Dark's row
+       .  .  .  *  .  .  .  .   shared row
+       *  .  .  .        *  ○   Light's row
+      waiting: Light 6, Dark 7; home: Light 0, Dark 0
+    Throw 1: 13 to 14.
+    Throw 2: 13 off the board.
+    Throw 3: the piece on 13 cannot move.
+    Throw 4: the piece on 13 cannot move.
+
 British Museum 1990s
 --------------------
 
@@ -186,6 +233,23 @@ differences:
 James Masters, whose page is the source for this set, dates it both to
 “1990” and to “the late 1990s” (Masters 2025). We have not seen the leaflet
 itself.
+
+Example. The middle rosette position from Finkel 2017 again: here the piece
+on it can be taken.
+
+    British Museum 1990s: Light (○) to move, throw 3.
+    Squares are counted along Light's path.
+    Before:
+       *  .  .  .        *  .   Dark's row
+       ○  .  .  ●  .  .  .  .   shared row
+       *  .  .  .        *  .   Light's row
+      waiting: Light 4, Dark 4; home: Light 0, Dark 0
+    Moves allowed: 5 to 8, enter to 3.
+    After 5 to 8:
+       *  .  .  .        *  .   Dark's row
+       .  .  .  ○  .  .  .  .   shared row
+       *  .  .  .        *  .   Light's row
+      waiting: Light 4, Dark 5; home: Light 0, Dark 0
 
 R. C. Bell’s betting game
 -------------------------
@@ -221,6 +285,13 @@ Our choices:
 
 A game under Bell’s rules runs to about 220 throws, against about 150 for
 Finkel 2017.
+
+Example. Only a 5 brings a piece onto the board.
+
+    R. C. Bell: Light (○) has every piece waiting.
+    Throw 1: Moves allowed: none.
+    Throw 4: Moves allowed: none.
+    Throw 5: Moves allowed: enter to 1.
 
 The Babylonian tablet
 ---------------------

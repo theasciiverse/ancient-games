@@ -1,0 +1,5 @@
+Kendall, five pieces: White (▲) to move, throw 3.
+house     11  12  13  14  15  16  17
+before     .   ▲   .   .   ■   .   .
+after      .   ■   .   .   ▲   .   .
+Moves allowed: 12 to 15.

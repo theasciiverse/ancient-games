@@ -1,0 +1,8 @@
+Finkel 2017: Light (○) to move, throw 3.
+Squares are counted along Light's path.
+Before:
+   *  .  .  .        *  .   Dark's row
+   ○  .  .  ●  .  .  .  .   shared row
+   *  .  .  .        *  .   Light's row
+  waiting: Light 6, Dark 6; home: Light 0, Dark 0
+Moves allowed: enter to 3.

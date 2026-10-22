@@ -1,0 +1,20 @@
+# What rulebook/build.sh draws from the games themselves.
+#
+#   examples <package>
+#       the game's worked examples (<package> --rulebook-examples), one
+#       file each in examples/<package>/; a chapter shows one with a code
+#       block of class "example": ```{.example file="<package>/<name>"}```
+#   screen <package> <name> <rules> <seed> <seconds>
+#       the computer playing the rule set at place <rules> in the menu
+#       (from 0), drawn after <seconds> of simulated play, as
+#       screens/<package>/<name>.svg
+#
+# Both are the same on every build: the games run on a simulated clock.
+
+examples royal-ur
+screen royal-ur finkel-2017 0 3 20
+screen royal-ur tablet 3 5 40
+
+examples senet
+screen senet kendall-5 0 3 30
+screen senet bell 2 4 15

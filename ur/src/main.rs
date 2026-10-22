@@ -7,9 +7,11 @@
 
 mod ai;
 mod app;
+mod examples;
 mod rules;
 mod ui;
 
+use ancient_core::capture;
 use ancient_core::player::{Player, Strength};
 use ancient_core::rng::Rng;
 use ancient_core::shell::{self, Program, Setup};
@@ -203,6 +205,19 @@ fn main() -> io::Result<()> {
         quit: false,
         demo_restart: None,
     };
+    // Pictures for the rulebook (rulebook/build.sh): the worked examples,
+    // or a demo of one rule set drawn after some simulated seconds.
+    if shell::flag("--rulebook-examples") {
+        capture::print_examples(&examples::all());
+        return Ok(());
+    }
+    if let Some((rules, seconds)) = capture::screen_arg() {
+        app.setup.rules = rules.min(app.rules.len() - 1);
+        app.demo = true;
+        app.start();
+        print!("{}", capture::svg(&capture::play_and_draw(&mut app, seconds)));
+        return Ok(());
+    }
     if demo {
         app.start();
     }

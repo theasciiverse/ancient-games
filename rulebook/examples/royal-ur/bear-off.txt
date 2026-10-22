@@ -1,0 +1,10 @@
+Finkel 2017: Light (○) has a piece on square 13.
+Before:
+   *  .  .  .        *  .   Dark's row
+   .  .  .  *  .  .  .  .   shared row
+   *  .  .  .        *  ○   Light's row
+  waiting: Light 6, Dark 7; home: Light 0, Dark 0
+Throw 1: 13 to 14.
+Throw 2: 13 off the board.
+Throw 3: the piece on 13 cannot move.
+Throw 4: the piece on 13 cannot move.

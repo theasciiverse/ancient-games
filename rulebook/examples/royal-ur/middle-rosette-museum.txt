@@ -1,0 +1,13 @@
+British Museum 1990s: Light (○) to move, throw 3.
+Squares are counted along Light's path.
+Before:
+   *  .  .  .        *  .   Dark's row
+   ○  .  .  ●  .  .  .  .   shared row
+   *  .  .  .        *  .   Light's row
+  waiting: Light 4, Dark 4; home: Light 0, Dark 0
+Moves allowed: 5 to 8, enter to 3.
+After 5 to 8:
+   *  .  .  .        *  .   Dark's row
+   .  .  .  ○  .  .  .  .   shared row
+   *  .  .  .        *  .   Light's row
+  waiting: Light 4, Dark 5; home: Light 0, Dark 0
