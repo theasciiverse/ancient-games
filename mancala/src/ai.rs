@@ -59,7 +59,10 @@ pub fn choose(rules: &Rules, position: &Position, strength: Strength, rng: &mut 
         for &mv in &order {
             let mut next = position.clone();
             next.play(rules, mv);
-            let value = search.value_for(position.to_move, &next, depth - 1, alpha, WIN * 2);
+            // Searched against the best so far less one: a worse move then
+            // only proves itself worse, but a move as good gets its true
+            // value, so equals stay equal for the noise below to choose.
+            let value = search.value_for(position.to_move, &next, depth - 1, alpha - 1, WIN * 2);
             if search.out_of_time && depth > 1 {
                 break;
             }
@@ -210,6 +213,29 @@ mod tests {
             position.play(rules, mv);
         }
         position.leader()
+    }
+
+    /// Measures the strengths against each other, each side in turn:
+    /// `cargo test --release -p mancala strengths -- --ignored --nocapture`.
+    #[test]
+    #[ignore]
+    fn strengths() {
+        use Strength::*;
+        let n = 10;
+        for rules in [Rules::oware(), Rules::kalah(), Rules::toguz(), Rules::bohnenspiel()] {
+            for (a, b) in [(Normal, Easy), (Hard, Easy), (Hard, Normal)] {
+                let (mut wins, mut draws) = (0, 0);
+                for seed in 0..n {
+                    let (strengths, me) = if seed % 2 == 0 { ([a, b], Side::South) } else { ([b, a], Side::North) };
+                    match game(&rules, strengths, seed + 1) {
+                        Some(w) if w == me => wins += 1,
+                        None => draws += 1,
+                        _ => {}
+                    }
+                }
+                println!("{}: {} beats {} {wins}/{n} ({draws} drawn)", rules.id, a.name(), b.name());
+            }
+        }
     }
 
     #[test]

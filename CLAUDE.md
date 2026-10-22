@@ -2,7 +2,8 @@
 
 Terminal versions of the classic board games of the world, starting with
 the oldest: the Royal Game of Ur, Senet, Mehen, Hnefatafl and Fox &
-Geese (David, 2026-10-20). More to follow.
+Geese (David, 2026-10-20), then the mancala games (2026-10-22). More to
+follow.
 
 **Status (2026-10-20):** four games playable, each its own binary, all
 with the computer at three strengths or two players at one keyboard, keys
@@ -17,8 +18,17 @@ and mouse, a menu of rule sets with sources, and help:
   Tablut after Linnaeus, Tablut after Bell 1960
 - Mehen (`mehen/`, `mehen`): James Masters' 2024 reconstruction for two,
   four or six players (two teams; the person plays a whole team)
+- Mancala (`mancala/`, `mancala`, 2026-10-22): nine two-rank sowing games
+  as one title (David's choice over one title per game), each from a
+  source: Oware Abapa, Wari after Bell, Lane's two Cairo games of
+  mankal'ah, Kalah after Champion's patent, Congkak after Hellier,
+  Pallanguli after Durai, Toguz Kumalak, Bohnenspiel; see "Mancala" below
 
-All five games first planned are in. On the website mockup since 2026-10-20 as five
+All five games first planned are in, and Mancala since 2026-10-22 (on
+the mockup as a sixth title, NEW! banner, cast `asciiverse/casts/mancala.cast`
+seed 3, dev-releases archive built at `834cc29` under the same 0.1.0-av.1;
+the pushed tag v0.1.0-av.1 predates it, so the next release needs a new
+tag). On the website mockup since 2026-10-20 as five
 separate titles in the collection `ancient-games` (hub's collections.toml;
 entries in the mockup's dev/mock-titles.toml with the other Asciiverse
 originals, licence undecided, NEW! banner), previews from each game's
@@ -30,6 +40,88 @@ one archive per game for static musl Linux, macOS and Windows, x86-64 and
 ARM64; tag v0.1.0-av.1 pushed, no GitHub release while Actions billing
 blocks builds. Licence: not chosen; David chooses licences case by case
 (2026-10-20), so the Cargo.toml files name none until he does. Own git repo, branch `main`, private at github.com/theasciiverse/ancient-games.
+
+## Mancala
+
+One crate, one binary, one catalog title (David, 2026-10-22: "one title,
+many rules", like Hnefatafl). Two-rank games first; the four-rank games
+of East and Southern Africa (Chisolo, Omweso, Bao la Kujifunza, Bao la
+Kiswahili) are version 2, in `ROADMAP.md`. Plan:
+`~/.claude/plans/do-you-wan-tto-eager-finch.md`. Rulebook chapter
+`rulebook/chapters/06-mancala.md`, sources in `rulebook/bib/mancala.bib`.
+
+**Code.** `rules.rs` holds the rule sets as data (`Rules`: setup,
+origin skipping, laps (single, relay, Lane's 3/5+, Indian), capture kind,
+cow, tuzdyk, grand slam (allowed, no capture, illegal), ending (feed,
+sweep, opponent takes, Lane's gift, Hellier's restock), match (single,
+points, refill rounds), clockwise) and one engine. Pits are numbered in
+the order of sowing, South 0 to n-1, North n to 2n-1; a clockwise game is
+the same game drawn mirrored. Every change to the board goes through
+`act`, which records a `Step`; `apply` replays it, so the animation
+(`app.rs`), the rulebook examples (`examples.rs`) and the tests (each
+checks the replay) cannot disagree with the rules. `ai.rs`: alpha-beta,
+iterative deepening, transposition table with bounds; an extra move from
+one's own store is searched as the same side again; the judgement is the
+stores' difference. Root moves are searched against the best less one, so
+random tie-breaking only ever chooses among equals (a first version
+passed the best itself and let noise pick a fail-low move: hard lost to
+easy 9 of 10 at Oware, found by the strength test, 2026-10-22).
+
+**Sources read (2026-10-22), and what each settled:**
+- Oware Abapa: the Oware Society's rules (oware.org/abapa.asp, Wayback
+  2003 and 2026) and Aualé (joansala.com). Grand slam sown, no capture
+  (the Society's "beyond five houses one forfeits everything"; we follow
+  its stated reason, no capture whenever the other side would be left
+  with nothing); feeding obligatory; no feed possible: each takes own
+  side (Aualé); cycles: each keeps own side (we take a third repetition).
+- Wari: Bell 1969 pp. 116-121; the move capturing everything is illegal
+  (Bell; Ludii's summary of G. T. Bennett's chapter in Rattray 1927,
+  pp. 382-390, not itself read); if every move does it, allowed (as
+  Romein and Bal). Rattray's book is lending-only on archive.org.
+- Lane 1836 (Gutenberg 70796, p. 315) read in full: two modes. Bell
+  pp. 113-114 merges them and invents a rule; the program follows Lane.
+- Kalah: Champion's patent US 2,720,362 (filed 1951, granted 1955):
+  3 to 6 seeds, series to 40 by seeds won from the opponent, first move
+  alternates; silent on an empty facing pit (we capture nothing).
+- Congkak: Hellier 1907 (JSBRAS 49: 93-94), the Malay game: 7x7,
+  simultaneous play (we take turns), capture of the facing hole only,
+  a player whose row is empty refills from her house leaving ruined
+  wells, until she cannot. Overbeck 1915 is the Ceylonese game; Skeat
+  1900 has 8 holes; Culin 1900 (Philippines) has no captures; Parker 1909
+  (Colombo) one round, no extra turn.
+- Pallanguli: Durai 1928 (Man 28, no. 135, pp. 185-186) read in full:
+  a capture ends the move (Bell, who follows her, continues: we follow
+  Durai); cows of four to the side's owner; first move alternates by
+  round. Modern pallanguzhi (12 seeds with 2 in the middle, pasu of six)
+  has no good source and is not offered.
+- Toguz Kumalak: the Kazakh competition rules, Astana 2013 (9kumalak.com
+  via Wayback), our translation: first stone back in its hole, single
+  stone moves on, even capture, tuzdyk (makes 3, not No. 9, once, not
+  the mirror), atsyrau (no move: the opponent makes an extra move and
+  takes all; we give him all at once). The 1949 Auezov codification on
+  Wikipedia is not supported by that text's preface.
+- Bohnenspiel: Jahn 1917 pp. 14-15 (Commons scan, Fraktur, transcribed):
+  captures of 2, 4, 6 on either side in an unbroken run; the rest from
+  igGameCenter.
+- History: Depaulis 2020 and 2024 (BGSJ), de Voogt 2021 (BGSJ), Hyde
+  1694, Culin 1896, Jobson 1623, Parker 1909, Alvares 1881, Christiano
+  2010, Waweru 2024. Findings: 'Ain Ghazal, the Egyptian temple holes and
+  three-row boards are not mancala; Culin's Ethiopian "mancal" is in
+  Alvares a distance ("a game of manqual"), a horseshoe game; earliest
+  likely boards Aksumite, 6th to 8th c. (de Voogt: speculative). The
+  Kitab al-Aghani mention rests on Culin alone; not found.
+- Not reached: Herskovits 1932, Townshend 1979, Pankhurst 1971, Murray
+  1952 (lending-only), Bernardo 1937 (Sungka), Arbeiter and Ruhnke 1937,
+  the Kyrgyz federation rules. Mancala World (fandom) blocks scripted
+  fetches; the browser would be needed.
+
+**Measured strengths** (2026-10-22, 10 single games each, sides
+alternating; `cargo test --release -p mancala strengths -- --ignored
+--nocapture`, about half an hour): normal beats easy 10/10 at Oware,
+Toguz and Bohnenspiel, 9/10 at Kalah; hard beats easy 10/10 (Toguz 9/10);
+hard beats normal 10/10 at Oware, Toguz and Bohnenspiel, but only 6/10
+(1 drawn) at Kalah, where four moves already see most of it. Before the
+root-window fix, hard beat easy 1/10 at Oware.
 
 ## Roadmap
 

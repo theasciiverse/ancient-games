@@ -55,10 +55,14 @@ Several competing reconstructions each, which suits the rule-set menu.
 
 ## Africa and the Mediterranean
 
-- [ ] **The mancala family**: Oware, Bao and others, with many regional
-  rule sets; a collection of the real regional games, each with its own
-  rules. A few terminal versions exist, the best a Go TUI of plain
-  Mancala (Broderick-Westrope/mancala-go, GPL-3.0, 10 stars).
+- [x] **The mancala family**, two-rank games: `mancala` (2026-10-22),
+  nine rule sets from their sources (see `CLAUDE.md`). A few terminal
+  versions existed, the best a Go TUI of plain Mancala
+  (Broderick-Westrope/mancala-go, GPL-3.0, 10 stars).
+- [ ] **Mancala, four-rank games**, version 2 of `mancala`: Chisolo
+  (Bell 1969, rules read), Omweso (Uganda; Wikipedia contradicts itself on
+  where captured seeds are sown from: needs Nsimbi 1968 or de Voogt 1997),
+  Bao la Kujifunza, Bao la Kiswahili (de Voogt 1995).
 - [ ] **Fanorona**: Madagascar. One console project.
 - [ ] **Alquerque**: the ancestor of draughts. One small console
   project.
