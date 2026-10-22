@@ -30,6 +30,11 @@ and captures by where the last seed falls. Almost everything after that
 differs from one place to the next, and this chapter offers the games of
 several regions, each with its own rules.
 
+![A boat-shaped mancala board carved by the Bidjogo of the Bijagós
+islands, Guinea-Bissau, two rows of six with a store at each end,
+held by two figures. Brooklyn Museum 22.239, CC BY
+3.0.](images/mancala-bidjogo-brooklyn.jpg){height=8cm}
+
 **The name.** Thomas Hyde, the Oxford orientalist, wrote the first
 European account of the game in 1694. He gives the name in Arabic,
 *manqala*, "commonly Mángala", and explains it: it is so called "because
@@ -94,11 +99,6 @@ In 2024 Veronica Waweru of Yale reported about twenty boards of holes cut
 in a rock ledge at Lewa in central Kenya [@yale-waweru]. They have not
 been dated: they could be several thousand years old, or "just a few
 centuries" [@brunskill2024].
-
-![A boat-shaped mancala board carved by the Bidjogo of the Bijagós
-islands, Guinea-Bissau, two rows of six with a store at each end,
-held by two figures. Brooklyn Museum 22.239, CC BY
-3.0.](images/mancala-bidjogo-brooklyn.jpg){width=60%}
 
 **The first words about it.** An Arabic legal text of about 800 AD,
 ash-Shāfi'ī's *Kitāb al-Umm*, mentions *hizzah*, "a piece of wood in

@@ -28,9 +28,14 @@ burials, about 3100 BC, and the first certain picture of the game is in
 the Third Dynasty tomb of the official Hesy, about 2620 BC. Its name,
 *znt*, means "passing" [@wiki-senet].
 
+![A game box from a burial at Thebes, about 1635 to 1458 BC: the Senet
+side, three rows of ten. Its other side is the Twenty Squares board in
+the chapter on the Royal Game of Ur. Metropolitan Museum of Art
+16.10.475a, CC0.](images/senet-met-16-10-475.jpg){height=8cm}
+
 Many boards were made as boxes with a drawer for the pieces and dice,
 and the underside often carries a second game [@bell1969, 25-26]; on the
-box below it is Twenty Squares, the later form of the Royal Game of Ur. A board in the British
+box above it is Twenty Squares, the later form of the Royal Game of Ur. A board in the British
 Museum marked with the cartouche of Queen Hatshepsut, about 1500 BC,
 shows what most boards share: the fifth square from the end carries a
 hieroglyph meaning a door or exit, and the last four are marked X, III,
@@ -38,11 +43,6 @@ II and I. Its drawer held twenty pieces with lions' heads, ten light and
 nine dark (the twentieth, of ivory, perhaps a replacement), and four
 throwing sticks. A board from Tutankhamun's tomb held two knucklebones
 [@bell1969, 26].
-
-![A game box from a burial at Thebes, about 1635 to 1458 BC: the Senet
-side, three rows of ten. Its other side is the Twenty Squares board in
-the chapter on the Royal Game of Ur. Metropolitan Museum of Art
-16.10.475a, CC0.](images/senet-met-16-10-475.jpg){width=100%}
 
 **The pieces and dice.** Sets often had two kinds of men, one side shaped
 like pawns or cones, the other like spools [@bell1969, 26]. The game was

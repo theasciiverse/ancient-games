@@ -32,6 +32,11 @@ lists *Renard et les poules* in France, *Fuchs und Gänse* or *Fuchs und
 Henne* in Germany, *Rävspel* in Sweden and *Refskák* in Iceland, among
 others [@wiki-fox-games].
 
+![J. M. Kronheim & Co.'s Fox & Goose Game, London, 1840s: the board,
+the box and the rules printed on it, and three of its eighteen geese.
+Bodleian Libraries, University of Oxford, Games 26 (24),
+CC BY 4.0.](images/fox-and-geese-kronheim-1840s.jpg){height=8cm}
+
 **Early mentions.** Nothing written about the game before modern times
 gives its rules. Bell collects what there is [@bell1969, 76-77]:
 
@@ -52,11 +57,6 @@ Continent: Solitaire, a patience for one player "using a traditional
 Fox and Geese board" [@bell1969, 111]. Printed and boxed sets survive
 from the nineteenth century, some of them with their rules (see Other
 variants).
-
-![J. M. Kronheim & Co.'s Fox & Goose Game, London, 1840s: the board,
-the box and the rules printed on it, and three of its eighteen geese.
-Bodleian Libraries, University of Oxford, Games 26 (24),
-CC BY 4.0.](images/fox-and-geese-kronheim-1840s.jpg){width=70%}
 
 ![An old handmade board for *Fuchs und Henne*, fox and hen, with pegs
 of two colours, in the Museum der Stadt Steyr, Austria. Photograph:

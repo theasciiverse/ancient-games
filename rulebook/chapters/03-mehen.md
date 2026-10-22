@@ -29,6 +29,11 @@ religion, and the game is named after him [@wiki-mehen]. In the myth,
 the sun god Ra sailed through the underworld every night, and Mehen
 coiled his body round him to protect him [@masters-tradgames].
 
+![An alabaster Mehen board of the Old Kingdom, the grooved kind, its
+spaces raised bars and its head in the middle. Institute for the Study
+of Ancient Cultures, Chicago. Photograph: Daderot,
+CC0.](images/mehen-board-chicago.jpg){height=8cm}
+
 **The boards.** A Mehen board is a snake coiled in a spiral, its head in
 the middle and its tail at the edge, its body divided into spaces. The
 number of spaces varies greatly from board to board [@masters-mehen]; the
@@ -53,11 +58,6 @@ board, in the Fitzwilliam Museum in Cambridge, is 44 cm across
 Museum of Art, which long confused attempts to reconstruct the game, is
 modern: the museum told Masters in 2021 that it is not an ancient object
 [@masters-mehen-evidence, 19].
-
-![An alabaster Mehen board of the Old Kingdom, the grooved kind, its
-spaces raised bars and its head in the middle. Institute for the Study
-of Ancient Cultures, Chicago. Photograph: Daderot,
-CC0.](images/mehen-board-chicago.jpg){width=75%}
 
 ![The pitted board in the British Museum, with an eye in the middle in
 place of the head. The four marbles were added for the display.
