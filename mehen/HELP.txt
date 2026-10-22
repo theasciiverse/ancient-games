@@ -2,8 +2,6 @@ Mehen
 Asciiverse
 2026-10-22
 
-
-
 A race along a coiled snake, moved by guessing. Each team has one, two or
 three pharaohs; the side to move hides 1 to 5 marbles and the other side
 guesses how many. Squares run from 1 at the tail to 70 at the head. The

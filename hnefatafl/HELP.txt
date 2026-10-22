@@ -2,8 +2,6 @@ Hnefatafl
 Asciiverse
 2026-10-22
 
-
-
 Two unequal sides: the king and his defenders in the middle, twice as many
 attackers round the edges. The attackers move first. Every piece moves like
 a rook in chess, any number of empty squares along a row or column, never

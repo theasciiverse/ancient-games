@@ -1,3 +1,10 @@
+```{=typst}
+// In the PDF this section sits at the foot of the page it falls on, in
+// one piece (style/book.typ styles its heading).
+#v(1fr)
+#block(breakable: false)[
+```
+
 # About this book
 
 These are the rules of the games in Asciiverse's Ancient Games collection,
@@ -24,3 +31,7 @@ cited "as cited in" that other source.
 
 The rules here are the rules the programs play. When a program and this
 book disagree, that is a bug in one of them; please report it.
+
+```{=typst}
+]
+```
