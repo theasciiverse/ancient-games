@@ -74,8 +74,21 @@ intro=chapters/00-introduction.md
 games=$(ls chapters/[0-9][0-9]-*.md | grep -v "^$intro\$")
 
 # The whole book. Chapters are top-level headings; the bibliography
-# collects at the end.
-pandoc $full $intro $games --toc --standalone \
+# collects at the end. The PDF has its own title page (style/titlepage.typ)
+# in place of pandoc's title block: the games the book holds, from the
+# chapters' headings, and the date written out.
+listing=$(for chapter in $games; do
+    awk 'NR == 1 && /^---$/ { yaml = 1; next }
+         yaml && /^---$/ { yaml = 0; next }
+         !yaml && /^# / { sub(/^# /, ""); print; exit }' "$chapter"
+done | awk '{ if (NR == 1) printf "%s", $0
+            else printf " #box[#text(fill: rgb(\"#b5432a\"))[◆]#h(0.5em)%s]", $0 }')
+written=$(date -d "$date" '+%-d %B %Y' 2>/dev/null || echo "$date")
+sed -e "s|@GAMES@|$listing|" -e "s|@DATE@|$written|" style/titlepage.typ > "$out/titlepage.typ"
+book=$(echo "$full" | sed "s| --metadata=date:$date||")
+pandoc $book $intro $games --toc --standalone \
+    --metadata=title: --metadata=subtitle: --metadata=author: --metadata=date: \
+    --include-in-header="$out/titlepage.typ" --include-before-body=style/document.typ \
     -t typst -o "$out/ancient-games-rules.typ"
 # Typst reads images relative to the file and only inside its root, so
 # compile a copy that sits here, beside figures/ and images/.
