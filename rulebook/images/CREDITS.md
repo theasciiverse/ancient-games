@@ -52,3 +52,12 @@ The two Bodleian files were given to Commons by the Bodleian's
 Wikimedian in Residence under CC BY 4.0; the Bodleian's own IIIF
 manifests for the same objects name CC BY-NC-SA 3.0. The book follows
 the Commons release.
+
+## Mancala
+
+| File | Shows | Source | Author | Licence |
+|---|---|---|---|---|
+| `mancala-bidjogo-brooklyn.jpg` | Boat-shaped mancala board with two carved figures, Bidjogo (Bijagós), Guinea-Bissau, Brooklyn Museum 22.239 | [Commons](https://commons.wikimedia.org/wiki/File:Brooklyn_Museum_22.239_Mancala_Game_Board.jpg), from the Brooklyn Museum's online collection | Brooklyn Museum | CC BY 3.0 |
+| `oware-board.jpg` | An oware board, two rows of six | [Commons](https://commons.wikimedia.org/wiki/File:Oware_Board.jpg) | Hasslaebetch | CC BY-SA 4.0 |
+| `congkak-malaysia.jpg` | A congkak board from Malaysia, five holes a side and a store at each end | [Commons](https://commons.wikimedia.org/wiki/File:Congkak.jpg) | Víktor Bautista i Roca | CC BY-SA 2.5 |
+| `toguz-auezov-board.jpg` | A togyzkumalak board of the early twentieth century, described on Commons as Mukhtar Auezov's | [Commons](https://commons.wikimedia.org/wiki/File:Игральная_доска_для_тогызкумалака_Мухтара_Ауеза._Начало_XX_века.jpg) | Bekbal | CC BY-SA 4.0 |

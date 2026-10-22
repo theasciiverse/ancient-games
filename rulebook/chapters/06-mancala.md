@@ -86,6 +86,11 @@ in a rock ledge at Lewa in central Kenya [@yale-waweru]. They have not
 been dated: they could be several thousand years old, or "just a few
 centuries" [@brunskill2024].
 
+![A boat-shaped mancala board carved by the Bidjogo of the Bijagós
+islands, Guinea-Bissau, two rows of six with a store at each end,
+held by two figures. Brooklyn Museum 22.239, CC BY
+3.0.](images/mancala-bidjogo-brooklyn.jpg){width=60%}
+
 **The first words about it.** An Arabic legal text of about 800 AD,
 ash-Shāfi'ī's *Kitāb al-Umm*, mentions *hizzah*, "a piece of wood in
 which there are holes for playing", which fits a mancala board well
@@ -190,6 +195,9 @@ of Oware played by adults and used for competitions", its name meaning
 "the proper version" in Twi [@owaresoc-abapa]. The program follows the
 Society's rules, with Aualé's wording where the Society's is unclear
 [@auale-rules].
+
+![An oware board: two rows of six pits, with no stores on the board.
+Photograph: Hasslaebetch, CC BY-SA 4.0.](images/oware-board.jpg){width=55%}
 
 **Sowing.** South plays from any pit of the near row that holds seeds,
 North from the far row. All the seeds of the pit are sown one by one
@@ -436,6 +444,10 @@ in the Journal of the Straits Branch of the Royal Asiatic Society
 [@hellier1907, 93-94]. Hellier's is the earliest full account of the
 Malay rules we have read, and the program follows it.
 
+![A small modern congkak board from Malaysia, with five holes a side
+rather than seven and a store at each end. Photograph: Víktor Bautista
+i Roca, CC BY-SA 2.5.](images/congkak-malaysia.jpg){width=65%}
+
 **The board.** "The board has 7 holes on each side, with a larger hole or
 compartment at each end." Each player has one "village", her row, and
 places seven seeds in each hole. Play goes from right to left along a
@@ -582,6 +594,11 @@ championships and inscribed on UNESCO's list of intangible heritage in
 2020 with the Turkish Mangala [@unesco-toguz]. The program follows the
 competition rules approved in Kazakhstan in 2013 [@togyz2013]; the
 quotations are our translation from the Kazakh.
+
+![A togyzkumalak board of the early twentieth century, nine holes a
+side with the kazans between the rows; Wikimedia Commons describes it as
+the writer Mukhtar Auezov's. Photograph: Bekbal, CC BY-SA
+4.0.](images/toguz-auezov-board.jpg){width=70%}
 
 **Sowing.** A player takes all the stones of one of her holes, "leaves
 one" in it, and sows the rest anticlockwise from the next hole on. A
