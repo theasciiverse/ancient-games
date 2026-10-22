@@ -31,6 +31,8 @@ struct App {
     screen: Screen,
     game: Option<Game>,
     help: bool,
+    help_lines: Vec<shell::Help>,
+    help_scroll: usize,
     demo: bool,
     hits: ui::Hits,
     rng: Rng,
@@ -65,13 +67,19 @@ impl Program for App {
             match code {
                 KeyCode::Esc | KeyCode::F(1) | KeyCode::Char('?') => self.help = false,
                 KeyCode::Char('q') | KeyCode::Char('Q') => self.quit = true,
-                _ => {}
+                _ => {
+                    shell::help_key(code, &mut self.help_scroll);
+                }
             }
             return;
         }
         match code {
             KeyCode::Char('q') | KeyCode::Char('Q') => return self.quit = true,
-            KeyCode::F(1) | KeyCode::Char('?') => return self.help = true,
+            KeyCode::F(1) | KeyCode::Char('?') => {
+                // The rulebook chapter, opened at the rule set in play.
+                (self.help_lines, self.help_scroll) = ui::help(&self.rules[self.setup.rules]);
+                return self.help = true;
+            }
             _ => {}
         }
         match &mut self.screen {
@@ -167,7 +175,7 @@ impl Program for App {
             }
         }
         if self.help {
-            shell::draw_help(buf, area, &ui::help(&self.rules[self.setup.rules]));
+            shell::draw_help_at(buf, area, &self.help_lines, &mut self.help_scroll);
         }
     }
 
@@ -187,6 +195,8 @@ fn main() -> io::Result<()> {
         screen: Screen::Menu { row: 3 },
         game: None,
         help: false,
+        help_lines: Vec::new(),
+        help_scroll: 0,
         demo,
         hits: ui::Hits::default(),
         rng: Rng::new(seed),

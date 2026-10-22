@@ -4,7 +4,7 @@
 
 use crate::app::{Game, Phase};
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, centre, fill, outline, put};
-use ancient_core::shell::{Help, Menu};
+use ancient_core::shell::{self, Help, Menu};
 use ancient_core::player::Player;
 use crate::rules::{Board, Lots, Move, ROWS, Rules, START, Side, TABLET_TAGS};
 use ratatui::buffer::Buffer;
@@ -444,46 +444,36 @@ pub fn menu(rules: &[Rules], chosen: usize) -> Menu<'_> {
     }
 }
 
-/// How to play, and what is known of the game.
-pub fn help(rules: &Rules) -> Vec<Help> {
-    let mut lines = vec![
-        Help::Heading("HOW TO PLAY".into()),
-        Help::Blank,
-        Help::Text(
-            "Race your pieces from the start, along your own row, down the shared middle \
-             row and on, then off the board. First with every piece home wins. One piece \
-             per square."
-                .into(),
-        ),
-        Help::Text(
-            "Land on an enemy piece in the middle row and it goes back to the start. To \
-             bear a piece off you need the exact throw."
-                .into(),
-        ),
-        Help::Blank,
-        Help::Heading(format!("{} RULES", rules.name.to_uppercase())),
-    ];
-    lines.extend(rules.summary.iter().map(|l| Help::Text(l.to_string())));
-    lines.extend([
-        Help::Blank,
-        Help::Heading("KEYS".into()),
-        Help::Text(
-            "Space or Enter: throw   Arrows or Tab: choose a piece   Enter: move   D: dare \
-             the ox bone   Mouse: click a lit piece   M: menu   Q: quit"
-                .into(),
-        ),
-        Help::Blank,
-        Help::Heading("WHAT WE KNOW".into()),
-        Help::Quiet(
-            "The game was played across the Near East for three thousand years. Its rules \
-             were lost until Irving Finkel of the British Museum read a clay tablet written \
-             by the Babylonian scribe Itti-Marduk-balatu in 177 BC, catalogued for decades \
-             as bird omens. The rules here are reconstructions from that tablet and the \
-             board; where scholars differ, the menu lets you choose."
-                .into(),
-        ),
-        Help::Blank,
-    ]);
-    lines
+/// The game's chapter of the rulebook, as plain text: the help, and
+/// RULES.txt in the release archives. Written by `rulebook/build.sh`.
+pub const RULES: &str = include_str!("../RULES.txt");
+
+/// How to play: the rulebook chapter, and the line where the rule set
+/// `rules` begins.
+pub fn help(rules: &Rules) -> (Vec<Help>, usize) {
+    let lines = shell::rules_help(RULES);
+    let at = shell::help_find(&lines, rules.section).unwrap_or(0);
+    (lines, at)
 }
 
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn the_help_opens_at_every_rule_set() {
+        let lines = shell::rules_help(RULES);
+        for rules in Rules::all() {
+            assert!(shell::help_find(&lines, rules.section).is_some(), "{}", rules.section);
+        }
+    }
+
+    #[test]
+    fn the_rulebook_text_fits_the_help() {
+        // The help is 84 columns wide with 3 on each side.
+        for line in RULES.lines() {
+            assert!(line.chars().count() <= 78, "too wide: {line}");
+        }
+    }
+}

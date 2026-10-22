@@ -156,41 +156,131 @@ pub fn draw_menu(buf: &mut Buffer, area: Rect, menu: &Menu, setup: &Setup, row: 
     );
 }
 
-/// A line of the help: a heading, text, quieter text, or a blank.
+/// A line of the help: a heading, text, quieter text, a line kept as it is
+/// (not wrapped), or a blank.
 pub enum Help {
     Heading(String),
     Text(String),
     Quiet(String),
+    Pre(String),
     Blank,
+}
+
+/// The help from a game's rulebook chapter (its RULES.txt, written by
+/// `rulebook/build.sh` already wrapped to fit the help): the first line
+/// (the title) and every underlined line are headings, the underlines go,
+/// and every other line is kept as it is.
+pub fn rules_help(text: &str) -> Vec<Help> {
+    let underline = |l: &str| l.len() >= 3 && (l.bytes().all(|b| b == b'=') || l.bytes().all(|b| b == b'-'));
+    let lines: Vec<&str> = text.lines().collect();
+    let mut help = Vec::new();
+    for (i, &line) in lines.iter().enumerate() {
+        if underline(line) && i > 0 {
+            continue;
+        }
+        let heading = i == 0 || lines.get(i + 1).is_some_and(|next| underline(next));
+        help.push(if line.trim().is_empty() {
+            Help::Blank
+        } else if heading {
+            Help::Heading(line.to_string())
+        } else {
+            Help::Pre(line.to_string())
+        });
+    }
+    help
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn rules_help_finds_headings_and_drops_underlines() {
+        let text = "Title\nAsciiverse\n\nSection\n-------\n\n  ---- ----\n  a    b\nRefs\n====\n";
+        let help = rules_help(text);
+        let headings: Vec<&str> = help
+            .iter()
+            .filter_map(|l| if let Help::Heading(h) = l { Some(h.as_str()) } else { None })
+            .collect();
+        assert_eq!(headings, ["Title", "Section", "Refs"]);
+        // The table rule is indented, so it stays.
+        assert!(help.iter().any(|l| matches!(l, Help::Pre(p) if p == "  ---- ----")));
+        assert_eq!(help_find(&help, "section"), Some(3));
+    }
+}
+
+/// The line of the heading `name` in `lines`, compared in capitals and with
+/// typographic apostrophes made plain.
+pub fn help_find(lines: &[Help], name: &str) -> Option<usize> {
+    let plain = |s: &str| s.replace('\u{2019}', "'").to_uppercase();
+    let name = plain(name);
+    lines.iter().position(|l| matches!(l, Help::Heading(h) if plain(h) == name))
+}
+
+/// Scroll keys in the help. Returns whether the key was one. The draw
+/// keeps `scroll` within the text.
+pub fn help_key(code: KeyCode, scroll: &mut usize) -> bool {
+    const PAGE: usize = 24;
+    match code {
+        KeyCode::Up | KeyCode::Char('k') => *scroll = scroll.saturating_sub(1),
+        KeyCode::Down | KeyCode::Char('j') => *scroll += 1,
+        KeyCode::PageUp => *scroll = scroll.saturating_sub(PAGE),
+        KeyCode::PageDown | KeyCode::Char(' ') => *scroll += PAGE,
+        KeyCode::Home => *scroll = 0,
+        KeyCode::End => *scroll = usize::MAX,
+        _ => return false,
+    }
+    true
 }
 
 /// The help, over the screen.
 pub fn draw_help(buf: &mut Buffer, area: Rect, lines: &[Help]) {
+    draw_help_at(buf, area, lines, &mut 0);
+}
+
+/// The help, over the screen, from row `scroll` of the text on.
+pub fn draw_help_at(buf: &mut Buffer, area: Rect, lines: &[Help], scroll: &mut usize) {
     let back = Color::Rgb(18, 18, 26);
     let w = area.width.min(84);
     let h = area.height.min(34);
     let x = area.x + (area.width - w) / 2;
     let y = area.y + (area.height - h) / 2;
     fill(buf, Rect::new(x, y, w, h), back);
-    let mut yy = y + 1;
-    let mut write = |text: &str, style: Style| {
-        for part in wrap(text, (w - 6) as usize) {
-            if yy >= y + h - 2 {
-                return;
-            }
-            put(buf, x + 3, yy, &part, style);
-            yy += 1;
-        }
-    };
+
+    let heading = Style::new().fg(AMBER).bg(back).add_modifier(Modifier::BOLD);
+    let text = Style::new().fg(TEXT).bg(back);
+    let quiet = Style::new().fg(DIM).bg(back);
+    let mut rows: Vec<(String, Style)> = Vec::new();
     for line in lines {
-        match line {
-            Help::Heading(t) => write(t, Style::new().fg(AMBER).bg(back).add_modifier(Modifier::BOLD)),
-            Help::Text(t) => write(t, Style::new().fg(TEXT).bg(back)),
-            Help::Quiet(t) => write(t, Style::new().fg(DIM).bg(back)),
-            Help::Blank => write("", Style::new().bg(back)),
-        }
+        let (t, style) = match line {
+            Help::Heading(t) => (t, heading),
+            Help::Text(t) => (t, text),
+            Help::Quiet(t) => (t, quiet),
+            Help::Pre(t) => {
+                rows.push((t.clone(), text));
+                continue;
+            }
+            Help::Blank => {
+                rows.push((String::new(), text));
+                continue;
+            }
+        };
+        rows.extend(wrap(t, (w - 6) as usize).into_iter().map(|part| (part, style)));
     }
-    put(buf, x + 3, y + h - 2, "Esc or F1: back", Style::new().fg(DIM).bg(back));
+
+    let visible = h.saturating_sub(4) as usize;
+    let last = rows.len().saturating_sub(visible);
+    *scroll = (*scroll).min(last);
+    for (i, (t, style)) in rows.iter().skip(*scroll).take(visible).enumerate() {
+        put(buf, x + 3, y + 1 + i as u16, t, *style);
+    }
+    let foot = if last > 0 {
+        let percent = *scroll * 100 / last;
+        format!("Esc or F1: back   Up, Down, PgUp, PgDn: scroll   {percent}%")
+    } else {
+        "Esc or F1: back".to_string()
+    };
+    put(buf, x + 3, y + h - 2, &foot, quiet);
 }
 
 /// A game's program, as the loop drives it.

@@ -3,8 +3,9 @@
 #   ancient-games-rules.pdf    the whole book (pandoc, then Typst)
 #   ancient-games-rules.html   the whole book, one self-contained page
 #   <game>.html                one game's chapter, for its catalog page
-#   <game>.txt                 one game's chapter as plain text, for RULES.txt
-#                              in the release archives
+#   <game>.txt                 one game's chapter as plain text, also copied
+#                              to the game's crate as RULES.txt (its F1 help,
+#                              and part of its release archive)
 # Needs pandoc 3.1.2 or newer, typst and python3.
 set -eu
 
@@ -37,7 +38,10 @@ pandoc $common $intro $games --toc --standalone --embed-resources \
 # title, and the chapter gets its own references.
 for chapter in $games; do
     game=$(basename "$chapter" .md | sed 's/^[0-9]*-//')
-    title=$(sed -n 's/^# //p' "$chapter" | head -n 1)
+    # The first heading after the front matter.
+    title=$(awk 'NR == 1 && /^---$/ { yaml = 1; next }
+                 yaml && /^---$/ { yaml = 0; next }
+                 !yaml && /^# / { sub(/^# /, ""); print; exit }' "$chapter")
     pandoc $common --shift-heading-level-by=-1 --metadata=title:"$title" \
         --metadata=subtitle:"The rules, and where they come from" \
         "$chapter" --standalone --embed-resources --css=style/rulebook.css \
@@ -46,6 +50,11 @@ for chapter in $games; do
         --metadata=subtitle:"The rules, and where they come from" \
         --lua-filter=filters/text-figures.lua "$chapter" \
         --standalone -t plain --columns=76 -o "$out/$game.txt"
+    # The game's help and the RULES.txt of its release archive.
+    crate=$(sed -n '1,/^---$/{s/^crate: *//p}' "$chapter" | head -n 1)
+    if [ -n "$crate" ]; then
+        cp "$out/$game.txt" "../$crate/RULES.txt"
+    fi
 done
 
 # No en or em dashes anywhere (the filter should have caught them all).

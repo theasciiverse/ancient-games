@@ -37,11 +37,18 @@ blocks builds. Licence: not chosen; David chooses licences case by case
 one Markdown chapter per game plus a BibTeX file, built by
 `rulebook/build.sh` into a PDF (pandoc and Typst), HTML (book and one page
 per game) and plain text per game (meant for `RULES.txt` in the release
-archives, not wired into the workflow yet). Board figures come from
+archives). Board figures come from
 `rulebook/figures/make_figures.py` as SVG and ASCII. Done: introduction,
-Royal Game of Ur. To do: Senet, Fox & Geese, Hnefatafl, Mehen. Open
-question for David: generate the in-game F1 help from the chapters, or
-keep the two separate and checked against each other.
+Royal Game of Ur. To do: Senet, Fox & Geese, Hnefatafl, Mehen.
+
+The F1 help is generated from the chapters (David, 2026-10-22): a chapter
+names its crate in its front matter (`crate: ur`), build.sh copies its
+text to `<crate>/RULES.txt`, the game `include_str!`s it and shows it
+scrollable (`shell::rules_help`, `draw_help_at`, `help_key`), opened at
+the heading named by the rule set's `section`; a test checks every
+section is there and no line is wider than the help. The release
+workflow puts RULES.txt in the archive. Games without a chapter keep
+their hand-written help until theirs is written.
 
 ## Code
 

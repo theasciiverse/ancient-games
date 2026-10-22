@@ -1,5 +1,5 @@
 -- Plain text output: a figure becomes its ASCII drawing (the .txt next to
--- the .svg) followed by its caption, and section headings are in capitals.
+-- the .svg) followed by its caption, and section headings are underlined.
 local function read(path)
   local f = io.open(path, "r")
   if not f then return nil end
@@ -21,10 +21,17 @@ function Figure(fig)
   return out
 end
 
--- Headings stand out in plain text: section headings in capitals.
+-- Headings stand out in plain text: underlined, = for the references
+-- and - for sections. (Before --shift-heading-level-by, so the sections
+-- are still level 2 here.)
 function Header(h)
-  -- (Before --shift-heading-level-by, so the sections are still level 2.)
+  -- The chapter's own heading: the title block already shows it.
+  if h.level == 1 and h.identifier ~= "bibliography" then
+    return {}
+  end
   if h.level <= 2 then
-    return h:walk({ Str = function(s) s.text = pandoc.text.upper(s.text); return s end })
+    local text = pandoc.utils.stringify(h)
+    local mark = h.level == 1 and "=" or "-"
+    return pandoc.RawBlock("plain", text .. "\n" .. string.rep(mark, utf8.len(text)))
   end
 end

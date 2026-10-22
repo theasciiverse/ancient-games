@@ -70,6 +70,9 @@ jobs:
           for game in $GAMES; do
             rm -rf stage && mkdir stage
             cp README.md stage/
+            # the game's rulebook chapter, if it has one (rulebook/build.sh)
+            crate=$(dirname "$(grep -l "^name = \"$game\"" */Cargo.toml)")
+            if [ -f "$crate/RULES.txt" ]; then cp "$crate/RULES.txt" stage/; fi
             if [[ "${{ matrix.target }}" == *windows* ]]; then
               cp "target/${{ matrix.target }}/release/$game.exe" stage/
               (cd stage && 7z a -tzip "../dist/$game-${{ matrix.target }}.zip" . > /dev/null)

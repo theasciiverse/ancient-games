@@ -292,8 +292,9 @@ pub struct Rules {
     /// A piece on a rosette of the middle row cannot be taken.
     pub rosettes_safe: bool,
     pub stakes: Option<Stakes>,
-    /// How to play, a line each, for the help.
-    pub summary: &'static [&'static str],
+    /// The heading of this rule set in the rulebook chapter (RULES.txt),
+    /// where the help opens.
+    pub section: &'static str,
 }
 
 impl Rules {
@@ -313,11 +314,7 @@ impl Rules {
             rosettes: Rosettes::ThrowAgain,
             rosettes_safe: true,
             stakes: None,
-            summary: &[
-                "Throw four lots: the marked tips up, 0 to 4, are how far you move. A throw of 0 loses the turn.",
-                "Bring pieces on with any throw. Seven pieces each.",
-                "A rosette gives you another throw. A piece on the middle rosette cannot be taken.",
-            ],
+            section: "Finkel 2017",
         }
     }
 
@@ -336,11 +333,7 @@ impl Rules {
             rosettes: Rosettes::ThrowAgain,
             rosettes_safe: false,
             stakes: None,
-            summary: &[
-                "Throw four lots: the marked tips up, 0 to 4, are how far you move. A throw of 0 loses the turn.",
-                "Bring pieces on with any throw. Five pieces each.",
-                "A rosette gives you another throw. No square in the middle row is safe.",
-            ],
+            section: "British Museum 1990s",
         }
     }
 
@@ -361,12 +354,7 @@ impl Rules {
             rosettes: Rosettes::OpponentPays,
             rosettes_safe: false,
             stakes: Some(Stakes { purse: 20, stake: 5, fine: 1 }),
-            summary: &[
-                "Throw three lots. All three jewelled tips up: 5 and throw again. None: 4 and throw again. Two: 1 and throw again. One: nothing, and your turn is over.",
-                "A piece comes on only with a 5, onto its first square. A piece that is taken needs a 5 again.",
-                "Both sides put 5 into the pool. Land on a rosette and your opponent pays 1 into it. First with every piece home takes the pool; your purse carries on to the next game.",
-                "Bell does not say where a piece entered on a 5 stands, nor whether an unusable throw still throws again: here it stands on its first square, and the throw again stands.",
-            ],
+            section: "R. C. Bell's betting game",
         }
     }
 
@@ -388,14 +376,7 @@ impl Rules {
             rosettes: Rosettes::Tokens,
             rosettes_safe: true,
             stakes: Some(Stakes { purse: 40, stake: 5, fine: 0 }),
-            summary: &[
-                "Five different pieces each: the Swallow, the Storm-bird, the Raven, the Rooster and the Eagle.",
-                "Throw the sheep's knucklebone for 1 to 4. Then use it, or dare the ox's knucklebone: yes turns 1, 2, 3, 4 into 5, 6, 7, 10; no wastes the throw.",
-                "Each bird comes on with its own throw: the Swallow with 2, onto the first rosette; the Storm-bird, Raven, Rooster and Eagle with 5, 6, 7 and 10, onto that house. (Finkel also reads the Swallow as coming on before any rosette; in a race that lets it skip almost the whole board.)",
-                "Rosettes are safe. A bird landing on one wins tokens from the pool, a bird passing one pays them in: Swallow 3, Storm-bird, Raven and Rooster 4, Eagle 5. Purses start at 40; both sides put 5 into the pool each game.",
-                "A bird landed on in the middle row goes back to the start. The first side with all five birds home wins, and takes the pool.",
-                "The tablet gives the entries and the rosettes' fortunes; the dice, the tokens, capture and bearing off by an exact throw are Finkel's proposals or ours.",
-            ],
+            section: "The Babylonian tablet",
         }
     }
 

@@ -1,3 +1,9 @@
+---
+# The game's crate: build.sh writes this chapter as <crate>/RULES.txt,
+# which the game shows as its help and ships in its release archive.
+crate: ur
+---
+
 # The Royal Game of Ur
 
 |                |                                                       |
