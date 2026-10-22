@@ -35,6 +35,11 @@ millennium BC. One of them is in the British Museum, ME 120834
 one comparable board of that age has been found elsewhere, a carved
 wooden one from Shahr-i Sokhta in Iran [@finkel2007, 17].
 
+![One of Woolley's boards from Ur, now in the British Museum
+(1928,1009.378): twenty inlaid shell plaques on wood, 30.1 cm long.
+Photograph: BabelStone,
+CC0.](images/ur-board-british-museum.jpg){height=8cm}
+
 The board has twenty squares: a block of four by three joined to a block
 of two by three by a bridge of two squares. Five squares carry a rosette.
 Scholars also call it the Game of Twenty Squares, because the game
@@ -43,11 +48,6 @@ boards are known from Iraq, Iran, Israel, Syria, Jordan, Lebanon,
 Turkey, Cyprus, Egypt and Crete. Early in the second millennium BC the
 board changed shape: the small block was straightened out into a single
 run, so that the middle row became twelve squares long [@finkel2007, 17].
-
-![One of Woolley's boards from Ur, now in the British Museum
-(1928,1009.378): twenty inlaid shell plaques on wood, 30.1 cm long.
-Photograph: BabelStone,
-CC0.](images/ur-board-british-museum.jpg){width=85%}
 
 **The pieces and dice.** At Ur each player had seven identical pieces.
 The dice found with the boards were tetrahedra of stone or lapis lazuli,

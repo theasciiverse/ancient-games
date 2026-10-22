@@ -33,6 +33,11 @@ named the king piece [@wiki-tafl]. The tafl games were played in Norway,
 Sweden, Denmark, Iceland, Britain, Ireland and Sápmi, the land of the
 Sámi, and chess pushed them aside from the twelfth century [@wiki-tafl].
 
+![A board of the 1100s found in a backyard in Trondheim during the
+excavations of the 1980s, with bone pieces of the 1200s from elsewhere
+in the town. NTNU University Museum. Photograph: Åge Hojem, NTNU
+Vitenskapsmuseet, CC BY 2.0.](images/hnefatafl-trondheim-board.jpg){height=8cm}
+
 **The boards and pieces.** Boards and pieces turn up across that world.
 Bell describes a board fragment from a Roman Iron Age grave at Wimose on
 Fyn in Denmark, before about AD 400, with at least eighteen squares
@@ -44,11 +49,6 @@ pieces [@wiki-tafl]; it marks the centre and corner squares with
 circles [@ashton2007, 15]. A glass piece found on Lindisfarne in 2019,
 topped with white droplets thought to stand for a crown, is thought to
 be a piece from hnefatafl or a game like it [@wiki-tafl].
-
-![A board of the 1100s found in a backyard in Trondheim during the
-excavations of the 1980s, with bone pieces of the 1200s from elsewhere
-in the town. NTNU University Museum. Photograph: Åge Hojem, NTNU
-Vitenskapsmuseet, CC BY 2.0.](images/hnefatafl-trondheim-board.jpg){width=100%}
 
 **The sagas.** The Icelandic sagas mention the game often but never
 explain it. In the *Orkneyinga saga* Earl Rögnvald Kali Kolsson puts
