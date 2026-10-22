@@ -35,11 +35,20 @@ Turkey, Cyprus, Egypt and Crete. Early in the second millennium BC the
 board changed shape: the small block was straightened out into a single
 run, so that the middle row became twelve squares long [@finkel2007, 17].
 
+![One of Woolley's boards from Ur, now in the British Museum
+(1928,1009.378): twenty inlaid shell plaques on wood, 30.1 cm long.
+Photograph: BabelStone,
+CC0.](images/ur-board-british-museum.jpg){width=85%}
+
 **The pieces and dice.** At Ur each player had seven identical pieces.
 The dice found with the boards were tetrahedra of stone or lapis lazuli,
 two of whose four corners are marked with inlaid points, so that a single
 die scores with two chances in four. Ten four-sided stick dice numbered
 one to four were also found at Ur [@finkel2007, 17].
+
+![Pieces and dice shown with the board in the British Museum: seven
+pieces a side, three tetrahedral dice and four stick dice. Photograph:
+Gary Todd, CC0.](images/ur-pieces-and-dice.jpg){width=100%}
 
 **The tablet.** On 3 November 177 or 176 BC, in Babylon, the scribe
 Itti-Marduk-balāṭu finished copying a tablet that had belonged to a
@@ -53,6 +62,9 @@ survived). A note on that second tablet calls its subject a game, and
 names the game "Pack of Dogs". Landsberger showed in 1960 that both
 tablets concern a game [@weidner1956; @bottero1956; @landsberger1960;
 all as cited in @finkel2007, 16].
+
+![The rules tablet, BM 33333B, written in Babylon in 177 or 176 BC.
+Photograph: Fæ, CC BY-SA 3.0.](images/ur-rules-tablet-bm-33333b.jpg){width=55%}
 
 The back of the British Museum tablet is the oldest known set of rules
 for any board game [@finkel2007, 19]. It does not explain the game from
@@ -227,6 +239,12 @@ board. Finkel argues it is the later Game of Twenty Squares, whose run of
 twelve squares matches the tablet's twelve zodiac phrases, and proposes
 this route: houses 1 to 4 on the player's own row, then the twelve
 houses of the middle row, then off [@finkel2007, 23-27].
+
+![The later shape of the board on an Egyptian game box of about 1635 to
+1458 BC, found at Thebes: a block of four by three with the middle row
+running on for eight squares more. The other side of the box is a Senet
+board. Metropolitan Museum of Art 16.10.475a,
+CC0.](images/twenty-squares-met-16-10-475.jpg){width=100%}
 
 **The pieces.** Five different pieces each, all birds: the Swallow, the
 Storm-bird, the Raven, the Rooster and the Eagle. The tablet calls the

@@ -21,6 +21,9 @@ Needs pandoc 3.1.2 or newer, Typst and Python 3.
   another is marked there and cited "as cited in" that source
 - `figures/make_figures.py`: draws the boards as SVG and as ASCII, from
   the same geometry as the game's code; the build reruns it
+- `images/`: photographs, each with its source, author and licence in
+  `images/CREDITS.md` and in its caption; the PDF and HTML show them,
+  the text and the F1 help leave them out
 - `filters/`: `no-dashes.lua` (no en or em dashes in any output; the
   build also fails if one slips through), `text-figures.lua` (ASCII
   boards and capital headings in the text output)

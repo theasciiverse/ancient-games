@@ -1,5 +1,6 @@
 -- Plain text output: a figure becomes its ASCII drawing (the .txt next to
--- the .svg) followed by its caption, and section headings are underlined.
+-- the .svg) followed by its caption, photographs are left out, and
+-- section headings are underlined.
 local function read(path)
   local f = io.open(path, "r")
   if not f then return nil end
@@ -12,8 +13,9 @@ function Figure(fig)
   local src
   fig:walk({ Image = function(img) src = src or img.src end })
   if not src then return nil end
-  local drawing = read((src:gsub("%.svg$", ".txt")))
-  if not drawing then return nil end
+  -- A photograph has no drawing: the text leaves it out.
+  local drawing = src:match("%.svg$") and read((src:gsub("%.svg$", ".txt")))
+  if not drawing then return {} end
   local out = { pandoc.CodeBlock((drawing:gsub("\n$", ""))) }
   for _, block in ipairs(fig.caption.long) do
     table.insert(out, block)
