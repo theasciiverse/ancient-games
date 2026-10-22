@@ -301,6 +301,11 @@ pub trait Program {
     fn click(&mut self, x: u16, y: u16, now: Instant);
     fn draw(&mut self, frame: &mut ratatui::Frame);
     fn quit(&self) -> bool;
+    /// Whether the computer is still thinking on another thread (the
+    /// rulebook's pictures wait for it).
+    fn busy(&self) -> bool {
+        false
+    }
 }
 
 /// Runs the terminal: raw mode, the mouse, a frame about every 33 ms,

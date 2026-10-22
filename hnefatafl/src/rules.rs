@@ -101,9 +101,9 @@ pub struct Rules {
     /// The attackers win by enclosing the king and all his defenders.
     pub encirclement: bool,
     pub repetition: Repetition,
-    /// The throne is never hostile to the king (Brandubh); elsewhere the
-    /// king is not captured against it but beside it.
-    pub summary: &'static [&'static str],
+    /// The heading of this rule set in the rulebook chapter (RULES.txt),
+    /// where the help opens.
+    pub section: &'static str,
 }
 
 const COPENHAGEN_ATTACKERS: [Square; 24] = [
@@ -156,13 +156,7 @@ impl Rules {
             exit_fort: true,
             encirclement: true,
             repetition: Repetition::DefendersLose,
-            summary: &[
-                "The attackers move first. Every piece moves like a rook: any number of empty squares along a row or column. Only the king may stop on the throne or the corners; any piece may pass the empty throne.",
-                "Sandwich an enemy between two of yours, or between yours and a hostile square, to capture it. The corners are hostile to all; the throne to the attackers always, to the defenders when empty. The king helps capture.",
-                "The king is captured by attackers on all four sides (three beside the throne), never on the edge. Shield wall: a row of pieces on the edge, each with an enemy in front, is taken whole when bracketed at both ends.",
-                "The defenders win when the king reaches a corner, or builds an exit fort: on the edge, able to move, walled by defenders the attackers can never capture. The attackers win by capturing the king or ringing in all the defenders.",
-                "A position repeated a third time loses for the defenders. A side that cannot move loses.",
-            ],
+            section: "Copenhagen 11x11",
         }
     }
 
@@ -170,8 +164,8 @@ impl Rules {
         Rules {
             id: "fetlar",
             name: "Fetlar 11x11",
-            source: "The Fetlar rules (Shetland, 1983) as Aage Nielsen gives \
-                     them: the 11x11 game without the shield wall or the fort.",
+            source: "The Fetlar rules (the Fetlar Hnefatafl Panel, 2007) as Aage \
+                     Nielsen gives them: the 11x11 game without the shield wall or the fort.",
             size: 11,
             attackers: &COPENHAGEN_ATTACKERS,
             defenders: &COPENHAGEN_DEFENDERS,
@@ -181,12 +175,7 @@ impl Rules {
             exit_fort: false,
             encirclement: true,
             repetition: Repetition::Draw,
-            summary: &[
-                "The attackers move first. Every piece moves like a rook. Only the king may stop on the throne or the corners; any piece may pass the empty throne.",
-                "Sandwich an enemy between two of yours, or between yours and a hostile square, to capture it. The corners are hostile to all; the throne to the attackers always, to the defenders when empty. The king helps capture.",
-                "The king is captured by attackers on all four sides (three beside the throne). On the edge he is safe, unless he is the last defender and every square around him is taken.",
-                "The defenders win when the king reaches a corner. The attackers win by capturing the king or ringing in all the defenders. Repetitions are a draw; a side that cannot move loses.",
-            ],
+            section: "Fetlar 11x11",
         }
     }
 
@@ -206,12 +195,7 @@ impl Rules {
             exit_fort: false,
             encirclement: true,
             repetition: Repetition::MoverLoses,
-            summary: &[
-                "The Viking invaders move first. Every piece moves like a rook. Only the king may stop on the throne or the corners (the four provinces); any piece may pass the empty throne.",
-                "Sandwich an enemy between two of yours, or between yours and a hostile square, to capture it. The corners are hostile to all, the king too; the throne is hostile to the attackers always, to the defenders when the king is off it, never to the king.",
-                "The king is captured like any piece, except on his throne, where the attackers need all four sides. He helps capture.",
-                "The king escapes to a corner. The attackers win by capturing him or ringing in all the defenders. Whoever repeats a position a third time loses; so does a side that cannot move.",
-            ],
+            section: "Brandubh 7x7",
         }
     }
 
@@ -232,12 +216,7 @@ impl Rules {
             exit_fort: false,
             encirclement: true,
             repetition: Repetition::DefendersLose,
-            summary: &[
-                "Sixteen Muscovites against eight Swedes and their king. The Muscovites move first. Every piece moves like a rook; only the king may stop on the throne, the konakis, and any piece may pass it empty.",
-                "Sandwich an enemy between two of yours, or between yours and the throne, to capture it. The throne is hostile to the attackers always, to the defenders when empty. The king helps capture.",
-                "The king is captured like any piece (\"likewise the king\"), except on the throne (all four sides) and beside it (the other three).",
-                "The Swedes win when the king reaches any edge square. The Muscovites win by capturing him or ringing in all the Swedes. A third repetition loses for the Swedes; a side that cannot move loses.",
-            ],
+            section: "Tablut 9x9 (Linnaeus)",
         }
     }
 
@@ -257,12 +236,7 @@ impl Rules {
             exit_fort: false,
             encirclement: false,
             repetition: Repetition::Draw,
-            summary: &[
-                "Sixteen Muscovites against eight Swedes and their king. Every piece moves like a rook; only the king may stop on the throne, the konakis.",
-                "A piece is captured between two enemies along a row or column; moving between two enemies is safe.",
-                "The king is captured only when surrounded on all four sides, or on three with the throne on the fourth. The Swedes win when he reaches any edge square. When he has one clear way out, Raichi! is called; two, Tuichi!",
-                "This is the rule of the 1811 translation that misread \"likewise the king\"; it favours the Swedes. Bell does not say who moves first, whether pieces pass the empty throne, whether the king captures, or how repetitions end: here the Muscovites move first, they may, he does, and a third repetition draws.",
-            ],
+            section: "Tablut 9x9 (Bell 1960)",
         }
     }
 

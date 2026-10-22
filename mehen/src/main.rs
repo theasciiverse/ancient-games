@@ -7,9 +7,11 @@
 
 mod ai;
 mod app;
+mod examples;
 mod rules;
 mod ui;
 
+use ancient_core::capture;
 use ancient_core::player::{Player, Strength};
 use ancient_core::rng::Rng;
 use ancient_core::shell::{self, Program, Setup};
@@ -31,6 +33,8 @@ struct App {
     screen: Screen,
     game: Option<Game>,
     help: bool,
+    help_lines: Vec<shell::Help>,
+    help_scroll: usize,
     demo: bool,
     hits: ui::Hits,
     rng: Rng,
@@ -58,13 +62,19 @@ impl Program for App {
             match code {
                 KeyCode::Esc | KeyCode::F(1) | KeyCode::Char('?') => self.help = false,
                 KeyCode::Char('q') | KeyCode::Char('Q') => self.quit = true,
-                _ => {}
+                _ => {
+                    shell::help_key(code, &mut self.help_scroll);
+                }
             }
             return;
         }
         match code {
             KeyCode::Char('q') | KeyCode::Char('Q') => return self.quit = true,
-            KeyCode::F(1) | KeyCode::Char('?') => return self.help = true,
+            KeyCode::F(1) | KeyCode::Char('?') => {
+                // The rulebook chapter, opened at the rule set in play.
+                (self.help_lines, self.help_scroll) = ui::help(&self.rules[self.setup.rules]);
+                return self.help = true;
+            }
             _ => {}
         }
         match &mut self.screen {
@@ -156,7 +166,7 @@ impl Program for App {
             }
         }
         if self.help {
-            shell::draw_help(buf, area, &ui::help(&self.rules[self.setup.rules]));
+            shell::draw_help_at(buf, area, &self.help_lines, &mut self.help_scroll);
         }
     }
 
@@ -172,17 +182,32 @@ fn main() -> io::Result<()> {
     info!("start: seed {seed}, demo {demo}");
     let mut app = App {
         rules: Rules::all(),
-        // Seventeen geese, the person as the fox.
+        // Two players, the person as the lions.
         setup: Setup { rules: 0, opponent: 1, side: 0 },
         screen: Screen::Menu { row: 3 },
         game: None,
         help: false,
+        help_lines: Vec::new(),
+        help_scroll: 0,
         demo,
         hits: ui::Hits::default(),
         rng: Rng::new(seed),
         quit: false,
         demo_restart: None,
     };
+    // Pictures for the rulebook (rulebook/build.sh): the worked examples,
+    // or a demo of one rule set drawn after some simulated seconds.
+    if shell::flag("--rulebook-examples") {
+        capture::print_examples(&examples::all());
+        return Ok(());
+    }
+    if let Some((rules, seconds)) = capture::screen_arg() {
+        app.setup.rules = rules.min(app.rules.len() - 1);
+        app.demo = true;
+        app.start();
+        print!("{}", capture::svg(&capture::play_and_draw(&mut app, seconds)));
+        return Ok(());
+    }
     if demo {
         app.start();
     }

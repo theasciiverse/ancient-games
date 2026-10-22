@@ -20,10 +20,17 @@ const WIN: i32 = 1_000_000;
 
 /// How long the computer may think, and how deep at most.
 fn budget(strength: Strength) -> (Duration, u32) {
-    match strength {
+    let (time, depth) = match strength {
         Strength::Easy => (Duration::from_millis(80), 1),
         Strength::Normal => (Duration::from_millis(400), 2),
         Strength::Hard => (Duration::from_millis(1500), 8),
+    };
+    // The rulebook's pictures search to a fixed depth, the same on every
+    // machine, and no deeper than normal so they are made in good time.
+    if ancient_core::capture::untimed() {
+        (Duration::MAX, depth.min(2))
+    } else {
+        (time, depth)
     }
 }
 

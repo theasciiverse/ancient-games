@@ -1,0 +1,17 @@
+      A   B   C   D   E   F   G
+  1           +---+---+
+              |   |   |
+  2           +---+---+
+              |   |   |
+  3   o---+---+---F---+---+---o
+      |   |   |   |   |   |   |
+  4   o---+---+---+---+---+---o
+      |   |   |   |   |   |   |
+  5   O---O---O---O---O---O---O
+              |   |   |
+  6           O---O---O
+              |   |   |
+  7           O---O---O
+
+F the fox. O the thirteen geese. o the four more geese of the
+seventeen-geese game. + an empty point.

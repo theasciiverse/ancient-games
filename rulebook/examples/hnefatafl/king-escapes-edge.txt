@@ -1,0 +1,25 @@
+Tablut 9x9 (Linnaeus): the defenders to move.
+Before:
+     a b c d e f g h i
+   9 + . . . . . . . +
+   8 . . . . . . . . .
+   7 . . . K . . . . .
+   6 . . . . . . . . .
+   5 . . . . + . . . .
+   4 . . . . . . . . .
+   3 . . . . . . A . .
+   2 . . . . . . . . .
+   1 + . . . . . . . +
+d7 to d9. Captured: nothing.
+The game is over: the defenders win.
+After:
+     a b c d e f g h i
+   9 + . . K . . . . +
+   8 . . . . . . . . .
+   7 . . . . . . . . .
+   6 . . . . . . . . .
+   5 . . . . + . . . .
+   4 . . . . . . . . .
+   3 . . . . . . A . .
+   2 . . . . . . . . .
+   1 + . . . . . . . +

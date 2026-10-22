@@ -9,7 +9,16 @@ use ratatui::backend::TestBackend;
 use ratatui::buffer::Buffer;
 use ratatui::style::{Color, Modifier};
 use std::fmt::Write;
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::time::{Duration, Instant};
+
+static UNTIMED: AtomicBool = AtomicBool::new(false);
+
+/// Whether the computer should search to a fixed depth instead of within a
+/// time budget, so a picture comes out the same on any machine.
+pub fn untimed() -> bool {
+    UNTIMED.load(Ordering::Relaxed)
+}
 
 /// The size every game is made for, and the size of the pictures.
 pub const WIDTH: u16 = 100;
@@ -32,12 +41,21 @@ pub fn print_examples(examples: &[(&str, String)]) {
 }
 
 /// Plays `program` for `seconds` of simulated time, in frames of 33 ms
-/// as the terminal loop does, then draws it.
+/// as the terminal loop does, then draws it. The computer searches to a fixed depth from then on (`untimed`), and a
+/// computer still thinking is waited for, so the clock only moves on when
+/// the game would have.
 pub fn play_and_draw(program: &mut impl Program, seconds: f64) -> Buffer {
+    UNTIMED.store(true, Ordering::Relaxed);
     let start = Instant::now();
     let frames = (seconds * 1000.0 / 33.0) as u32;
     for i in 0..=frames {
+        while program.busy() {
+            std::thread::sleep(Duration::from_millis(1));
+        }
         program.tick(start + Duration::from_millis(33 * i as u64));
+    }
+    while program.busy() {
+        std::thread::sleep(Duration::from_millis(1));
     }
     draw(program)
 }

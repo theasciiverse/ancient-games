@@ -180,6 +180,11 @@ impl Game {
         }
     }
 
+    /// Whether the computer is still working out its move.
+    pub fn thinking(&self) -> bool {
+        matches!(&self.phase, Phase::Thinking { handle, .. } if !handle.is_finished())
+    }
+
     pub fn tick(&mut self, now: Instant) {
         match &self.phase {
             Phase::Turn => {

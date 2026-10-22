@@ -39,12 +39,28 @@ one Markdown chapter per game plus a BibTeX file, built by
 per game) and plain text per game (meant for `RULES.txt` in the release
 archives). Board figures come from
 `rulebook/figures/make_figures.py` as SVG and ASCII. Done: introduction,
-Royal Game of Ur, Senet. To do: Fox & Geese, Hnefatafl, Mehen.
+all five games (2026-10-22; Mehen, Hnefatafl and Fox & Geese researched
+and written by subagents from the sources, then checked against the code).
 Illustrations (David, 2026-10-22): photographs of the real objects in the
 PDF and HTML, each with source, author and licence in
 `rulebook/images/CREDITS.md` and its caption (CC0 museum images first:
 the Met, the Brooklyn Museum, CC0 Commons photos); the text and F1 help
-leave them out.
+leave them out. Pictures from the games themselves (David, 2026-10-22):
+`rulebook/pictures.txt` lists worked examples (`--rulebook-examples`,
+each game's `examples.rs`, drawn by the real rules engine) and screens
+(`--rulebook-screen RULES:SECONDS`, `core/src/capture.rs`: a demo on a
+simulated clock drawn to SVG; Hnefatafl's and Fox & Geese's computer is
+waited for and searches to a fixed depth there, so pictures are the same
+on any machine).
+
+Where the program departs from its sources (found while writing the
+book, each marked "Our choice" in its chapter; candidates for changing
+the code, David's call): Hnefatafl: the empty throne is hostile in Bell's
+Tablut too; a side that cannot move loses in every set; no draw for a
+game that cannot be ended (Copenhagen, Fetlar); Brandubh counts any third
+repetition, the WTF text says "for the third time in a row", and no
+two-game match. Fox & Geese: the fox always starts on D3 (Bell: any
+vacant point); a third repetition is a draw (Bell silent).
 
 The F1 help is generated from the chapters (David, 2026-10-22): a chapter
 names its crate in its front matter (`crate: ur`), build.sh copies its

@@ -1,0 +1,7 @@
+Masters 2024, four players: a lions' pharaoh (L) moves 5 from 67.
+S is a pharaoh of the lionesses; square 0 is off the board.
+square    63  64  65  66  67  68  69  70
+before     .   .   .   .   L   .   .   .
+after      .   .   .   .   .   .   .   .
+It reaches the head and is reborn.
+(No exact count is needed.)

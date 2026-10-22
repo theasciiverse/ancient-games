@@ -7,7 +7,7 @@ use crate::app::{Game, Phase};
 use crate::rules::{Escape, Move, Piece, Rules, Side, Square};
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, fill, put, wrap};
 use ancient_core::player::Player;
-use ancient_core::shell::{Help, Menu};
+use ancient_core::shell::{self, Help, Menu};
 use ratatui::buffer::Buffer;
 use ratatui::layout::Rect;
 use ratatui::style::{Color, Modifier, Style};
@@ -283,28 +283,37 @@ pub fn menu(rules: &[Rules], chosen: usize) -> Menu<'_> {
     }
 }
 
-/// How to play, and what is known of the game.
-pub fn help(rules: &Rules) -> Vec<Help> {
-    let mut lines = vec![Help::Heading(format!("HOW TO PLAY: {} RULES", rules.name.to_uppercase()))];
-    lines.extend(rules.summary.iter().map(|l| Help::Text(l.to_string())));
-    lines.extend([
-        Help::Blank,
-        Help::Heading("KEYS".into()),
-        Help::Text(
-            "Arrows and Enter, or the mouse: pick up a piece, then a lit square   Esc:\u{a0}drop\u{a0}it   \
-             M:\u{a0}menu   Q:\u{a0}quit"
-                .into(),
-        ),
-        Help::Blank,
-        Help::Heading("WHAT WE KNOW".into()),
-        Help::Quiet(
-            "Tafl boards turn up across the Viking world and the sagas speak of hnefatafl, \
-             the king's table, but no Norse rules survive. Linnaeus wrote down Tablut as the \
-             Saami played it in 1732; Ireland, Wales and Shetland left boards and games. \
-             Today's rule sets are reconstructions from these; each comes with its source."
-                .into(),
-        ),
-        Help::Blank,
-    ]);
-    lines
+/// The game's chapter of the rulebook, as plain text: the help, and
+/// RULES.txt in the release archives. Written by `rulebook/build.sh`.
+pub const RULES: &str = include_str!("../RULES.txt");
+
+/// How to play: the rulebook chapter, and the line where the rule set
+/// `rules` begins.
+pub fn help(rules: &Rules) -> (Vec<Help>, usize) {
+    let lines = shell::rules_help(RULES);
+    let at = shell::help_find(&lines, rules.section).unwrap_or(0);
+    (lines, at)
+}
+
+#[cfg(test)]
+mod help_tests {
+    use super::*;
+
+    #[test]
+    fn the_help_opens_at_every_rule_set() {
+        let lines = shell::rules_help(RULES);
+        for rules in Rules::all() {
+            assert!(shell::help_find(&lines, rules.section).is_some(), "{}", rules.section);
+        }
+    }
+
+    #[test]
+    fn the_rulebook_text_fits_the_help() {
+        // The help is 84 columns wide with 3 on each side. Only a single
+        // word, a web address, may be wider (the help runs it on).
+        for line in RULES.lines() {
+            let word = !line.trim().contains(' ');
+            assert!(line.chars().count() <= 78 || word, "too wide: {line}");
+        }
+    }
 }

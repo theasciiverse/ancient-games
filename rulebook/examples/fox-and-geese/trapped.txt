@@ -1,0 +1,12 @@
+Bell, thirteen geese: the fox (F) to move.
+Position:
+     A B C D E F G
+  1      F G G
+  2      G G .
+  3  . . G . . . .
+  4  . . . . . . .
+  5  . . . . . . .
+  6      . G .
+  7      . G .
+Fox moves allowed: 0.
+Winner: the geese.

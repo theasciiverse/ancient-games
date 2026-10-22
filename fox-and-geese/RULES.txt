@@ -1,0 +1,289 @@
+Fox and Geese
+Asciiverse
+2026-10-22
+
+
+
+  ----------- --------------------------------------------------
+  Played      Europe; perhaps medieval, certainly by the 1840s
+  Players     Two
+  Kind        Hunt game: one fox against many geese
+  Program     fox-and-geese
+  Rule sets   Bell, thirteen geese; Bell, seventeen geese
+  ----------- --------------------------------------------------
+
+What survives
+-------------
+
+The game. One player has a single fox, the other a flock of geese. The fox
+kills geese by jumping over them; the geese cannot kill, and try to hem the
+fox in until he cannot move. R. C. Bell counts it among the war games of the
+tafl group, which “originated in northern Europe and are miniature battles
+fought between unequal forces” (Bell 1969, 1:75-76). The same idea is played
+under many names: Wikipedia lists Renard et les poules in France, Fuchs und
+Gänse or Fuchs und Henne in Germany, Rävspel in Sweden and Refskák in
+Iceland, among others (Wikipedia 2026b).
+
+Early mentions. Nothing written about the game before modern times gives its
+rules. Bell collects what there is (Bell 1969, 1:76-77):
+
+- Hala-tafl, “the Fox Game”, is mentioned in the Icelandic Grettis saga,
+  which the literary historian Finnur Jónsson believed was written after
+  AD 1300. We have not found the passage ourselves.
+- During the reign of Edward IV of England (1461 to 1483) the accounts of
+  the Royal Household record the purchase “of two foxes and twenty-six
+  hounds of silver over-gilt for two sets of Marelles”. Wikipedia takes
+  these to have been sets of Fox and Hounds (Wikipedia 2026b).
+- Fiske suggested that Fox and Geese may be the same game as Freystafl,
+  mentioned in the late sagas.
+
+Boards and sets. The board is a cross of 33 points. In the eighteenth
+century, Bell writes, a new game reached England from the Continent:
+Solitaire, a patience for one player “using a traditional Fox and Geese
+board” (Bell 1969, 1:111). Printed and boxed sets survive from the
+nineteenth century, some of them with their rules (see Other variants).
+
+What is not known. How the game was played in the Middle Ages, or whether
+the medieval fox games were this game at all. The rules below are the ones
+R. C. Bell gives in Board and Table Games from Many Civilizations, first
+published in 1960 and read here in the second edition (1969, 1:76). He gives
+two forms, an early one with thirteen geese and a later one with seventeen;
+the program offers both.
+
+The board
+---------
+
+          A   B   C   D   E   F   G
+      1           +---+---+
+                  |   |   |
+      2           +---+---+
+                  |   |   |
+      3   o---+---+---F---+---+---o
+          |   |   |   |   |   |   |
+      4   o---+---+---+---+---+---o
+          |   |   |   |   |   |   |
+      5   O---O---O---O---O---O---O
+                  |   |   |
+      6           O---O---O
+                  |   |   |
+      7           O---O---O
+
+    F the fox. O the thirteen geese. o the four more geese of the
+    seventeen-geese game. + an empty point.
+
+The board with the pieces as they start: the thirteen geese and the fox of
+Bell’s figure 62, and dashed, the four more geese of his figure 63.
+
+Thirty-three points in the shape of a cross: a square of three by three in
+the middle with an arm of two rows of three on each side. Lines join each
+point to its neighbours along the rows and columns. Bell’s figures have no
+diagonal lines, and neither does the program: a piece only ever moves up,
+down, left or right.
+
+This book names the points as Bell does when he shows the same board for
+Solitaire: columns A to G from left to right, rows 1 to 7 from top to
+bottom, so that the centre is D4 (Bell 1969, 1:111). The program draws the
+board the same way round, the geese at the bottom, but shows no names.
+
+Bell, thirteen geese
+--------------------
+
+Bell’s early form (Bell 1969, 1:76):
+
+1.  Thirteen geese stand on the seven points of row 5 and the six points of
+    the lower arm, as in Bell’s figure 62. The fox stands on D3.
+2.  The players move in turn, one piece a turn. The geese move first.
+3.  The fox and the geese move one point along a line to the next point, in
+    any direction, onto an empty point.
+4.  Instead of stepping, the fox may jump over a goose next to him along a
+    line, onto the empty point straight beyond it. The goose is killed and
+    taken off the board.
+5.  Two or more geese can be killed in one move by a series of such short
+    jumps.
+6.  The geese cannot jump over the fox.
+7.  If the fox cannot move, he loses: the geese win.
+8.  If the fox thins the geese out until they are too few to trap him, he
+    wins. In the program that is when three or fewer geese are left.
+
+Examples. These are made by the program’s own rules engine each time the
+book is built: the position is set up, the engine lists the moves it allows,
+and one is played. F is the fox, G a goose, . an empty point.
+
+The fox may jump goose after goose in one move, changing direction between
+jumps:
+
+    Bell, thirteen geese: the fox (F) to move.
+    Before:
+         A B C D E F G
+      1      . . .
+      2      . . .
+      3  . . . F . . .
+      4  . . G G . . .
+      5  . . . . G . .
+      6      . G .
+      7      . . .
+    Jumps allowed: D3 to D5; D3 to D5 to D7; D3 to D5 to F5.
+    After D3 to D5 to F5:
+         A B C D E F G
+      1      . . .
+      2      . . .
+      3  . . . . . . .
+      4  . . G . . . .
+      5  . . . . . F .
+      6      . G .
+      7      . . .
+
+A fox that cannot move has lost:
+
+    Bell, thirteen geese: the fox (F) to move.
+    Position:
+         A B C D E F G
+      1      F G G
+      2      G G .
+      3  . . G . . . .
+      4  . . . . . . .
+      5  . . . . . . .
+      6      . G .
+      7      . G .
+    Fox moves allowed: 0.
+    Winner: the geese.
+
+Bell adds: “If the geese are correctly played the fox must lose.” In his
+text the sentence follows the description of this thirteen-geese game and
+comes just before the seventeen-geese form (Bell 1969, 1:76). Wikipedia says
+the opposite, that the traditional game with thirteen geese “gives the
+advantage to the fox”, without a source for it (Wikipedia 2026b).
+
+Our choices:
+
+- The fox starts on D3. Bell’s text says the fox “is placed on any vacant
+  point”; both of his figures show it on D3, and the program always puts it
+  there.
+- The geese move first. Bell does not say who starts. (The Kronheim set of
+  the 1840s lets the fox move first: see Other variants.)
+- The fox need not capture: he may step when a jump is possible. Bell does
+  not say either way.
+- In a series of jumps the fox may change direction between jumps and may
+  stop after any of them. The geese he kills stay on the board until the
+  move ends, so none can be jumped twice, and the fox may not land on any
+  point twice in one move, his starting point included.
+- Bell’s “unable to trap him” is counted as three geese or fewer. Every way
+  of trapping the fox on this board takes at least four geese: the program’s
+  tests try every placement of three geese around the fox on every point and
+  find none that holds him. With four or more the game goes on, even if the
+  geese can no longer trap him in practice.
+- If the geese cannot move on their turn, the fox wins. Bell does not say.
+- The same position with the same side to move, a third time, is a draw.
+  Bell gives no end to a game that goes round in circles.
+
+Bell, seventeen geese
+---------------------
+
+“In later forms of the game the geese were increased to seventeen, but were
+deprived of the power of moving backwards” (Bell 1969, 1:76). The rules are
+those of the thirteen-geese game, with all its choices, but for these
+differences:
+
+1.  Seventeen geese: the thirteen of the early form, and two more down each
+    side, on A3, A4, G3 and G4 (Bell’s figure 63). The fox again stands on
+    D3.
+2.  A goose moves forward or sideways, never backward. The fox still moves
+    any way.
+
+Our choice: Bell does not say which way is forward. Here it is up the board,
+towards row 1; backward is towards row 7, where the geese start. Sideways
+moves stay, since Bell takes away only the backward one. With no move back,
+geese can now be left with no move at all; then the fox wins, as above.
+
+Example. The same goose, under both forms:
+
+    The goose on D4, the geese to move.
+    Position:
+         A B C D E F G
+      1      . F .
+      2      . . .
+      3  . . . . . . .
+      4  . . . G . . .
+      5  . . . . . . .
+      6      . . .
+      7      . . .
+    Bell, thirteen geese: D4 to C4, D3, D5, E4.
+    Bell, seventeen geese: D4 to C4, D3, E4.
+
+Other variants
+--------------
+
+None of these is in the program.
+
+Kronheim’s rules, 1840s. The box of J. M. Kronheim & Co.’s Fox & Goose Game
+held eighteen geese and one fox, and its rules read (J. M. Kronheim & Co.
+1840s): “Place the Fox in the centre. The Geese to occupy one half the
+Board, with the exception of one hole on each side of the Fox. The Fox moves
+first along any marked line, the Geese follow him with a view of blocking
+him in. The Fox can take any Goose next him that has a vacant hole behind;
+and when the Geese are reduced to six he cannot be blocked and wins the
+game.” So here the fox starts in the centre, moves first, and wins with six
+geese left, not three.
+
+Diagonal lines. Some boards add diagonals. The board given away with the
+Boy’s Own Paper in 1879 has them through every other point (The Boy’s Own
+Paper 1879). Wikipedia describes the English game this way: the fox in the
+middle, thirteen geese on one side, both moving to any empty point next to
+them, diagonals included; capturing is not compulsory; the fox wins when the
+geese left cannot surround him. It also mentions versions with 15, 17 or 18
+geese, or with two foxes (Wikipedia 2026b).
+
+Halatafl. As Wikipedia describes the Scandinavian fox game still played with
+pegs: two foxes and twenty sheep; the sheep move only forward or sideways
+and win by filling a square of nine holes, the paddock; the foxes must
+capture, and must go on jumping while they can (Wikipedia 2026b).
+
+Asalto. On the same cross of 33 points, two officers defend a fortress, the
+top arm, against 24 rebels. The rebels move only towards the fortress; they
+win by trapping or capturing both officers, or by filling the fortress. An
+officer who fails to make a capture he could have made is removed (“huffed”)
+(Wikipedia 2026a).
+
+Playing it in the terminal
+--------------------------
+
+Start fox-and-geese, choose a rule set, whom to play against (the computer,
+easy, normal or hard, or a friend at the same keyboard) and which side you
+play.
+
+  Key              
+  ---------------- --------------------------------------------------
+  Arrows           Move the cursor
+  Enter or Space   Pick up a piece, then put it down on a lit point
+  Esc              Let go of the piece
+  Mouse            Click a piece, then a point
+  F1               These rules
+  M                Back to the menu
+  Q                Quit
+
+When a piece is picked up, the points it can go to are lit, and the geese a
+jump would kill turn red under the cursor.
+
+Our choice: where several series of jumps end on the same point, the program
+offers the one that kills the most geese.
+
+fox-and-geese --demo lets the computer play both sides; --seed N repeats a
+game exactly.
+
+References
+==========
+
+Bell, R. C. 1969. Board and Table Games from Many Civilizations. 2nd ed.
+Vol. 1. London: Oxford University Press.
+
+J. M. Kronheim & Co. 1840s. ‘J. M. Kronheim & Co.’s Fox & Goose Game’.
+London.
+https://digital.bodleian.ox.ac.uk/objects/86e30a19-7f3c-4d82-918c-f095f2f6076a/.
+
+The Boy’s Own Paper. 1879. ‘The Combined Solitaire and “Fox and Geese”
+Board’. London.
+https://digital.bodleian.ox.ac.uk/objects/daf37725-bb8a-48b7-8e01-abae86fa43bf/.
+
+Wikipedia. 2026a. ‘Asalto’. 2026. https://en.wikipedia.org/wiki/Asalto.
+
+---. 2026b. ‘Fox Games’. 2026. https://en.wikipedia.org/wiki/Fox_games.

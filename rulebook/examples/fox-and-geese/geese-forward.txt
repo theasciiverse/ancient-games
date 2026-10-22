@@ -1,0 +1,12 @@
+The goose on D4, the geese to move.
+Position:
+     A B C D E F G
+  1      . F .
+  2      . . .
+  3  . . . . . . .
+  4  . . . G . . .
+  5  . . . . . . .
+  6      . . .
+  7      . . .
+Bell, thirteen geese: D4 to C4, D3, D5, E4.
+Bell, seventeen geese: D4 to C4, D3, E4.

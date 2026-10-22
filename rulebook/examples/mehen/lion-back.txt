@@ -1,0 +1,4 @@
+Masters 2024, four players: the lions' team has lost a cat.
+The lions' cats: in reserve 2, dead 1.
+Right guess 1: cats in reserve 2, dead 1.
+Right guess 2: cats in reserve 3, dead 0 (one is back).

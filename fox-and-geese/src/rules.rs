@@ -74,7 +74,9 @@ pub struct Rules {
     pub geese: &'static [Point],
     /// Whether geese may move back, away from the fox's end (row 0).
     pub geese_back: bool,
-    pub summary: &'static [&'static str],
+    /// The heading of this rule set in the rulebook chapter (RULES.txt),
+    /// where the help opens.
+    pub section: &'static str,
 }
 
 /// Bell's fig. 62: the row below the middle and the lower arm.
@@ -111,12 +113,7 @@ impl Rules {
                      that may move any way along a line.",
             geese: &THIRTEEN,
             geese_back: true,
-            summary: &[
-                "Thirteen geese against one fox. The geese move first. Both move one point along a line, any way.",
-                "The fox kills a goose by jumping over it to the empty point beyond, and may jump again and again in one move. Geese cannot jump.",
-                "The geese win if the fox cannot move. The fox wins when three or fewer geese are left (that is too few to trap him anywhere on this board), or if the geese cannot move.",
-                "Capturing is not compulsory. Bell says the fox has the better of this early form.",
-            ],
+            section: "Bell, thirteen geese",
         }
     }
 
@@ -125,16 +122,10 @@ impl Rules {
             id: "seventeen",
             name: "Bell, seventeen geese",
             source: "R. C. Bell's later form (1960): seventeen geese, which \
-                     have lost the power of moving backwards. Played well, the \
-                     geese should win.",
+                     have lost the power of moving backwards.",
             geese: &SEVENTEEN,
             geese_back: false,
-            summary: &[
-                "Seventeen geese against one fox. The geese move first. The fox moves one point along a line, any way; a goose forward or sideways, never back.",
-                "The fox kills a goose by jumping over it to the empty point beyond, and may jump again and again in one move. Geese cannot jump.",
-                "The geese win if the fox cannot move. The fox wins when three or fewer geese are left (that is too few to trap him anywhere on this board), or if the geese cannot move.",
-                "Capturing is not compulsory. Bell: if the geese are correctly played the fox must lose.",
-            ],
+            section: "Bell, seventeen geese",
         }
     }
 

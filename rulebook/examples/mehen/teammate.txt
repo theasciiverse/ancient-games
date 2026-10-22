@@ -1,0 +1,6 @@
+Masters 2024, four players: a lions' pharaoh (L) moves 3 from 10.
+S is a pharaoh of the lionesses; square 0 is off the board.
+square     8   9  10  11  12  13  14  15  16
+before     .   .   L   .   .   L   .   .   .
+after      .   .   .   .   .   L   L   .   .
+It lands on 14, one further for each teammate (1).

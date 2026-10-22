@@ -1,2 +1,3 @@
 out/
 .book-*.typ
+__pycache__/

@@ -20,6 +20,14 @@ mkdir -p "$out"
 python3 figures/make_figures.py
 
 # Worked examples and screens from the games themselves (pictures.txt).
+# A game includes its chapter as RULES.txt, so a new chapter's crate gets
+# an empty one to compile with; the real text replaces it below.
+for chapter in chapters/[0-9][0-9]-*.md; do
+    crate=$(sed -n '1,/^---$/{s/^crate: *//p}' "$chapter" | head -n 1)
+    if [ -n "$crate" ] && [ ! -f "../$crate/RULES.txt" ]; then
+        : > "../$crate/RULES.txt"
+    fi
+done
 cargo build --release --quiet --manifest-path ../Cargo.toml --workspace
 bin=../target/release
 grep -v '^#' pictures.txt | while read -r kind package name rules seed seconds; do

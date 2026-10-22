@@ -6,7 +6,7 @@ use crate::app::{Game, Phase, lion_word};
 use crate::rules::{GRID, HOME, LIONS, Lion, Rules, SQUARES, Team, coil};
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, centre, fill, put, wrap};
 use ancient_core::player::Player;
-use ancient_core::shell::{Help, Menu};
+use ancient_core::shell::{self, Help, Menu};
 use ratatui::buffer::Buffer;
 use ratatui::layout::Rect;
 use ratatui::style::{Color, Modifier, Style};
@@ -409,57 +409,37 @@ pub fn menu(rules: &[Rules], chosen: usize) -> Menu<'_> {
     }
 }
 
-/// How to play, and what is known of the game.
-pub fn help(rules: &Rules) -> Vec<Help> {
-    let mut lines = vec![Help::Heading("HOW TO PLAY".into())];
-    if rules.pharaohs > 1 {
-        lines.push(Help::Text(format!(
-            "Two teams of {}: each player is one pharaoh, a marble racing the snake. You play \
-             a whole team.",
-            rules.pharaohs
-        )));
+/// The game's chapter of the rulebook, as plain text: the help, and
+/// RULES.txt in the release archives. Written by `rulebook/build.sh`.
+pub const RULES: &str = include_str!("../RULES.txt");
+
+/// How to play: the rulebook chapter, and the line where the rule set
+/// `rules` begins (every Mehen rule set is "Masters 2024").
+pub fn help(_rules: &Rules) -> (Vec<Help>, usize) {
+    let lines = shell::rules_help(RULES);
+    let at = shell::help_find(&lines, "Masters 2024").unwrap_or(0);
+    (lines, at)
+}
+
+#[cfg(test)]
+mod help_tests {
+    use super::*;
+
+    #[test]
+    fn the_help_opens_at_every_rule_set() {
+        let lines = shell::rules_help(RULES);
+        for _rules in Rules::all() {
+            assert!(shell::help_find(&lines, "Masters 2024").is_some(), "Masters 2024");
+        }
     }
-    lines.extend([
-        Help::Text(
-            "Race your pharaohs from the tail to the head of the snake, where they are reborn; \
-             no exact count is needed. The first team with every pharaoh reborn wins."
-                .into(),
-        ),
-        Help::Text(
-            "On a turn, your team picks a pharaoh and you hide 1 to 5 marbles in your fist. The \
-             other side guesses how many. Wrong: your pharaoh moves that many. Right: theirs \
-             moves that many instead, and they may set a lion on your pharaoh."
-                .into(),
-        ),
-        Help::Text(
-            "A pharaoh held by a lion cannot move until the lion is killed: the lion's side \
-             hides 1 to 3 marbles, and a right guess kills it (then the pharaoh moves as usual); \
-             a wrong one ends the turn. Two right guesses in a row for a move bring back a dead \
-             lion."
-                .into(),
-        ),
-        Help::Text(
-            "Land on an opponent and you change places (if you were just entering, it starts \
-             again). Land on a teammate and you go one further. A lion follows its pharaoh."
-                .into(),
-        ),
-        Help::Blank,
-        Help::Heading("KEYS".into()),
-        Help::Text(
-            "1 to 5, or arrows and Enter: hide or guess   Arrows and Enter: choose a pharaoh   \
-             Y\u{a0}or\u{a0}N: a lion   Mouse: click   M:\u{a0}menu   Q:\u{a0}quit"
-                .into(),
-        ),
-        Help::Blank,
-        Help::Heading("WHAT WE KNOW".into()),
-        Help::Quiet(
-            "Mehen boards, a snake coiled round its head, are known from Egypt's earliest \
-             dynasties, with lion and lioness pieces and small marbles; the game vanished \
-             after the Old Kingdom. No rules survive. This is James F. R. Masters' \
-             reconstruction (2024): the guessing with marbles he reads in the finds and tomb \
-             pictures of fists and open hands; the lions' part is his own suggestion."
-                .into(),
-        ),
-    ]);
-    lines
+
+    #[test]
+    fn the_rulebook_text_fits_the_help() {
+        // The help is 84 columns wide with 3 on each side. Only a single
+        // word, a web address, may be wider (the help runs it on).
+        for line in RULES.lines() {
+            let word = !line.trim().contains(' ');
+            assert!(line.chars().count() <= 78 || word, "too wide: {line}");
+        }
+    }
 }

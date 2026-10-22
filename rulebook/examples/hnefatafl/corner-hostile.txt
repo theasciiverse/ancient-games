@@ -1,0 +1,20 @@
+Brandubh 7x7: the attackers to move.
+Before:
+     a b c d e f g
+   7 + D . . . . +
+   6 . . . . . . .
+   5 . . A . . . .
+   4 . . . K . . .
+   3 . . . . . . .
+   2 . . . . . . .
+   1 + . . . . . +
+c5 to c7. Captured: b7.
+After:
+     a b c d e f g
+   7 + . A . . . +
+   6 . . . . . . .
+   5 . . . . . . .
+   4 . . . K . . .
+   3 . . . . . . .
+   2 . . . . . . .
+   1 + . . . . . +
