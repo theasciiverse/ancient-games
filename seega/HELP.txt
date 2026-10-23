@@ -1,0 +1,49 @@
+Seega
+Asciiverse
+2026-10-23
+
+A square of holes, five, seven or nine a side. Each player has a kelb
+(piece) for half the holes but the centre. Two each are set down on fixed
+holes; then the players set down two at a time, anywhere but the centre,
+until only the centre is empty. Then a move is one step, along a row or a
+column, into an empty hole. A kelb that comes to stand so that an enemy kelb
+lies between it and another of yours takes that enemy kelb; as long as you
+can take again at once, you move again. If you cannot move, the other must
+open a way by giving up a kelb of his. The rules in short follow; the full
+rules, the source and the history are in RULES.txt and the rulebook.
+
+Seega of five
+-------------
+
+- 5 by 5, twelve kelbs each. Stone has kelbs on c1 and c5, Brick on a3 and
+  e3. Then Stone sets down two, Brick two, and so on, anywhere but the
+  centre c3.
+- Brick, who placed last, moves first: a step into the centre. Our choice;
+  Lane does not say who begins.
+- A move: one step along a row or column into an empty hole.
+- Taking: a kelb that steps so that an enemy kelb lies between it and
+  another of yours, in a row or column, takes it; several at once if so
+  placed. A kelb may step in between two enemies safely.
+- After taking, if you can take again at once (with any kelb), you must move
+  again, and only to take.
+- No move: the other gives up a kelb next to one of yours, and you move.
+- A side with no kelbs has lost. Our choice: after 40 moves with nothing
+  taken or given, more kelbs win; equal is a draw.
+
+Seega of seven and of nine
+--------------------------
+
+- The seb’áwee, 7 by 7, twenty-four kelbs each, and the tis’áwee, 9 by 9,
+  forty each. The same rules as on the board of five.
+- The first four kelbs stand on the middle holes of the outer rows (Stone)
+  and outer columns (Brick), as on Lane’s board of five. Our choice.
+
+Playing it in the terminal
+--------------------------
+
+- Arrows: move the cursor; Enter or Space: set a kelb down, give one up, or
+  pick one up and put it on a lit hole; Esc: let go. Or click.
+- The kelbs a step would take are marked ✕ when the cursor is on where it
+  goes.
+- When the game is over, Enter plays again.
+- M: menu; F1: this help; Q: quit.

@@ -15,6 +15,7 @@ at three strengths.
 | Morris | `morris` | Nine Men's Morris (today's rules, and after Bell), Morabaraba (Mind Sports South Africa), Six Men's Morris after Bell, Three Men's Morris after Bell, and placing only |
 | Mū tōrere | `mu-torere` | The pūtahi beside an enemy (as most give it today), and Best 1925 as he wrote it |
 | Kōnane | `konane` | Ernst 1995 (8 by 8), Modern Kōnane, Puʻuhonua o Hōnaunau (9 by 11), King's papamū of 1779 (14 by 17) |
+| Seega | `seega` | Lane 1836, on his boards of five, seven and nine |
 
 Every game: play the computer (easy, normal or hard) or a friend at the
 same keyboard; keys and mouse; F1 for the rules, where each one comes

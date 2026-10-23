@@ -20,8 +20,9 @@ Beside the Royal Game of Ur and Senet.
 
 - [ ] **Hounds and Jackals, or 58 Holes**: a race game with pegs, found
   in Egypt and Mesopotamia. Nothing found.
-- [ ] **Seega**: an Egyptian game of placing and capturing. One small
-  student project.
+- [x] **Seega**: `seega` (2026-10-23), Lane's 1836 account on his
+  three boards (5, 7, 9); see `CLAUDE.md`. Not yet read: Bell's account,
+  and anything dating the game before Lane.
 
 ## Greece and Rome
 

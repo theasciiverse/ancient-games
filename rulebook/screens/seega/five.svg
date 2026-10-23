@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600" shape-rendering="crispEdges">
+<rect width="1000" height="600" fill="#101014"/>
+<rect x="0" y="0" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="20" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="40" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="60" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="80" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="100" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="120" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="140" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="160" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="180" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="200" width="210" height="20.5" fill="#0a0a0e"/>
+<rect x="210" y="200" width="230" height="20.5" fill="#96764e"/>
+<rect x="440" y="200" width="560" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="220" width="210" height="20.5" fill="#0a0a0e"/>
+<rect x="210" y="220" width="230" height="20.5" fill="#96764e"/>
+<rect x="440" y="220" width="560" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="240" width="210" height="20.5" fill="#0a0a0e"/>
+<rect x="210" y="240" width="230" height="20.5" fill="#96764e"/>
+<rect x="440" y="240" width="560" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="260" width="210" height="20.5" fill="#0a0a0e"/>
+<rect x="210" y="260" width="230" height="20.5" fill="#96764e"/>
+<rect x="440" y="260" width="560" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="280" width="210" height="20.5" fill="#0a0a0e"/>
+<rect x="210" y="280" width="230" height="20.5" fill="#96764e"/>
+<rect x="440" y="280" width="560" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="300" width="210" height="20.5" fill="#0a0a0e"/>
+<rect x="210" y="300" width="230" height="20.5" fill="#96764e"/>
+<rect x="440" y="300" width="560" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="320" width="210" height="20.5" fill="#0a0a0e"/>
+<rect x="210" y="320" width="230" height="20.5" fill="#96764e"/>
+<rect x="440" y="320" width="560" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="340" width="210" height="20.5" fill="#0a0a0e"/>
+<rect x="210" y="340" width="230" height="20.5" fill="#96764e"/>
+<rect x="440" y="340" width="560" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="360" width="210" height="20.5" fill="#0a0a0e"/>
+<rect x="210" y="360" width="230" height="20.5" fill="#96764e"/>
+<rect x="440" y="360" width="560" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="380" width="210" height="20.5" fill="#0a0a0e"/>
+<rect x="210" y="380" width="230" height="20.5" fill="#96764e"/>
+<rect x="440" y="380" width="560" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="400" width="210" height="20.5" fill="#0a0a0e"/>
+<rect x="210" y="400" width="230" height="20.5" fill="#96764e"/>
+<rect x="440" y="400" width="560" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="420" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="440" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="460" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="480" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="500" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="520" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="540" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="560" width="1000" height="20.5" fill="#0a0a0e"/>
+<rect x="0" y="580" width="1000" height="20.5" fill="#0a0a0e"/>
+<g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="16" xml:space="preserve">
+<text x="240 280 320 360 400" y="195" fill="#78746c">abcde</text>
+<text x="470 480 490 500 510" y="215" fill="#ffb000" font-weight="bold">SEEGA</text>
+<text x="190" y="235" fill="#78746c">1</text>
+<text x="240" y="235" fill="#5c442a" font-weight="bold">●</text>
+<text x="280" y="235" fill="#cdc8bc" font-weight="bold">●</text>
+<text x="320" y="235" fill="#b23422" font-weight="bold">●</text>
+<text x="360" y="235" fill="#5c442a" font-weight="bold">●</text>
+<text x="400" y="235" fill="#b23422" font-weight="bold">●</text>
+<text x="470 480 490 500 510 530 540 560 570 580 590 610 620 630 640 650 660 670 680 690 700 710" y="235" fill="#78746c">Seegaoffive(khamsáwee)</text>
+<text x="190" y="275" fill="#78746c">2</text>
+<text x="240" y="275" fill="#cdc8bc" font-weight="bold">●</text>
+<text x="280" y="275" fill="#b23422" font-weight="bold">●</text>
+<text x="320 360" y="275" fill="#5c442a" font-weight="bold">●●</text>
+<text x="400" y="275" fill="#b23422" font-weight="bold">●</text>
+<text x="490" y="275" fill="#cdc8bc">●</text>
+<text x="510 520 530 540 550 570 580 590 600 610 620 630 640 650 660 680 690 700 710 720 730 740 750 770" y="275" fill="#c8c4ba">Stone(computer,normal),6</text>
+<text x="470" y="295" fill="#ffb000" font-weight="bold">▶</text>
+<text x="490" y="295" fill="#b23422">●</text>
+<text x="510 520 530 540 550 570 580 590 600 610 620 630 640 650 660 680 690 700 710 720 730 750 760" y="295" fill="#ffb000" font-weight="bold">Brick(computer,hard),12</text>
+<text x="190" y="315" fill="#78746c">3</text>
+<text x="240" y="315" fill="#cdc8bc" font-weight="bold">●</text>
+<text x="280" y="315" fill="#b23422" font-weight="bold">●</text>
+<text x="320 360" y="315" fill="#5c442a" font-weight="bold">◯●</text>
+<text x="390" y="315" fill="#c8c4ba">·</text>
+<text x="400" y="315" fill="#b23422" font-weight="bold">●</text>
+<text x="410" y="315" fill="#c8c4ba">·</text>
+<text x="470 480 490 500 510 520 540 550 560 570 580" y="315" fill="#78746c">Takingagain</text>
+<text x="190" y="355" fill="#78746c">4</text>
+<text x="240 280 320" y="355" fill="#b23422" font-weight="bold">●●●</text>
+<text x="360" y="355" fill="#cdc8bc" font-weight="bold">●</text>
+<text x="400" y="355" fill="#ffd65a" font-weight="bold">·</text>
+<text x="470 480 490 500 510 530 540 550 560 570 590 600 620 630 650 660 670 690 700 710 720 730 740 760 770 780" y="355" fill="#c8c4ba">Brickmovesd3toe3,takinge4.</text>
+<text x="470 480 490 500 510 530 540 550 560 570 590 600 610 620 630 640" y="375" fill="#c8c4ba">Bricktakesagain.</text>
+<text x="190" y="395" fill="#78746c">5</text>
+<text x="240 280" y="395" fill="#b23422" font-weight="bold">●●</text>
+<text x="320 360" y="395" fill="#cdc8bc" font-weight="bold">●●</text>
+<text x="400" y="395" fill="#b23422" font-weight="bold">●</text>
+<text x="470 480 490 500 510 520 530 540 550 560 570" y="395" fill="#78746c">thinking...</text>
+<text x="470 480 490 510 520 530 540 580 590 610 620 630 640" y="535" fill="#78746c">F1:helpQ:quit</text>
+</g>
+</svg>
