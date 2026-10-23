@@ -537,7 +537,10 @@ after a mill, the men it may take turn red.
 The computer plays at three strengths. Easy searches two moves ahead
 and now and then plays any move at all; normal searches four moves deep;
 hard searches as deep as it can in a second and a half. All three keep
-away from positions the game has already seen.
+away from positions the game has already seen. Three Men's Morris is
+small enough to solve when the game starts, a few thousand positions,
+and hard plays both its forms perfectly: as the first player in the
+moving game it always wins.
 
 `morris --demo` lets the computer play both sides; `--seed N` repeats a
 game exactly.

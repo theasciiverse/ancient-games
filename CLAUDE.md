@@ -189,7 +189,9 @@ beats normal 9/10 at Six, 8/10 at Bell's Nine, 7/10 at Three. At today's
 Nine it was 4/10 until the judgement learned reachable threats and the
 swinging double mill (Zwickmühle): 8/10. At Morabaraba White won every
 game whatever the strength (Gévay and Danner: a White win), so 5/10.
-The full table was not rerun after the judgement change.
+The full table was not rerun after the judgement change. Since
+2026-10-23 hard plays both forms of Three Men's Morris perfectly from the
+solved game (`rules::Solved`, worked out once on first use).
 
 ## Mū tōrere and Kōnane
 
@@ -229,8 +231,11 @@ moves, any kelb). Our choices, each in the chapter: Stone places first,
 Brick moves first; orthogonal steps and custodian capture, only by the
 kelb moved; the end (no kelbs loses; 40 moves with nothing taken or
 given: more kelbs win, equal draws). AI: alpha-beta as Kōnane, judging
-kelbs then captures to hand; a quarter of the time while placing. Not
-read: Bell, anything dating seega before Lane.
+kelbs then captures to hand; a quarter of the time while placing.
+Measured 2026-10-23 on the board of five (`SEEGA_ONLY=five`, see the
+`strengths` test): hard beats easy 6/6 and normal 5/6; normal at depth 3
+beat easy only 3/6, at depth 4 10/10. Not read: Bell, anything dating
+seega before Lane.
 
 ## Roadmap
 

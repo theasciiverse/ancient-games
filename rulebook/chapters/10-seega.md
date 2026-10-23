@@ -191,7 +191,7 @@ you play.
 
 The computer searches ahead and judges a position by the kelbs each
 side has, then by the captures each could make next: easy one move
-ahead and now and then any move at all, normal three, hard as deep as
+ahead and now and then any move at all, normal four, hard as deep as
 it can in a second and a half (a quarter of that while placing).
 
 `seega --demo` lets the computer play both sides; `--seed N` repeats a

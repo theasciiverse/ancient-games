@@ -586,6 +586,106 @@ pub fn bits(mut set: u32) -> impl Iterator<Item = usize> {
     })
 }
 
+/// A small game solved: every position reachable from the start, worked
+/// back from every end. Three Men's Morris has a few thousand, so the
+/// hard computer plays it perfectly from this.
+pub struct Solved {
+    /// For each position, for the side to move: 1 won, -1 lost, 0 drawn
+    /// (or only able to go round in circles), and the round of the working
+    /// back at which that was found, the moves to the end for a win or a
+    /// loss.
+    table: std::collections::HashMap<Position, (i8, u16)>,
+}
+
+impl Solved {
+    pub fn new(rules: &Rules) -> Solved {
+        use std::collections::HashMap;
+        let b = rules.board();
+        let start = Position::new(rules);
+        let mut index: HashMap<Position, usize> = HashMap::new();
+        let mut all = vec![start.clone()];
+        index.insert(start, 0);
+        let mut next: Vec<Vec<usize>> = Vec::new();
+        let mut i = 0;
+        while i < all.len() {
+            let p = all[i].clone();
+            let mut out = Vec::new();
+            if p.outcome(rules, &b).is_none() {
+                for mv in p.moves(rules, &b) {
+                    let mut q = p.clone();
+                    q.play(rules, &b, &mv);
+                    let n = all.len();
+                    let j = *index.entry(q.clone()).or_insert(n);
+                    if j == n {
+                        all.push(q);
+                    }
+                    out.push(j);
+                }
+            }
+            next.push(out);
+            i += 1;
+        }
+        let mut value: Vec<(i8, u16)> = all
+            .iter()
+            .map(|p| match p.outcome(rules, &b) {
+                Some(Outcome::Won(s, _)) if s == p.to_move => (1, 0),
+                Some(Outcome::Won(..)) => (-1, 0),
+                _ => (0, 0),
+            })
+            .collect();
+        // Round by round, so that a win found in round n is n moves from
+        // its end, at most.
+        let mut round = 0;
+        loop {
+            round += 1;
+            let mut found = Vec::new();
+            for k in 0..all.len() {
+                if value[k].0 != 0 || next[k].is_empty() {
+                    continue;
+                }
+                if next[k].iter().any(|&j| value[j].0 == -1) {
+                    found.push((k, 1));
+                } else if next[k].iter().all(|&j| value[j].0 == 1) {
+                    found.push((k, -1));
+                }
+            }
+            if found.is_empty() {
+                break;
+            }
+            for (k, v) in found {
+                value[k] = (v, round);
+            }
+        }
+        Solved { table: all.into_iter().zip(value).collect() }
+    }
+
+    /// The value of a position for the side to move, and its distance.
+    pub fn value(&self, p: &Position) -> Option<(i8, u16)> {
+        self.table.get(p).copied()
+    }
+
+    /// The best move: the quickest win, else a draw, else the slowest
+    /// loss.
+    pub fn best(&self, rules: &Rules, board: &Board, p: &Position) -> Option<Move> {
+        p.moves(rules, board)
+            .into_iter()
+            .filter_map(|mv| {
+                let mut q = p.clone();
+                q.play(rules, board, &mv);
+                let (v, d) = self.value(&q)?;
+                // The value for the mover: the other side's, turned round.
+                let key = match -v {
+                    1 => 3_000_000 - d as i32,
+                    0 => 0,
+                    _ => -3_000_000 + d as i32,
+                };
+                Some((key, mv))
+            })
+            .max_by_key(|&(key, _)| key)
+            .map(|(_, mv)| mv)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -795,63 +895,10 @@ mod tests {
         assert_eq!(p.outcome(&rules, &b), Some(Outcome::Drawn(Why::Quiet)));
     }
 
-    /// The value of the start for White under perfect play, by working
-    /// back from every end over all positions reachable (small boards
-    /// only): 1 a win, 0 a draw, -1 a loss. A position that can only go
-    /// round in circles is a draw.
+    /// The value of the start for the first player: 1 a win, 0 a draw,
+    /// -1 a loss.
     fn solve(rules: &Rules) -> i32 {
-        use std::collections::HashMap;
-        let b = rules.board();
-        let start = Position::new(rules);
-        let mut index: HashMap<Position, usize> = HashMap::new();
-        let mut all = vec![start.clone()];
-        index.insert(start, 0);
-        let mut next: Vec<Vec<usize>> = Vec::new();
-        let mut i = 0;
-        while i < all.len() {
-            let p = all[i].clone();
-            let mut out = Vec::new();
-            for mv in p.moves(rules, &b) {
-                let mut q = p.clone();
-                q.play(rules, &b, &mv);
-                let n = all.len();
-                let j = *index.entry(q.clone()).or_insert(n);
-                if j == n {
-                    all.push(q);
-                }
-                out.push(j);
-            }
-            next.push(out);
-            i += 1;
-        }
-        // For the side to move: 1 won, -1 lost, 0 not yet known or drawn.
-        let mut value: Vec<i32> = all
-            .iter()
-            .map(|p| match p.outcome(rules, &b) {
-                Some(Outcome::Won(s, _)) if s == p.to_move => 1,
-                Some(Outcome::Won(..)) => -1,
-                _ => 0,
-            })
-            .collect();
-        loop {
-            let mut changed = false;
-            for k in 0..all.len() {
-                if value[k] != 0 || next[k].is_empty() {
-                    continue;
-                }
-                if next[k].iter().any(|&j| value[j] == -1) {
-                    value[k] = 1;
-                    changed = true;
-                } else if next[k].iter().all(|&j| value[j] == 1) {
-                    value[k] = -1;
-                    changed = true;
-                }
-            }
-            if !changed {
-                break;
-            }
-        }
-        value[0]
+        Solved::new(rules).value(&Position::new(rules)).map_or(0, |(v, _)| v as i32)
     }
 
     /// Bell: in his second form "the first player could always force a

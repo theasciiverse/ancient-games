@@ -216,14 +216,23 @@ mod tests {
     }
 
     /// Measures the strengths against each other, each side in turn:
-    /// `cargo test --release -p mancala strengths -- --ignored --nocapture`.
+    /// `cargo test --release -p mancala strengths -- --ignored --nocapture`
+    /// (`MANCALA_GAMES=n`, `MANCALA_ONLY=<id>` one rule set,
+    /// `MANCALA_HARD=1` only hard against normal).
     #[test]
     #[ignore]
     fn strengths() {
         use Strength::*;
-        let n = 10;
-        for rules in [Rules::oware(), Rules::kalah(), Rules::toguz(), Rules::bohnenspiel()] {
-            for (a, b) in [(Normal, Easy), (Hard, Easy), (Hard, Normal)] {
+        let n: u64 = std::env::var("MANCALA_GAMES").ok().and_then(|s| s.parse().ok()).unwrap_or(10);
+        let only = std::env::var("MANCALA_ONLY").ok();
+        let pairs: &[(Strength, Strength)] = if std::env::var("MANCALA_HARD").is_ok() {
+            &[(Hard, Normal)]
+        } else {
+            &[(Normal, Easy), (Hard, Easy), (Hard, Normal)]
+        };
+        let all = [Rules::oware(), Rules::kalah(), Rules::toguz(), Rules::bohnenspiel()];
+        for rules in all.into_iter().filter(|r| only.as_deref().is_none_or(|o| o == r.id)) {
+            for &(a, b) in pairs {
                 let (mut wins, mut draws) = (0, 0);
                 for seed in 0..n {
                     let (strengths, me) = if seed % 2 == 0 { ([a, b], Side::South) } else { ([b, a], Side::North) };

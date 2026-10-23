@@ -8,9 +8,10 @@
 
 pub use ancient_core::player::Strength;
 
-use crate::rules::{Board, Move, Outcome, Position, Rules, Side, bits};
+use crate::rules::{Board, Layout, Move, Outcome, Position, Rules, Side, Solved, bits};
 use ancient_core::rng::Rng;
 use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
 /// How often a beginner plays any legal move instead of its best, in
@@ -52,6 +53,13 @@ pub fn choose(
     }
     if strength == Strength::Easy && rng.next() % 16 < BEGINNER_SLIPS {
         return Some(moves[(rng.next() % moves.len() as u64) as usize]);
+    }
+    // Three Men's Morris is small enough to know: hard plays it perfectly.
+    if strength == Strength::Hard
+        && matches!(rules.layout, Layout::Three { .. })
+        && let Some(mv) = solved(rules).best(rules, board, position)
+    {
+        return Some(mv);
     }
     let (time, max_depth) = budget(strength);
     let mut search = Search { rules, board, start: Instant::now(), time, table: HashMap::new(), out_of_time: false };
@@ -98,6 +106,18 @@ pub fn choose(
         }
     }
     Some(best)
+}
+
+/// The solution of a small rule set, worked out once.
+fn solved(rules: &Rules) -> Arc<Solved> {
+    static SOLVED: Mutex<Vec<(&'static str, Arc<Solved>)>> = Mutex::new(Vec::new());
+    let mut all = SOLVED.lock().unwrap_or_else(|e| e.into_inner());
+    if let Some((_, s)) = all.iter().find(|(id, _)| *id == rules.id) {
+        return s.clone();
+    }
+    let s = Arc::new(Solved::new(rules));
+    all.push((rules.id, s.clone()));
+    s
 }
 
 /// What a stored value is: exact, or only a bound because the search of
@@ -364,6 +384,19 @@ mod tests {
         for rules in Rules::all() {
             let o = game(&rules, [Strength::Easy, Strength::Easy], 5);
             println!("{}: {o:?}", rules.id);
+        }
+    }
+
+    /// From the solution, hard wins Three Men's Morris whenever it moves
+    /// first (moving second, a perfect opponent wins).
+    #[test]
+    fn hard_plays_three_mens_morris_perfectly() {
+        use Strength::*;
+        let rules = Rules::three_moving();
+        for seed in 1..=4 {
+            for other in [Easy, Normal] {
+                assert!(matches!(game(&rules, [Hard, other], seed), Some(Outcome::Won(Side::White, _))), "{seed}");
+            }
         }
     }
 
