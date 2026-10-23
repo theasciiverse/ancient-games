@@ -189,9 +189,12 @@ beats normal 9/10 at Six, 8/10 at Bell's Nine, 7/10 at Three. At today's
 Nine it was 4/10 until the judgement learned reachable threats and the
 swinging double mill (Zwickmühle): 8/10. At Morabaraba White won every
 game whatever the strength (Gévay and Danner: a White win), so 5/10.
-The full table was not rerun after the judgement change. Since
-2026-10-23 hard plays both forms of Three Men's Morris perfectly from the
-solved game (`rules::Solved`, worked out once on first use).
+Since 2026-10-23 hard plays both forms of Three Men's Morris perfectly
+from the solved game (`rules::Solved`, worked out once on first use).
+Full table rerun 2026-10-24, 10 games each (normal/easy, hard/easy,
+hard/normal): Nine today 9, 9, 8 (1 drawn); Bell's Nine 9, 9, 9;
+Morabaraba 8, 10, 9; Six 10, 10, 8; Three 10, 10, 5 (3 drawn: hard wins
+every game as the first player, and as the second cannot force one).
 
 ## Mū tōrere and Kōnane
 
@@ -213,7 +216,10 @@ claim here. Just making some games."). Chapters 08 and 09, sources in
   King, Corney, Andrews; Emerson in Malo 1903). Ernst 1995 (after Emory
   1924, Buck 1957) for the opening and multiple jumps, and his Modern
   Konane; NPS leaflet of Puʻuhonua o Hōnaunau (lift anywhere). King 1779:
-  238 squares, 14 in a row. AI: alpha-beta on mobility.
+  238 squares, 14 in a row. AI: alpha-beta on mobility. Measured
+  2026-10-24 (`strengths` test, `KONANE_ONLY`, 10 games each): Ernst 8x8
+  normal beats easy 10/10, hard beats easy 10/10, normal 7/10; Hōnaunau
+  9x11 8, 10, 8.
 - Preview casts and website mockup entries 2026-10-23 (version 0.4.0).
 
 ## Seega
