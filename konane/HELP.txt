@@ -1,0 +1,53 @@
+Kōnane
+Asciiverse
+2026-10-23
+
+Every hollow of the board (papamū) is filled with black and white stones in
+turn, so each diagonal is of one colour. Two stones are lifted out to begin.
+Then a move is a jump: one of your stones leaps an enemy stone next to it,
+along a row or a column, into the empty hollow beyond, and takes it; it may
+jump on along the same line. Who cannot jump has lost. The rules of each
+form in short follow; the full rules, their sources and the history are in
+RULES.txt and the rulebook.
+
+Kōnane after Ernst
+------------------
+
+- 8 by 8, every hollow filled. Black begins.
+- Black lifts one of his stones in the middle (one of the central four) or
+  at a corner; White then lifts one of his next to that hollow.
+- Then each in turn jumps: over an enemy stone next to his, along a row or
+  column, into the empty hollow beyond, taking it. He may jump on in the
+  same direction, over stone after stone, and stop when he likes; never
+  diagonally, never turning.
+- Who cannot jump has lost. Jumping is never forced beyond that.
+
+Modern Kōnane
+-------------
+
+- As Kōnane after Ernst, but a move is a single jump: one enemy stone taken,
+  never more.
+
+Puʻuhonua o Hōnaunau
+--------------------
+
+- 9 rows by 11, as the old stone papamū at Puʻuhonua o Hōnaunau.
+- Black lifts any one of his stones; White any one of his.
+- Then jumps as after Ernst: on along a line if you like, never turning. The
+  player who makes the last jump wins.
+
+King’s papamū
+-------------
+
+- 14 rows by 17: the board of 238 squares, 14 in a row, that James King saw
+  in 1779.
+- Ernst’s rules, as in the first rule set.
+
+Playing it in the terminal
+--------------------------
+
+- Arrows: move the cursor; Enter or Space: lift a lit stone (at the start),
+  or pick up a stone and land it on a lit hollow; Esc: let go. Or click.
+- The stones a jump would take turn red when the cursor is on its landing.
+- When the game is over, Enter plays again.
+- M: menu; F1: this help; Q: quit.

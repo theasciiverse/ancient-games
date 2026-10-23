@@ -1,0 +1,9 @@
+  8 --- 1 --- 2        B --- W --- W
+  | \   |   / |        | \   |   / |
+  7 --- P --- 3        B --- . --- W
+  | /   |   \ |        | /   |   \ |
+  6 --- 5 --- 4        B --- B --- W
+
+The board drawn square: the kewai 1 to 8 round the edge, each joined
+to its two neighbours and to the pūtahi P in the middle. Right: the
+start, White (W) on 1 to 4, Black (B) on 5 to 8, the pūtahi empty.

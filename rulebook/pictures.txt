@@ -40,3 +40,9 @@ examples morris
 screen morris nine 0 3 30
 screen morris morabaraba 2 3 30
 screen morris three 4 3 12
+
+examples mu-torere
+screen mu-torere beside-enemy 0 3 20
+
+examples konane
+screen konane ernst 0 3 30

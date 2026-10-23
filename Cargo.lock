@@ -718,6 +718,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "konane"
+version = "0.3.0"
+dependencies = [
+ "ancient-core",
+ "env_logger",
+ "log",
+ "ratatui",
+]
+
+[[package]]
 name = "lab"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -857,6 +867,16 @@ dependencies = [
 
 [[package]]
 name = "morris"
+version = "0.3.0"
+dependencies = [
+ "ancient-core",
+ "env_logger",
+ "log",
+ "ratatui",
+]
+
+[[package]]
+name = "mu-torere"
 version = "0.3.0"
 dependencies = [
  "ancient-core",

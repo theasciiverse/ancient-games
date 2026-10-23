@@ -1,0 +1,18 @@
+Tuta Nihoniho's game (Best 1925, p. 111), B opening:
+  B: kewai 5 to the pūtahi (beside an enemy)
+  A: kewai 4 to kewai 5
+  B: the pūtahi to kewai 4
+  A: kewai 3 to the pūtahi (beside an enemy)
+  B: kewai 4 to kewai 3
+  A: the pūtahi to kewai 4
+  B: kewai 3 to the pūtahi (beside an enemy)
+  A: kewai 2 to kewai 3
+  B: the pūtahi to kewai 2
+  A: kewai 4 to the pūtahi (not beside an enemy)
+The end:
+  B --- W --- B        8 --- 1 --- 2
+  | \   |   / |        | \   |   / |
+  B --- W --- W        7 --- P --- 3
+  | /   |   \ |        | /   |   \ |
+  B --- W --- .        6 --- 5 --- 4
+B to move: blocked, A has won.

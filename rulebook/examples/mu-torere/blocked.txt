@@ -1,0 +1,9 @@
+The pūtahi beside an enemy: Black to move.
+Position:
+  B --- W --- W        8 --- 1 --- 2
+  | \   |   / |        | \   |   / |
+  B --- W --- .        7 --- P --- 3
+  | /   |   \ |        | /   |   \ |
+  B --- B --- W        6 --- 5 --- 4
+Black's moves: none.
+White wins: Black's men are nowhere near kewai 3.

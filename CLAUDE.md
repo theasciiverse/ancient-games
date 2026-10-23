@@ -5,7 +5,7 @@ the oldest: the Royal Game of Ur, Senet, Mehen, Hnefatafl and Fox &
 Geese (David, 2026-10-20), then the mancala games (2026-10-22). More to
 follow.
 
-**Status (2026-10-23):** seven games playable, each its own binary, all
+**Status (2026-10-23):** nine games playable, each its own binary, all
 with the computer at three strengths or two players at one keyboard, keys
 and mouse, a menu of rule sets with sources, and help:
 
@@ -26,6 +26,10 @@ and mouse, a menu of rule sets with sources, and help:
 - Morris (`morris/`, `morris`, 2026-10-23): Nine Men's Morris (today's
   rules, after Bell), Morabaraba (Mind Sports South Africa), Six and Three
   Men's Morris after Bell, Three Men's placing only; see "Morris" below
+- Mū tōrere (`mu-torere/`, 2026-10-23): the pūtahi beside an enemy, and
+  Best 1925 as written; see "Mū tōrere and Kōnane" below
+- Kōnane (`konane/`, 2026-10-23): Ernst 8x8, Modern (one jump), Puʻuhonua
+  o Hōnaunau 9x11, King's papamū 14x17
 
 All five games first planned are in, Mancala since 2026-10-22 and
 Morris since 2026-10-23. On the website mockup as seven separate titles in the collection
@@ -180,6 +184,29 @@ Nine it was 4/10 until the judgement learned reachable threats and the
 swinging double mill (Zwickmühle): 8/10. At Morabaraba White won every
 game whatever the strength (Gévay and Danner: a White win), so 5/10.
 The full table was not rerun after the judgement change.
+
+## Mū tōrere and Kōnane
+
+Both 2026-10-23, kept small (David: "We are not making a scientific
+claim here. Just making some games."). Chapters 08 and 09, sources in
+`rulebook/bib/mu-torere.bib` and `konane.bib`, downloads in
+`~/references/ancient-games/mu-torere/` and `konane/`.
+
+- Mū tōrere: 1,180 positions, solved at the start (`rules::solve`);
+  hard perfect, normal slips, easy random but no blunder one move off.
+  The board's joins are those of Three Men's Morris with diagonals; the
+  program draws a dotted ring and spokes. Best 1925 (pp. 110-113, from
+  Tuta Nihoniho) restricts only the opening move into the pūtahi; read
+  so, the opener loses in two. The common "beside an enemy" rule (always)
+  makes it a draw; its first source is unknown (Wikipedia, uncited;
+  Ascher 1987 not read). Tuta's sample game breaks the strict rule on its
+  last move: shown as a worked example.
+- Kōnane: no early source gives full rules (Culin 1899 compiles Brigham,
+  King, Corney, Andrews; Emerson in Malo 1903). Ernst 1995 (after Emory
+  1924, Buck 1957) for the opening and multiple jumps, and his Modern
+  Konane; NPS leaflet of Puʻuhonua o Hōnaunau (lift anywhere). King 1779:
+  238 squares, 14 in a row. AI: alpha-beta on mobility.
+- Not yet: preview casts, website mockup entries.
 
 ## Roadmap
 

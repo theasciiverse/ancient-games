@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" width="420" height="420" font-family="Libertinus Serif, Georgia, serif">
+<circle cx="210" cy="210" r="190" fill="#f4ecdc"/>
+<polygon points="210.0,60.0 234.1,151.8 316.1,103.9 268.2,185.9 360.0,210.0 268.2,234.1 316.1,316.1 234.1,268.2 210.0,360.0 185.9,268.2 103.9,316.1 151.8,234.1 60.0,210.0 151.8,185.9 103.9,103.9 185.9,151.8" fill="none" stroke="#2b2b2b" stroke-width="2.5"/>
+<line x1="210" y1="210" x2="210.0" y2="60.0" stroke="#2b2b2b" stroke-width="1.2" stroke-dasharray="4 4"/>
+<line x1="210" y1="210" x2="316.1" y2="103.9" stroke="#2b2b2b" stroke-width="1.2" stroke-dasharray="4 4"/>
+<line x1="210" y1="210" x2="360.0" y2="210.0" stroke="#2b2b2b" stroke-width="1.2" stroke-dasharray="4 4"/>
+<line x1="210" y1="210" x2="316.1" y2="316.1" stroke="#2b2b2b" stroke-width="1.2" stroke-dasharray="4 4"/>
+<line x1="210" y1="210" x2="210.0" y2="360.0" stroke="#2b2b2b" stroke-width="1.2" stroke-dasharray="4 4"/>
+<line x1="210" y1="210" x2="103.9" y2="316.1" stroke="#2b2b2b" stroke-width="1.2" stroke-dasharray="4 4"/>
+<line x1="210" y1="210" x2="60.0" y2="210.0" stroke="#2b2b2b" stroke-width="1.2" stroke-dasharray="4 4"/>
+<line x1="210" y1="210" x2="103.9" y2="103.9" stroke="#2b2b2b" stroke-width="1.2" stroke-dasharray="4 4"/>
+<circle cx="210.0" cy="60.0" r="15" fill="#ffffff" stroke="#2b2b2b" stroke-width="2.5"/>
+<text x="210.0" y="36.0" font-size="17" text-anchor="middle" fill="#b5432a">1</text>
+<circle cx="316.1" cy="103.9" r="15" fill="#ffffff" stroke="#2b2b2b" stroke-width="2.5"/>
+<text x="337.3" y="88.7" font-size="17" text-anchor="middle" fill="#b5432a">2</text>
+<circle cx="360.0" cy="210.0" r="15" fill="#ffffff" stroke="#2b2b2b" stroke-width="2.5"/>
+<text x="390.0" y="216.0" font-size="17" text-anchor="middle" fill="#b5432a">3</text>
+<circle cx="316.1" cy="316.1" r="15" fill="#ffffff" stroke="#2b2b2b" stroke-width="2.5"/>
+<text x="337.3" y="343.3" font-size="17" text-anchor="middle" fill="#b5432a">4</text>
+<circle cx="210.0" cy="360.0" r="15" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="2.5"/>
+<text x="210.0" y="396.0" font-size="17" text-anchor="middle" fill="#b5432a">5</text>
+<circle cx="103.9" cy="316.1" r="15" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="2.5"/>
+<text x="82.7" y="343.3" font-size="17" text-anchor="middle" fill="#b5432a">6</text>
+<circle cx="60.0" cy="210.0" r="15" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="2.5"/>
+<text x="30.0" y="216.0" font-size="17" text-anchor="middle" fill="#b5432a">7</text>
+<circle cx="103.9" cy="103.9" r="15" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="2.5"/>
+<text x="82.7" y="88.7" font-size="17" text-anchor="middle" fill="#b5432a">8</text>
+<circle cx="210" cy="210" r="15" fill="#f4ecdc" stroke="#2b2b2b" stroke-width="2.5"/>
+</svg>

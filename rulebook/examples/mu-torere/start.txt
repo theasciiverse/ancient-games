@@ -1,0 +1,8 @@
+The pūtahi beside an enemy: the start, White to move.
+Position:
+  B --- W --- W        8 --- 1 --- 2
+  | \   |   / |        | \   |   / |
+  B --- . --- W        7 --- P --- 3
+  | /   |   \ |        | /   |   \ |
+  B --- B --- W        6 --- 5 --- 4
+White's moves: kewai 1 to the pūtahi; kewai 4 to the pūtahi.
