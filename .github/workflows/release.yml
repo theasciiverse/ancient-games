@@ -106,6 +106,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$TAG" dist/* --repo "${{ github.repository }}" \
-            --title "Ancient Games $TAG" \
-            --notes "The Royal Game of Ur, Senet, Mehen, Hnefatafl, Fox and Geese, Mancala, Morris, Mū tōrere and Kōnane, one archive per game and platform."
+          # the release may already exist, made by hand with the rulebook
+          # PDF on it, so make it only if missing and add the archives
+          gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null 2>&1 ||
+            gh release create "$TAG" --repo "${{ github.repository }}" \
+              --title "Ancient Games $TAG" \
+              --notes "The Royal Game of Ur, Senet, Mehen, Hnefatafl, Fox and Geese, Mancala, Morris, Mū tōrere and Kōnane, one archive per game and platform."
+          gh release upload "$TAG" dist/* --repo "${{ github.repository }}" --clobber
