@@ -1,0 +1,17 @@
+Three Men's Morris after Bell: every man entered, White to move.
+Before:
+  3  B---+---B
+     | \ | / |
+  2  +---W---W
+     | / | \ |
+  1  W---+---B
+     a   b   c
+White's moves: a1 to a2; a1 to b1; b2 to a2; b2 to b1; b2 to b3.
+After White a1 to a2:
+  3  B---+---B
+     | \ | / |
+  2  W---W---W
+     | / | \ |
+  1  +---+---B
+     a   b   c
+Three in a line, a2-b2-c2: White wins.

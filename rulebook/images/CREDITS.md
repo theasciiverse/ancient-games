@@ -61,3 +61,17 @@ the Commons release.
 | `oware-board.jpg` | An oware board, two rows of six | [Commons](https://commons.wikimedia.org/wiki/File:Oware_Board.jpg) | Hasslaebetch | CC BY-SA 4.0 |
 | `congkak-malaysia.jpg` | A congkak board from Malaysia, five holes a side and a store at each end | [Commons](https://commons.wikimedia.org/wiki/File:Congkak.jpg) | Víktor Bautista i Roca | CC BY-SA 2.5 |
 | `toguz-auezov-board.jpg` | A togyzkumalak board of the early twentieth century, described on Commons as Mukhtar Auezov's | [Commons](https://commons.wikimedia.org/wiki/File:Игральная_доска_для_тогызкумалака_Мухтара_Ауеза._Начало_XX_века.jpg) | Bekbal | CC BY-SA 4.0 |
+
+## Morris
+
+| File | Shows | Source | Author | Licence |
+|---|---|---|---|---|
+| `morris-gokstad-board.jpg` (cropped, levels adjusted) | The morris side of the oak gaming-board fragment from the Gokstad ship burial, about 900, Museum of Cultural History, University of Oslo, C10406 | [Unimus](https://www.unimus.no/portal/#/things/7d99fcd2-59b3-45f3-aaa0-27d857633fc9), photo Cf55408_659_C10406 | Kirsten Helgeland, Kulturhistorisk museum, UiO | CC BY-SA 4.0 |
+| `morris-gokstad-drawing.jpg` (cropped) | Drawing of the same fragment at 2/5 size, with the morris board reconstructed in dashed lines, C10406 | [Unimus](https://www.unimus.no/portal/#/things/7d99fcd2-59b3-45f3-aaa0-27d857633fc9), drawing Saksnr05_8823_3_062_C10406 | Unknown (attributed to Mary Storm), Kulturhistorisk museum, UiO | CC BY-SA 4.0 |
+| `morris-roman-brick-cologne.jpg` | Roman brick with a scratched morris board, lent by the Römisch-Germanisches Museum Köln to the exhibition *Bretter, die die Welt bedeuten* (2018) | [Commons](https://commons.wikimedia.org/wiki/File:Bretter,_die_die_Welt_bedeuten._Spielend_durch_2000_Jahre_K%C3%B6ln_-0662.jpg) | Raimond Spekking | CC BY-SA 4.0 |
+| `morris-novgorod-12th-century.jpg` | A twelfth-century mill board in the museum of the Novgorod Kremlin | [Commons](https://commons.wikimedia.org/wiki/File:Mill_game_board_-_12c_-_Novgorod_Kremlin_Museum.jpg) | Лапоть | CC0 |
+| `morris-games-board-met-64-51.jpg` | Morris side of a chess and tric-trac board, about 1550, Metropolitan Museum of Art 64.51 | [the Met](https://www.metmuseum.org/art/collection/search/203005), image DP-19193-002 | The Metropolitan Museum of Art | CC0 |
+| `morris-libro-de-los-juegos.jpg` | Two men playing morris, *Libro de los juegos* of Alfonso X, 1283, El Escorial MS T-I-6 | [Commons](https://commons.wikimedia.org/wiki/File:Jeu_du_moulin.jpg) | Alfonso X of Castile (his workshop) | Public domain |
+
+The two Gokstad pictures are not on Commons; their licence is the one
+the Museum of Cultural History gives on each image in Unimus.

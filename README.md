@@ -12,6 +12,7 @@ at three strengths.
 | Hnefatafl | `hnefatafl` | Copenhagen, Fetlar, Brandubh, Tablut after Linnaeus, Tablut after Bell 1960 |
 | Fox and Geese | `fox-and-geese` | R. C. Bell's 13 and 17 geese |
 | Mancala | `mancala` | Oware (Abapa), Wari after Bell, Lane's Mankal'ah of the ignorant and of the wise, Kalah (Champion 1955), Congkak (Hellier 1907), Pallanguli (Durai 1928), Toguz Kumalak, Bohnenspiel |
+| Morris | `morris` | Nine Men's Morris (today's rules, and after Bell), Morabaraba (Mind Sports South Africa), Six Men's Morris after Bell, Three Men's Morris after Bell, and placing only |
 
 Every game: play the computer (easy, normal or hard) or a friend at the
 same keyboard; keys and mouse; F1 for the rules, where each one comes

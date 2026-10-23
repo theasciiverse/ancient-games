@@ -35,3 +35,8 @@ examples mancala
 screen mancala oware 0 3 20
 screen mancala pallanguli 6 3 25
 screen mancala toguz 7 3 20
+
+examples morris
+screen morris nine 0 3 30
+screen morris morabaraba 2 3 30
+screen morris three 4 3 12

@@ -194,6 +194,11 @@ def main():
 
     mancala.write(HERE)
 
+    # The morris boards: points and lines.
+    import morris
+
+    morris.write(HERE)
+
     ur = ur_board()
     labels = ["Dark's row", "shared row", "Light's row"]
     (HERE / "ur-board.svg").write_text(to_svg(ur, (2, 4), (2, 5), labels))

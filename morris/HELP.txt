@@ -1,0 +1,89 @@
+Morris
+Asciiverse
+2026-10-22
+
+
+
+Two players enter their men one at a time on the points of a board of lines,
+then move them along the lines. Three men of one colour in a row along a
+line make a mill. In Three Men’s Morris a mill wins; in the larger games
+each mill takes one of the other side’s men, and a side left with two men,
+or with no move, has lost. The rules of each form in short follow; the full
+rules, their sources and the history are in RULES.txt and the rulebook.
+
+Nine Men’s Morris, today’s rules
+--------------------------------
+
+- 9 men each. White begins. In turn, each enters a man on any empty point
+  until all 18 are in; then each moves one man a turn along a line to the
+  next empty point.
+- Three of your men on one line make a mill: take one of the other side’s
+  men, but not one in a mill, unless all of them are in mills. Two mills at
+  once still take one man. A mill opened and closed again takes again.
+- Down to three men, a side flies: it moves a man to any empty point.
+- A side left with two men, or with no move, loses.
+- The same position with the same side to move a third time: a draw.
+
+Nine Men’s Morris after Bell
+----------------------------
+
+- As today’s rules, with these differences:
+- No flying: a side down to three still moves along the lines.
+- A mill never takes a man that stands in a mill; if every one does, it
+  takes nothing.
+- A side left with two men, or with no move, loses. A side whose only men
+  stand in a mill must still move, even out of it.
+
+Morabaraba, Mind Sports South Africa
+------------------------------------
+
+- 12 cows (men) each on the board with diagonals: the corners of the three
+  squares are joined, and mills run along the diagonals too. Cows move along
+  any line, diagonals included.
+- A mill shoots (takes) one cow, not one in a mill while there is any other;
+  two mills at once still shoot one.
+- A cow that left a mill to make a new one may not go straight back on your
+  next move if that makes a mill again.
+- Down to three cows, a side flies. Two cows left, or no move: lost.
+- The board filled with no cow shot: a draw. A side down to three and no cow
+  shot in ten moves each: a draw.
+
+Six Men’s Morris after Bell
+---------------------------
+
+- 6 men each on a board of two squares (16 points), their sides’ middles
+  joined. Mills only along the sides of the squares.
+- Enter all men in turn, then move along the lines, as in Nine Men’s Morris.
+  No flying.
+- A mill takes any one man of the other side, in a mill or not.
+- A side left with two men, or with no move, loses.
+
+Three Men’s Morris after Bell
+-----------------------------
+
+- 3 men each on 9 points: a square of three by three, joined along the rows,
+  the columns and both diagonals. White begins.
+- Enter the men in turn on empty points, then move one a turn along a line
+  to the next empty point.
+- The first to have his three men in a row along a line wins. Nothing is
+  taken.
+- The same position a third time: a draw. With perfect play the side that
+  begins wins.
+
+Three Men’s Morris, placing only
+--------------------------------
+
+- 4 counters each on 9 points: a square of three by three, joined along the
+  rows and columns, without diagonals. White begins.
+- In turn, each places a counter on an empty point. Counters never move.
+- Three in a row along a row or a column wins. All eight placed and no row:
+  a draw.
+
+Playing it in the terminal
+--------------------------
+
+- Arrows: move the cursor; Enter or Space: enter a man on an empty point, or
+  pick up a man and put it down on a lit point; Esc: let go. Or click.
+- After a mill, the men it may take are lit red: choose one.
+- When the game is over, Enter plays again.
+- M: menu; F1: this help; Q: quit.

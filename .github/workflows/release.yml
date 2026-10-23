@@ -18,7 +18,7 @@ on:
         required: true
 
 env:
-  GAMES: royal-ur senet mehen hnefatafl fox-and-geese mancala
+  GAMES: royal-ur senet mehen hnefatafl fox-and-geese mancala morris
   TAG: ${{ inputs.tag || github.ref_name }}
 
 permissions:

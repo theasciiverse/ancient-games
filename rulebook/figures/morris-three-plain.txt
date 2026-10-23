@@ -1,0 +1,8 @@
+  3  +---+---+
+     |   |   |
+  2  +---+---+
+     |   |   |
+  1  +---+---+
+     a   b   c
+
++ a point. Neighbours on a line are joined.

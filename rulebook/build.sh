@@ -89,9 +89,10 @@ book=$(echo "$full" | sed "s| --metadata=date:$date||")
 pandoc $book $intro $games --toc --standalone \
     --metadata=title: --metadata=subtitle: --metadata=author: --metadata=date: \
     --include-in-header="$out/titlepage.typ" --include-before-body=style/document.typ \
-    -t typst -o "$out/ancient-games-rules.typ"
+    --wrap=none -t typst -o "$out/ancient-games-rules.typ"
 # Typst reads images relative to the file and only inside its root, so
-# compile a copy that sits here, beside figures/ and images/.
+# compile a copy that sits here, beside figures/ and images/. (Unwrapped
+# above: Typst would read a wrapped line starting "196. " as a list.)
 tmp=".book-$$.typ"
 cp "$out/ancient-games-rules.typ" "$tmp"
 typst compile --root . "$tmp" "$out/ancient-games-rules.pdf" || { rm -f "$tmp"; exit 1; }
