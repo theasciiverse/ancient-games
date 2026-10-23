@@ -32,6 +32,11 @@ mill wins; in the larger ones it lets its maker take one of the other
 side's men. R. C. Bell puts them first among his "games of position"
 [@bell1969, 91-95].
 
+![A Roman brick with a morris board scratched into its face, bone
+counters laid on it; lent by the Römisch-Germanisches Museum, Cologne,
+to the exhibition *Bretter, die die Welt bedeuten* (2018). Photograph:
+Raimond Spekking, CC BY-SA 4.0.](images/morris-roman-brick-cologne.jpg){height=8cm}
+
 The names come from the pieces. Friedrich Berger traces *merels*,
 French *marelle* and *mérelles*, to the Latin *marellus*, a little man
 or game piece, and the German *Mühle*, the mill, to *mîle*, from the
@@ -83,11 +88,6 @@ southern France, about 100 BC to AD 40, and one cut into a tile of the
 Thirtieth Legion at Xanten in Germany before it was fired, so after
 AD 196. Many more are scratched into Roman buildings, but cannot be
 dated, since they may have been drawn later [@berger2004, 15-16].
-
-![A Roman brick with a morris board scratched into its face, bone
-counters laid on it; lent by the Römisch-Germanisches Museum, Cologne,
-to the exhibition *Bretter, die die Welt bedeuten* (2018). Photograph:
-Raimond Spekking, CC BY-SA 4.0.](images/morris-roman-brick-cologne.jpg){width=55%}
 
 **The Vikings.** In the Gokstad ship burial in Norway, opened in 1880,
 lay part of an oak gaming board, cut on one side for Nine Men's Morris
