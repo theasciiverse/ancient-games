@@ -43,7 +43,10 @@ dev-releases/ancient-games, built from a fresh clone with
 tag v0.4.0-av.1; v0.3.0-av.1 (2026-10-23) added Morris; v0.2.0-av.1 (2026-10-22) added Mancala, the short F1 help,
 the Senet water fix and the title page; v0.1.0-av.1 was the first five. Release workflow `.github/workflows/release.yml`: one
 archive per game for static musl Linux, macOS and Windows, x86-64 and
-ARM64; no GitHub release while Actions billing blocks builds. Licence: not chosen; David chooses licences case by case
+ARM64; Actions billing blocks builds, so the GitHub release v0.4.0-av.1
+(made by hand 2026-10-23) holds only the rulebook PDF. The workflow adds
+to an existing release since `a17e246`; the tag's own copy predates that,
+so its archives need the next tag (v0.4.0-av.2), not a re-run. Licence: not chosen; David chooses licences case by case
 (2026-10-20), so the Cargo.toml files name none until he does. Own git repo, branch `main`, private at github.com/theasciiverse/ancient-games.
 
 ## Mancala
