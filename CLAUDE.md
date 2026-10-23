@@ -5,7 +5,7 @@ the oldest: the Royal Game of Ur, Senet, Mehen, Hnefatafl and Fox &
 Geese (David, 2026-10-20), then the mancala games (2026-10-22). More to
 follow.
 
-**Status (2026-10-22):** six games playable, each its own binary, all
+**Status (2026-10-23):** seven games playable, each its own binary, all
 with the computer at three strengths or two players at one keyboard, keys
 and mouse, a menu of rule sets with sources, and help:
 
@@ -23,8 +23,13 @@ and mouse, a menu of rule sets with sources, and help:
   source: Oware Abapa, Wari after Bell, Lane's two Cairo games of
   mankal'ah, Kalah after Champion's patent, Congkak after Hellier,
   Pallanguli after Durai, Toguz Kumalak, Bohnenspiel; see "Mancala" below
+- Morris (`morris/`, `morris`, 2026-10-23): Nine Men's Morris (today's
+  rules, after Bell), Morabaraba (Mind Sports South Africa), Six and Three
+  Men's Morris after Bell, Three Men's placing only; see "Morris" below
 
-All five games first planned are in, and Mancala since 2026-10-22. On
+All five games first planned are in, Mancala since 2026-10-22 and
+Morris since 2026-10-23 (Morris not yet on the website mockup, no preview
+cast yet: asciinema was not installed on the machine it was built on). On
 the website mockup as six separate titles in the collection
 `ancient-games` (hub's collections.toml; entries in the mockup's
 dev/mock-titles.toml with the other Asciiverse originals, licence
@@ -121,6 +126,63 @@ hard beats normal 10/10 at Oware, Toguz and Bohnenspiel, but only 6/10
 (1 drawn) at Kalah, where four moves already see most of it. Before the
 root-window fix, hard beat easy 1/10 at Oware.
 
+## Morris
+
+One crate, one binary, one catalog title, like Mancala. Rulebook chapter
+`rulebook/chapters/07-morris.md`, sources in `rulebook/bib/morris.bib`,
+downloads in `~/references/ancient-games/morris/` (Bell's pages, Golladay
+2007, Berger 2004, Gasser 1996, Gévay and Danner, the WMD leaflet,
+Rosenberger, MSSA, Strutt, Ovid).
+
+**Code.** `rules.rs`: a board is points on a square grid and lines
+through them (neighbours on a line joined, every line of three a mill);
+men are bit sets. `Rules` as data: layout (Three with or without
+diagonals, Six, Nine, Twelve), men, moving or placing only, mill wins
+(Three) or takes, flying at n, taking (`Any`, `NeverFromMills`,
+`FromMillsLast`), two mills take one or two, full board draws,
+Morabaraba's no-straight-return (`barred` in the position) and quiet draw
+(`quiet`, 20 moves). A `Move` carries the men its mill takes, so the
+search needs no extra step; the person chooses them in `app.rs`
+(`pending`). Points named a1 to g7 from the bottom left. `ai.rs`:
+alpha-beta, iterative deepening, table with bounds and best move, root
+searched against the best less one (as Mancala); judgement: men x1000,
+mills nearly made, made, room to move. Tests solve Three Men's Morris
+exactly (all positions, from the ends back).
+
+**Sources read (2026-10-23), and what each settled:**
+- Bell 1969 pp. 91-95 (page scans read): Three Men's first form (4
+  counters, no diagonals, placed), second form (3 men, diagonals, entered
+  then moved; "the first player could always force a win"), Six (a mill
+  takes "any one"), Nine (none from a mill; no flying: "must move" with
+  three in a mill; two men or blocked loses), Alfonso's dice variant.
+- Alfonso X via Golladay 2007 (translation pp. 623-627, commentary
+  607-608): alquerque de doze is the 5x5 jumping game, not Twelve Men's
+  Morris; de tres: first player "wins if he should know how to play it
+  well", silent on moving. Solved here: placing only is a draw, moving a
+  first-player win, so the program reads Alfonso's game as Bell's second
+  form (no separate rule set). Bell's account of the dice game differs
+  from the text (Golladay p. 606); the dice game is not offered.
+- Dating: Kurna (Bell c. 1400 BC) and Mihintale (AD 9-21) rest on Parker
+  1909; Berger 2004 p. 15: Kurna's figures Coptic, "cannot be dated";
+  oldest dated boards Roman (Enserune 100 BC to AD 40, Xanten after 196).
+- Today's rules: WMD leaflet 2008 p. 6 (none from a closed mill, fly at
+  3, two left or blocked loses) and Gasser 1996 (two mills take one, all
+  in mills: any; the program follows Gasser on both). Morabaraba: MSSA
+  2007 text; full board not covered there (Rosenberger p. 43: draw;
+  Gévay and Danner: no consensus), our choice a draw.
+- Not reached: Murray 1952 (lending-only), Schädler 2018 (abstract only),
+  the Gokstad excavation report.
+
+**Measured strengths** (2026-10-23, 10 games each, sides alternating;
+`MORRIS_GAMES=10 cargo test --release -p morris strengths -- --ignored
+--nocapture`, `MORRIS_ONLY=<id>` and `MORRIS_HARD=1` narrow it): normal
+beats easy 9 or 10 of 10 everywhere, hard beats easy 8 to 10 of 10. Hard
+beats normal 9/10 at Six, 8/10 at Bell's Nine, 7/10 at Three. At today's
+Nine it was 4/10 until the judgement learned reachable threats and the
+swinging double mill (Zwickmühle): 8/10. At Morabaraba White won every
+game whatever the strength (Gévay and Danner: a White win), so 5/10.
+The full table was not rerun after the judgement change.
+
 ## Roadmap
 
 `ROADMAP.md` (2026-10-22): ancient games from around the world that could
@@ -138,7 +200,8 @@ per game) and plain text per game (meant for `RULES.txt` in the release
 archives). Board figures come from
 `rulebook/figures/make_figures.py` as SVG and ASCII. Done: introduction,
 all five games (2026-10-22; Mehen, Hnefatafl and Fox & Geese researched
-and written by subagents from the sources, then checked against the code).
+and written by subagents from the sources, then checked against the code),
+Mancala, Morris (2026-10-23).
 Illustrations (David, 2026-10-22): photographs of the real objects in the
 PDF and HTML, each with source, author and licence in
 `rulebook/images/CREDITS.md` and its caption (CC0 museum images first:

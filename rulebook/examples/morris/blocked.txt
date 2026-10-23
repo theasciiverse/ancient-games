@@ -1,0 +1,18 @@
+Nine Men's Morris after Bell: Black to move.
+Position:
+  7  +-----------+-----------W
+     |           |           |
+  6  |   +-------+-------+   |
+     |   |       |       |   |
+  5  |   |   +---+---+   |   |
+     |   |   |       |   |   |
+  4  W---+---W       +---+---W
+     |   |   |       |   |   |
+  3  |   |   W---B---W   |   |
+     |   |       |       |   |
+  2  |   W-------B-------W   |
+     |           |           |
+  1  B-----------W-----------B
+     a   b   c   d   e   f   g
+Black's moves: 0.
+White wins: Black cannot move.

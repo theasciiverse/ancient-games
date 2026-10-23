@@ -66,8 +66,9 @@ Several competing reconstructions each, which suits the rule-set menu.
 - [ ] **Fanorona**: Madagascar. One console project.
 - [ ] **Alquerque**: the ancestor of draughts. One small console
   project.
-- [ ] **Nine Men's Morris** and its kin (Three, Six and Twelve Men's
-  Morris): a few console projects, the best with 11 stars
+- [x] **Nine Men's Morris** and its kin: `morris` (2026-10-23), six
+  rule sets from their sources (see `CLAUDE.md`, "Morris"). A few console
+  projects existed, the best with 11 stars
   (rajko-z/nine-mens-morris-python, MIT).
 
 ## Suggested order
@@ -78,7 +79,7 @@ Several competing reconstructions each, which suits the rule-set menu.
    collection is built around.
 4. Patolli and Liubo: two lost dice games from opposite sides of the
    world.
-5. The morris family: the simplest to build.
+5. ~~The morris family: the simplest to build.~~ Done, 2026-10-23.
 
 Each new game follows the first five: its own binary in this workspace,
 the computer at three strengths or two players, every honest rule set in

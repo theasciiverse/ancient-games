@@ -1,0 +1,16 @@
+[package]
+name = "morris"
+version = "0.2.0"
+description = "The morris games in the terminal: Three, Six, Nine and Twelve Men's Morris"
+edition.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "morris"
+path = "src/main.rs"
+
+[dependencies]
+ratatui = "0.30"
+log = "0.4"
+env_logger = "0.11"
+ancient-core = { path = "../core" }

@@ -1,0 +1,18 @@
+Black, down to three men, to move.
+Position:
+  7  +-----------B-----------W
+     |           |           |
+  6  |   +-------+-------+   |
+     |   |       |       |   |
+  5  |   |   W---+---+   |   |
+     |   |   |       |   |   |
+  4  B---W---+       W---+---+
+     |   |   |       |   |   |
+  3  |   |   +---+---+   |   |
+     |   |       |       |   |
+  2  |   +-------W-------+   |
+     |           |           |
+  1  W-----------+-----------B
+     a   b   c   d   e   f   g
+Nine Men's Morris, today's rules: a4 may go to any of the 15 empty points.
+Nine Men's Morris after Bell: a4 may go to a7.

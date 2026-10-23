@@ -1,0 +1,18 @@
+Every black man stands in a mill; White to enter.
+Position:
+  7  +-----------+-----------+
+     |           |           |
+  6  |   B-------B-------B   |
+     |   |       |       |   |
+  5  |   |   +---+---+   |   |
+     |   |   |       |   |   |
+  4  +---+---+       +---+---+
+     |   |   |       |   |   |
+  3  |   |   +---+---+   |   |
+     |   |       |       |   |
+  2  |   +-------+-------+   |
+     |           |           |
+  1  W-----------W-----------+
+     a   b   c   d   e   f   g
+Nine Men's Morris, today's rules: the mill on g1 takes one of b6, d6, f6.
+Nine Men's Morris after Bell: the mill on g1 takes nothing.
