@@ -2,7 +2,7 @@
 # title, so every target gets one archive per game, named
 # <id>-<target>.tar.gz (Linux, macOS) or .zip (Windows), plus one SHA256SUMS
 # for them all, attached to a GitHub release (hub/catalog/SCHEMA.md,
-# release.source = "github"). Tags look like v0.3.0-av.1.
+# release.source = "github"). Tags look like v0.4.0-av.1.
 #
 # The games need nothing but a terminal, so Linux builds are static musl.
 
@@ -108,4 +108,4 @@ jobs:
         run: |
           gh release create "$TAG" dist/* --repo "${{ github.repository }}" \
             --title "Ancient Games $TAG" \
-            --notes "The Royal Game of Ur, Senet, Mehen, Hnefatafl, Fox and Geese, Mancala and Morris, one archive per game and platform."
+            --notes "The Royal Game of Ur, Senet, Mehen, Hnefatafl, Fox and Geese, Mancala, Morris, Mū tōrere and Kōnane, one archive per game and platform."

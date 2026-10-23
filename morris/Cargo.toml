@@ -1,6 +1,6 @@
 [package]
 name = "morris"
-version = "0.3.0"
+version = "0.4.0"
 description = "The morris games in the terminal: Three, Six, Nine and Twelve Men's Morris"
 edition.workspace = true
 repository.workspace = true
