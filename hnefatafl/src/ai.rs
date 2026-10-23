@@ -254,13 +254,15 @@ fn judge(rules: &Rules, position: &Position) -> i32 {
     value -= pressed * press;
     value += room * 30;
 
-    // Attackers guarding the squares that lead to the corners.
+    // Attackers barring the corners: the three squares on the diagonal
+    // before each corner seal it (the squares right beside a hostile
+    // corner are no guard: a single defender takes a man there).
     if rules.escape == Escape::Corners {
         let e = rules.size - 1;
-        for s in [(0, 1), (1, 0), (0, e - 1), (1, e), (e, 1), (e - 1, 0), (e, e - 1), (e - 1, e)] {
-            if position.at(s) == Some(Piece::Attacker) {
-                value -= 40;
-            }
+        let bars = [[(0, 2), (1, 1), (2, 0)], [(0, e - 2), (1, e - 1), (2, e)], [(e, 2), (e - 1, 1), (e - 2, 0)], [(e, e - 2), (e - 1, e - 1), (e - 2, e)]];
+        for bar in bars {
+            let held = bar.iter().filter(|&&s| position.at(s) == Some(Piece::Attacker)).count() as i32;
+            value -= held * 40 + if held == 3 { 120 } else { 0 };
         }
     }
     value
@@ -313,10 +315,10 @@ mod measure {
     use super::*;
 
     /// Plays a game: `None` is a draw (by the rules, or 300 moves).
-    fn play(rules: &Rules, attackers: Strength, defenders: Strength) -> Option<Side> {
+    fn play(rules: &Rules, attackers: Strength, defenders: Strength, seed: u64) -> Option<Side> {
         let mut p = Position::new(rules);
         let mut seen: HashMap<Position, u32> = HashMap::new();
-        let mut rng = Rng::new(9);
+        let mut rng = Rng::new(seed);
         for _ in 0..300 {
             let s = if p.to_move == Side::Attackers { attackers } else { defenders };
             let mover = p.to_move;
@@ -338,13 +340,36 @@ mod measure {
         None
     }
 
+    /// `cargo test --release -p hnefatafl matches -- --ignored --nocapture`
+    /// (`HNEFATAFL_GAMES=n` games each, `HNEFATAFL_ONLY=<id>` one rule set,
+    /// `HNEFATAFL_HARD=1` only hard against normal).
     #[test]
     #[ignore]
     fn matches() {
         use Strength::*;
-        for rules in Rules::all() {
-            for (a, d) in [(Normal, Normal), (Hard, Easy), (Easy, Hard), (Hard, Normal), (Normal, Hard)] {
-                println!("{}: attackers {} v defenders {}: {:?}", rules.id, a.name(), d.name(), play(&rules, a, d));
+        let n: u64 = std::env::var("HNEFATAFL_GAMES").ok().and_then(|s| s.parse().ok()).unwrap_or(1);
+        let only = std::env::var("HNEFATAFL_ONLY").ok();
+        let pairs: &[(Strength, Strength)] = if std::env::var("HNEFATAFL_HARD").is_ok() {
+            &[(Hard, Normal), (Normal, Hard)]
+        } else {
+            &[(Normal, Normal), (Hard, Easy), (Easy, Hard), (Hard, Normal), (Normal, Hard)]
+        };
+        for rules in Rules::all().into_iter().filter(|r| only.as_deref().is_none_or(|o| o == r.id)) {
+            for &(a, d) in pairs {
+                let (mut att, mut def, mut drawn) = (0, 0, 0);
+                for seed in 0..n {
+                    match play(&rules, a, d, seed + 9) {
+                        Some(Side::Attackers) => att += 1,
+                        Some(Side::Defenders) => def += 1,
+                        None => drawn += 1,
+                    }
+                }
+                println!(
+                    "{}: attackers {} v defenders {}: attackers {att}, defenders {def}, drawn {drawn}",
+                    rules.id,
+                    a.name(),
+                    d.name()
+                );
             }
         }
     }
