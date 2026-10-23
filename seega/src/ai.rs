@@ -22,7 +22,7 @@ const WIN: i32 = 1_000_000;
 fn budget(strength: Strength, placing: bool) -> (Duration, u32) {
     let (time, depth) = match strength {
         Strength::Easy => (Duration::from_millis(60), 1),
-        Strength::Normal => (Duration::from_millis(400), 3),
+        Strength::Normal => (Duration::from_millis(400), 4),
         Strength::Hard => (Duration::from_millis(1500), 30),
     };
     let time = if placing { time / 4 } else { time };
@@ -195,7 +195,9 @@ mod tests {
 }
 
 /// Strength against strength, sides alternating. Slow:
-/// `SEEGA_GAMES=10 cargo test --release -p seega strengths -- --ignored --nocapture`.
+/// `SEEGA_GAMES=10 cargo test --release -p seega strengths -- --ignored --nocapture`
+/// (`SEEGA_ONLY=five` for one board, `SEEGA_NORMAL=1` only normal
+/// against easy).
 #[cfg(test)]
 mod strength_tests {
     use super::*;
@@ -216,8 +218,14 @@ mod strength_tests {
     #[ignore]
     fn strengths() {
         let games: u64 = std::env::var("SEEGA_GAMES").ok().and_then(|s| s.parse().ok()).unwrap_or(10);
-        for rules in Rules::all() {
-            for (strong, weak) in [(Strength::Normal, Strength::Easy), (Strength::Hard, Strength::Easy), (Strength::Hard, Strength::Normal)] {
+        let only = std::env::var("SEEGA_ONLY").ok();
+        for rules in Rules::all().into_iter().filter(|r| only.as_deref().is_none_or(|o| o == r.id)) {
+            let pairs = if std::env::var("SEEGA_NORMAL").is_ok() {
+                vec![(Strength::Normal, Strength::Easy)]
+            } else {
+                vec![(Strength::Normal, Strength::Easy), (Strength::Hard, Strength::Easy), (Strength::Hard, Strength::Normal)]
+            };
+            for (strong, weak) in pairs {
                 let (mut won, mut drawn, mut quiet_ends) = (0, 0, 0);
                 for g in 0..games {
                     let strong_side = if g % 2 == 0 { Side::Stone } else { Side::Brick };
