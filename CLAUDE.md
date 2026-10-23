@@ -5,7 +5,7 @@ the oldest: the Royal Game of Ur, Senet, Mehen, Hnefatafl and Fox &
 Geese (David, 2026-10-20), then the mancala games (2026-10-22). More to
 follow.
 
-**Status (2026-10-23):** nine games playable, each its own binary, all
+**Status (2026-10-23):** ten games playable, each its own binary, all
 with the computer at three strengths or two players at one keyboard, keys
 and mouse, a menu of rule sets with sources, and help:
 
@@ -30,6 +30,9 @@ and mouse, a menu of rule sets with sources, and help:
   Best 1925 as written; see "Mū tōrere and Kōnane" below
 - Kōnane (`konane/`, 2026-10-23): Ernst 8x8, Modern (one jump), Puʻuhonua
   o Hōnaunau 9x11, King's papamū 14x17
+- Seega (`seega/`, 2026-10-23): Lane 1836 on his boards of five, seven
+  and nine; see "Seega" below. Not yet in a release, on the mockup or
+  recorded (David records previews on his other computer)
 
 All five games first planned are in, Mancala since 2026-10-22 and
 Morris, Mū tōrere and Kōnane since 2026-10-23. On the website mockup as nine separate titles in the collection
@@ -210,6 +213,24 @@ claim here. Just making some games."). Chapters 08 and 09, sources in
   Konane; NPS leaflet of Puʻuhonua o Hōnaunau (lift anywhere). King 1779:
   238 squares, 14 in a row. AI: alpha-beta on mobility.
 - Preview casts and website mockup entries 2026-10-23 (version 0.4.0).
+
+## Seega
+
+2026-10-23, small, like Mū tōrere and Kōnane (David: do not overtune
+now). Chapter 10, source Lane 1836 pp. 318-321 (Gutenberg 70796, HTML
+and figure in `~/references/ancient-games/seega/`; the bib entry is
+`lane1836` in `mancala.bib`). Lane's figure: a, a on c1 and c5, b, b on
+a3 and e3 (the board of five); on 7 and 9 the same middles of the edges.
+Sides Stone and Brick, after Lane's táb kelbs (stone or dingy brick
+against red brick). `rules.rs`: stages Placing (two a turn, never the
+centre), Moving, Opening (the side to move gives up a kelb next to the
+blocked side's); `chain` after a capture (moves again, only capturing
+moves, any kelb). Our choices, each in the chapter: Stone places first,
+Brick moves first; orthogonal steps and custodian capture, only by the
+kelb moved; the end (no kelbs loses; 40 moves with nothing taken or
+given: more kelbs win, equal draws). AI: alpha-beta as Kōnane, judging
+kelbs then captures to hand; a quarter of the time while placing. Not
+read: Bell, anything dating seega before Lane.
 
 ## Roadmap
 

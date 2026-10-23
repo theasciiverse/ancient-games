@@ -1,0 +1,10 @@
+Before the placing:
+     a b c d e
+   1 . . S . .
+   2 . . . . .
+   3 B . . . B
+   4 . . . . .
+   5 . . S . .
+Stone has set kelbs on c1 and c5 (Lane's a, a),
+Brick on a3 and e3 (b, b). Then each in turn sets
+down two, on any of the 20 empty holes but c3.

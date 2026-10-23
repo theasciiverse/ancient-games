@@ -1,0 +1,13 @@
+The board of five, Stone to move.
+Position:
+     a b c d e
+   1 . S . . .
+   2 . . B . .
+   3 . . S B .
+   4 . . . B S
+   5 B . . . .
+Stone moves b1 to c1, taking c2.
+Stone takes again at once, and may only take:
+c3 to c4; e4 to e3.
+Stone moves e4 to e3, taking d3.
+Nothing more to take: Brick moves, 2 kelbs to 3.

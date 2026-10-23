@@ -1,0 +1,11 @@
+Stone to move.
+Position:
+     a b c d e
+   1 B S S . .
+   2 S . . . .
+   3 . . . . .
+   4 . . . . .
+   5 . . . . S
+Stone moves e5 to e4, taking nothing.
+Brick's a1 is shut in. Stone must give up b1 or a2.
+Stone gives a2, and Brick moves a1 into it.

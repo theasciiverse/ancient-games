@@ -46,3 +46,6 @@ screen mu-torere beside-enemy 0 3 20
 
 examples konane
 screen konane ernst 0 3 30
+
+examples seega
+screen seega five 0 3 30
