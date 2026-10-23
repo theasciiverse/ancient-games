@@ -28,14 +28,12 @@ and mouse, a menu of rule sets with sources, and help:
   Men's Morris after Bell, Three Men's placing only; see "Morris" below
 
 All five games first planned are in, Mancala since 2026-10-22 and
-Morris since 2026-10-23 (Morris not yet on the website mockup, no preview
-cast yet: asciinema was not installed on the machine it was built on). On
-the website mockup as six separate titles in the collection
+Morris since 2026-10-23. On the website mockup as seven separate titles in the collection
 `ancient-games` (hub's collections.toml; entries in the mockup's
 dev/mock-titles.toml with the other Asciiverse originals, licence
 undecided, NEW! banner), previews from each game's `--demo` recorded by
 `asciiverse/record-preview.sh` (casts in `asciiverse/casts/`, seed 3,
-Mehen seed 4), local Linux builds in the website's
+Mehen seed 4; Morris seed 3, 60 s, one take, built from `ef5f04a` and still calling itself 0.2.0, though the v0.2.0-av.1 tag predates it), local Linux builds in the website's
 dev-releases/ancient-games, built from a fresh clone with
 --remap-path-prefix. Version 0.2.0 (David, 2026-10-22: Mancala, the short
 F1 help, the Senet water fix, the title page), tag v0.2.0-av.1; v0.1.0-av.1
