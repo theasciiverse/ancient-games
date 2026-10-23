@@ -33,11 +33,11 @@ Morris since 2026-10-23. On the website mockup as seven separate titles in the c
 dev/mock-titles.toml with the other Asciiverse originals, licence
 undecided, NEW! banner), previews from each game's `--demo` recorded by
 `asciiverse/record-preview.sh` (casts in `asciiverse/casts/`, seed 3,
-Mehen seed 4; Morris seed 3, 60 s, one take, built from `ef5f04a` and still calling itself 0.2.0, though the v0.2.0-av.1 tag predates it), local Linux builds in the website's
+Mehen seed 4; Morris seed 3, 60 s, one take), local Linux builds in the website's
 dev-releases/ancient-games, built from a fresh clone with
---remap-path-prefix. Version 0.2.0 (David, 2026-10-22: Mancala, the short
-F1 help, the Senet water fix, the title page), tag v0.2.0-av.1; v0.1.0-av.1
-was the first five. Release workflow `.github/workflows/release.yml`: one
+--remap-path-prefix. Version 0.3.0 (David, 2026-10-23: Morris), tag
+v0.3.0-av.1; v0.2.0-av.1 (2026-10-22) added Mancala, the short F1 help,
+the Senet water fix and the title page; v0.1.0-av.1 was the first five. Release workflow `.github/workflows/release.yml`: one
 archive per game for static musl Linux, macOS and Windows, x86-64 and
 ARM64; no GitHub release while Actions billing blocks builds. Licence: not chosen; David chooses licences case by case
 (2026-10-20), so the Cargo.toml files name none until he does. Own git repo, branch `main`, private at github.com/theasciiverse/ancient-games.
