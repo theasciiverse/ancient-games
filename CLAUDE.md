@@ -358,6 +358,10 @@ behind the `Program` trait). Each game has `rules.rs` (tested), `ai.rs`,
   (400 games each): two players: normal beats easy 59%, hard beats easy
   85% and normal 68%, about 60 hands a game; six players: hard beats easy
   97%, about 150 hands
+- Senet, measured 2026-10-24 (`strengths` test, 100 games each): normal
+  beats easy 64, 63, 65 of 100 (Kendall 5, Kendall 7, Bell); hard beats
+  normal 70, 65, 54 (the dice decide much; at Bell's game two turns of
+  lookahead add little, as at Ur)
 - Options in every game: `--seed N`, `--demo` (computer against computer,
   restarts), `--quit-after SECONDS`; `RUST_LOG=debug <binary> 2>game.log`
 
