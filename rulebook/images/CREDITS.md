@@ -75,3 +75,24 @@ the Commons release.
 
 The two Gokstad pictures are not on Commons; their licence is the one
 the Museum of Cultural History gives on each image in Unimus.
+
+## Mū tōrere
+
+| File | Shows | Source | Author | Licence |
+|---|---|---|---|---|
+| `mu-torere-players-1910s.jpg` | Te Rangiua and Te Urikore (Tūhoe) playing mū tōrere, about 1910; Dominion Museum photo, Best, *Games and Pastimes of the Maori* (1925), fig. 26; Alexander Turnbull Library PAColl-5671-07 | [National Library of New Zealand](https://natlib.govt.nz/records/23218316) | Unidentified photographer, Dominion Museum | Public domain (published 1925) |
+| `mu-torere-board-best-1924.jpg` | The mū tōrere board with numbered points and pūtahi, from Best, *The Maori* vol. 2 (1924), reprinted in *Games and Pastimes of the Maori*, fig. 25 | [NZETC](http://nzetc.victoria.ac.nz/tm/scholarly/tei-BesGame-t1-body-d5-d1-d2.html) (via the Wayback Machine) | Elsdon Best | Drawing public domain; NZETC scan CC BY-SA 3.0 NZ |
+
+The photograph is the Dominion Museum picture Best printed in 1925; the
+Turnbull Library's own page could not be read when it was chosen, so its
+statement of copyright is unchecked. Te Ara shows the same photograph,
+credited to Te Papa, with a request for permission; the book relies on
+the 1925 publication.
+
+## Kōnane
+
+| File | Shows | Source | Author | Licence |
+|---|---|---|---|---|
+| `konane-papamu-honaunau.jpg` (resized) | A papamū cut into a lava-stone slab beside the Hale o Keawe, Puʻuhonua o Hōnaunau National Historical Park, Hawaiʻi, 2020 | [Commons](https://commons.wikimedia.org/wiki/File:Konane_at_Pu%CA%BBuhonua_o_H%C5%8Dnaunau_National_Historical_Park.jpg) | Nobody(not jj) | CC BY-SA 4.0 |
+| `konane-wooden-papamu-2005.jpg` | A boy playing kōnane on a wooden papamū with lava-stone and coral pieces, Hawaiʻi, 2005 | [Commons](https://commons.wikimedia.org/wiki/File:USMC-14131.jpg), from marines.mil | Cpl. Rich Mattingly, U.S. Marine Corps | Public domain (US government work) |
+| `konane-hawaii-volcanoes-nps.jpg` | A child learning kōnane, Merrie Monarch Festival week, Hawaiʻi Volcanoes National Park | [Commons](https://commons.wikimedia.org/wiki/File:Hawaiian_checkers_-_konane_(40829470781).jpg), from [Flickr](https://www.flickr.com/photos/144356245@N06/40829470781) | Janice Wei, National Park Service | Public domain (US government work) |

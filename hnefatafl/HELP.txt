@@ -1,6 +1,6 @@
 Hnefatafl
 Asciiverse
-2026-10-22
+2026-10-23
 
 Two unequal sides: the king and his defenders in the middle, twice as many
 attackers round the edges. The attackers move first. Every piece moves like

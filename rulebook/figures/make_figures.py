@@ -199,6 +199,11 @@ def main():
 
     morris.write(HERE)
 
+    # Mū tōrere's star and Kōnane's papamū.
+    import small_games
+
+    small_games.write(HERE)
+
     ur = ur_board()
     labels = ["Dark's row", "shared row", "Light's row"]
     (HERE / "ur-board.svg").write_text(to_svg(ur, (2, 4), (2, 5), labels))

@@ -1,0 +1,16 @@
+[package]
+name = "mu-torere"
+version = "0.3.0"
+description = "Mū tōrere, the Māori game of the eight-pointed star, in the terminal"
+edition.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "mu-torere"
+path = "src/main.rs"
+
+[dependencies]
+ratatui = "0.30"
+log = "0.4"
+env_logger = "0.11"
+ancient-core = { path = "../core" }

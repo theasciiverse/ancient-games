@@ -1,0 +1,14 @@
+Kōnane after Ernst, 8 by 8: Black to move.
+Position:
+     a b c d e f g h
+   1 . . . . . . . .
+   2 . X O . O . . .
+   3 . O . . . O . .
+   4 . . . . . . . .
+   5 . . . . . . . .
+   6 . . . . . . . .
+   7 . . . . . . . .
+   8 . . . . . . . .
+After Ernst, Black may: b2 to b4; b2 to d2; b2 to d2 to f2.
+Modern Kōnane, 8 by 8: b2 to b4; b2 to d2.
+Landed on f2, the stone may not turn to jump f3: a move keeps to one line.

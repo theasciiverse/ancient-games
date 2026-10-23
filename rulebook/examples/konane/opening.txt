@@ -1,0 +1,14 @@
+Kōnane after Ernst, 8 by 8: the start.
+Position:
+     a b c d e f g h
+   1 X O X O X O X O
+   2 O X O X O X O X
+   3 X O X O X O X O
+   4 O X O X O X O X
+   5 X O X O X O X O
+   6 O X O X O X O X
+   7 X O X O X O X O
+   8 O X O X O X O X
+Black may: lift a1; lift d4; lift e5; lift h8.
+After Black lifts d4, White may: lift c4; lift d3; lift d5; lift e4.
+After White lifts e4, Black may: b4 to d4; d2 to d4; d6 to d4.

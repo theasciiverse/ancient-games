@@ -50,17 +50,12 @@ Several competing reconstructions each, which suits the rule-set menu.
   in *Board and Table Games from Many Civilizations* (pp. 6-8 of the
   1969 edition, seen while reading for Ur). Only client projects found.
 - [ ] **Puluc**: a Maya race game. Nothing found.
-- [ ] **Kōnane**: Hawaii. One small project. Pre-contact (boards cut in
-  lava rock, *papamū*; first European account from Cook's third voyage,
-  Cook and King 1784); board sizes from about 6x6 to 13x20, which could
-  be its rule sets. To read: Culin, "Hawaiian Games", *American
-  Anthropologist* 1899 (public domain), Cook and King 1784. (Wikipedia,
-  2026-10-22.)
-- [ ] **Mū tōrere**: Māori. One small project. Solved: 1,180 positions,
-  the start a draw (Gamescrafters; Ascher, "Mu Torere: An Analysis of a
-  Maori Game", *Mathematics Magazine* 1987). Whether it predates
-  European contact is not settled there: read Ascher and Harko Brown,
-  *Ngā Taonga Tākoro* (2008). (Wikipedia, 2026-10-22.)
+- [x] **Kōnane**: `konane` (2026-10-23), four rule sets (Ernst 8x8,
+  Modern, Puʻuhonua o Hōnaunau 9x11, King's papamū 14x17); see
+  `CLAUDE.md`. Not yet read: Emory 1924, Buck 1957.
+- [x] **Mū tōrere**: `mu-torere` (2026-10-23), two rule sets (the
+  pūtahi beside an enemy; Best 1925 as written); see `CLAUDE.md`. Not
+  yet read: Ascher 1987, Harko Brown 2008, Browne 2023.
 
 ## Africa and the Mediterranean
 

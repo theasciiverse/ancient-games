@@ -1,0 +1,39 @@
+Mū tōrere
+Asciiverse
+2026-10-23
+
+Two players have four men each on an eight-pointed star: eight points
+(kewai) round a centre (pūtahi), each kewai joined to its two neighbours and
+to the pūtahi. The men start on four neighbouring kewai each, the pūtahi
+empty. In turn, each moves one man to the one empty point, if it is joined
+to it. Nothing is taken: who cannot move has lost. The rules of each form in
+short follow; the full rules, their sources and the history are in RULES.txt
+and the rulebook.
+
+The pūtahi beside an enemy
+--------------------------
+
+- 4 men each: White on kewai 1 to 4, Black on 5 to 8. White begins.
+- A move: a man goes to the empty point, along the ring to the next kewai,
+  from a kewai into the pūtahi, or out of the pūtahi to any kewai.
+- A man may enter the pūtahi only if one of the kewai beside it holds an
+  enemy man, at any time in the game.
+- Who cannot move has lost. The same position a third time: a draw.
+
+Mū tōrere after Best
+--------------------
+
+- As above, but the rule about the pūtahi holds only for the opening move:
+  the first man to move must come from beside an enemy. After that, any man
+  may enter the empty pūtahi.
+- Read this way the side that moves second can win at once, as the program
+  does; see RULES.txt.
+
+Playing it in the terminal
+--------------------------
+
+- Arrows: move the cursor; Enter or Space: move the man under it (with one
+  empty point, each man has at most one place to go). Or click a man. The
+  men that may move are lit.
+- When the game is over, Enter plays again.
+- M: menu; F1: this help; Q: quit.

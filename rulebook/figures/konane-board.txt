@@ -1,0 +1,11 @@
+     a b c d e f g h
+   1 X O X O X O X O
+   2 O X O X O X O X
+   3 X O X O X O X O
+   4 O X O X O X O X
+   5 X O X O X O X O
+   6 O X O X O X O X
+   7 X O X O X O X O
+   8 O X O X O X O X
+
+X a black stone, O a white one: every hollow filled, a1 black.
