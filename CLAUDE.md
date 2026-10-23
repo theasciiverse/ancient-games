@@ -324,11 +324,19 @@ behind the `Program` trait). Each game has `rules.rs` (tested), `ai.rs`,
   repetition. AI: alpha-beta with iterative deepening (easy depth 1 with
   slips, normal 2, hard up to 8 in 1.5 s), judging king distance to an
   escape in king moves, clear ways out, attackers beside the king,
-  material (a defender worth two attackers) and corner guards. Measured
-  2026-10-20 (one game each): in Copenhagen, Brandubh and Linnaeus' Tablut
-  hard beat easy and normal from both sides; in Fetlar hard attackers drew
-  with normal defenders; Bell's Tablut favours the king (his side won
-  every game but hard attackers against easy)
+  material (a defender worth two attackers) and corner barricades (the
+  three squares on the diagonal before a corner; until 2026-10-23 the
+  squares beside it, where one defender takes a man). Measured
+  2026-10-23 (`HNEFATAFL_GAMES`, `HNEFATAFL_ONLY`, `HNEFATAFL_HARD` in the
+  `matches` test), hard against normal, 4 games a side: hard defenders won
+  every game everywhere; hard attackers before the barricades won 2/4 at
+  Copenhagen, 2/4 at Fetlar (1 drawn), 3/4 at Brandubh, 4/4 at Linnaeus'
+  Tablut, after them 4/4 at all four; and 2 games a side: hard beat easy
+  and normal in every game at Copenhagen, Fetlar and Brandubh. Bell's
+  Tablut favours the king: his side won all 8 games, whoever was hard.
+- Fox & Geese, measured 2026-10-23 (`FOX_GAMES`, `FOX_ONLY`, `FOX_HARD`),
+  hard against normal, 4 games each: the geese won 15 of 16 (one draw,
+  hard fox at 13), whoever was hard; not tuned, likely the game itself
 - Mehen: the 70-square coil is generated (14 by 8 grid, one gap between
   coils, head near the middle). Positions 0 (start), 1 to 70, 71 reborn.
   Choices where Masters is silent: the side to start by a coin; a lion

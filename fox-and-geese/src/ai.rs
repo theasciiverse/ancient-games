@@ -202,10 +202,10 @@ mod measure {
     use crate::rules::Rules;
 
     /// Plays a game: `None` is a draw by threefold repetition or 400 moves.
-    fn play(rules: &Rules, fox: Strength, geese: Strength) -> Option<Side> {
+    fn play(rules: &Rules, fox: Strength, geese: Strength, seed: u64) -> Option<Side> {
         let mut p = Position::new(rules);
         let mut seen: HashMap<Position, u32> = HashMap::new();
-        let mut rng = Rng::new(9);
+        let mut rng = Rng::new(seed);
         for _ in 0..400 {
             if let Some(w) = p.winner(rules) {
                 return Some(w);
@@ -222,13 +222,31 @@ mod measure {
         None
     }
 
+    /// `cargo test --release -p fox-and-geese matches -- --ignored --nocapture`
+    /// (`FOX_GAMES=n` games each, `FOX_ONLY=<id>` one rule set, `FOX_HARD=1`
+    /// only hard against normal).
     #[test]
     #[ignore]
     fn matches() {
         use Strength::*;
-        for rules in Rules::all() {
-            for (fox, geese) in [(Normal, Normal), (Hard, Hard), (Hard, Easy), (Easy, Hard), (Hard, Normal), (Normal, Hard)] {
-                println!("{}: fox {} v geese {}: {:?}", rules.id, fox.name(), geese.name(), play(&rules, fox, geese));
+        let n: u64 = std::env::var("FOX_GAMES").ok().and_then(|s| s.parse().ok()).unwrap_or(1);
+        let only = std::env::var("FOX_ONLY").ok();
+        let pairs: &[(Strength, Strength)] = if std::env::var("FOX_HARD").is_ok() {
+            &[(Hard, Normal), (Normal, Hard)]
+        } else {
+            &[(Normal, Normal), (Hard, Hard), (Hard, Easy), (Easy, Hard), (Hard, Normal), (Normal, Hard)]
+        };
+        for rules in Rules::all().into_iter().filter(|r| only.as_deref().is_none_or(|o| o == r.id)) {
+            for &(fox, geese) in pairs {
+                let (mut f, mut g, mut drawn) = (0, 0, 0);
+                for seed in 0..n {
+                    match play(&rules, fox, geese, seed + 9) {
+                        Some(Side::Fox) => f += 1,
+                        Some(Side::Geese) => g += 1,
+                        None => drawn += 1,
+                    }
+                }
+                println!("{}: fox {} v geese {}: fox {f}, geese {g}, drawn {drawn}", rules.id, fox.name(), geese.name());
             }
         }
     }
