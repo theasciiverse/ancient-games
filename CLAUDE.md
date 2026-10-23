@@ -32,15 +32,15 @@ and mouse, a menu of rule sets with sources, and help:
   o Hōnaunau 9x11, King's papamū 14x17
 
 All five games first planned are in, Mancala since 2026-10-22 and
-Morris since 2026-10-23. On the website mockup as seven separate titles in the collection
+Morris, Mū tōrere and Kōnane since 2026-10-23. On the website mockup as nine separate titles in the collection
 `ancient-games` (hub's collections.toml; entries in the mockup's
 dev/mock-titles.toml with the other Asciiverse originals, licence
 undecided, NEW! banner), previews from each game's `--demo` recorded by
 `asciiverse/record-preview.sh` (casts in `asciiverse/casts/`, seed 3,
-Mehen seed 4; Morris seed 3, 60 s, one take), local Linux builds in the website's
+Mehen seed 4; Morris, Mū tōrere and Kōnane seed 3, 60 s, one take each), local Linux builds in the website's
 dev-releases/ancient-games, built from a fresh clone with
---remap-path-prefix. Version 0.3.0 (David, 2026-10-23: Morris), tag
-v0.3.0-av.1; v0.2.0-av.1 (2026-10-22) added Mancala, the short F1 help,
+--remap-path-prefix. Version 0.4.0 (2026-10-23: Mū tōrere and Kōnane),
+tag v0.4.0-av.1; v0.3.0-av.1 (2026-10-23) added Morris; v0.2.0-av.1 (2026-10-22) added Mancala, the short F1 help,
 the Senet water fix and the title page; v0.1.0-av.1 was the first five. Release workflow `.github/workflows/release.yml`: one
 archive per game for static musl Linux, macOS and Windows, x86-64 and
 ARM64; no GitHub release while Actions billing blocks builds. Licence: not chosen; David chooses licences case by case
@@ -206,7 +206,7 @@ claim here. Just making some games."). Chapters 08 and 09, sources in
   1924, Buck 1957) for the opening and multiple jumps, and his Modern
   Konane; NPS leaflet of Puʻuhonua o Hōnaunau (lift anywhere). King 1779:
   238 squares, 14 in a row. AI: alpha-beta on mobility.
-- Not yet: preview casts, website mockup entries.
+- Preview casts and website mockup entries 2026-10-23 (version 0.4.0).
 
 ## Roadmap
 
