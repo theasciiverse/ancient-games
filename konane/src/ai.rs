@@ -135,3 +135,44 @@ mod tests {
         }
     }
 }
+
+/// Strength against strength, sides alternating:
+/// `cargo test --release -p konane strengths -- --ignored --nocapture`
+/// (`KONANE_GAMES=n`, `KONANE_ONLY=<id>` one rule set).
+#[cfg(test)]
+mod strength_tests {
+    use super::*;
+    use crate::rules::Side;
+
+    fn play(rules: &Rules, players: [Strength; 2], seed: u64) -> Side {
+        let mut p = Position::new(rules);
+        let mut rng = Rng::new(seed);
+        loop {
+            if let Some(w) = p.winner(rules) {
+                return w;
+            }
+            let mv = choose(rules, &p, players[p.to_move.index()], &mut rng).unwrap();
+            p.play(rules, &mv);
+        }
+    }
+
+    #[test]
+    #[ignore]
+    fn strengths() {
+        use Strength::*;
+        let n: u64 = std::env::var("KONANE_GAMES").ok().and_then(|s| s.parse().ok()).unwrap_or(10);
+        let only = std::env::var("KONANE_ONLY").ok();
+        for rules in Rules::all().into_iter().filter(|r| only.as_deref().is_none_or(|o| o == r.id)) {
+            for (a, b) in [(Normal, Easy), (Hard, Easy), (Hard, Normal)] {
+                let mut wins = 0;
+                for seed in 0..n {
+                    let (players, me) = if seed % 2 == 0 { ([a, b], Side::Black) } else { ([b, a], Side::White) };
+                    if play(&rules, players, seed + 1) == me {
+                        wins += 1;
+                    }
+                }
+                println!("{}: {} beats {} {wins}/{n}", rules.id, a.name(), b.name());
+            }
+        }
+    }
+}
