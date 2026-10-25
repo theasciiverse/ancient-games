@@ -30,7 +30,7 @@ Several competing reconstructions each, which suits the rule-set menu.
 
 - [ ] **Ludus latrunculorum**: a Roman war game. One CLI client, no full
   game.
-- [ ] **Duodecim scripta, or Tabula**: Roman ancestors of backgammon.
+- [x] **Duodecim scripta, or Tabula**: Roman ancestors of backgammon.
   Nothing found. One of the fifteen (2026-10-25).
 - [ ] **Petteia**: Greek. Nothing found.
 - [ ] **Pente grammai**: Greek. Nothing found.
@@ -39,16 +39,16 @@ Several competing reconstructions each, which suits the rule-set menu.
 
 - [ ] **Liubo**: a Han-dynasty dice game, its rules lost and debated.
   Nothing found.
-- [ ] **Chaupar**: the cross-shaped race game that Pachisi and Ludo come
+- [x] **Chaupar**: the cross-shaped race game that Pachisi and Ludo come
   from. Ludo console games exist; Chaupar itself, nothing found. One of
   the fifteen, as Pachisi with chaupar (2026-10-25).
 - [ ] **Chaturanga**: an early form of chess. Nothing found.
-- [ ] **Shatranj**: the Persian and Arabic form of chess. One student
+- [x] **Shatranj**: the Persian and Arabic form of chess. One student
   client. One of the fifteen, with chaturanga (2026-10-25).
 
 ## The Americas and the Pacific
 
-- [ ] **Patolli**: the Aztec race game. R. C. Bell gives suggested rules
+- [x] **Patolli**: the Aztec race game. R. C. Bell gives suggested rules
   in *Board and Table Games from Many Civilizations* (pp. 6-8 of the
   1969 edition, seen while reading for Ur). Only client projects found.
   One of the fifteen (2026-10-25).
@@ -70,9 +70,9 @@ Several competing reconstructions each, which suits the rule-set menu.
   (Bell 1969, rules read), Omweso (Uganda; Wikipedia contradicts itself on
   where captured seeds are sown from: needs Nsimbi 1968 or de Voogt 1997),
   Bao la Kujifunza, Bao la Kiswahili (de Voogt 1995).
-- [ ] **Fanorona**: Madagascar. One console project. One of the
+- [x] **Fanorona**: Madagascar. One console project. One of the
   fifteen, with Alquerque (2026-10-25).
-- [ ] **Alquerque**: the ancestor of draughts. One small console
+- [x] **Alquerque**: the ancestor of draughts. One small console
   project. One of the fifteen, with Fanorona (2026-10-25).
 - [x] **Nine Men's Morris** and its kin: `morris` (2026-10-23), six
   rule sets from their sources (see `CLAUDE.md`, "Morris"). A few console
@@ -98,7 +98,8 @@ ancestor of a game still widely played):
    its reconstructions marked as such.
 
 Order of building: Alquerque and Fanorona, Tabula, Pachisi, Shatranj,
-Patolli. Left for later: Hounds and Jackals (a fourth Egyptian race game,
+Patolli. All five built 2026-10-25 (`alquerque`, `tabula`, `pachisi`,
+`shatranj`, `patolli`); see `CLAUDE.md`. Left for later: Hounds and Jackals (a fourth Egyptian race game,
 thin rules), Ludus latrunculorum (the reconstructions disagree; Tabula
 stands for Rome), Liubo and petteia (too little known to play well),
 Puluc, Chaturanga as a title of its own, and the four-rank mancala games

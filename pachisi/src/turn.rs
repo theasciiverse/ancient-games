@@ -44,7 +44,7 @@ impl Turn {
                 }
                 if matches!(t.value, 10 | 12 | 25) {
                     self.run += 1;
-                    if self.run % 3 == 0 {
+                    if self.run.is_multiple_of(3) {
                         self.pending = true;
                     }
                 } else {

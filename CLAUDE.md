@@ -5,7 +5,7 @@ the oldest: the Royal Game of Ur, Senet, Mehen, Hnefatafl and Fox &
 Geese (David, 2026-10-20), then the mancala games (2026-10-22). More to
 follow.
 
-**Status (2026-10-23):** ten games playable, each its own binary, all
+**Status (2026-10-25):** fifteen games playable, each its own binary, all
 with the computer at three strengths or two players at one keyboard, keys
 and mouse, a menu of rule sets with sources, and help:
 
@@ -33,6 +33,11 @@ and mouse, a menu of rule sets with sources, and help:
 - Seega (`seega/`, 2026-10-23): Lane 1836 on his boards of five, seven
   and nine; see "Seega" below. Not yet in a release, on the mockup or
   recorded (David records previews on his other computer)
+- The fifteen (2026-10-25, David: "Lets only take it up to 15 in total
+  for now"): Alquerque and Fanorona (`alquerque/`), Tabula (`tabula/`),
+  Pachisi and chaupar (`pachisi/`), Shatranj (`shatranj/`), Patolli
+  (`patolli/`); see "The five of 2026-10-25" below. Like Seega, not yet
+  in a release, on the mockup or recorded
 
 All five games first planned are in, Mancala since 2026-10-22 and
 Morris, Mū tōrere and Kōnane since 2026-10-23. On the website mockup as nine separate titles in the collection
@@ -243,6 +248,116 @@ Measured 2026-10-23 on the board of five (`SEEGA_ONLY=five`, see the
 beat easy only 3/6, at depth 4 10/10. Not read: Bell, anything dating
 seega before Lane.
 
+## The five of 2026-10-25
+
+Chosen by Claude, approved by David ("Good selection!"), to complete the
+fifteen: see `ROADMAP.md`, "The fifteen". Each researched by a subagent
+from the sources (notes, downloads and BibTeX in
+`~/references/ancient-games/<game>/NOTES.md`, folders alquerque, tabula,
+pachisi, shatranj, patolli), then built and written up from the notes.
+Photographs for all five gathered by a subagent, licences checked
+(`rulebook/images/CREDITS.md`). Chapters 11 to 15. Crate versions 0.4.0,
+like the rest, until the next release.
+
+- **Alquerque and Fanorona** (`alquerque`, chapter 11): one engine on the
+  lined board (diagonals through points whose row and column are both odd
+  or both even), leap captures or Fanorona's approach and withdrawal.
+  Six rule sets: Alquerque after Alfonso X (Golladay's translation:
+  taking not compulsory, chains optional, any direction; the middle row
+  as Bell's Fig. 39); after Bell 1969 (his added rules: no step backwards,
+  no man back to a point it stood on, back row takes only; his huff played
+  as compulsion, our choice); Fanorona today (Schadd et al. 2008: no same
+  direction twice, no point twice, stop any time; the default); after
+  Montgomery 1886 (first turn one capture; only no straight return; his
+  sample game replays exactly, the researcher checked); the vela (Black,
+  the winner, may not take until 17 lost; the loser moves first, each
+  capture one man, no chain); Fanoron-dimy (5x5, by analogy). Findings:
+  Alfonso has no compulsion or huff (huff first in Covarrubias 1611); Bell's
+  Kurna board of 1400 BC is not in Parker; the qirq of the Kitab al-Aghani
+  is a morris board; Fanorona "c. 1680" is Montgomery's guess. A turn is
+  made step by step in `app.rs` (`partial`, `choosing` for a step that
+  could take two lines).
+- **Tabula** (`tabula`, chapter 12): a race engine with tracks as data
+  (`len`, `same_way`, `home`, `hold`), three dice, every die a separate
+  step onto open points, as many dice as possible and then the highest
+  (Alfonso's buffa de baldrac, our choice), hit men entering first. Rule
+  sets: Tabula after Becq de Fouquières and Austin (colours opposite),
+  after Bell (the same way), Ludus duodecim scriptorum after Murray as
+  Austin printed it (36 points, enter on the middle row, none past 12
+  until all entered). Zeno's position (Agathias, Anth. Pal. IX.482) is a
+  test and a book example: with 2, 5, 6 exactly one play, eight blots,
+  which needs closed points, separate steps, the whole throw and bearing
+  off only from home (Austin; Bell called that last rule his own
+  improvement). Bell's errors listed in the chapter.
+- **Pachisi and chaupar** (`pachisi`, chapter 13): Red's track 0 to 84
+  (Falkener's numbered figure), loop of 68 shared, both castle layouts
+  (Tylor's 4th from the middle, Falkener's 4th from the outer end; Culin:
+  both real). Two partnerships, one player each: Red and Black against
+  Yellow and Green (Falkener). Rule sets: after Tylor 1879 (Rajendralala
+  Mitra's rules; six cowries 6, 10, 2, 3, 4, 25, 12; starting 1 with 10 and
+  25; holds; rotten throws, our reading), after Falkener 1892 (followed by
+  Bell; grace lets a man out into the middle; doubled men at peril; a
+  finished player waits), chaupar after Abu'l-Fazl (three long dice 1, 2,
+  5, 6; men start on 6, 7, 15, 16, our reading; doublets move a pair twice
+  the value). `turn.rs` collects throws; moves carry the tokens they use
+  (values, not indices: a memo hit once returned another order's indices).
+  The computer plans all its throws at once (memo over position and
+  tokens); hard takes normal's best six end positions and plays out the
+  next enemy turn (24 samples, same throws for each). Findings: earliest
+  sure evidence 15th to 16th century (Schmidt-Madsen 2021); Mahabharata
+  and Ellora claims fail; Akbar's living pieces not in the Ain.
+- **Shatranj** (`shatranj`, chapter 14): Murray 1913 throughout; sides Red
+  and Black as the manuscripts, shahs on e1 and e8 (the manuscripts'
+  d-file mirrored). Five rule sets: as-Suli's (stalemated side loses; bare
+  shah loses unless he bares back at once, which draws), the Medinese
+  victory (first to bare wins), and chaturanga with al-'Adli's Indian rules
+  (stalemated side wins, first to bare wins) with three elephants: the
+  diagonal leap (Murray: oldest), al-'Adli's corner elephant leaping two
+  straight (rukh on c1, f1), al-Biruni's five-fold step. Our choices: Red
+  first, third repetition, 70 moves each without capture or baidaq move.
+  Bell's "strangled stalemate" is Timur's chess via Forbes (Murray 229
+  n. 12): not offered. Chaturaji (four-handed, dice) not offered: too much
+  unknown; a candidate later. AI: alpha-beta, table, captures to the end
+  (all moves in check), depths 1, 2, 4 (see the measurements below).
+- **Patolli** (`patolli`, chapter 15): one rule set, Bell's 15 "Suggested
+  Additional Rules" (pp. 7-8) on Durán's equipment, the ring of 60 from
+  his Fig. 7 (each arm two rows of seven; 5th and 6th from the middle
+  pinched, 7th the rounded end). Our choices: pool 10 each, purse 20,
+  no holes moves nothing, a player who cannot pay pays what he has (a
+  dry purse does not end the game: with purses of 20 it decided every
+  game against easy, found by the strength test), passing over stones.
+  Findings: no 16th-century source gives rules; 52 squares and the
+  calendar come from Mateos Higuera 1930 and Swezey 1970; Moctezuma
+  watched (Gómara), the game he played was totoloque (Bernal Díaz); the
+  square Teotihuacan boards are another game (Depaulis 2018).
+
+**Measured strengths** (2026-10-25; each crate's `strengths` test, sides
+alternating):
+- Alquerque and Fanorona (10 games each, `ALQUERQUE_GAMES`,
+  `ALQUERQUE_ONLY`): normal beats easy 10/10 everywhere but the vela (8,
+  2 drawn); hard beats easy 10/10 everywhere; hard beats normal 9/10 at
+  every Fanorona, 6/10 at Bell's alquerque, 3/10 with 6 drawn at
+  Alfonso's (optional taking makes it drawish: "frequently there can be a
+  tie", Alfonso).
+- Tabula (100 games, `TABULA_GAMES`, `TABULA_ONLY`): normal and hard beat
+  easy 100/100 at all three; hard beats normal 67 (colours opposite), 52
+  (the same way), 54 (duodecim scripta) of 100: the dice decide much.
+- Pachisi (`PACHISI_GAMES`, `PACHISI_ONLY`, `PACHISI_HARD`): normal beats
+  easy 38 to 40 of 40, hard beats easy 35 to 40 of 40; hard beats normal
+  67 (Tylor), 51 (Falkener; 55 in another 100) and 66 (chaupar) of 100.
+- Patolli (200 games, `PATOLLI_GAMES`): normal beats easy 193, hard easy
+  200, hard normal 113 of 200.
+- Shatranj (10 games, `SHATRANJ_GAMES`, `SHATRANJ_ONLY`, `SHATRANJ_HARD`;
+  each test game opens with four random moves, or the games repeat):
+  normal beats easy 9/10, hard beats easy 10/10 and normal 7/10. Depths
+  1, 2 and 4 (even: odd depths end on one's own move). Until this, hard
+  searched as deep as 7 in 1.5 s and lost to normal at depth 3 (2 to 4
+  of 10, several times, table on or off): deeper than 4 does not help with
+  this judgement, cause not found; a fixed 4 against 2 won 6/8. The
+  judgement has mobility for rukh and faras; a baidaq on the seventh is
+  worth less than the firzan it becomes; the capture search tries every
+  move when in check. Only as-Suli's rule set measured this way.
+
 ## Roadmap
 
 `ROADMAP.md` (2026-10-22): ancient games from around the world that could
@@ -261,7 +376,9 @@ archives). Board figures come from
 `rulebook/figures/make_figures.py` as SVG and ASCII. Done: introduction,
 all five games (2026-10-22; Mehen, Hnefatafl and Fox & Geese researched
 and written by subagents from the sources, then checked against the code),
-Mancala, Morris (2026-10-23).
+Mancala, Morris (2026-10-23), Mū tōrere, Kōnane, Seega, and the five of
+2026-10-25 (Alquerque and Fanorona, Tabula, Pachisi, Shatranj, Patolli,
+chapters 11 to 15).
 Illustrations (David, 2026-10-22): photographs of the real objects in the
 PDF and HTML, each with source, author and licence in
 `rulebook/images/CREDITS.md` and its caption (CC0 museum images first:

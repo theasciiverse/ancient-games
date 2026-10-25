@@ -18,7 +18,7 @@ on:
         required: true
 
 env:
-  GAMES: royal-ur senet mehen hnefatafl fox-and-geese mancala morris mu-torere konane seega
+  GAMES: royal-ur senet mehen hnefatafl fox-and-geese mancala morris mu-torere konane seega alquerque tabula pachisi shatranj patolli
   TAG: ${{ inputs.tag || github.ref_name }}
 
 permissions:

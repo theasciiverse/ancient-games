@@ -24,10 +24,12 @@ const REPEAT: i32 = 30;
 fn budget(strength: Strength) -> (Duration, u32) {
     let (time, depth) = match strength {
         Strength::Easy => (Duration::from_millis(80), 1),
-        Strength::Normal => (Duration::from_millis(400), 3),
-        Strength::Hard => (Duration::from_millis(1500), 30),
+        // Even depths: an odd depth ends on one's own move and is too
+        // hopeful. Measured: deeper than 4 did not play better.
+        Strength::Normal => (Duration::from_millis(400), 2),
+        Strength::Hard => (Duration::from_millis(1500), 4),
     };
-    if ancient_core::capture::untimed() { (Duration::MAX, depth.min(3)) } else { (time, depth) }
+    if ancient_core::capture::untimed() { (Duration::MAX, depth.min(2)) } else { (time, depth) }
 }
 
 pub fn value(kind: Kind) -> i32 {
@@ -53,7 +55,7 @@ struct Search<'a> {
 impl Search<'_> {
     fn out(&mut self) -> bool {
         self.nodes += 1;
-        self.nodes % 512 == 0 && self.start.elapsed() > self.time
+        self.nodes.is_multiple_of(512) && self.start.elapsed() > self.time
     }
 }
 
@@ -78,6 +80,9 @@ pub fn choose(
     let (time, max_depth) = budget(strength);
     let mut search = Search { rules, start: Instant::now(), time, table: HashMap::new(), seen, nodes: 0 };
     let mut best = moves[0];
+    // Hard keeps the move of its last finished even depth: an odd depth
+    // ends on its own move and is too hopeful.
+    let mut kept = None;
     for depth in 1..=max_depth {
         if let Some(i) = moves.iter().position(|m| *m == best) {
             moves[..=i].rotate_right(1);
@@ -107,7 +112,11 @@ pub fn choose(
         }
         if let Some((v, mv)) = found {
             best = mv;
+            if depth % 2 == 0 {
+                kept = Some(mv);
+            }
             if (v / 4).abs() >= WIN - 1000 {
+                kept = Some(mv);
                 break;
             }
         }
@@ -115,7 +124,7 @@ pub fn choose(
             break;
         }
     }
-    Some(best)
+    if strength == Strength::Hard { Some(kept.unwrap_or(best)) } else { Some(best) }
 }
 
 /// Captures first, the most valuable man taken by the least valuable;
@@ -191,15 +200,25 @@ fn negamax(s: &mut Search, position: &Position, depth: u32, ply: u32, mut alpha:
     best
 }
 
-/// Captures only, until the position is quiet.
+/// Captures only, until the position is quiet; a shah in check tries
+/// every way out instead.
 fn quiesce(s: &mut Search, position: &Position, ply: u32, mut alpha: i32, beta: i32, left: u32) -> i32 {
+    let check = position.in_check(position.to_move);
     let stand = judge(s.rules, position);
-    if stand >= beta || left == 0 {
+    if !check && (stand >= beta || left == 0) {
         return stand;
     }
-    alpha = alpha.max(stand);
-    let mut moves: Vec<Move> =
-        position.moves().into_iter().filter(|m| position.board[m.to as usize].is_some() || m.promotes).collect();
+    if !check {
+        alpha = alpha.max(stand);
+    }
+    let mut moves: Vec<Move> = position
+        .moves()
+        .into_iter()
+        .filter(|m| check || position.board[m.to as usize].is_some() || m.promotes)
+        .collect();
+    if check && left == 0 {
+        return stand;
+    }
     order(position, &mut moves, None);
     for mv in &moves {
         let mut next = position.clone();
@@ -214,11 +233,41 @@ fn quiesce(s: &mut Search, position: &Position, ply: u32, mut alpha: i32, beta: 
         }
         alpha = alpha.max(v);
     }
-    alpha
+    if check && alpha == -WIN * 2 { stand } else { alpha }
+}
+
+/// Squares the faras or rukh on `sq` could move to.
+fn mobility(position: &Position, sq: usize) -> i32 {
+    let Some(m) = position.board[sq] else { return 0 };
+    let (f, r) = fr(sq);
+    let free = |s: usize| position.board[s].is_none_or(|o| o.side != m.side);
+    match m.kind {
+        Kind::Faras => [(1, 2), (2, 1), (-1, 2), (-2, 1), (1, -2), (2, -1), (-1, -2), (-2, -1)]
+            .iter()
+            .filter(|&&(df, dr)| crate::rules::square(f + df, r + dr).is_some_and(free))
+            .count() as i32,
+        Kind::Rukh => {
+            let mut n = 0;
+            for (df, dr) in [(1, 0), (-1, 0), (0, 1), (0, -1)] {
+                let (mut x, mut y) = (f + df, r + dr);
+                while let Some(s) = crate::rules::square(x, y) {
+                    if position.board[s].is_some() {
+                        n += free(s) as i32;
+                        break;
+                    }
+                    n += 1;
+                    x += df;
+                    y += dr;
+                }
+            }
+            n
+        }
+        _ => 0,
+    }
 }
 
 /// The value of `position` for the side to move.
-pub fn judge(rules: &Rules, position: &Position) -> i32 {
+pub fn judge(_rules: &Rules, position: &Position) -> i32 {
     let me = position.to_move;
     let mut score = [0i32; 2];
     let mut men = [0i32; 2];
@@ -232,14 +281,18 @@ pub fn judge(rules: &Rules, position: &Position) -> i32 {
         if m.kind != Kind::Shah {
             men[i] += 1;
         }
-        // Baidaqs gain as they go on; men like the middle of the board.
+        // Baidaqs gain as they go on; men like the middle of the board,
+        // and the rukh and faras like room to move.
         let advance = if m.side == Side::Red { r } else { 7 - r } as i32;
-        let central = 3 - (2 * f as i32 - 7).abs().min((2 * r as i32 - 7).abs()) / 2;
+        let central = 3 - ((2 * f as i32 - 7).abs().max((2 * r as i32 - 7).abs()) - 1) / 2;
         score[i] += match m.kind {
-            Kind::Baidaq => advance * advance * 3,
-            Kind::Faras | Kind::Firzan => central * 8,
+            // Up to 60 on the seventh rank: still less than the firzan it
+            // is about to become.
+            Kind::Baidaq => advance * 10,
+            Kind::Faras => central * 10 + mobility(position, sq) * 4,
+            Kind::Rukh => mobility(position, sq) * 3,
+            Kind::Firzan | Kind::Fil => central * 6,
             Kind::Shah => 0,
-            _ => central * 3,
         };
     }
     let (a, b) = (me.index(), me.other().index());
@@ -305,7 +358,12 @@ pub fn play_out(rules: &Rules, players: [Strength; 2], seed: u64) -> (Option<Out
         if *n >= 3 {
             return (Some(Outcome::Draw(crate::rules::Why::Repetition)), plies);
         }
-        let mv = choose(rules, &p, players[p.to_move.index()], &seen, &mut rng).unwrap();
+        // Four random moves open each test game, so that games differ.
+        let mv = if plies < 4 {
+            moves[(rng.next() % moves.len() as u64) as usize]
+        } else {
+            choose(rules, &p, players[p.to_move.index()], &seen, &mut rng).unwrap()
+        };
         p.play(rules, &mv);
         plies += 1;
     }
@@ -313,7 +371,8 @@ pub fn play_out(rules: &Rules, players: [Strength; 2], seed: u64) -> (Option<Out
 
 /// Strength against strength, sides alternating. Slow:
 /// `SHATRANJ_GAMES=10 cargo test --release -p shatranj strengths -- --ignored --nocapture`
-/// (`SHATRANJ_ONLY=<id>` for one rule set).
+/// (`SHATRANJ_ONLY=<id>` for one rule set, `SHATRANJ_HARD=1` only hard
+/// against normal).
 #[cfg(test)]
 mod strength_tests {
     use super::*;
@@ -324,9 +383,12 @@ mod strength_tests {
         let games: u64 = std::env::var("SHATRANJ_GAMES").ok().and_then(|s| s.parse().ok()).unwrap_or(10);
         let only = std::env::var("SHATRANJ_ONLY").ok();
         for rules in Rules::all().into_iter().filter(|r| only.as_deref().is_none_or(|o| o == r.id)) {
-            for (strong, weak) in
-                [(Strength::Normal, Strength::Easy), (Strength::Hard, Strength::Easy), (Strength::Hard, Strength::Normal)]
-            {
+            let pairs = if std::env::var("SHATRANJ_HARD").is_ok() {
+                vec![(Strength::Hard, Strength::Normal)]
+            } else {
+                vec![(Strength::Normal, Strength::Easy), (Strength::Hard, Strength::Easy), (Strength::Hard, Strength::Normal)]
+            };
+            for (strong, weak) in pairs {
                 let (mut won, mut drawn) = (0, 0);
                 for g in 0..games {
                     let strong_side = if g % 2 == 0 { Side::Red } else { Side::Black };
@@ -343,5 +405,42 @@ mod strength_tests {
                 eprintln!("{}: {:?} beats {:?} {won}/{games}, {drawn} drawn", rules.id, strong, weak);
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod hard_probe {
+    use super::*;
+    use crate::rules::tests::place;
+    use crate::rules::{name, parse};
+
+    #[test]
+    fn hard_mates_in_one_and_sees_the_threat() {
+        let r = Rules::shatranj();
+        let mut p = Position::empty();
+        place(&mut p, Side::Red, &[("g1", Kind::Shah), ("a1", Kind::Rukh)]);
+        place(&mut p, Side::Black, &[("g8", Kind::Shah), ("f7", Kind::Baidaq), ("g7", Kind::Baidaq), ("h7", Kind::Baidaq)]);
+        for s in [Strength::Normal, Strength::Hard] {
+            let mv = choose(&r, &p, s, &HashMap::new(), &mut Rng::new(1)).unwrap();
+            assert_eq!(name(mv.to as usize), "a8", "{s:?} mates");
+        }
+        // Black to move must stop Ra1-a8 mate: his rukh on b2 goes to b8,
+        // or a baidaq makes room.
+        let mut q = p.clone();
+        place(&mut q, Side::Black, &[("b2", Kind::Rukh)]);
+        q.to_move = Side::Black;
+        for s in [Strength::Normal, Strength::Hard] {
+            let mv = choose(&r, &q, s, &HashMap::new(), &mut Rng::new(1)).unwrap();
+            let mut after = q.clone();
+            after.play(&r, &mv);
+            let mate = after.moves().into_iter().any(|m| {
+                let mut x = after.clone();
+                x.play(&r, &m);
+                let ms = x.moves();
+                ms.is_empty() && x.in_check(x.to_move)
+            });
+            assert!(!mate, "{s:?} played {}-{} and allows mate", name(mv.from as usize), name(mv.to as usize));
+        }
+        let _ = parse("a1");
     }
 }

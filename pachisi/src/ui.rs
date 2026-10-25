@@ -4,7 +4,7 @@
 //! the help.
 
 use crate::app::{Game, Phase};
-use crate::rules::{COLOURS, HOME, READY, Rules, TEAMS, Throws, cell, loop_square, team};
+use crate::rules::{COLOURS, HOME, READY, Rules, TEAMS, Throws, cell, loop_square};
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, fill, put, wrap};
 use ancient_core::player::Player;
 use ancient_core::shell::{self, Help, Menu};
@@ -81,7 +81,7 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
                 MIDDLE
             } else if castle {
                 CASTLE
-            } else if (r as u16 + c as u16) % 2 == 0 {
+            } else if (r as u16 + c as u16).is_multiple_of(2) {
                 CLOTH
             } else {
                 Color::Rgb(198, 178, 138)
@@ -220,7 +220,6 @@ fn draw_panel(buf: &mut Buffer, panel: Rect, game: &Game) {
         put(buf, x, ky, k, Style::new().fg(DIM).bg(BG));
         ky += 1;
     }
-    let _ = team;
 }
 
 pub fn menu(rules: &[Rules], chosen: usize) -> Menu<'_> {

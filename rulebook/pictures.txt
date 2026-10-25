@@ -58,7 +58,7 @@ screen tabula tabula 0 3 40
 screen tabula duodecim 2 3 60
 
 examples alquerque
-screen alquerque alquerque 0 3 30
+screen alquerque alquerque 0 3 12
 screen alquerque fanorona 2 3 30
 
 examples pachisi

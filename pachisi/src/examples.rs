@@ -3,7 +3,7 @@
 //! `pachisi --rulebook-examples` and the chapter shows each block, so the
 //! book can never show a move the program would not make.
 
-use crate::rules::{COLOURS, HOME, LOOP, Position, Rules, Throw, Throws, loop_square, tokens};
+use crate::rules::{HOME, Position, Rules, Throw, Throws, loop_square, tokens};
 use crate::turn::Turn;
 
 pub fn all() -> Vec<(&'static str, String)> {
@@ -111,7 +111,6 @@ fn doublet() -> String {
         pair.to
     ));
     lines.push(format!("Or each die moves a man by itself: {} plays in all.", moves.len()));
-    let _ = (COLOURS, LOOP);
     lines.join("\n")
 }
 

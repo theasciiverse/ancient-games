@@ -14,6 +14,10 @@ use std::collections::HashMap;
 
 const BEGINNER_SLIPS: u64 = 3;
 
+/// Plans already searched: the position and the throws left, the value
+/// and the plan.
+type Memo = HashMap<(Position, Vec<Token>), (i32, Vec<Move>)>;
+
 /// The chance, in parts of 4096, that one man of the side to move can be
 /// brought exactly `d` steps (1 to 60) by some of the throws of one whole
 /// turn: worked out once per kind of throw by playing many turns.
@@ -146,7 +150,7 @@ pub fn plan(rules: &Rules, p: &Position, tokens: &[Token], strength: Strength, r
         }
         return out;
     }
-    let mut memo: HashMap<(Position, Vec<Token>), (i32, Vec<Move>)> = HashMap::new();
+    let mut memo: Memo = HashMap::new();
     if strength == Strength::Normal {
         let (_, best) = search(rules, p, tokens.to_vec(), us, strength, &mut memo, 0);
         return best;
@@ -218,7 +222,7 @@ fn search(
     toks: Vec<Token>,
     us: usize,
     strength: Strength,
-    memo: &mut HashMap<(Position, Vec<Token>), (i32, Vec<Move>)>,
+    memo: &mut Memo,
     bonus: i32,
 ) -> (i32, Vec<Move>) {
     let mut sorted = toks.clone();

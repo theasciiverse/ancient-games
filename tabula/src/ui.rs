@@ -173,8 +173,10 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     tray(buf, by - 2, "In hand:", 0, 0, hits);
     tray(buf, by + bh + 1, "Borne off:", rules.off(), rules.off(), hits);
 
-    if game.choosing() {
-        if let Some((r, _)) = hits.spots.iter().find(|(_, s)| *s == game.cursor) {
+    if game.choosing()
+        && let Some((r, _)) = hits.spots.iter().find(|(_, s)| *s == game.cursor)
+    {
+        {
             let style = Style::new().fg(AMBER).add_modifier(Modifier::BOLD);
             put(buf, r.x.saturating_sub(1), r.y + r.height / 2, "▶", style);
         }

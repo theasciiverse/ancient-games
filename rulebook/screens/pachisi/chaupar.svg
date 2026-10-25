@@ -150,32 +150,32 @@
 <rect x="0" y="580" width="1000" height="20.5" fill="#0a0a0e"/>
 <g font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="16" xml:space="preserve">
 <text x="610 620 630 640 650 660 670" y="115" fill="#ffb000" font-weight="bold">CHAUPAR</text>
-<text x="260" y="135" fill="#c42018" font-weight="bold">●</text>
 <text x="610 620 630 640 650 660 670 680 700 710 720 730 740 760 770 780 790 800 810 820 830 840 850 870 880 890 910 920 930 940 950" y="135" fill="#78746c">Chaupar,afterAbu'l-Fazl(c.1590)</text>
+<text x="320" y="155" fill="#c48c00" font-weight="bold">●</text>
 <text x="610 620 630 650 660 670 690 700 710 720 730 750 760 770 780 790 800 810 820 830 840 860 870 880 890 900 910 920" y="155" fill="#c8c4ba">RedandBlack(computer,normal)</text>
+<text x="610" y="175" fill="#ffb000" font-weight="bold">▶</text>
 <text x="630" y="175" fill="#c42018" font-weight="bold">●</text>
-<text x="650 660 670 720 740 750 770 780 790 800 810 820 840 860 870 880 890" y="175" fill="#78746c">Red0toenter,0home</text>
+<text x="650 660 670 720 740 750 770 780 790 800 810 820 840 860 870 880 890" y="175" fill="#ffb000" font-weight="bold">Red0toenter,0home</text>
 <text x="630" y="195" fill="#12100e" font-weight="bold">●</text>
 <text x="650 660 670 680 690 720 740 750 770 780 790 800 810 820 840 860 870 880 890" y="195" fill="#78746c">Black0toenter,0home</text>
-<text x="260" y="215" fill="#c48c00" font-weight="bold">●</text>
 <text x="610 620 630 640 650 660 680 690 700 720 730 740 750 760 780 790 800 810 820 830 840 850 860 870 890 900 910 920 930" y="215" fill="#c8c4ba">YellowandGreen(computer,hard)</text>
 <text x="630" y="235" fill="#c48c00" font-weight="bold">●</text>
 <text x="650 660 670 680 690 700 720 740 750 770 780 790 800 810 820 840 860 870 880 890" y="235" fill="#78746c">Yellow0toenter,0home</text>
-<text x="610" y="255" fill="#ffb000" font-weight="bold">▶</text>
 <text x="630" y="255" fill="#188034" font-weight="bold">●</text>
-<text x="650 660 670 680 690 720 740 750 770 780 790 800 810 820 840 860 870 880 890" y="255" fill="#ffb000" font-weight="bold">Green2toenter,0home</text>
-<text x="230" y="275" fill="#c48c00" font-weight="bold">●</text>
-<text x="280 290" y="295" fill="#188034" font-weight="bold">○2</text>
-<text x="610 620 630 640 650 660 670 690 700 710 730 740 750 770 780 790" y="295" fill="#c8c4ba">Thrown:[2][1][1]</text>
-<text x="170 200" y="315" fill="#188034" font-weight="bold">●●</text>
-<text x="400 410" y="315" fill="#c42018" font-weight="bold">●2</text>
-<text x="460" y="315" fill="#1e5aa0" font-weight="bold">·</text>
-<text x="470" y="315" fill="#12100e" font-weight="bold">2</text>
-<text x="490 500" y="315" fill="#c48c00" font-weight="bold">●2</text>
-<text x="610 620 640 650 660 670 690 710 730" y="315" fill="#ffb000">Touse:211</text>
-<text x="290" y="335" fill="#c42018" font-weight="bold">●</text>
-<text x="610 620 630 640 650 670 680 690 700 710 720 740 750 770 780 800 810" y="355" fill="#c8c4ba">Greenthrows2,1,1.</text>
+<text x="650 660 670 680 690 720 740 750 770 780 790 800 810 820 840 860 870 880 890" y="255" fill="#78746c">Green0toenter,0home</text>
+<text x="50" y="295" fill="#188034" font-weight="bold">●</text>
+<text x="530" y="295" fill="#c48c00" font-weight="bold">●</text>
+<text x="550" y="295" fill="#1e5aa0" font-weight="bold">·</text>
+<text x="560" y="295" fill="#188034" font-weight="bold">2</text>
+<text x="610 620 630 640 650 660 670 690 700 710" y="295" fill="#c8c4ba">Thrown:...</text>
+<text x="50" y="315" fill="#188034" font-weight="bold">●</text>
+<text x="70 80" y="315" fill="#c42018" font-weight="bold">●2</text>
+<text x="460 470" y="315" fill="#12100e" font-weight="bold">●2</text>
+<text x="490 500" y="315" fill="#c42018" font-weight="bold">●2</text>
+<text x="610 620 630 640 650 670 680 690 700 710 730 750 760 770 790 800 810 820 830 840 850 860 880 890 900 910" y="355" fill="#c8c4ba">Greenmoves2mentogetherfrom</text>
 <text x="250 260" y="375" fill="#12100e" font-weight="bold">●2</text>
+<text x="610 620 630 640 650 660 680 690 710 720 740 750 760 770 780 790 810 820 830" y="375" fill="#c8c4ba">square40tosquare42.</text>
+<text x="310 320" y="455" fill="#c48c00" font-weight="bold">●2</text>
 <text x="610 620 630 650 660 670 680 720 730 750 760 770 780" y="495" fill="#78746c">F1:helpQ:quit</text>
 </g>
 </svg>
