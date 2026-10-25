@@ -1,0 +1,7 @@
+Holes up  Counts  Chance
+       0       0   1 in 32  nothing moves (our choice)
+       1       1   5 in 32
+       2       2  10 in 32
+       3       3  10 in 32
+       4       4   5 in 32
+       5      10   1 in 32

@@ -1,0 +1,45 @@
+Patolli
+Asciiverse
+2026-10-25
+
+A cross painted on a mat, its arms divided into compartments; six stones
+each, red and blue; five black beans, each with one white hole. Cast the
+beans: the holes showing count 1 to 4, all five 10. Each player brings his
+stones in on his own square of the middle and moves them once round the
+cross, the way his first stone took, and off beside where they came in. A
+compartment holds one stone; nobody is taken. The pinched compartments cost
+two forfeits, the rounded ends give another throw. The first with all six
+stones off wins the pool. The rules are a reconstruction, R. C. Bell’s; the
+chroniclers give only the equipment and the count. The rules in short
+follow; the full rules, the sources and the history are in RULES.txt and the
+rulebook.
+
+Bell’s suggested rules
+----------------------
+
+- Each casts the beans; the higher begins (ties cast again).
+- Your first throw brings a stone in on your square of the middle and moves
+  it the whole throw, either way round; all your stones then go that way.
+  After that a stone comes in only on a throw of 1.
+- A throw moves one stone its whole count. No stone may land on a
+  compartment that holds a stone (it may pass over). If any stone can move,
+  one must.
+- No move: a forfeit into the pool. Landing on a pinched compartment: two
+  forfeits to the other player. Landing on a rounded end: another throw.
+- Stones go once round and off, beside where they came in, by the exact
+  throw; the other pays a forfeit for each. The first with all six off wins
+  the pool.
+- Our choices: a pool of 10 each and purses of 20; a throw of no holes moves
+  nothing and costs nothing; a player who cannot pay in full pays what he
+  has.
+
+Playing it in the terminal
+--------------------------
+
+- Enter or Space: cast the beans. Then arrows (or the mouse) to a lit
+  compartment, Enter to send a stone there; B (or the “bear off” button) to
+  bear a stone off.
+- The panel shows the beans as they fell (◉ a hole up), the purses and the
+  pool, and which way each side goes.
+- When the game is over, Enter plays again.
+- M: menu; F1: this help; Q: quit.
