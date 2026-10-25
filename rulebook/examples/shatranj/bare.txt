@@ -1,0 +1,27 @@
+Red to play:
+  8  r . k . . . . .
+  7  . . . . . . . .
+  6  . . . K . . . .
+  5  . . . . . . . .
+  4  . . . . . . . .
+  3  . . . . . . . R
+  2  . . . . . . . .
+  1  . . . . . . . .
+     a b c d e f g h
+  1. Rh3-h8+    Kc8-b7
+  2. Rh8xa8     
+Black is bare. In Medina: Black is bare: Red wins.
+Elsewhere he may take back, Kb7xa8: both shahs are bare: a draw.
+With the shahs on e6 and d8:
+  8  r . . k . . . .
+  7  . . . . . . . .
+  6  . . . . K . . .
+  5  . . . . . . . .
+  4  . . . . . . . .
+  3  . . . . . . . R
+  2  . . . . . . . .
+  1  . . . . . . . .
+     a b c d e f g h
+  1. Rh3-h8+    Kd8-c7
+  2. Rh8xa8     
+Black cannot take back. Black is bare: Red wins.
