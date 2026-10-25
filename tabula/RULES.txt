@@ -1,0 +1,312 @@
+Tabula
+Asciiverse
+2026-10-25
+
+  ---------------- ----------------------------------------------------------
+  Played           The Roman world: duodecim scripta from the 1st century BC,
+                   tabula by the 5th century AD
+
+  Players          Two
+
+  Kind             Race game with three dice: fifteen men round the board and
+                   off
+
+  Program          tabula
+
+  Rule sets        Tabula with the colours running opposite ways (Becq de
+                   Fouquières, Austin); the same way (Bell); ludus duodecim
+                   scriptorum (Murray)
+  ---------------- ----------------------------------------------------------
+
+What survives
+-------------
+
+No ancient text gives the rules of either Roman game. What survives is
+boards by the hundred, dice and dice towers, a few words used by the
+players, and one game position, written in verse. Everything else is
+reconstruction, mostly by analogy with backgammon, and its makers say so: R.
+G. Austin’s account “is based entirely on legitimate analogy with the rules
+common to the backgammon family of games, and on inference from the type of
+board used” (Austin 1934a, 34).
+
+Duodecim scripta, “twelve lines” or “twelve marks”, is named by Cicero, and
+Ovid describes “another sort [of game] divided exactly into as many markings
+(scriptula) as the rolling year has months” (Austin 1934a, 31). Its boards
+have three rows of twelve, each row split in the middle; many are cut in
+stone, and many spell out six words of six letters, two to a row. One from
+Timgad reads VENARI LAVARI / LVDERE RIDERE / OCCEST VIVERE: “to hunt, to
+bathe, to play, to laugh: that is living” (Austin 1934a, 31). A board found
+at Qustul in Nubia, of about the 4th century, lay with fifteen men of ivory
+and fifteen of ebony, a dice tower and five dice (Bell 1969, 1:28-29).
+
+Tabula is the later game on two rows of twelve: the twenty-four points of
+backgammon. When the middle row was given up is not known (Austin 1935, 78);
+boards of two rows are known from Sardis, Didyma, Ostia and Rome (Durnagölü
+and Söğüt 2025, 30). Isidore of Seville, early in the 7th century, writes
+that “tabula is played with a dice tower, men and dice”, three dice, and
+that some men move “in order”, some “at random”, and some cannot move at all
+(Isidore of Seville 1911, XVIII.60-67). The game passed to Byzantium as
+tavli and to medieval Europe as the game of tables, whose rules Alfonso X
+had written down in 1283 (Golladay 2007, 413-95).
+
+Players. Suetonius says the emperor Claudius “played dice most eagerly”,
+wrote a book on the art, and had a board fitted to his carriage so that he
+could play while driven (Suetonius, n.d., 33.2); the word is alea, and which
+game he played is not said. Martial describes a board with duodecim scripta
+on one side and a war game on the other (Martial, n.d., XIV.17). A painted
+wall of a tavern at Pompeii shows two men at a board, one crying “Exsi” (I’m
+out), the other “Not three, it’s two”, and the landlord telling them to
+fight outside (Bell 1969, 1:33).
+
+Zeno’s game. Agathias, a poet of the 6th century, wrote an epigram on a game
+the emperor Zeno (who reigned 474-491) played and lost. It names the points
+each man stood on and the throw, and ends: “Avoid backgammon, as the king
+himself did not escape from its blind chance” (Agathias Scholasticus 1917,
+269). Louis Becq de Fouquières worked the position out in 1869 (Becq de
+Fouquières 1869, 371-80), and Austin in 1934 (Austin 1934b). It is the one
+place where the rules of a Roman board game can be tested, and it holds: see
+the example below. The position only works out if a point of two men is
+closed, if each die moves a man a step of its own (every point it stops on
+open), if the whole throw must be used, and if no man may leave the board
+before all are in the last quarter (Austin 1934b, 203-4). Bell calls that
+last rule “not mentioned by classical writers” and adds it because it
+improves the game (Bell 1969, 1:35); Austin had already shown that Zeno’s
+position needs it. The program, playing Becq’s and Austin’s rules, finds
+that the throw 2, 5, 6 leaves Zeno exactly one play, and that it leaves the
+eight single men the poem counts:
+
+    White (Zeno) to play, having thrown 2, 5, 6:
+       13  14  15  16  17  18 |  19  20  21  22  23  24
+       B1  B2  B2   .   .  B2 |  W2  W2  B2   .  W1   .
+       12  11  10   9   8   7 |   6   5   4   3   2   1
+       B2  B2  W2  W1  B2   . |  W7   .   .   .   .   .
+      In hand: White 0, Black 0. Borne off: White 0, Black 0.
+    Legal plays: 1.
+      20 to 22 (2), 19 to 24 (5), 10 to 16 (6)
+    After it:
+       13  14  15  16  17  18 |  19  20  21  22  23  24
+       B1  B2  B2  W1   .  B2 |  W1  W1  B2  W1  W1  W1
+       12  11  10   9   8   7 |   6   5   4   3   2   1
+       B2  B2  W1  W1  B2   . |  W7   .   .   .   .   .
+      In hand: White 0, Black 0. Borne off: White 0, Black 0.
+    White's single men: 8 (9, 10, 16, 19, 20, 22, 23, 24).
+
+What the epigram does not decide is which way Black goes: it counts Black’s
+men on the same numbers as White’s, and either reading fits.
+
+Corrections. Bell’s chapter (Bell 1969, 1:30-35) is the most read account;
+some of it does not hold. The throws he gives Cicero, Venus and Canis, are
+throws of four knucklebones, not of three dice; Zeno reigned 474-491, not
+475-481; Pompeii was not buried “with lava in A.D. 63”; and Suetonius’ alea
+does not say that Claudius played tabula.
+
+The boards
+----------
+
+       13  14  15  16  17  18 |  19  20  21  22  23  24
+       12  11  10   9   8   7 |   6   5   4   3   2   1
+
+    The points as White counts them, 1 to 24, then off. Black counts the
+    other way (from 24) when the colours run opposite ways, the same way
+    when they run alike.
+
+The board of tabula, its points numbered along White’s way.
+
+The program numbers the points along White’s way, 1 to 24, and names them so
+in its messages. Black’s points are named the same, whichever way Black
+goes.
+
+       24  23  22  21  20  19 |  18  17  16  15  14  13
+        1   2   3   4   5   6 |   7   8   9  10  11  12
+       25  26  27  28  29  30 |  31  32  33  34  35  36
+
+    Murray's route: in along the middle row (1 to 12), back along the top
+    (13 to 24), along the bottom (25 to 36) and off. Both sides the same.
+
+The board of duodecim scripta with Murray’s route.
+Rules every set shares
+----------------------
+
+What the sources give, and what they do not:
+
+- Fifteen men and three dice: the counts in Zeno’s position, the Qustul find
+  and Isidore’s “three dice” (Becq de Fouquières 1869, 373; Bell 1969,
+  1:28-29; Isidore of Seville 1911, XVIII.64).
+- Each die a separate step, onto open points; two men close a point; the
+  whole throw used; bearing off only from the last quarter: all needed for
+  Zeno’s position (Austin 1934b, 203-4); Bell gives the same as rules (Bell
+  1969, 1:34-35).
+- Hitting a single man, and its entering again before its owner moves
+  anything else: Austin’s and Bell’s inference, by analogy (Austin 1934a,
+  34; Bell 1969, 1:35).
+
+Our choices, where every source is silent:
+
+- Who begins: White.
+- Entering: a die of n puts a man on its owner’s nth point. Austin says the
+  men are entered “from his own entry table”, not how (Austin 1935, 78).
+  Becq instead stacks all fifteen on the first point at the start (Becq de
+  Fouquières 1869, 377); the program enters them.
+- A hit man that cannot enter: those dice are lost.
+- When not every die can be played: as many as can be, and of those plays
+  the highest numbers, as Alfonso’s three-dice game buffa de baldrac has it:
+  “they use the largest number they can” (Golladay 2007, 494).
+- Doubles and triples: each die once; nothing ancient says they count twice.
+- Bearing off: an exact throw, or a higher one for the man furthest back; a
+  man hit while bearing off must come round again before bearing off goes
+  on.
+
+    The start: every man in hand. White throws 6, 4, 1.
+    White has 5 different plays, for instance:
+      hand to 6 (6), hand to 4 (4), hand to 1 (1)
+      hand to 6 (6), 6 to 10 (4), 10 to 11 (1)
+    After the first:
+       13  14  15  16  17  18 |  19  20  21  22  23  24
+        .   .   .   .   .   . |   .   .   .   .   .   .
+       12  11  10   9   8   7 |   6   5   4   3   2   1
+        .   .   .   .   .   . |  W1   .  W1   .   .  W1
+      In hand: White 12, Black 15. Borne off: White 0, Black 0.
+
+A hit, and what it costs:
+
+    Black to play 5, 3, 2:
+       13  14  15  16  17  18 |  19  20  21  22  23  24
+        .  B2   .   .   .   . |   .   .   .  B1   .   .
+       12  11  10   9   8   7 |   6   5   4   3   2   1
+        .  W2   .  W1   .   . |   .  W2   .   .   .   .
+      In hand: White 10, Black 12. Borne off: White 0, Black 0.
+    Black: 14 to 9 (5) hitting, 14 to 12 (2), 12 to 9 (3).
+    After it:
+       13  14  15  16  17  18 |  19  20  21  22  23  24
+        .   .   .   .   .   . |   .   .   .  B1   .   .
+       12  11  10   9   8   7 |   6   5   4   3   2   1
+        .  W2   .  B2   .   . |   .  W2   .   .   .   .
+      In hand: White 11, Black 12. Borne off: White 0, Black 0.
+    White's hit man must enter again first: every play begins by entering it.
+
+Tabula, the colours opposite
+----------------------------
+
+Becq: White “made his way from the white men’s quarter towards the rear
+road, while his opponent made his way from the black men’s quarter towards
+the front road” [Becq de Fouquières (1869), 374; our translation]; Austin:
+each player moves “from his own entry table … through his opponent’s tables,
+so as to reach the latter’s entry table” (Austin 1935, 78), arrows and all
+in his drawing of Zeno’s board (Austin 1934b, 203). The medieval buffa de
+baldrac, with three dice, men entered from the hand and the two sides “the
+one against the other through all the tables of the board”, is the same game
+rule for rule (Golladay 2007, 494).
+
+Tabula, the colours the same way
+--------------------------------
+
+Bell: “The pieces were entered on the board in the first quarter and
+travelled anti-clockwise round the track. Apparently both colours travelled
+in the same direction” (Bell 1969, 1:35). Ulrich Schädler reads the epigram
+the same way (Schädler 2020). Bell also suggests, as his own improvement,
+that no man pass the first half until all are entered (Bell 1969, 1:35); the
+program does not, and Schädler’s further rules (a middle row for hit men,
+doubles played twice) are his own, by his own account oriented on the
+medieval game of Puff (Schädler 2020).
+
+Ludus duodecim scriptorum
+-------------------------
+
+H. J. R. Murray’s reconstruction, which Austin printed Austin (1934a). It
+rests on one board, from Ostia, lettered row by row in a way that “strongly
+suggests that the direction of play followed the letters of the alphabet”
+(Austin 1934a, 33): the men enter on the middle row, then go “through B to
+C, then down to D” and off. “Neither player could begin to advance his
+pieces until all were so entered on the middle row”; blots could be hit
+while entering too, “which would thus often occupy a considerable time”
+(Austin 1934a, 34).
+
+    Duodecim scripta, White to play 6, 3, 2:
+       24  23  22  21  20  19 |  18  17  16  15  14  13
+        .   .   .   .   .   . |   .   .   .   .   .   .
+        1   2   3   4   5   6 |   7   8   9  10  11  12
+        .   .  W4   .  B2   . |  W4   .  B2  B2   .  W3
+       25  26  27  28  29  30 |  31  32  33  34  35  36
+        .   .   .   .   .   . |   .   .   .   .   .   .
+      In hand: White 4, Black 9. Borne off: White 0, Black 0.
+    White still has men in hand, so no man may pass point 12.
+    Plays: 6, for instance hand to 6 (6), hand to 3 (3), hand to 2 (2).
+
+Our choices beyond tabula’s: three dice, as Austin has it (Austin 1934a,
+34); Schädler argues for two, reading scripta as the pips of the dice
+(Schädler 2020). Ovid’s “modo tres iactet numeros” (let her throw three
+numbers now) in the passage on women’s games (Ovid 2001, III.355) fits
+three.
+
+Playing it in the terminal
+--------------------------
+
+Start tabula, choose the rules, whom to play against (the computer, easy,
+normal or hard, or a friend at the same keyboard) and which side you play.
+
+  Key                            
+  ------------------------------ ----------------------------------------------------------------
+  Enter or Space                 Throw the dice; pick up a man; put it on a lit point
+  Arrows                         Move the cursor between points, the hand and the men borne off
+  Esc                            Let go of the man, or take back the last step of the turn
+  Mouse                          Click to throw, to pick up and to put down
+  F1 or ?                        The rules in short (F1, ? or Esc closes them)
+  Enter or Space, after a game   Play again
+  M, or Esc after a game         Back to the menu
+  Q                              Quit
+
+The computer: easy hits when it can and otherwise moves its furthest men,
+and now and then plays any move at all; normal judges each play by the race,
+the points it holds, the blots it leaves and how many enemy men could reach
+them; hard also weighs every throw of the other side and its best answer.
+
+tabula --demo lets the computer play both sides; --seed N repeats a game
+exactly.
+
+References
+==========
+
+Agathias Scholasticus. 1917. ‘On the Emperor Zeno’s Game’. In The Greek
+Anthology, with an English Translation by w. R. Paton, 3:268-69. Loeb
+Classical Library. London: Heinemann.
+
+Austin, Roland G. 1934a. ‘Roman Board Games. I’. Greece and Rome 4 (10):
+24-34.
+
+---. 1934b. ‘Zeno’s Game of Tάβλη (A.P. Ix. 482)’. Journal of Hellenic
+Studies 54 (2): 202-5. https://doi.org/10.2307/626864.
+
+---. 1935. ‘Roman Board Games. II’. Greece and Rome 4 (11): 76-82.
+
+Becq de Fouquières, Louis. 1869. Les Jeux Des Anciens: Leur Description,
+Leur Origine, Leurs Rapports Avec La Religion, l’histoire, Les Arts Et Les
+Mœurs. Paris: C. Reinwald.
+
+Bell, R. C. 1969. Board and Table Games from Many Civilizations. 2nd ed.
+Vol. 1. London: Oxford University Press.
+
+Durnagölü, Nihal, and Bilal Söğüt. 2025. ‘A Study on the Late Antique Board
+Game Duodecim Scripta/Alea from Stratonikeia and Lagina’. Board Game Studies
+Journal 19: 25-57. https://doi.org/10.2478/bgs-2025-0002.
+
+Golladay, Sonja Musser. 2007. ‘Los Libros de Acedrex Dados e Tablas:
+Historical, Artistic and Metaphysical Dimensions of Alfonso X’s Book of
+Games’. PhD thesis, University of Arizona.
+https://repository.arizona.edu/handle/10150/194159.
+
+Isidore of Seville. 1911. Etymologiarum Sive Originum Libri XX. Edited by W.
+M. Lindsay. Oxford: Clarendon Press.
+
+Martial. n.d. Epigrammata, Book XIV.
+
+Murray, H. J. R. 1952. A History of Board-Games Other Than Chess. Oxford:
+Clarendon Press.
+
+Ovid. 2001. The Art of Love (Ars Amatoria). Translated by A. S. Kline.
+https://www.poetryintranslation.com.
+
+Schädler, Ulrich. 2020. ‘Ludus XII Scriptorum; Zeno’s Tavli’. Rule sheets of
+the ERC project Locus Ludi, University of Fribourg.
+https://locusludi.ch/play-ancient-online-games/.
+
+Suetonius. n.d. Divus Claudius.

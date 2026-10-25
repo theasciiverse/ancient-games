@@ -93,8 +93,8 @@ impl Rules {
     pub fn tabula() -> Rules {
         Rules {
             id: "tabula",
-            name: "Tabula, after Becq de Fouquieres and Austin",
-            source: "The game of the emperor Zeno (c. AD 480), as Becq de Fouquieres (1869) and \
+            name: "Tabula, after Becq de Fouquières and Austin",
+            source: "The game of the emperor Zeno (c. AD 480), as Becq de Fouquières (1869) and \
                      R. G. Austin (1934) worked it out from Agathias' epigram: fifteen men, three dice, \
                      the two colours running opposite ways as in backgammon.",
             section: "Tabula, the colours opposite",
@@ -331,6 +331,22 @@ impl Position {
     }
 }
 
+/// Zeno's position, after Becq and Austin (Agathias, Anth. Pal.
+/// IX.482): White to play 2, 5, 6.
+pub fn zeno() -> Position {
+    let r = Rules::tabula();
+    let mut p = Position::new(&r);
+    p.men = [vec![0; 26], vec![0; 26]];
+    for (pt, n) in [(6, 7), (9, 1), (10, 2), (19, 2), (20, 2), (23, 1)] {
+        p.men[0][pt] = n;
+    }
+    for (pt, n) in [(8, 2), (11, 2), (12, 2), (13, 1), (14, 2), (15, 2), (18, 2), (21, 2)] {
+        p.men[1][r.step_of(Side::Black, pt) as usize] = n;
+    }
+    p
+}
+
+
 #[cfg(test)]
 pub(crate) mod tests {
     use super::*;
@@ -360,25 +376,10 @@ pub(crate) mod tests {
         assert!(p.moves(&r, &[6, 6, 6]).iter().all(|m| m.hops.is_empty()));
     }
 
-    /// Zeno's position, after Becq and Austin (Agathias, Anth. Pal.
-    /// IX.482): White to play 2, 5, 6.
-    pub fn zeno() -> Position {
-        let r = Rules::tabula();
-        let mut p = Position::new(&r);
-        p.men = [vec![0; 26], vec![0; 26]];
-        for (pt, n) in [(6, 7), (9, 1), (10, 2), (19, 2), (20, 2), (23, 1)] {
-            p.men[0][pt] = n;
-        }
-        for (pt, n) in [(8, 2), (11, 2), (12, 2), (13, 1), (14, 2), (15, 2), (18, 2), (21, 2)] {
-            p.men[1][r.step_of(Side::Black, pt) as usize] = n;
-        }
-        p
-    }
-
     #[test]
     fn zenos_throw() {
         let r = Rules::tabula();
-        let p = zeno();
+        let p = super::zeno();
         let moves = p.moves(&r, &[2, 5, 6]);
         assert_eq!(moves.len(), 1);
         let mut hops: Vec<(u8, u8)> = moves[0].hops.iter().map(|h| (h.from, h.to)).collect();

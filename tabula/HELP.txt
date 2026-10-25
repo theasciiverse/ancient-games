@@ -1,0 +1,64 @@
+Tabula
+Asciiverse
+2026-10-25
+
+The Roman ancestor of backgammon. Each side has fifteen men, all in hand at
+the start, and three dice. Each die moves one man that many points along its
+way round the board: into the board, round it, and off the far end. A point
+with two or more men of one side is closed to the other; a single man (a
+blot) is hit when an enemy man lands on it and must start again. You must
+use the whole throw if you can. A man may leave the board only when all your
+men are in the last six points. The first to bear off all fifteen wins. The
+rules in short follow; the full rules, the sources and the history are in
+RULES.txt and the rulebook.
+
+Rules every set shares
+----------------------
+
+- 15 men each, all in hand at the start; three dice; White throws first (our
+  choice).
+- Entering: a die of n enters a man on your nth point. Men may enter and men
+  on the board may move in the same turn.
+- Each die moves one man its number of points; one man may take two or three
+  dice in turn, but every point it stops on must be open.
+- Two or more men of one side close a point. A single man is hit by an enemy
+  landing on it and goes back to hand; while you have a hit man, you must
+  enter it before anything else moves.
+- Use as many dice as you can; if not all, the highest you can (our choice,
+  after Alfonso X). Each die counts once, doubles and triples too (our
+  choice).
+- Bearing off: only when all your men are in your last six points; a man
+  leaves on an exact throw, or a higher one if no man of yours stands
+  further back (our choice).
+
+Tabula, the colours opposite
+----------------------------
+
+- Contrary motion, as in backgammon: White enters on points 1 to 6 and bears
+  off from 19 to 24; Black enters on 24 to 19 and bears off from 6 to 1.
+
+Tabula, the colours the same way
+--------------------------------
+
+- Parallel motion: both sides enter on points 1 to 6, run the same way round
+  the board and bear off from 19 to 24. Every point is contested from the
+  start.
+
+Ludus duodecim scriptorum
+-------------------------
+
+- Three rows of twelve, both sides the same way: in along the middle row
+  (points 1 to 12), back along the top (13 to 24), along the bottom (25
+  to 36) and off.
+- No man may go beyond point 12 while any of yours is still in hand.
+- Bearing off from the last six points, 31 to 36. Otherwise as tabula.
+
+Playing it in the terminal
+--------------------------
+
+- Enter or Space: throw. Then arrows (or the mouse) to a lit man, Enter to
+  pick it up, a lit point (or “Borne off”) to put it down; one die at a
+  time. Esc: let go, or take back the last step.
+- In hand and Borne off stand above and below the board.
+- When the game is over, Enter plays again.
+- M: menu; F1: this help; Q: quit.
