@@ -1,0 +1,4 @@
+Red's men start on squares 6, 7, 15, 16 (Abu'l-Fazl).
+Red has men on 6, 7 and two on 20, and throws 5, 5, 2.
+The two fives may move the pair on 20 ten squares each, to 30.
+Or each die moves a man by itself: 7 plays in all.

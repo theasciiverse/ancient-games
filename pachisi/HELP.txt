@@ -1,0 +1,81 @@
+Pachisi and Chaupar
+Asciiverse
+2026-10-25
+
+A cross of four arms, each three columns by eight rows, round a square in
+the middle. Four colours, four men each, one colour to an arm; partners sit
+opposite and win together. A man comes out of the middle down the middle row
+of its own arm, goes round the outside of the whole cross against the sun,
+and back up its own middle row into the middle: 84 steps. Each throw moves
+one man its full value. A man landing on a single enemy man sends him back
+to the middle, except on the castles (the crossed squares). The partnership
+with all eight men home first wins. Pachisi is thrown with six cowrie
+shells, chaupar with three long dice. The rules in short follow; the full
+rules, the sources and the history are in RULES.txt and the rulebook.
+
+Rules every set shares
+----------------------
+
+- Two partnerships: Red and Black against Yellow and Green; you play both
+  colours of yours. Red throws first, then Yellow, Black, Green, round
+  against the sun (our choice).
+- Each throw moves one man its whole value; a throw is never split. Throws
+  may be used in any order, on any men, and may be left unused (P leaves the
+  rest).
+- Landing on a lone enemy man outside a castle sends it back to the middle.
+  Partners never take each other, and may share a square.
+- Men pass over any men. Going home needs the exact number.
+
+Pachisi, after Tylor
+--------------------
+
+- Six cowries; count the mouths up: none 6, one 10, two 2, three 3, four 4,
+  five 25, six 12. A 6, 10, 12 or 25 throws again; then the throws are
+  played.
+- A 10 or a 25 also brings a starting 1: the only way a man enters (onto the
+  first square), and the way from square 83 home.
+- Two or more men of one colour hold their square: no enemy may land there.
+  A castle with an enemy man on it is shut to you.
+- Taking a man brings another throw.
+- Rotten throws: three high throws (10, 12, 25) running are struck out,
+  unless the next throw is a 10 or a 25.
+- A colour with all its men home throws for its partner (our choice).
+
+Pachisi, after Falkener
+-----------------------
+
+- Six cowries: none up 25, one 10, two 2, three 3, four 4, five 5, six
+  6.  A 25, 10 or 6 throws again; a 25 or a 10 brings a grace of 1.
+- One man of each colour starts out in the middle; the others come out only
+  with a grace. Once out, a man moves from the middle with any throw: 25
+  from the middle reaches the castle at the end of the next arm.
+- Castles are shut to the enemy. Men may double on other squares at their
+  own peril: one enemy man landing there takes them all.
+- Taking a man brings another throw. A colour with all its men home simply
+  waits.
+
+Chaupar, after Abu’l-Fazl
+-------------------------
+
+- Three long dice, each showing 1, 2, 5 or 6. Each die moves one man; no
+  throwing again.
+- The men start on the board: two on squares 6 and 7 of their middle row,
+  two on 15 and 16 of the row on their right.
+- A doublet may move two men standing together twice its value each (keeping
+  them together); a triplet three. Otherwise dice are used one by one.
+- Two or more men together cannot be taken, except by a pair moved together
+  by a doublet. There are no castles.
+- A man taken goes to the middle and comes back on a die of 1, onto the
+  first square (our choice).
+- A player with all his men home throws for his partner.
+
+Playing it in the terminal
+--------------------------
+
+- Enter or Space: throw. Then arrows (or the mouse) to a lit man, Enter to
+  pick it up, a lit square to put it down; the middle stands for men still
+  to come out. P: leave the rest of the throws unused.
+- The panel shows the throw as it fell and the throws still to use (1* a
+  starting 1 or grace).
+- When the game is over, Enter plays again.
+- M: menu; F1: this help; Q: quit.

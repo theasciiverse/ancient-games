@@ -1,0 +1,23 @@
+                         . XO  .
+                         .  .  .
+                         .  .  .
+                         O  .  O
+                         X  .  X
+                         .  .  .
+                         .  .  .
+                         .  .  .
+ .  .  .  O  X  .  .  . ######### .  .  .  X  O  .  .  .
+XO  .  .  .  .  .  .  . ######### .  .  .  .  .  .  . XO
+ .  .  .  O  X  .  .  . ######### .  .  .  X  O  .  .  .
+                         .  .  .
+                         .  .  .
+                         .  .  .
+                         X  .  X
+                         O  .  O
+                         .  .  .
+                         .  .  .
+                         . XO  .
+
+The cross, Red's arm at the bottom; ### the middle. X: Tylor's castles
+(the 4th square from the middle on the outer rows); O: Falkener's (the
+4th from the outer end); XO: both, at the end of each middle row.

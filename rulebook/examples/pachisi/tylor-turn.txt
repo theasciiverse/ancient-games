@@ -1,0 +1,6 @@
+Red throws 10 (one mouth up): throw again; then 2.
+To use: 10, 1 (starting), 2.
+  1: a man from the middle to square 1.
+  10: a man from square 1 to square 11.
+  2: a man from square 11 to square 13.
+Square 13 is a fort: the man is safe there.
