@@ -1,0 +1,21 @@
+                      O  O
+                      X  X
+                      X  X
+                      .  .
+                      .  .
+                      .  .
+                      .  .
+ O  X  X  .  .  .  .  #  #  .  .  .  .  X  X  O
+ O  X  X  .  .  .  .  #  #  .  .  .  .  X  X  O
+                      .  .
+                      .  .
+                      .  .
+                      .  .
+                      X  X
+                      X  X
+                      O  O
+
+The cross drawn upright. #: the four squares of the middle; X: the
+pinched compartments (two forfeits); O: the rounded ends (another
+throw). Red enters on the lower left square of the middle, Blue on
+the upper right.

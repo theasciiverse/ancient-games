@@ -64,3 +64,6 @@ screen alquerque fanorona 2 3 30
 examples pachisi
 screen pachisi tylor 0 3 200
 screen pachisi chaupar 2 3 90
+
+examples patolli
+screen patolli bell 0 3 120

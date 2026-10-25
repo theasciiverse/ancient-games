@@ -1,0 +1,290 @@
+Patolli
+Asciiverse
+2026-10-25
+
+  ---------------- ----------------------------------------------------------
+  Played           The Aztecs of central Mexico, before and just after the
+                   Spanish conquest (1521)
+
+  Players          Two (Durán: “the usual way”); more in partnership
+
+  Kind             Race and betting game: six stones once round a painted
+                   cross
+
+  Program          patolli
+
+  Rule sets        Bell’s suggested rules (1969), on Durán’s equipment
+  ---------------- ----------------------------------------------------------
+
+What survives
+-------------
+
+No writer of the 16th century gives the rules of patolli. What the
+chroniclers give is the equipment, the count of the throw, and what the game
+meant to those who played it. R. C. Bell put it plainly: “Little more is
+known about patolli and this is not enough to play the game” (Bell 1969,
+1:7).
+
+Diego Durán, a Dominican friar in Mexico, wrote the fullest account, about
+1579, in his book of the old rites [Durán (1880), 234-238; our
+translations]. On a mat “they had painted a great saltire that took the mat
+from corner to corner; across the inside of the saltire were drawn lines
+that served as houses”, ruled in melted rubber. “For these houses there were
+twelve small stones, six red and six blue … if two played, which was the
+usual way, one took six and the other the other six; and though many played,
+one always played for all.” The lots were “some black beans, five or ten as
+they wished to lose or win, which had little white holes, one in each bean …
+if one, one; if two, two; if three, three; if four, four; but five showing
+were ten, and ten, twenty”; “and so those little white spots were the lots,
+and the count of the lines won, and for moving the stones from one house to
+another” (Durán 1880, 2:235).
+
+The god of the beans. “The name of the god of the dice was Macuilxochitl,
+which means five roses”; there were five beans in his honour, and as they
+cast them on the mat the players “called aloud ‘Macuilxochitl!’ and gave a
+great clap of the hands, and then looked to see what points had come” (Durán
+1880, 2:237). Gamesters carried the mat rolled under the arm and the beans
+tied in a cloth, spoke to them “a thousand words of love”, and offered
+incense and food before they played (Durán 1880, 2:235-36). “So many
+onlookers and gamesters came that they were on top of one another over the
+mat, some to play, others to bet” (Durán 1880, 2:235).
+
+Playing oneself into slavery. Durán’s chapter is “of the games these Indians
+had to amuse and divert themselves on feast days, but also to stake
+themselves and become slaves for ever” (Durán 1880, 2:234): when nothing
+else was left, “they staked themselves at a price, on condition that if
+within a certain time they could not redeem themselves, they would remain
+the slave for ever of the one who won them” (Durán 1880, 2:237). Gómara, the
+first to describe the game in print (1552), and Torquemada say the same
+(López de Gómara 1870, 224; Torquemada 1723, 2:554).
+
+Bernardino de Sahagún counts patolli among the lords’ pastimes: “a game
+called patolli, which is like the game of castro or alquerque, or almost
+like dice; there are four large beans, each with a hole, and they throw them
+by hand on a mat … where a figure is made”; elsewhere he has three beans
+[Sahagún (1829), 292, 317; our translation]. The game and the ball game
+“they have given up, as suspect of some idolatrous superstitions” (Sahagún
+1829, 2:292); the magistrates tore the mats and “burned on their hands the
+little beans that served as dice”, so that, Durán writes, no memory of the
+game was left (Durán 1880, 2:238).
+
+Moctezuma is often said to have played patolli. Gómara says only that
+“sometimes Moctezuma watched them play” (López de Gómara 1870, 223); the
+game Bernal Díaz saw him play with Cortés was totoloque, pellets of gold
+thrown at a mark (Díaz del Castillo 1632, cap. XCVII).
+
+What is not known. How the stones went round, what the marked compartments
+did, how a game was won: nothing in the chronicles says. The pictures show
+an X with arms two compartments wide, hourglass marks near the ends and
+rounded ends, but they differ in the number of compartments. The 52
+compartments of many modern accounts, said to match the 52 years of the
+Aztec calendar round, come from 20th-century reconstructions, Mateos
+Higuera’s of 1930 and Swezey’s of 1970, not from any chronicle Swezey and
+Bittman (1983); so does the rule that a bean standing on its edge wins all
+(Kendall 1980). The many square boards scratched in the floors of
+Teotihuacan and the Maya cities, often called patolli boards, are of another
+game: “none offers the cross-shaped board typical of patolli” (Depaulis
+2018, 42). Edward Tylor argued in 1879 that patolli came from the Indian
+pachisi (Tylor 1879, 124-25); the question has stayed open.
+
+The board
+---------
+
+                          O  O
+                          X  X
+                          X  X
+                          .  .
+                          .  .
+                          .  .
+                          .  .
+     O  X  X  .  .  .  .  #  #  .  .  .  .  X  X  O
+     O  X  X  .  .  .  .  #  #  .  .  .  .  X  X  O
+                          .  .
+                          .  .
+                          .  .
+                          .  .
+                          X  X
+                          X  X
+                          O  O
+
+    The cross drawn upright. #: the four squares of the middle; X: the
+    pinched compartments (two forfeits); O: the rounded ends (another
+    throw). Red enters on the lower left square of the middle, Blue on
+    the upper right.
+
+The cross drawn upright with its 60 compartments numbered round the ring
+from Red’s square of the middle; the pinched compartments marked with their
+triangles, the rounded ends ringed.
+
+Bell’s figure, “after Duran” (Bell 1969, 1:6), is the board here: four arms,
+each two rows of seven compartments, the last of each row half of the arm’s
+rounded end, round four squares in the middle; in every row the fifth and
+sixth compartments from the middle are pinched by black triangles, an
+hourglass across the arm. Bell’s text gives “sixteen compartments” a limb
+(Bell 1969, 1:7); his drawing agrees only if the two squares of the middle
+beside each limb are counted with it. Round the outline of the cross the
+compartments make a ring of 60. The program draws the cross upright; on the
+mat it lay corner to corner.
+
+Bell’s suggested rules
+----------------------
+
+Bell’s “Suggested Additional Rules (for two players)” (Bell 1969, 1:7-8), in
+his words:
+
+1.  “The players put an agreed sum into a pool and decide on the size of the
+    forfeits.”
+2.  “One player takes six red pieces, the other six blue.”
+3.  “Each player casts the patolli in turn and the higher scorer starts the
+    game by casting again.”
+4.  “The opening player introduces a piece on to his nearest central square
+    and then moves it the indicated number of compartments in either
+    direction round the board, but whichever way his first piece moves the
+    others must do likewise. His opponent at his opening throw also has a
+    free choice of direction but having once chosen, the remaining pieces
+    must travel the same way.”
+5.  “After the entry of the first piece the others must enter the board on
+    the player’s nearest central square with a throw of 1.”
+6.  “No piece may move on to a compartment occupied by any other piece.”
+7.  “If two or more of a player’s pieces can be moved to satisfy a
+    particular throw, the player has free choice which it shall be, but if
+    only one piece can move, the move must be made even if it is to the
+    player’s disadvantage.”
+8.  “If a player cannot move any piece he pays a forfeit into the pool.”
+9.  “A player landing on a compartment which has been reduced in size by the
+    markings pays two forfeits to his opponent.”
+10. “A player moving a piece on to one of the rounded compartments at the
+    end of the limbs of the cross is awarded another turn.”
+11. “Pieces travel round the cross and are borne off on the side of the
+    fourth limb nearest the player with exact throws, as in backgammon. The
+    four central squares, which have been traversed in the circuit of the
+    piece, are excluded in the bearing off.”
+12. “As each of the player’s pieces leaves the cross his opponent pays him
+    one forfeit.”
+13. “The player removing all his pieces from the cross first wins the stake
+    in the pool.”
+
+Rules 8 to 10 rest on a guess, which Bell gives: “By comparison with other
+North American games it is probable that the marked squares were penalty
+areas and the player was penalized for trespassing on them” (Bell 1969,
+1:7). His rules 14 and 15, for three and four players, are not offered.
+
+The count of the beans is Durán’s; with five beans, each as likely to fall
+hole up as not:
+
+    Holes up  Counts  Chance
+           0       0   1 in 32  nothing moves (our choice)
+           1       1   5 in 32
+           2       2  10 in 32
+           3       3  10 in 32
+           4       4   5 in 32
+           5      10   1 in 32
+
+    Red begins, and casts 3.
+    2 moves: a stone in on Red's square of the middle and 3 on, either way.
+    Red takes it down its own arm first (against the sun, as the program
+    draws it): every Red stone will go that way round.
+    Next, a 2 can only move that stone (1 move).
+    Only a 1 brings in another stone: yes.
+
+    Red has stones 3 and 56 along its way; purses 20 and 20.
+    A 2: 3 to 5, a pinched compartment. Red pays Blue 2: purses 18 and 22.
+    A 2 again: 5 to 7, a rounded end: Red throws again.
+    A 4 bears 56 off exactly; a 10 could not.
+    Blue pays one for it: purses 19 and 21.
+
+Our choices, where Bell is silent:
+
+- The stakes: each puts 10 into the pool and has 20 in his purse; a forfeit
+  is 1. A player who cannot pay in full pays what he has, and the game goes
+  on: only bearing off ends it.
+- No holes up moves nothing and costs nothing; it is not a throw that
+  “cannot move” (Durán gives no value for it).
+- Passing: a stone may pass over others; Bell forbids only landing.
+- Another turn on a rounded end is one more cast.
+- The way round: Red enters on the lower left square of the middle and Blue
+  on the upper right, opposite; each chooses his way with his first stone. A
+  stone goes off from the last compartment before its own square of the
+  middle, which it does not enter again.
+
+Not offered. A game on the 52-compartment route of Swezey’s reconstruction,
+three arms of the cross for each player (Swezey and Bittman 1983, 375,
+fig. 17b): almost everything in it but the route would be our own invention.
+Kendall’s and Mateos Higuera’s rules, the likely source of today’s popular
+ones, could not be read (Kendall 1980; Mateos Higuera 1930).
+
+Playing it in the terminal
+--------------------------
+
+Start patolli, choose whom to play against (the computer, easy, normal or
+hard, or a friend at the same keyboard) and which side you play. Who begins
+is cast for.
+
+  ---------------------------------------------------------------------------
+  Key                                   
+  ------------------------------------- -------------------------------------
+  Enter or Space                        Cast the beans; send a stone to the
+                                        lit compartment under the cursor
+
+  Arrows                                Move the cursor round the cross
+
+  B                                     Bear a stone off
+
+  Mouse                                 Click to cast; click a lit
+                                        compartment, or a stone
+
+  F1 or ?                               The rules in short (F1, ? or Esc
+                                        closes them)
+
+  Enter or Space, after a game          Play again
+
+  M, or Esc after a game                Back to the menu
+
+  Q                                     Quit
+  ---------------------------------------------------------------------------
+
+The computer: easy moves its furthest stone, and now and then any; normal
+judges the race and the purses, and likes the rounded ends; hard also weighs
+every cast the other side could make next, and its best answer.
+
+patolli --demo lets the computer play both sides; --seed N repeats a game
+exactly.
+
+References
+==========
+
+Bell, R. C. 1969. Board and Table Games from Many Civilizations. 2nd ed.
+Vol. 1. London: Oxford University Press.
+
+Depaulis, Thierry. 2018. ‘Ancient American Board Games, I: From Teotihuacan
+to the Great Plains’. Board Game Studies Journal 12: 29-55.
+https://doi.org/10.2478/bgs-2018-0002.
+
+Díaz del Castillo, Bernal. 1632. Historia Verdadera de La Conquista de La
+Nueva España. Madrid: Imprenta del Reyno.
+
+Durán, Diego. 1880. Historia de Las Indias de Nueva-España y Islas de Tierra
+Firme. Edited by José F. Ramírez. Vol. 2. México.
+
+Kendall, Timothy. 1980. Patolli: A Game of Ancient Mexico. Kirk Game
+Company.
+
+López de Gómara, Francisco. 1870. Conquista de Méjico. México.
+
+Mateos Higuera, Salvador. 1930. Breve Monografía y Reglas Del Patolli.
+México.
+
+Sahagún, Bernardino de. 1829. Historia General de Las Cosas de Nueva España.
+Edited by Carlos María de Bustamante. Vol. 2. México: Imprenta del ciudadano
+Alejandro Valdés.
+
+Swezey, William R., and Bente Bittman. 1983. ‘El Rectángulo de Cintas y El
+Patolli: Nueva Evidencia de La Antigüedad, Distribución, Variedad y Formas
+de Practicar Este Juego Precolombino’. Mesoamérica 4 (6): 373-416.
+
+Torquemada, Juan de. 1723. Monarquía Indiana. Vol. 2. Madrid: Nicolás
+Rodríguez Franco.
+
+Tylor, Edward B. 1879. ‘On the Game of Patolli in Ancient Mexico, and Its
+Probably Asiatic Origin’. Journal of the Anthropological Institute of Great
+Britain and Ireland 8: 116-28.

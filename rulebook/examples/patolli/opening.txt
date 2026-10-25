@@ -1,0 +1,6 @@
+Red begins, and casts 3.
+2 moves: a stone in on Red's square of the middle and 3 on, either way.
+Red takes it down its own arm first (against the sun, as the program
+draws it): every Red stone will go that way round.
+Next, a 2 can only move that stone (1 move).
+Only a 1 brings in another stone: yes.
