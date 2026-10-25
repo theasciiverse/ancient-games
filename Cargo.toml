@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["core", "fox-and-geese", "hnefatafl", "konane", "mancala", "mehen", "morris", "mu-torere", "seega", "senet", "ur"]
+members = ["alquerque", "core", "fox-and-geese", "hnefatafl", "konane", "mancala", "mehen", "morris", "mu-torere", "seega", "senet", "shatranj", "tabula", "ur"]
 
 [workspace.package]
 edition = "2024"

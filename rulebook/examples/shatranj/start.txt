@@ -1,0 +1,12 @@
+The start:
+  8  r n e f k e n r
+  7  p p p p p p p p
+  6  . . . . . . . .
+  5  . . . . . . . .
+  4  . . . . . . . .
+  3  . . . . . . . .
+  2  P P P P P P P P
+  1  R N E F K E N R
+     a b c d e f g h
+K shah, F firzan, E elephant (fil), N horse (faras),
+R rukh, P foot soldier (baidaq). Red in capitals.

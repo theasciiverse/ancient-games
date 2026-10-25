@@ -1,0 +1,65 @@
+Shatranj
+Asciiverse
+2026-10-23
+
+Chess before the queen and the bishop. Eight by eight squares; each side has
+a shah (king), a firzan (counsellor), two fils (elephants), two faras
+(horses), two rukhs (chariots) and eight baidaqs (foot soldiers). The shah,
+the faras and the rukh move as the king, the knight and the rook do today;
+the firzan steps one square diagonally; the fil leaps exactly two squares
+diagonally, over anything; the baidaq steps one square forward and takes one
+diagonally forward, and on the far row becomes a firzan. No castling, no
+double step. You win by mate, by taking every man of his but the shah
+(baring him), or, in shatranj, by leaving him without a move. The rules in
+short follow; the full rules, the sources and the history are in RULES.txt
+and the rulebook.
+
+Shatranj
+--------
+
+- Red moves first (our choice; the manuscripts give Red the move).
+- Mate wins. A stalemated shah (no legal move, not in check) loses.
+- Baring wins: take every man of his but the shah while keeping one of
+  yours. But if he can take your last man on his very next move, he may, and
+  both bare is a draw.
+- A third repetition of a position is a draw; so are 70 moves each with
+  nothing taken and no baidaq moved (our choice).
+
+Shatranj, the Medinese victory
+------------------------------
+
+- As shatranj, but whoever first bares the other’s shah wins at once, even
+  if the bared shah could take the last man back.
+
+Chaturanga, the Indian rules
+----------------------------
+
+- The men move as in shatranj.
+- A stalemated shah wins: the side left without a move, not in check, has
+  won (al-’Adli’s Indian rule).
+- Whoever first bares the other’s shah wins (the Medinese rule, which
+  al-’Adli calls Indian).
+- Draws as in shatranj (our choice).
+
+The elephant in the corner
+--------------------------
+
+- Chaturanga, the Indian rules, but the elephant stands in the corner and
+  leaps exactly two squares along a rank or file, over anything. The rukh
+  (chariot) stands on c1 and f1.
+
+Al-Biruni’s elephant
+--------------------
+
+- Chaturanga, the Indian rules, but the elephant steps one square diagonally
+  or one straight forward: “the trunk and the four feet”.
+
+Playing it in the terminal
+--------------------------
+
+- Arrows: move the cursor; Enter or Space: pick up a man, then put it on a
+  lit square; Esc: let go. Or click.
+- The panel shows the last moves: letter, from, to, x for a capture, =F for
+  a baidaq made firzan, + for check.
+- When the game is over, Enter plays again.
+- M: menu; F1: this help; Q: quit.

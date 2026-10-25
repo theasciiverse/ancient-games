@@ -1,0 +1,14 @@
+Black to move:
+  8  . . . . . . . .
+  7  . . . . . . . .
+  6  . . . . . . . .
+  5  . . . . . . . p
+  4  . . . . . . . P
+  3  . F . . . . . .
+  2  . . K . . . . .
+  1  k . . . . . . .
+     a b c d e f g h
+The black shah is not attacked, but every square
+he could go to is, and his foot soldier is blocked.
+Shatranj: Black has no move: Red wins.
+Chaturanga, the Indian rule: Black has no move: Black wins.

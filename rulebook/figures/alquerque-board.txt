@@ -1,0 +1,12 @@
+  5 B---B---B---B---B
+    | \ | / | \ | / |
+  4 B---B---B---B---B
+    | / | \ | / | \ |
+  3 B---B---o---W---W
+    | \ | / | \ | / |
+  2 W---W---W---W---W
+    | / | \ | / | \ |
+  1 W---W---W---W---W
+    a   b   c   d   e
+
+W a white man, B a black one, o the empty centre: 12 men each.

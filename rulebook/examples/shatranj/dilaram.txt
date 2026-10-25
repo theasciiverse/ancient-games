@@ -1,0 +1,25 @@
+Red to play and win:
+  8  . r . . . . k .
+  7  . . . . . . . .
+  6  . . . . . P P .
+  5  . . . . . . . .
+  4  K . n . . . N R
+  3  . . . . . . . E
+  2  . r . . . . . .
+  1  . . . . . . . R
+     a b c d e f g h
+The solution in the manuscripts:
+  1. Rh4-h8+    Kg8xh8
+  2. Eh3-f5+    Rb2-h2
+  3. Rh1xh2+    Kh8-g8
+  4. Rh2-h8+    Kg8xh8
+  5. g6-g7+     Kh8-g8
+  6. Ng4-h6+    
+Mate: Red wins.
+If Black declines the block, mate comes a move sooner:
+  1. Rh4-h8+    Kg8xh8
+  2. Eh3-f5+    Kh8-g8
+  3. Rh1-h8+    Kg8xh8
+  4. g6-g7+     Kh8-g8
+  5. Ng4-h6+    
+Mate: Red wins.

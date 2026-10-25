@@ -49,3 +49,6 @@ screen konane ernst 0 3 30
 
 examples seega
 screen seega five 0 3 30
+
+examples shatranj
+screen shatranj shatranj 0 3 40

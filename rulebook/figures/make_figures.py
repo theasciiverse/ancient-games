@@ -204,6 +204,11 @@ def main():
 
     small_games.write(HERE)
 
+    # The lined boards of Alquerque and Fanorona.
+    import lined_boards
+
+    lined_boards.write(HERE)
+
     ur = ur_board()
     labels = ["Dark's row", "shared row", "Light's row"]
     (HERE / "ur-board.svg").write_text(to_svg(ur, (2, 4), (2, 5), labels))
