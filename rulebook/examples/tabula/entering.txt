@@ -1,0 +1,10 @@
+The start: every man in hand. White throws 6, 4, 1.
+White has 5 different plays, for instance:
+  hand to 6 (6), hand to 4 (4), hand to 1 (1)
+  hand to 6 (6), 6 to 10 (4), 10 to 11 (1)
+After the first:
+   13  14  15  16  17  18 |  19  20  21  22  23  24
+    .   .   .   .   .   . |   .   .   .   .   .   .
+   12  11  10   9   8   7 |   6   5   4   3   2   1
+    .   .   .   .   .   . |  W1   .  W1   .   .  W1
+  In hand: White 12, Black 15. Borne off: White 0, Black 0.

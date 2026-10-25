@@ -209,6 +209,11 @@ def main():
 
     lined_boards.write(HERE)
 
+    # The boards of tabula and duodecim scripta.
+    import tables
+
+    tables.write(HERE)
+
     ur = ur_board()
     labels = ["Dark's row", "shared row", "Light's row"]
     (HERE / "ur-board.svg").write_text(to_svg(ur, (2, 4), (2, 5), labels))

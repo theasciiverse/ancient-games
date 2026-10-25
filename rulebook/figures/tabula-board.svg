@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 566 318" width="566" height="318" font-family="Libertinus Serif, Georgia, serif">
+<rect x="0" y="0" width="566" height="318" rx="10" fill="#e9e1cf" stroke="#2b2b2b" stroke-width="2"/>
+<rect x="270" y="20" width="26" height="278" fill="#2b2b2b" opacity="0.15"/>
+<polygon points="33,30 67,30 50.0,130" fill="#5a6b4c" opacity="0.85"/>
+<text x="50.0" y="146" font-size="14" text-anchor="middle" fill="#2b2b2b">13</text>
+<polygon points="73,30 107,30 90.0,130" fill="#b5432a" opacity="0.85"/>
+<text x="90.0" y="146" font-size="14" text-anchor="middle" fill="#2b2b2b">14</text>
+<polygon points="113,30 147,30 130.0,130" fill="#5a6b4c" opacity="0.85"/>
+<text x="130.0" y="146" font-size="14" text-anchor="middle" fill="#2b2b2b">15</text>
+<polygon points="153,30 187,30 170.0,130" fill="#b5432a" opacity="0.85"/>
+<text x="170.0" y="146" font-size="14" text-anchor="middle" fill="#2b2b2b">16</text>
+<polygon points="193,30 227,30 210.0,130" fill="#5a6b4c" opacity="0.85"/>
+<text x="210.0" y="146" font-size="14" text-anchor="middle" fill="#2b2b2b">17</text>
+<polygon points="233,30 267,30 250.0,130" fill="#b5432a" opacity="0.85"/>
+<text x="250.0" y="146" font-size="14" text-anchor="middle" fill="#2b2b2b">18</text>
+<polygon points="299,30 333,30 316.0,130" fill="#5a6b4c" opacity="0.85"/>
+<text x="316.0" y="146" font-size="14" text-anchor="middle" fill="#2b2b2b">19</text>
+<polygon points="339,30 373,30 356.0,130" fill="#b5432a" opacity="0.85"/>
+<text x="356.0" y="146" font-size="14" text-anchor="middle" fill="#2b2b2b">20</text>
+<polygon points="379,30 413,30 396.0,130" fill="#5a6b4c" opacity="0.85"/>
+<text x="396.0" y="146" font-size="14" text-anchor="middle" fill="#2b2b2b">21</text>
+<polygon points="419,30 453,30 436.0,130" fill="#b5432a" opacity="0.85"/>
+<text x="436.0" y="146" font-size="14" text-anchor="middle" fill="#2b2b2b">22</text>
+<polygon points="459,30 493,30 476.0,130" fill="#5a6b4c" opacity="0.85"/>
+<text x="476.0" y="146" font-size="14" text-anchor="middle" fill="#2b2b2b">23</text>
+<polygon points="499,30 533,30 516.0,130" fill="#b5432a" opacity="0.85"/>
+<text x="516.0" y="146" font-size="14" text-anchor="middle" fill="#2b2b2b">24</text>
+<polygon points="33,288 67,288 50.0,188" fill="#b5432a" opacity="0.85"/>
+<text x="50.0" y="182" font-size="14" text-anchor="middle" fill="#2b2b2b">12</text>
+<polygon points="73,288 107,288 90.0,188" fill="#5a6b4c" opacity="0.85"/>
+<text x="90.0" y="182" font-size="14" text-anchor="middle" fill="#2b2b2b">11</text>
+<polygon points="113,288 147,288 130.0,188" fill="#b5432a" opacity="0.85"/>
+<text x="130.0" y="182" font-size="14" text-anchor="middle" fill="#2b2b2b">10</text>
+<polygon points="153,288 187,288 170.0,188" fill="#5a6b4c" opacity="0.85"/>
+<text x="170.0" y="182" font-size="14" text-anchor="middle" fill="#2b2b2b">9</text>
+<polygon points="193,288 227,288 210.0,188" fill="#b5432a" opacity="0.85"/>
+<text x="210.0" y="182" font-size="14" text-anchor="middle" fill="#2b2b2b">8</text>
+<polygon points="233,288 267,288 250.0,188" fill="#5a6b4c" opacity="0.85"/>
+<text x="250.0" y="182" font-size="14" text-anchor="middle" fill="#2b2b2b">7</text>
+<polygon points="299,288 333,288 316.0,188" fill="#b5432a" opacity="0.85"/>
+<text x="316.0" y="182" font-size="14" text-anchor="middle" fill="#2b2b2b">6</text>
+<polygon points="339,288 373,288 356.0,188" fill="#5a6b4c" opacity="0.85"/>
+<text x="356.0" y="182" font-size="14" text-anchor="middle" fill="#2b2b2b">5</text>
+<polygon points="379,288 413,288 396.0,188" fill="#b5432a" opacity="0.85"/>
+<text x="396.0" y="182" font-size="14" text-anchor="middle" fill="#2b2b2b">4</text>
+<polygon points="419,288 453,288 436.0,188" fill="#5a6b4c" opacity="0.85"/>
+<text x="436.0" y="182" font-size="14" text-anchor="middle" fill="#2b2b2b">3</text>
+<polygon points="459,288 493,288 476.0,188" fill="#b5432a" opacity="0.85"/>
+<text x="476.0" y="182" font-size="14" text-anchor="middle" fill="#2b2b2b">2</text>
+<polygon points="499,288 533,288 516.0,188" fill="#5a6b4c" opacity="0.85"/>
+<text x="516.0" y="182" font-size="14" text-anchor="middle" fill="#2b2b2b">1</text>
+<text x="283.0" y="310" font-size="13" text-anchor="middle" fill="#2b2b2b">White's way: 1 to 24, then off</text>
+</svg>

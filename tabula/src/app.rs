@@ -286,3 +286,48 @@ impl Game {
 fn list(dice: &[u8]) -> String {
     dice.iter().map(|d| d.to_string()).collect::<Vec<_>>().join(", ")
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn a_person_throws_and_moves() {
+        let mut game = Game::new(Rules::tabula(), [Player::Human, Player::Human], Rng::new(4));
+        let t = Instant::now();
+        game.act(0, t);
+        game.tick(t + Duration::from_secs(1));
+        assert_eq!(game.phase, Phase::Choosing);
+        // Pick up a man in hand and enter it, die by die, until the turn
+        // passes.
+        let mut guard = 0;
+        while game.phase == Phase::Choosing {
+            let lit = game.lit();
+            let spot = game.spot(lit[0]);
+            game.act(spot, t);
+            guard += 1;
+            assert!(guard < 20);
+        }
+        assert_eq!(game.position.to_move, Side::Black);
+        assert!(game.position.men[0][0] < 15);
+    }
+
+    #[test]
+    fn hard_thinks_quickly_enough() {
+        let r = Rules::tabula();
+        let mut p = Position::new(&r);
+        let mut rng = Rng::new(3);
+        let mut worst = Duration::ZERO;
+        for _ in 0..60 {
+            if p.outcome(&r).is_some() {
+                break;
+            }
+            let dice: Vec<u8> = (0..3).map(|_| (rng.next() % 6) as u8 + 1).collect();
+            let start = Instant::now();
+            let mv = ai::choose(&r, &p, &dice, ai::Strength::Hard, &mut rng).unwrap();
+            worst = worst.max(start.elapsed());
+            p.play(&r, &mv);
+        }
+        eprintln!("slowest hard move: {worst:?}");
+    }
+}

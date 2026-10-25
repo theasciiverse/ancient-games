@@ -1,6 +1,6 @@
 Kōnane
 Asciiverse
-2026-10-23
+2026-10-25
 
 Every hollow of the board (papamū) is filled with black and white stones in
 turn, so each diagonal is of one colour. Two stones are lifted out to begin.

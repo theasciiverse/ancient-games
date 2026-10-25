@@ -52,3 +52,7 @@ screen seega five 0 3 30
 
 examples shatranj
 screen shatranj shatranj 0 3 40
+
+examples tabula
+screen tabula tabula 0 3 40
+screen tabula duodecim 2 3 60

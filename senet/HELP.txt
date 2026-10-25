@@ -1,6 +1,6 @@
 Senet
 Asciiverse
-2026-10-23
+2026-10-25
 
 Senet is a race over thirty houses: throw, then move one piece forward that
 many houses, and be the first to bring your pieces off the end. Both sides
