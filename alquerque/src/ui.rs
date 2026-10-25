@@ -105,9 +105,7 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
             None if lit.contains(&p) => ("◆", Style::new().fg(MARK).bg(STONE).add_modifier(Modifier::BOLD)),
             None => ("•", line.add_modifier(Modifier::BOLD)),
         };
-        if game.selected == Some(p) {
-            style = style.bg(PICKED);
-        } else if lit.contains(&p) && shown.at[p].is_some() && !choosing {
+        if game.selected == Some(p) || (lit.contains(&p) && shown.at[p].is_some() && !choosing) {
             style = style.bg(PICKED);
         }
         put(buf, x, y, glyph, style);

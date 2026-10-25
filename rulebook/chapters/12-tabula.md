@@ -42,13 +42,14 @@ split in the middle; many are cut in stone, and many spell out six
 words of six letters, two to a row. One from Timgad reads VENARI
 LAVARI / LVDERE RIDERE / OCCEST VIVERE: "to hunt, to bathe, to play,
 to laugh: that is living" [@austin1934rbg1, 31].
-
-![Marble board for the game of twelve lines, found near the agora of
-Aphrodisias, Turkey. Photograph: wneuheisel, CC BY
-2.0.](images/tabula-xii-scripta-aphrodisias.jpg){width=70%} A board found at
+A board found at
 Qustul in Nubia, of about the 4th century, lay with fifteen men of
 ivory and fifteen of ebony, a dice tower and five dice
 [@bell1969, 28-29].
+
+![Marble board for the game of twelve lines, found near the agora of
+Aphrodisias, Turkey. Photograph: wneuheisel, CC BY
+2.0.](images/tabula-xii-scripta-aphrodisias.jpg){width=70%}
 
 **Tabula** is the later game on two rows of twelve: the twenty-four
 points of backgammon. When the middle row was given up is not known
@@ -56,14 +57,14 @@ points of backgammon. When the middle row was given up is not known
 Didyma, Ostia and Rome [@durnagolu2025, 30]. Isidore of Seville, early in the 7th
 century, writes that "tabula is played with a dice tower, men and dice",
 three dice, and that some men move "in order", some "at random", and
-some cannot move at all [@isidore-etym, XVIII.60-67].
+some cannot move at all [@isidore-etym, XVIII.60-67]. The game passed
+to Byzantium as *tavli* and to medieval Europe as the game of tables,
+whose rules Alfonso X had written down in 1283 [@golladay2007, 413-495].
 
 ![The Vettweiß-Froitzheim dice tower, 4th century, with Roman counters;
 its inscription reads PICTOS VICTOS HOSTIS DELETA LVDITE SECVRI.
 LVR-LandesMuseum Bonn. Photograph: Carole Raddato, CC BY-SA
-2.0.](images/tabula-dice-tower-bonn.jpg){height=8cm} The game passed
-to Byzantium as *tavli* and to medieval Europe as the game of tables,
-whose rules Alfonso X had written down in 1283 [@golladay2007, 413-495].
+2.0.](images/tabula-dice-tower-bonn.jpg){height=8cm}
 
 **Players.** Suetonius says the emperor Claudius "played dice most
 eagerly", wrote a book on the art, and had a board fitted to his

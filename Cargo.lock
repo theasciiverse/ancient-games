@@ -19,7 +19,7 @@ checksum = "683d7910e743518b0e34f1186f92494becacb047c7b6bf616c96772180fef923"
 
 [[package]]
 name = "alquerque"
-version = "0.5.0"
+version = "0.4.0"
 dependencies = [
  "ancient-core",
  "env_logger",
@@ -988,7 +988,7 @@ dependencies = [
 
 [[package]]
 name = "pachisi"
-version = "0.5.0"
+version = "0.4.0"
 dependencies = [
  "ancient-core",
  "env_logger",
@@ -1054,7 +1054,7 @@ dependencies = [
 
 [[package]]
 name = "patolli"
-version = "0.5.0"
+version = "0.4.0"
 dependencies = [
  "ancient-core",
  "env_logger",
@@ -1497,7 +1497,7 @@ dependencies = [
 
 [[package]]
 name = "shatranj"
-version = "0.5.0"
+version = "0.4.0"
 dependencies = [
  "ancient-core",
  "env_logger",
@@ -1641,7 +1641,7 @@ dependencies = [
 
 [[package]]
 name = "tabula"
-version = "0.5.0"
+version = "0.4.0"
 dependencies = [
  "ancient-core",
  "env_logger",

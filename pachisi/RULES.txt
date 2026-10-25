@@ -51,7 +51,7 @@ legends, and its technicalities play so important a part in them” that
 Richard Temple described it: with dice it is phansa, with cowries pachisi
 (Temple 1884, 1:243-45). The name comes from the highest throw: “the game is
 generally played with six cowries, making the highest throw 25 … hence it is
-termed Pucheesee (from puchees, 25)” (Sharif 1832, liii). The book follows
+termed Pucheesee (from puchees, 25)” (Herklots 1832, liii). The book follows
 Temple and Schmidt-Madsen in calling the dice game chaupar and the cowrie
 game pachisi (Schmidt-Madsen 2021, 33). The first European picture of the
 board is Thomas Hyde’s in 1694; the man he asked “could not teach me the way
@@ -102,17 +102,17 @@ rolled round in their turbans” (Tylor 1879, 118). All the sources agree on
 the cross of four arms of three columns by eight rows, and on the way round:
 out down one’s own middle row, round the outside rows “from right to left
 (i.e. contrary to the sun)”, and back up the middle row into the middle
-(Sharif 1832, lii; Tylor 1879, 119; Falkener 1892, 261). The program numbers
-a man’s way 1 to 84 as above, from Falkener’s numbered drawing (Falkener
-1892, 263).
+(Herklots 1832, lii; Tylor 1879, 119; Falkener 1892, 261). The program
+numbers a man’s way 1 to 84 as above, from Falkener’s numbered drawing
+(Falkener 1892, 263).
 
 There are twelve castles, “the twelve privileged squares, which are marked
-with a cross” (Sharif 1832, lii): the outer end of each middle row, and two
-on each arm’s outer rows. Where those two stand, the sources differ: Tylor’s
-drawing puts them on the fourth square from the middle (Tylor 1879, 119),
-Falkener’s and Bell’s on the fourth from the outer end (Falkener 1892, 263;
-Bell 1969, 1:10). Culin found both on real boards (Culin 1898, 854 n. 1).
-Each rule set keeps its own source’s.
+with a cross” (Herklots 1832, lii): the outer end of each middle row, and
+two on each arm’s outer rows. Where those two stand, the sources differ:
+Tylor’s drawing puts them on the fourth square from the middle (Tylor 1879,
+119), Falkener’s and Bell’s on the fourth from the outer end (Falkener 1892,
+263; Bell 1969, 1:10). Culin found both on real boards (Culin 1898, 854
+n. 1). Each rule set keeps its own source’s.
 
 Rules every set shares
 ----------------------
@@ -128,8 +128,8 @@ Pachisi, after Tylor
 
 The rules Rajendralala Mitra gave Tylor, “a more complete and consistent set
 of rules” than earlier ones (Tylor 1879, 118). The cowries count as Herklots
-and Shway Yoe also give them (Tylor 1879, 119; Sharif 1832, lii-liii; Shway
-Yoe 1896, 375):
+and Shway Yoe also give them (Tylor 1879, 119; Herklots 1832, lii-liii;
+Shway Yoe 1896, 375):
 
     Mouths up  Counts   Chance     Then
             0       6    1 in 64   throw again
@@ -301,6 +301,9 @@ Government Printing Office.
 Falkener, Edward. 1892. Games Ancient and Oriental and How to Play Them.
 London: Longmans, Green; Co.
 
+Herklots, G. A. 1832. Qanoon-e-Islam, or the Customs of the Moosulmans of
+India. London: Parbury, Allen; Co.
+
 Hyde, Thomas. 1694. Historia Nerdiludii (de Ludis Orientalibus, Liber
 Posterior). Oxford: e Theatro Sheldoniano.
 
@@ -312,9 +315,6 @@ Buckle. London: Bickers; Son.
 Schmidt-Madsen, Jacob. 2021. ‘The Crux of the Cruciform: Retracing the Early
 History of Chaupar and Pachisi’. Board Game Studies Journal 15 (1): 29-77.
 https://doi.org/10.2478/bgs-2021-0003.
-
-Sharif, Jaʿfar. 1832. Qanoon-e-Islam, or the Customs of the Moosulmans of
-India. Translated by G. A. Herklots. London: Parbury, Allen; Co.
 
 Shway Yoe. 1896. The Burman: His Life and Notions. 2nd ed. London:
 Macmillan.

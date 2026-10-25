@@ -47,7 +47,7 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     let by = area.y + area.height.saturating_sub(18) / 2;
     fill(buf, Rect::new(bx, by, bw, 18), MAT);
     let lit = game.lit();
-    let last = game.last.map(|(s, m)| (s, m));
+    let last = game.last;
     for sq in 0..RING {
         let (r, c) = cell(sq);
         let x = bx + 1 + c as u16 * W;

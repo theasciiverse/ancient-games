@@ -158,3 +158,48 @@ mod tests {
         }
     }
 }
+
+/// Strength against strength, sides alternating. Slow:
+/// `TABULA_GAMES=100 cargo test --release -p tabula strengths -- --ignored --nocapture`
+/// (`TABULA_ONLY=<id>` for one rule set).
+#[cfg(test)]
+mod strength_tests {
+    use super::*;
+    use crate::rules::Outcome;
+
+    fn play(rules: &Rules, players: [Strength; 2], seed: u64) -> Side {
+        let mut p = Position::new(rules);
+        let mut rng = Rng::new(seed);
+        loop {
+            if let Some(Outcome::Win(w)) = p.outcome(rules) {
+                return w;
+            }
+            let dice: Vec<u8> = (0..rules.dice).map(|_| (rng.next() % 6) as u8 + 1).collect();
+            match choose(rules, &p, &dice, players[p.to_move.index()], &mut rng) {
+                Some(m) => p.play(rules, &m),
+                None => p.to_move = p.to_move.other(),
+            }
+        }
+    }
+
+    #[test]
+    #[ignore]
+    fn strengths() {
+        let games: u64 = std::env::var("TABULA_GAMES").ok().and_then(|s| s.parse().ok()).unwrap_or(100);
+        let only = std::env::var("TABULA_ONLY").ok();
+        for rules in Rules::all().into_iter().filter(|r| only.as_deref().is_none_or(|o| o == r.id)) {
+            for (strong, weak) in
+                [(Strength::Normal, Strength::Easy), (Strength::Hard, Strength::Easy), (Strength::Hard, Strength::Normal)]
+            {
+                let mut won = 0;
+                for g in 0..games {
+                    let s = if g % 2 == 0 { Side::White } else { Side::Black };
+                    let mut players = [weak; 2];
+                    players[s.index()] = strong;
+                    won += (play(&rules, players, g + 1) == s) as u32;
+                }
+                eprintln!("{}: {strong:?} beats {weak:?} {won}/{games}", rules.id);
+            }
+        }
+    }
+}

@@ -71,12 +71,12 @@ skill at chess charms me more than these flowers" [@murray1913,
 endings and their verdicts, the openings, and problems (*mansubat*):
 over 1,600 in the manuscripts, about 553 of them different
 [@murray1913, 220-339, 270]. Muslim chessmen were abstract shapes, not
-figures [@murray1913, 223-224].
+figures [@murray1913, 223-224]. From Islam the game went on to Europe,
+where in time the firzan and the fil became the queen and the bishop.
 
 ![Chess set of glazed stonepaste, Nishapur, Iran, 12th century: the
 abstract men of Islamic chess. The Metropolitan Museum of Art, New
-York, 1971.193a-ff, CC0.](images/shatranj-nishapur-chess-set-met.jpg){width=60%} From Islam the game went on to Europe,
-where in time the firzan and the fil became the queen and the bishop.
+York, 1971.193a-ff, CC0.](images/shatranj-nishapur-chess-set-met.jpg){width=60%}
 
 **Chaturanga.** Of the rules of the Indian game before the year 1000,
 only what al-'Adli wrote of it survives: the Persians, he says,
@@ -316,7 +316,8 @@ by its men (the rukh worth most, then the faras; the firzan and the
 elephant little), by the baidaqs' advance and by where the men stand;
 with few men left it hunts the other shah and his last men, since a
 bare shah loses. Easy looks one move ahead and now and then plays any
-move, normal three, hard as deep as it can in a second and a half.
+move; normal looks at a move and the reply; hard two moves of each side.
+(A search deeper than that, with this judgement, did not play better.)
 
 `shatranj --demo` lets the computer play both sides; `--seed N` repeats
 a game exactly.

@@ -16,6 +16,11 @@ at three strengths.
 | Mū tōrere | `mu-torere` | The pūtahi beside an enemy (as most give it today), and Best 1925 as he wrote it |
 | Kōnane | `konane` | Ernst 1995 (8 by 8), Modern Kōnane, Puʻuhonua o Hōnaunau (9 by 11), King's papamū of 1779 (14 by 17) |
 | Seega | `seega` | Lane 1836, on his boards of five, seven and nine |
+| Alquerque and Fanorona | `alquerque` | Alquerque after Alfonso X (1283) and after Bell; Fanorona today (Schadd et al. 2008) and after Montgomery 1886; the vela; Fanoron-dimy |
+| Tabula | `tabula` | Becq de Fouquières and Austin (the colours opposite), Bell (the same way), Ludus duodecim scriptorum after Murray |
+| Pachisi and chaupar | `pachisi` | Pachisi after Tylor 1879 and after Falkener 1892 (and Bell); chaupar with long dice after Abu'l-Fazl |
+| Shatranj | `shatranj` | As-Suli's shatranj, the Medinese victory, chaturanga with al-'Adli's Indian rules and three Indian elephants |
+| Patolli | `patolli` | R. C. Bell's suggested rules, on Durán's equipment |
 
 Every game: play the computer (easy, normal or hard) or a friend at the
 same keyboard; keys and mouse; F1 for the rules, where each one comes
