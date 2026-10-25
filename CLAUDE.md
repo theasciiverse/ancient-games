@@ -31,23 +31,23 @@ and mouse, a menu of rule sets with sources, and help:
 - Kōnane (`konane/`, 2026-10-23): Ernst 8x8, Modern (one jump), Puʻuhonua
   o Hōnaunau 9x11, King's papamū 14x17
 - Seega (`seega/`, 2026-10-23): Lane 1836 on his boards of five, seven
-  and nine; see "Seega" below. Not yet in a release, on the mockup or
-  recorded (David records previews on his other computer)
+  and nine; see "Seega" below
 - The fifteen (2026-10-25, David: "Lets only take it up to 15 in total
   for now"): Alquerque and Fanorona (`alquerque/`), Tabula (`tabula/`),
   Pachisi and chaupar (`pachisi/`), Shatranj (`shatranj/`), Patolli
-  (`patolli/`); see "The five of 2026-10-25" below. Like Seega, not yet
-  in a release, on the mockup or recorded
+  (`patolli/`); see "The five of 2026-10-25" below
 
 All five games first planned are in, Mancala since 2026-10-22 and
-Morris, Mū tōrere and Kōnane since 2026-10-23. On the website mockup as nine separate titles in the collection
+Morris, Mū tōrere and Kōnane since 2026-10-23. On the website mockup as fifteen separate titles in the collection
 `ancient-games` (hub's collections.toml; entries in the mockup's
 dev/mock-titles.toml with the other Asciiverse originals, licence
 undecided, NEW! banner), previews from each game's `--demo` recorded by
 `asciiverse/record-preview.sh` (casts in `asciiverse/casts/`, seed 3,
-Mehen seed 4; Morris, Mū tōrere and Kōnane seed 3, 60 s, one take each), local Linux builds in the website's
-dev-releases/ancient-games, built from a fresh clone with
---remap-path-prefix. Version 0.5.0 (2026-10-25: Seega and the five of
+Mehen seed 4; Morris and everything after it seed 3, 60 s, one take
+each (David: do not overdo the recordings), the last six 2026-10-25),
+local Linux builds of all fifteen in the website's
+dev-releases/ancient-games (0.5.0-av.1 since 2026-10-25), built from a
+fresh clone of the tag with --remap-path-prefix. Version 0.5.0 (2026-10-25: Seega and the five of
 2026-10-25), tag v0.5.0-av.1 (GitHub release with the rulebook PDF only,
 like v0.4.0-av.1); v0.4.0-av.1 (2026-10-23) added Mū tōrere and Kōnane; v0.3.0-av.1 (2026-10-23) added Morris; v0.2.0-av.1 (2026-10-22) added Mancala, the short F1 help,
 the Senet water fix and the title page; v0.1.0-av.1 was the first five. Release workflow `.github/workflows/release.yml`: one
