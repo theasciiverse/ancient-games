@@ -492,18 +492,13 @@ impl Position {
         self.board[mv.to as usize] = Some(man);
     }
 
-    pub fn captures(&self, mv: &Move) -> Option<Man> {
-        self.board[mv.to as usize]
-    }
-
-    pub fn play(&mut self, rules: &Rules, mv: &Move) {
+    pub fn play(&mut self, _rules: &Rules, mv: &Move) {
         let me = self.to_move;
         let pawn = self.board[mv.from as usize].is_some_and(|m| m.kind == Kind::Baidaq);
         let capture = self.board[mv.to as usize].is_some();
         self.apply(mv);
         self.quiet = if pawn || capture { 0 } else { self.quiet + 1 };
         self.just_bared = capture && self.others(me.other()) == 0;
-        let _ = rules;
         self.to_move = me.other();
     }
 

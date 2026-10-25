@@ -140,7 +140,7 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
 fn draw_panel(buf: &mut Buffer, panel: Rect, game: &Game) {
     let mut y = panel.y;
     let x = panel.x;
-    let title = if game.rules.id == "fanorona" { "FANORONA" } else { "ALQUERQUE" };
+    let title = if game.rules.capture == crate::rules::Capture::Line { "FANORONA" } else { "ALQUERQUE" };
     put(buf, x, y, title, Style::new().fg(AMBER).bg(BG).add_modifier(Modifier::BOLD));
     y += 1;
     for line in wrap(game.rules.name, panel.width as usize) {
@@ -173,7 +173,10 @@ fn draw_panel(buf: &mut Buffer, panel: Rect, game: &Game) {
         y += 1;
     }
     let quiet = game.position.quiet;
-    if quiet > 0 && !over {
+    if game.position.vela_on(&game.rules) {
+        let given = 22 - game.position.count(Side::Black);
+        put(buf, x, y, &format!("Vela: Black has given {given} of 17"), Style::new().fg(DIM).bg(BG));
+    } else if quiet > 0 && !over {
         put(buf, x, y, &format!("Turns with nothing taken: {quiet} of {}", game.rules.quiet), Style::new().fg(DIM).bg(BG));
     }
     y += 2;

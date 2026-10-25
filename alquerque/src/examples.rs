@@ -13,6 +13,8 @@ pub fn all() -> Vec<(&'static str, String)> {
         ("fanorona-start", start(&Rules::fanorona())),
         ("fanorona-lines", lines()),
         ("fanorona-chain", chain()),
+        ("bell", bell()),
+        ("vela", vela()),
     ]
 }
 
@@ -59,6 +61,7 @@ pub fn board(rules: &Rules, to_move: Side, men: &[(&str, Side)]) -> Position {
     for &(name, side) in men {
         p.at[rules.point(name).unwrap_or_else(|| panic!("no point {name}"))] = Some(side);
     }
+    p.been = (0..rules.len()).map(|q| if p.at[q].is_some() { 1u64 << q } else { 0 }).collect();
     p.to_move = to_move;
     p.turns = 10;
     p
@@ -88,9 +91,10 @@ fn leaps() -> String {
     use Side::*;
     let mut p = board(&rules, White, &[("a1", White), ("b2", Black), ("d4", Black), ("c1", White), ("d2", Black), ("e5", Black)]);
     let mut lines = draw(&rules, &p, "White to move");
-    let moves = p.moves(&rules);
-    lines.push("White must take. The turns allowed:".to_string());
-    for m in &moves {
+    let moves: Vec<Move> = p.moves(&rules).into_iter().filter(|m| m.captures() > 0).collect();
+    lines.push("The turns that take (Alfonso lets White stop after".to_string());
+    lines.push("the first leap, or not take at all):".to_string());
+    for m in moves.iter().filter(|m| p.moves(&Rules::alquerque_bell()).contains(m)) {
         lines.push(format!("  {}", describe(&rules, m)));
     }
     let best = moves.iter().max_by_key(|m| m.captures()).unwrap().clone();
@@ -128,6 +132,40 @@ fn chain() -> String {
     lines.push(format!("The longest turn: {}.", describe(&rules, &best)));
     p.play(&best);
     lines.extend(draw(&rules, &p, "After it"));
+    lines.join("\n")
+}
+
+/// Bell's added rules: forward and sideways only, never back to a point.
+fn bell() -> String {
+    let rules = Rules::alquerque_bell();
+    use Side::*;
+    let mut p = board(&rules, White, &[("c2", White), ("e5", Black), ("a5", Black)]);
+    let mut lines = draw(&rules, &p, "White to move");
+    let to = |p: &Position| -> Vec<String> { p.moves(&rules).iter().map(|m| rules.name(m.to())).collect() };
+    lines.push(format!("c2 may go to {}, not back to c1.", to(&p).join(", ")));
+    let mv = p.moves(&rules).into_iter().find(|m| rules.name(m.to()) == "b2").unwrap();
+    p.play(&mv);
+    p.to_move = White;
+    lines.push(format!("After c2 to b2 it may go to {}: never c2 again.", to(&p).join(", ")));
+    lines.join("\n")
+}
+
+/// The vela: the loser takes one man at a time; the winner gives.
+fn vela() -> String {
+    let rules = Rules::vela();
+    let mut p = Position::new(&rules);
+    let mut lines = vec!["The vela opens: White, who lost, moves first.".to_string()];
+    let moves = p.moves(&rules);
+    lines.push(format!(
+        "White's {} turns all take, one man each: d2 to e3, approaching",
+        moves.len()
+    ));
+    let mv = moves.iter().find(|m| rules.name(m.from()) == "d2" && rules.name(m.to()) == "e3").unwrap().clone();
+    lines.push(format!("f4 and g5, takes only {}.", mv.taken().map(|q| rules.name(q)).collect::<Vec<_>>().join(" ")));
+    p.play(&mv);
+    let takes = p.moves(&rules).iter().filter(|m| m.captures() > 0).count();
+    lines.push(format!("Black now has {} moves and may take with none of them.", p.moves(&rules).len()));
+    assert_eq!(takes, 0);
     lines.join("\n")
 }
 
