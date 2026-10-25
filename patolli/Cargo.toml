@@ -1,6 +1,6 @@
 [package]
 name = "patolli"
-version = "0.4.0"
+version = "0.5.0"
 description = "Patolli, the Aztec race and betting game, in the terminal"
 edition.workspace = true
 repository.workspace = true
