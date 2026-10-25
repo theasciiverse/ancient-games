@@ -152,35 +152,33 @@
 <text x="290" y="115" fill="#96805c">✕</text>
 <text x="610 620 630 640 650 660 670" y="115" fill="#ffb000" font-weight="bold">PACHISI</text>
 <text x="610 620 630 640 650 660 670 680 700 710 720 730 740 760 770 780 790 800 820 830 840 850 860 870" y="135" fill="#78746c">Pachisi,afterTylor(1879)</text>
-<text x="250" y="155" fill="#1e5aa0">·</text>
-<text x="260" y="155" fill="#12100e" font-weight="bold">●</text>
 <text x="610 620 630 650 660 670 690 700 710 720 730 750 760 770 780 790 800 810 820 830 840 860 870 880 890 900 910 920" y="155" fill="#c8c4ba">RedandBlack(computer,normal)</text>
 <text x="630" y="175" fill="#c42018" font-weight="bold">●</text>
 <text x="650 660 670 720 740 750 770 780 790 800 810 820 840 860 870 880 890" y="175" fill="#78746c">Red4toenter,0home</text>
-<text x="250" y="195" fill="#c48c00" font-weight="bold">●</text>
-<text x="260" y="195" fill="#188034" font-weight="bold">●</text>
-<text x="320" y="195" fill="#96805c">✕</text>
+<text x="260 320" y="195" fill="#96805c">✕✕</text>
 <text x="610" y="195" fill="#ffb000" font-weight="bold">▶</text>
 <text x="630" y="195" fill="#12100e" font-weight="bold">●</text>
 <text x="650 660 670 680 690 720 740 750 770 780 790 800 810 820 840 860 870 880 890" y="195" fill="#ffb000" font-weight="bold">Black3toenter,0home</text>
 <text x="610 620 630 640 650 660 680 690 700 720 730 740 750 760 780 790 800 810 820 830 840 850 860 870 890 900 910 920 930" y="215" fill="#c8c4ba">YellowandGreen(computer,hard)</text>
 <text x="630" y="235" fill="#c48c00" font-weight="bold">●</text>
-<text x="650 660 670 680 690 700 720 740 750 770 780 790 800 810 820 840 860 870 880 890" y="235" fill="#78746c">Yellow0toenter,2home</text>
+<text x="650 660 670 680 690 700 720 740 750 770 780 790 800 810 820 840 860 870 880 890" y="235" fill="#78746c">Yellow0toenter,1home</text>
+<text x="280" y="255" fill="#1e5aa0">·</text>
+<text x="290" y="255" fill="#12100e" font-weight="bold">●</text>
 <text x="630" y="255" fill="#188034" font-weight="bold">●</text>
-<text x="650 660 670 680 690 720 740 750 770 780 790 800 810 820 840 860 870 880 890" y="255" fill="#78746c">Green0toenter,0home</text>
+<text x="650 660 670 680 690 720 740 750 770 780 790 800 810 820 840 860 870 880 890" y="255" fill="#78746c">Green0toenter,1home</text>
 <text x="140 440" y="275" fill="#96805c">✕✕</text>
-<text x="20" y="295" fill="#96805c">✕</text>
-<text x="50" y="295" fill="#188034" font-weight="bold">●</text>
+<text x="10" y="295" fill="#c48c00" font-weight="bold">●</text>
+<text x="20 250 260" y="295" fill="#188034" font-weight="bold">●⌂1</text>
 <text x="280 290" y="295" fill="#12100e" font-weight="bold">○3</text>
-<text x="310 320" y="295" fill="#c48c00" font-weight="bold">⌂2</text>
+<text x="310 320 350" y="295" fill="#c48c00" font-weight="bold">⌂1●</text>
 <text x="560" y="295" fill="#96805c">✕</text>
 <text x="610 620 630 640 650 660 670 690 700 710 720 730 740" y="295" fill="#c8c4ba">Thrown:◉◉◉◉◯◯</text>
+<text x="20" y="315" fill="#188034" font-weight="bold">●</text>
 <text x="140 440" y="315" fill="#96805c">✕✕</text>
-<text x="610 620 640 650 660 670 690" y="315" fill="#ffb000">Touse:4</text>
-<text x="610 620 630 640 650 670 680 690 700 710 730 750 760 770 790 800 810 820 840 850 860 870 880 890 910 930 940" y="355" fill="#c8c4ba">Blackmovesamanfromsquare1to</text>
-<text x="610 620 630 640 650 660 680 690 700" y="375" fill="#c8c4ba">square11.</text>
-<text x="260" y="395" fill="#96805c">✕</text>
-<text x="310" y="395" fill="#c48c00" font-weight="bold">●</text>
+<text x="610 620 640 650 660 670 690 700 720" y="315" fill="#ffb000">Touse:104</text>
+<text x="610 620 630 640 650 670 680 690 700 710 730 750 760 770 790 800 810 820 840 850 860 880 890 900 910 920 930 950 960" y="355" fill="#c8c4ba">Blackmovesamanfromthemiddleto</text>
+<text x="610 620 630 640 650 660 680 690" y="375" fill="#c8c4ba">square1.</text>
+<text x="260" y="395" fill="#c48c00" font-weight="bold">●</text>
 <text x="320" y="395" fill="#188034" font-weight="bold">●</text>
 <text x="290" y="475" fill="#96805c">✕</text>
 <text x="610 620 630 650 660 670 680 720 730 750 760 770 780" y="495" fill="#78746c">F1:helpQ:quit</text>

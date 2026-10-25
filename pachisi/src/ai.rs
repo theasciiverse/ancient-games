@@ -158,24 +158,26 @@ pub fn plan(rules: &Rules, p: &Position, tokens: &[Token], strength: Strength, r
     // Hard: every place the throws can bring the men to, the best few
     // by normal's judgement, each weighed over the next colour's turn
     // played out (the same throws for every candidate).
-    let mut ends: HashMap<Position, Vec<Move>> = HashMap::new();
+    let mut ends: HashMap<Position, (usize, Vec<Move>)> = HashMap::new();
     leaves(rules, p, tokens.to_vec(), Vec::new(), &mut ends);
-    let mut ranked: Vec<(i32, Position, Vec<Move>)> = ends
+    // Ties ranked in the order the positions were found, not the map's
+    // order, which changes from run to run.
+    let mut ranked: Vec<(i32, usize, Position, Vec<Move>)> = ends
         .into_iter()
-        .map(|(q, plan)| {
+        .map(|(q, (found, plan))| {
             let taken: i32 = plan.iter().map(|m| (!m.takes.is_empty()) as i32 * 60).sum();
-            (judge(rules, &q, us, Strength::Normal) + taken, q, plan)
+            (judge(rules, &q, us, Strength::Normal) + taken, found, q, plan)
         })
         .collect();
-    ranked.sort_by_key(|(v, _, _)| -v);
+    ranked.sort_by_key(|(v, found, _, _)| (-v, *found));
     ranked.truncate(if ancient_core::capture::untimed() { 3 } else { 6 });
     if ranked.len() == 1 {
-        return ranked.pop().map(|(_, _, plan)| plan).unwrap_or_default();
+        return ranked.pop().map(|(_, _, _, plan)| plan).unwrap_or_default();
     }
     let samples = if ancient_core::capture::untimed() { 6 } else { 24 };
     let seed = rng.next();
     let mut best = (i64::MIN, Vec::new());
-    for (_, q, plan) in ranked {
+    for (_, _, q, plan) in ranked {
         let mut total = 0i64;
         let mut sim = Rng::new(seed);
         for _ in 0..samples {
@@ -200,11 +202,11 @@ pub fn plan(rules: &Rules, p: &Position, tokens: &[Token], strength: Strength, r
 
 /// Every position the throws can bring the colour to move to, with one
 /// plan that gets there.
-fn leaves(rules: &Rules, p: &Position, toks: Vec<Token>, done: Vec<Move>, out: &mut HashMap<Position, Vec<Move>>) {
+fn leaves(rules: &Rules, p: &Position, toks: Vec<Token>, done: Vec<Move>, out: &mut HashMap<Position, (usize, Vec<Move>)>) {
     if out.contains_key(p) || out.len() > 20_000 {
         return;
     }
-    out.insert(p.clone(), done.clone());
+    out.insert(p.clone(), (out.len(), done.clone()));
     for mv in p.moves(rules, &toks) {
         let mut q = p.clone();
         q.apply(&mv);
