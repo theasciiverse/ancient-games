@@ -1,6 +1,6 @@
 [package]
 name = "alquerque"
-version = "0.4.0"
+version = "0.5.0"
 description = "Alquerque and Fanorona, the leaping and line-taking games, in the terminal"
 edition.workspace = true
 repository.workspace = true

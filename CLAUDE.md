@@ -47,8 +47,9 @@ undecided, NEW! banner), previews from each game's `--demo` recorded by
 `asciiverse/record-preview.sh` (casts in `asciiverse/casts/`, seed 3,
 Mehen seed 4; Morris, Mū tōrere and Kōnane seed 3, 60 s, one take each), local Linux builds in the website's
 dev-releases/ancient-games, built from a fresh clone with
---remap-path-prefix. Version 0.4.0 (2026-10-23: Mū tōrere and Kōnane),
-tag v0.4.0-av.1; v0.3.0-av.1 (2026-10-23) added Morris; v0.2.0-av.1 (2026-10-22) added Mancala, the short F1 help,
+--remap-path-prefix. Version 0.5.0 (2026-10-25: Seega and the five of
+2026-10-25), tag v0.5.0-av.1 (GitHub release with the rulebook PDF only,
+like v0.4.0-av.1); v0.4.0-av.1 (2026-10-23) added Mū tōrere and Kōnane; v0.3.0-av.1 (2026-10-23) added Morris; v0.2.0-av.1 (2026-10-22) added Mancala, the short F1 help,
 the Senet water fix and the title page; v0.1.0-av.1 was the first five. Release workflow `.github/workflows/release.yml`: one
 archive per game for static musl Linux, macOS and Windows, x86-64 and
 ARM64; Actions billing blocks builds, so the GitHub release v0.4.0-av.1
