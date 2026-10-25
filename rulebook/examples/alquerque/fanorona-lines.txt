@@ -1,0 +1,15 @@
+White to move:
+  5 o---o---o---o---B---o---o---o---o
+    | \ | / | \ | / | \ | / | \ | / |
+  4 o---o---o---o---o---o---o---o---o
+    | / | \ | / | \ | / | \ | / | \ |
+  3 o---o---B---B---W---o---B---B---W
+    | \ | / | \ | / | \ | / | \ | / |
+  2 o---o---o---o---o---o---o---o---o
+    | / | \ | / | \ | / | \ | / | \ |
+  1 o---o---o---o---o---o---o---o---o
+    a   b   c   d   e   f   g   h   i
+The captures White can begin with:
+  e3 to e4, taking e5 (approach)
+  e3 to f3, taking g3 h3 (approach)
+  e3 to f3, taking d3 c3 (withdrawal)

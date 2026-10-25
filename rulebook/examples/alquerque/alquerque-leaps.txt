@@ -1,0 +1,27 @@
+White to move:
+  5 o---o---o---o---B
+    | \ | / | \ | / |
+  4 o---o---o---B---o
+    | / | \ | / | \ |
+  3 o---o---o---o---o
+    | \ | / | \ | / |
+  2 o---B---o---B---o
+    | / | \ | / | \ |
+  1 W---o---W---o---o
+    a   b   c   d   e
+The turns that take (Alfonso lets White stop after
+the first leap, or not take at all):
+  a1 to c3 to e1, taking b2 d2
+  c1 to a3, taking b2
+  c1 to e3 to c5, taking d2 d4
+After c1 to e3 to c5, taking d2 d4:
+  5 o---o---W---o---B
+    | \ | / | \ | / |
+  4 o---o---o---o---o
+    | / | \ | / | \ |
+  3 o---o---o---o---o
+    | \ | / | \ | / |
+  2 o---B---o---o---o
+    | / | \ | / | \ |
+  1 W---o---o---o---o
+    a   b   c   d   e

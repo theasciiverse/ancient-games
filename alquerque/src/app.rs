@@ -339,7 +339,7 @@ mod tests {
 
     #[test]
     fn a_person_takes_step_by_step() {
-        let a = Rules::alquerque();
+        let a = Rules::alquerque_bell();
         let mut game = Game::new(a.clone(), [Player::Human, Player::Human], Rng::new(1));
         use Side::*;
         game.position = board(&a, White, &[("a1", White), ("b2", Black), ("d4", Black), ("e1", Black)]);

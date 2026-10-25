@@ -1,0 +1,89 @@
+Alquerque and Fanorona
+Asciiverse
+2026-10-25
+
+Two games on boards of points joined by lines: along every row and column,
+and along the diagonals through every other point. A man moves one step
+along a line to an empty point. In alquerque a man takes as in draughts,
+leaping over an enemy man next to it to the empty point beyond, and may leap
+on. In fanorona a man takes by moving towards an enemy man (approach) or
+away from one next to it (withdrawal), and the whole unbroken line of enemy
+men in that direction goes; it may take again in a new direction. Whoever
+takes every man of the other side, or leaves him no move, wins. The rules in
+short follow; the full rules, the sources and the history are in RULES.txt
+and the rulebook.
+
+Alquerque de doze, after Alfonso X
+----------------------------------
+
+- 5 by 5 points, 12 men each; only the centre c3 is empty. White begins
+  (Alfonso throws dice for it; our choice).
+- A move: one step along a line, any way, to an empty point.
+- Taking: leap along a line over an enemy man next to you onto the empty
+  point beyond; take him; you may leap on over more, turning as you like,
+  and stop when you like. Taking is not compulsory.
+- Whoever loses all his men, or has no move, loses (no move: our choice). A
+  third repetition, or 50 turns with nothing taken, draws (our choice).
+
+Alquerque, after Bell
+---------------------
+
+- As Alfonso’s game, but taking is compulsory, and a man that has taken must
+  take again while it can (the huff played as compulsion: our choice).
+- No man steps backwards: only forwards, diagonally forwards or sideways.
+  Leaps may go any way.
+- No man may come back to a point it has stood on before.
+- A man on the other side’s back row moves only to take.
+
+Fanorona, today’s rules
+-----------------------
+
+- 9 by 5 points, 22 men each; the middle row alternates, the centre e3
+  empty. White begins.
+- A move (paika): one step along a line to an empty point.
+- Taking: a step that ends next to an enemy man, moving towards him, takes
+  him and every enemy man straight behind him, up to the first empty point
+  or man of yours (approach); a step away from an enemy man next to you
+  takes him and the men behind him in the same way (withdrawal). If a step
+  could do both, you choose.
+- If you can take, you must. Then the same man may take again, as often as
+  it can, but never twice running in the same direction, and never onto a
+  point it has stood on this turn. You may stop at any time.
+- Whoever takes every enemy man, or leaves him no move, wins. A third
+  repetition draws; so do 50 turns with nothing taken (our choice).
+
+Fanorona, after Montgomery
+--------------------------
+
+- As today’s rules, but the very first turn of the game takes once only, and
+  a man taking again may not go straight back along the line it came. It may
+  take twice running in the same direction, and may come back to a point of
+  this turn.
+
+Vela
+----
+
+- The game after a defeat. Black, who won, may not take at all until he has
+  lost seventeen men; then his last five play on as usual.
+- White, who lost, moves first. Until then each of White’s captures takes
+  one man only, the nearest, and ends the turn; White must take when he can.
+- Then everything is as in fanorona after Montgomery.
+
+Fanoron-dimy
+------------
+
+- Fanorona on the board of five by five: 12 men each, the middle row Black,
+  White, empty, Black, White. Today’s rules.
+
+Playing it in the terminal
+--------------------------
+
+- Arrows: move the cursor; Enter or Space: pick up a man, then put it on a
+  lit point. A turn that takes again goes on from where the man stands:
+  choose the next lit point, or press Esc (or point at the man) to stop,
+  where stopping is allowed.
+- If one step could take two lines, the men of both are lit: point at the
+  line to take.
+- The men a step would take are marked ✕ when the cursor is on where it
+  goes. When the game is over, Enter plays again.
+- M: menu; F1: this help; Q: quit.

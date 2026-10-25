@@ -71,7 +71,11 @@ skill at chess charms me more than these flowers" [@murray1913,
 endings and their verdicts, the openings, and problems (*mansubat*):
 over 1,600 in the manuscripts, about 553 of them different
 [@murray1913, 220-339, 270]. Muslim chessmen were abstract shapes, not
-figures [@murray1913, 223-224]. From Islam the game went on to Europe,
+figures [@murray1913, 223-224].
+
+![Chess set of glazed stonepaste, Nishapur, Iran, 12th century: the
+abstract men of Islamic chess. The Metropolitan Museum of Art, New
+York, 1971.193a-ff, CC0.](images/shatranj-nishapur-chess-set-met.jpg){width=60%} From Islam the game went on to Europe,
 where in time the firzan and the fil became the queen and the bishop.
 
 **Chaturanga.** Of the rules of the Indian game before the year 1000,
@@ -161,7 +165,7 @@ goes nowhere.
 - A move that bares and mates at once wins as mate.
 
 **Dilaram's problem.** The most famous of the problems, as-Suli's,
-copied into Alfonso X's book and the source of nearly 200 problems in
+copied into Alfonso X's *Book of Games* (1283) and the source of nearly 200 problems in
 medieval Europe [@murray1913, 311-312]. A player, the story goes, had
 staked his favourite, Dilaram, on the game, and when this position came
 she cried out to him "Sacrifice your two Rooks, and not me"
@@ -178,6 +182,11 @@ she cried out to him "Sacrifice your two Rooks, and not me"
 
 ![The program playing shatranj, the computer against itself.
 ](screens/shatranj/shatranj.svg){width=100%}
+
+![Men playing chess, with a harpist and women serving, *Libro de los
+juegos* of Alfonso X, 1283, fol. 22r. Real Biblioteca del Monasterio de
+San Lorenzo de El Escorial, MS T-I-6. Public
+domain.](images/shatranj-libro-de-los-juegos-22r.jpg){width=90%}
 
 ## Shatranj, the Medinese victory
 
@@ -217,8 +226,15 @@ rules al-'Adli calls Indian [@murray1913, 56-57, 60-61].
 - **The elephant.** Murray found three moves recorded for it in India;
   the diagonal leap of two squares "became the widest spread, and it is
   probable that it is the oldest move. It is the only one which passed
-  westwards" [@murray1913, 59-60]. This rule set uses it; the two
+  westwards" [@murray1913, 59-60]. The elephant of the ivory set once
+  called Charlemagne's, made in southern Italy in the late 11th
+  century, is still an elephant (pictured). This rule set uses it; the two
   others are the next two rule sets.
+
+![Knight and elephant (the fil) of the so-called Charlemagne chessmen,
+southern Italy, late 11th century, ivory. Cabinet des médailles, BnF,
+Paris. Photograph: Poulpy, CC BY-SA
+3.0.](images/shatranj-charlemagne-knight-elephant.jpg){width=55%}
 
 Everything else (the setup, the baidaq's promotion, who moves first,
 the draws) is shatranj, our choice: no Indian text gives it.

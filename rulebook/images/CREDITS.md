@@ -96,3 +96,64 @@ the 1925 publication.
 | `konane-papamu-honaunau.jpg` (resized) | A papamū cut into a lava-stone slab beside the Hale o Keawe, Puʻuhonua o Hōnaunau National Historical Park, Hawaiʻi, 2020 | [Commons](https://commons.wikimedia.org/wiki/File:Konane_at_Pu%CA%BBuhonua_o_H%C5%8Dnaunau_National_Historical_Park.jpg) | Nobody(not jj) | CC BY-SA 4.0 |
 | `konane-wooden-papamu-2005.jpg` | A boy playing kōnane on a wooden papamū with lava-stone and coral pieces, Hawaiʻi, 2005 | [Commons](https://commons.wikimedia.org/wiki/File:USMC-14131.jpg), from marines.mil | Cpl. Rich Mattingly, U.S. Marine Corps | Public domain (US government work) |
 | `konane-hawaii-volcanoes-nps.jpg` | A child learning kōnane, Merrie Monarch Festival week, Hawaiʻi Volcanoes National Park | [Commons](https://commons.wikimedia.org/wiki/File:Hawaiian_checkers_-_konane_(40829470781).jpg), from [Flickr](https://www.flickr.com/photos/144356245@N06/40829470781) | Janice Wei, National Park Service | Public domain (US government work) |
+
+## Shatranj
+
+Licences checked on each file's page on 2026-10-25.
+
+| File | Shows | Source | Author | Licence |
+|---|---|---|---|---|
+| `shatranj-nishapur-chess-set-met.jpg` | Chess set of glazed stonepaste, Nishapur, Iran, 12th century, Metropolitan Museum of Art 1971.193a-ff | [the Met](https://www.metmuseum.org/art/collection/search/452204), image DP170393 | The Metropolitan Museum of Art | CC0 |
+| `shatranj-libro-de-los-juegos-22r.jpg` | Men playing chess, with a harpist and women serving, *Libro de los juegos* of Alfonso X, 1283, fol. 22r, El Escorial MS T-I-6 | [Commons](https://commons.wikimedia.org/wiki/File:Book_of_chess,_dice_and_boards,_0022R,_Berbers_playing_chess.jpg), from the [Real Biblioteca del Monasterio de El Escorial](https://rbme.patrimonionacional.es/s/rbme/item/13125) | Alfonso X of Castile (his workshop) | Public domain |
+| `shatranj-charlemagne-knight-elephant.jpg` | Knight and elephant (the fil) of the so-called Charlemagne chessmen, southern Italy, late 11th century, ivory, Cabinet des médailles, BnF, Paris | [Commons](https://commons.wikimedia.org/wiki/File:Cabinet_des_m%C3%A9dailles,_Paris_-_Charlemagne_Chessmen_-_Knight_and_Elephant.jpg) | Poulpy | CC BY-SA 3.0 |
+
+## Tabula and duodecim scripta
+
+| File | Shows | Source | Author | Licence |
+|---|---|---|---|---|
+| `tabula-dice-tower-bonn.jpg` (cropped) | The Vettweiß-Froitzheim dice tower, 4th century, with Roman counters, LVR-LandesMuseum Bonn | [Commons](https://commons.wikimedia.org/wiki/File:Roman_dice_tower_(pyrgus_or_turricula)_with_the_inscription_%22Pictos_victos,_Hostis_deleta,_Ludite_securi%22,_from_Vettweiss-Froitzheim,_4th_century_AD,_LVR-LandesMuseum_Bonn_(46341519812).jpg), from [Flickr](https://www.flickr.com/photos/carolemage/46341519812/) | Carole Raddato | CC BY-SA 2.0 |
+| `tabula-pompeii-dice-players.jpg` (cropped) | Two dice players quarrelling ("Exsi", "Non tria, duas est"), wall painting from the Caupona of Salvius, Pompeii VI 14, 35-36, Museo Archeologico Nazionale di Napoli 111482 | [Commons](https://commons.wikimedia.org/wiki/File:Wall_painting_-_scenes_around_the_pub_-_Pompeii_(VI_14_35-36)_-_Napoli_MAN_111482_-_01.jpg) | ArchaiOptix | CC BY-SA 4.0 |
+| `tabula-xii-scripta-aphrodisias.jpg` | Marble board for the game of twelve lines (three rows of twelve, with rosettes), found near the agora of Aphrodisias, Turkey | [Commons](https://commons.wikimedia.org/wiki/File:Roman_Game_of_12_Lines_Board_-_Aphrodisias.jpg), from [Flickr](https://www.flickr.com/photos/wneuheisel/7471668214/) | wneuheisel | CC BY 2.0 |
+
+The dice tower is also on Commons as
+`Vettweiss-Froitzheim_Dice_Tower.jpg`, tagged public domain and credited
+to the Rheinisches Landesmuseum, with no basis given for the tag (a
+recent museum photograph of a three-dimensional object); the book uses
+Carole Raddato's photograph instead. Likewise `3494(Foras_rixsatis).1.jpg`
+of the Pompeii painting is a page from a book uploaded as "own work" and
+public domain; not used. The second-century date of the Aphrodisias board
+is the photographer's.
+
+## Pachisi
+
+| File | Shows | Source | Author | Licence |
+|---|---|---|---|---|
+| `pachisi-sovan-singh-met.jpg` | *Maharaja Sovan Singh playing pachisi*, by Ambav, Udaipur, about 1868, Metropolitan Museum of Art 2019.123 | [the Met](https://www.metmuseum.org/art/collection/search/822852), image DP-18170-001 | The Metropolitan Museum of Art | CC0 |
+| `pachisi-shiva-parvati-met.jpg` | *Shiva and Parvati Playing Chaupar*, folio from a Rasamanjari series, by Devidasa of Nurpur, Basohli, 1694-95, Metropolitan Museum of Art 57.185.2 | [the Met](https://www.metmuseum.org/art/collection/search/37942), image DT5245 | The Metropolitan Museum of Art | CC0 |
+| `pachisi-set-acm.jpg` | Pachisi set: cloth board (20th century) and rock-crystal men and dice (18th or 19th century), Asian Civilisations Museum, Singapore, 2015-00643 and 2016-00031 | [Commons](https://commons.wikimedia.org/wiki/File:ACM-Pachisi_set-03561.jpg) | Wuselig | CC0 |
+
+## Patolli
+
+| File | Shows | Source | Author | Licence |
+|---|---|---|---|---|
+| `patolli-florentine-codex.jpg` | Two men playing patolli, Florentine Codex (Sahagún, *Historia general*), book 8, vol. 2 fol. 269r, about 1577, Biblioteca Medicea Laurenziana, Med. Palat. 219 | [Commons](https://commons.wikimedia.org/wiki/File:Patolli.jpg), from the Laurenziana's digital repository | Sahagún's Nahua artists | Public domain |
+| `patolli-magliabechiano.jpg` | Four men playing patolli before Macuilxochitl, Codex Magliabechiano p. 48 (fol. 60r), 16th century, from the 1903 Berkeley facsimile | [Commons](https://commons.wikimedia.org/wiki/File:Macuilxochitl_Patolli.png) | Unknown artist; facsimile University of California, 1903 | Public domain |
+| `patolli-duran-culin-1898.jpg` (cropped) | The game of patolli after the atlas of Durán's *Historia de las Indias de Nueva España* (Mexico, 1880), in Culin, *Chess and Playing-Cards* (Report of the U.S. National Museum for 1896, 1898), plate 29 | [Internet Archive](https://archive.org/details/chessplayingcard00culi), page n259 | after Diego Durán's manuscript (about 1579) | Public domain (US government publication, 1898) |
+
+The Florentine Codex picture is small on Commons (492 pixels); the
+Laurenziana and the World Digital Library hold larger scans, not reached
+(the Library of Congress site, which now holds the WDL, refuses scripted
+access).
+
+## Alquerque and Fanorona
+
+| File | Shows | Source | Author | Licence |
+|---|---|---|---|---|
+| `alquerque-libro-de-los-juegos.jpg` | Four men at an alquerque de doze board, *Libro de los juegos* of Alfonso X, 1283, El Escorial MS T-I-6 | [Commons](https://commons.wikimedia.org/wiki/File:Alquerque_in_Libro_de_los_juegos_(uncropped).jpg), scanned from Grunfeld, *Games of the World* (1975), p. 39 | Alfonso X of Castile (his workshop) | Public domain |
+| `fanorona-board-ambohimanga.jpg` (cropped) | Wooden fanorona board said to have been King Andrianampoinimerina's, Ambohimanga, Madagascar, 2008 | [Commons](https://commons.wikimedia.org/wiki/File:Fanorana_board_Ambohimanga_Madagascar.jpg), from Flickr | Olivier Lejade | CC BY-SA 2.0 |
+| `fanorona-board-set-up.jpg` | A carved wooden fanorona board with its 44 men, Madagascar, 2019 | [Commons](https://commons.wikimedia.org/wiki/File:Le_Fanorona_%22le_jeu_aux_mille_myst%C3%A8res%22.jpg) | RAZAKARIVONINJATOVO Miendrintsoa Cédric | CC BY-SA 4.0 |
+
+The men on the carved board are nearly, not exactly, in the opening
+position (the last point of the middle row holds the wrong colour). The
+attribution of the Ambohimanga board to Andrianampoinimerina is the
+photographer's.

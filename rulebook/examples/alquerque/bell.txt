@@ -1,0 +1,13 @@
+White to move:
+  5 B---o---o---o---B
+    | \ | / | \ | / |
+  4 o---o---o---o---o
+    | / | \ | / | \ |
+  3 o---o---o---o---o
+    | \ | / | \ | / |
+  2 o---o---W---o---o
+    | / | \ | / | \ |
+  1 o---o---o---o---o
+    a   b   c   d   e
+c2 may go to c3, b2, d2, not back to c1.
+After c2 to b2 it may go to b3, a2, a3, c3: never c2 again.

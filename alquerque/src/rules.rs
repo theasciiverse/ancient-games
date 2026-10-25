@@ -62,6 +62,18 @@ pub enum Capture {
     Line,
 }
 
+/// What limits a man that takes several times in one turn.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Chain {
+    /// Alquerque: it leaps on over any man it can, in any direction.
+    Free,
+    /// Montgomery's Fanorona: never straight back along the line it came.
+    NoReturn,
+    /// Today's Fanorona: never twice running in the same direction, and
+    /// never to a point it has already stood on this turn.
+    Modern,
+}
+
 /// Where the men stand at the start.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Setup {
@@ -69,7 +81,8 @@ pub enum Setup {
     /// points on its right of the middle row; only the centre is empty.
     Alquerque,
     /// Fanorona: each side fills the two rows nearest it; the middle row
-    /// alternates, the centre empty.
+    /// alternates, the centre empty (on the board of five as on the board
+    /// of nine).
     Fanorona,
 }
 
@@ -91,17 +104,32 @@ pub struct Rules {
     pub must_take: bool,
     /// Whether a man that has taken and can take again must go on.
     pub must_go_on: bool,
+    pub chain: Chain,
     /// Whether a man may step (not take) back towards its own side.
     pub backwards: bool,
+    /// Bell: no man may come back to a point it has stood on.
+    pub no_return: bool,
+    /// Bell: a man on the other side's back row moves only to take.
+    pub back_row_takes_only: bool,
     /// Fanorona: the first turn of the game takes once only.
     pub first_takes_once: bool,
+    /// The vela: Black, who won the last game, may not take until he has
+    /// given up 17 men; White's captures take one man and end the turn.
+    pub vela: bool,
     /// Moves with nothing taken after which the game is drawn.
     pub quiet: u16,
 }
 
 impl Rules {
     pub fn all() -> Vec<Rules> {
-        vec![Rules::alquerque(), Rules::fanorona()]
+        vec![
+            Rules::alquerque(),
+            Rules::alquerque_bell(),
+            Rules::fanorona(),
+            Rules::fanorona_montgomery(),
+            Rules::vela(),
+            Rules::fanoron_dimy(),
+        ]
     }
 
     pub fn alquerque() -> Rules {
@@ -109,36 +137,100 @@ impl Rules {
             id: "alquerque",
             name: "Alquerque de doze, after Alfonso X",
             source: "The Book of Games of Alfonso X of Castile (1283): twelve men each on a board of \
-                     five by five points, taking by leaping as in draughts.",
-            section: "Alquerque de doze",
+                     five by five points, taking by leaping, several at once. Alfonso does not make \
+                     taking compulsory.",
+            section: "Alquerque de doze, after Alfonso X",
             cols: 5,
             rows: 5,
             setup: Setup::Alquerque,
             capture: Capture::Leap,
+            must_take: false,
+            must_go_on: false,
+            chain: Chain::Free,
+            backwards: true,
+            no_return: false,
+            back_row_takes_only: false,
+            first_takes_once: false,
+            vela: false,
+            quiet: 50,
+        }
+    }
+
+    pub fn alquerque_bell() -> Rules {
+        Rules {
+            id: "alquerque-bell",
+            name: "Alquerque, after Bell",
+            source: "R. C. Bell (1969): Alfonso's game with Bell's own rules added: taking compulsory, no \
+                     step backwards, no man back to a point it has stood on.",
+            section: "Alquerque, after Bell",
             must_take: true,
             must_go_on: true,
-            backwards: true,
-            first_takes_once: false,
-            quiet: 50,
+            backwards: false,
+            no_return: true,
+            back_row_takes_only: true,
+            ..Rules::alquerque()
         }
     }
 
     pub fn fanorona() -> Rules {
         Rules {
             id: "fanorona",
-            name: "Fanorona",
-            source: "The game of Madagascar, as described by Montgomery (1886): twenty-two men each on a \
-                     board of nine by five points, taking whole lines by approach and withdrawal.",
-            section: "Fanorona",
+            name: "Fanorona, today's rules",
+            source: "The national game of Madagascar as it is played today, after Bell and Chauvicourt as \
+                     Schadd and others state it (2008), who proved that best play draws.",
+            section: "Fanorona, today's rules",
             cols: 9,
             rows: 5,
             setup: Setup::Fanorona,
             capture: Capture::Line,
             must_take: true,
             must_go_on: false,
+            chain: Chain::Modern,
             backwards: true,
-            first_takes_once: true,
+            no_return: false,
+            back_row_takes_only: false,
+            first_takes_once: false,
+            vela: false,
             quiet: 50,
+        }
+    }
+
+    pub fn fanorona_montgomery() -> Rules {
+        Rules {
+            id: "fanorona-1886",
+            name: "Fanorona, after Montgomery (1886)",
+            source: "The earliest account of the rules, W. Montgomery's in the Antananarivo Annual (1886): \
+                     the first turn takes once only, and a man taking again must not go back along \
+                     the line it came.",
+            section: "Fanorona, after Montgomery",
+            chain: Chain::NoReturn,
+            first_takes_once: true,
+            ..Rules::fanorona()
+        }
+    }
+
+    pub fn vela() -> Rules {
+        Rules {
+            id: "vela",
+            name: "Vela, the game after a defeat",
+            source: "Montgomery (1886): the winner of the last game (Black) gives up seventeen men, \
+                     taken one at a time, before he may take any himself; then his five play on \
+                     against the loser's whole side.",
+            section: "Vela",
+            vela: true,
+            ..Rules::fanorona_montgomery()
+        }
+    }
+
+    pub fn fanoron_dimy() -> Rules {
+        Rules {
+            id: "fanoron-dimy",
+            name: "Fanoron-dimy, the board of five",
+            source: "The small, quick fanorona on five lines that Malagasy sources name; its setup and \
+                     rules here are today's, by analogy.",
+            section: "Fanoron-dimy",
+            cols: 5,
+            ..Rules::fanorona()
         }
     }
 
@@ -258,6 +350,9 @@ pub struct Position {
     pub turns: u16,
     /// Turns since a man was last taken.
     pub quiet: u16,
+    /// Bell's rule: the points each man has stood on, kept on the point
+    /// where it stands (empty points hold nothing).
+    pub been: Vec<u64>,
 }
 
 impl Position {
@@ -287,7 +382,8 @@ impl Position {
                 }
             };
         }
-        Position { at, to_move: Side::White, turns: 0, quiet: 0 }
+        let been = (0..rules.len()).map(|p| if at[p].is_some() { 1u64 << p } else { 0 }).collect();
+        Position { at, to_move: Side::White, turns: 0, quiet: 0, been }
     }
 
     pub fn count(&self, side: Side) -> usize {
@@ -345,18 +441,40 @@ impl Position {
         out
     }
 
-    /// Every capture the side to move could begin with.
-    fn first_captures(&self, rules: &Rules) -> Vec<Step> {
-        let me = self.to_move;
+    /// Whether the vela's opening part is still on: the winner of the
+    /// last game (Black) has not yet given up seventeen men.
+    pub fn vela_on(&self, rules: &Rules) -> bool {
+        rules.vela && self.count(Side::Black) > 5
+    }
+
+    /// Whether the man on `from` may come to `to` (Bell's rule).
+    fn may_land(&self, rules: &Rules, from: usize, to: usize) -> bool {
+        !rules.no_return || self.been[from] & 1 << to == 0
+    }
+
+    /// Whether `p` is on the back row of the side that is not `me`.
+    fn their_back_row(&self, rules: &Rules, me: Side, p: usize) -> bool {
+        let (r, _) = rules.rc(p);
+        match me {
+            Side::White => r == 0,
+            Side::Black => r == rules.rows - 1,
+        }
+    }
+
+    /// The captures the man of `me` on `from` could make now, as steps.
+    fn captures_at(&self, rules: &Rules, me: Side, from: usize) -> Vec<((i8, i8), Step)> {
         let mut out = Vec::new();
-        for from in 0..rules.len() {
-            if self.at[from] != Some(me) {
-                continue;
-            }
-            for d in DIRECTIONS {
-                for (to, taken) in self.captures_from(rules, me, from, d) {
-                    out.push(Step { from: from as u8, to: to as u8, taken });
+        for d in DIRECTIONS {
+            for (to, mut taken) in self.captures_from(rules, me, from, d) {
+                if !self.may_land(rules, from, to) {
+                    continue;
                 }
+                // In the vela the loser's captures take one man only, the
+                // nearest.
+                if self.vela_on(rules) {
+                    taken.truncate(1);
+                }
+                out.push((d, Step { from: from as u8, to: to as u8, taken }));
             }
         }
         out
@@ -365,21 +483,34 @@ impl Position {
     /// The legal turns for the side to move.
     pub fn moves(&self, rules: &Rules) -> Vec<Move> {
         let me = self.to_move;
-        let firsts = self.first_captures(rules);
+        let vela = self.vela_on(rules);
+        // In the vela the winner of the last game may not take.
+        let can_take = !(vela && me == Side::Black);
         let mut out = Vec::new();
-        for step in &firsts {
-            let mut board = self.clone();
-            board.apply(step);
-            let once = rules.first_takes_once && self.turns == 0;
-            let mut visited = vec![step.from as usize, step.to as usize];
-            let dir = direction(rules, step.from as usize, step.to as usize);
-            board.chains(rules, me, vec![step.clone()], &mut visited, dir, once, &mut out);
+        let mut took = false;
+        if can_take {
+            for from in 0..rules.len() {
+                if self.at[from] != Some(me) {
+                    continue;
+                }
+                for (d, step) in self.captures_at(rules, me, from) {
+                    took = true;
+                    let mut board = self.clone();
+                    board.apply(&step);
+                    let once = (rules.first_takes_once && self.turns == 0) || vela;
+                    let mut visited = vec![step.from as usize, step.to as usize];
+                    board.chains(rules, me, vec![step], &mut visited, d, once, &mut out);
+                }
+            }
         }
-        if !firsts.is_empty() && rules.must_take {
+        if took && rules.must_take {
             return out;
         }
         for from in 0..rules.len() {
             if self.at[from] != Some(me) {
+                continue;
+            }
+            if rules.back_row_takes_only && self.their_back_row(rules, me, from) {
                 continue;
             }
             for d in DIRECTIONS {
@@ -388,10 +519,8 @@ impl Position {
                 }
                 if let Some(to) = rules.step(from, d)
                     && self.at[to].is_none()
+                    && self.may_land(rules, from, to)
                 {
-                    // In Fanorona a step that could take must take
-                    // (`must_take`); otherwise a plain step is offered
-                    // beside the captures.
                     out.push(Move { steps: vec![Step { from: from as u8, to: to as u8, taken: Vec::new() }] });
                 }
             }
@@ -415,14 +544,15 @@ impl Position {
         let at = done[done.len() - 1].to as usize;
         let mut next = Vec::new();
         if !once {
-            for d in DIRECTIONS {
-                for (to, taken) in self.captures_from(rules, me, at, d) {
-                    // Fanorona: never the same direction twice running,
-                    // never back to a point already passed this turn.
-                    if rules.capture == Capture::Line && (d == last_dir || visited.contains(&to)) {
-                        continue;
-                    }
-                    next.push((d, Step { from: at as u8, to: to as u8, taken }));
+            for (d, step) in self.captures_at(rules, me, at) {
+                let allowed = match rules.chain {
+                    Chain::Free => true,
+                    // Not straight back along the line it came.
+                    Chain::NoReturn => d != (-last_dir.0, -last_dir.1),
+                    Chain::Modern => d != last_dir && !visited.contains(&(step.to as usize)),
+                };
+                if allowed {
+                    next.push((d, step));
                 }
             }
         }
@@ -441,9 +571,13 @@ impl Position {
     }
 
     fn apply(&mut self, step: &Step) {
-        self.at[step.to as usize] = self.at[step.from as usize].take();
+        let (from, to) = (step.from as usize, step.to as usize);
+        self.at[to] = self.at[from].take();
+        self.been[to] = self.been[from] | 1 << to;
+        self.been[from] = 0;
         for &q in &step.taken {
             self.at[q as usize] = None;
+            self.been[q as usize] = 0;
         }
     }
 
@@ -492,6 +626,7 @@ pub(crate) mod tests {
         for &(name, side) in men {
             p.at[rules.point(name).unwrap()] = Some(side);
         }
+        p.been = (0..rules.len()).map(|q| if p.at[q].is_some() { 1u64 << q } else { 0 }).collect();
         p.to_move = to_move;
         p.turns = 10;
         p
@@ -538,7 +673,7 @@ pub(crate) mod tests {
 
     #[test]
     fn leaping_and_leaping_on() {
-        let a = Rules::alquerque();
+        let a = Rules::alquerque_bell();
         use Side::*;
         // White a1 leaps b2 to c3, then d4 to e5.
         let p = board(&a, White, &[("a1", White), ("b2", Black), ("d4", Black), ("e1", Black)]);
@@ -547,6 +682,66 @@ pub(crate) mod tests {
         let names: Vec<String> = moves[0].taken().map(|q| a.name(q)).collect();
         assert_eq!(names, ["b2", "d4"]);
         assert_eq!(a.name(moves[0].to()), "e5");
+    }
+
+    #[test]
+    fn alfonso_lets_a_man_stop_or_not_take() {
+        let a = Rules::alquerque();
+        use Side::*;
+        let p = board(&a, White, &[("a1", White), ("b2", Black), ("d4", Black), ("e1", Black)]);
+        let moves = p.moves(&a);
+        // A step, one leap, or both leaps.
+        assert!(moves.iter().any(|m| m.captures() == 0));
+        assert!(moves.iter().any(|m| m.captures() == 1));
+        assert!(moves.iter().any(|m| m.captures() == 2));
+    }
+
+    #[test]
+    fn bell_forbids_backwards_and_returning() {
+        let a = Rules::alquerque_bell();
+        use Side::*;
+        let mut p = board(&a, White, &[("c3", White), ("a5", Black)]);
+        let to: Vec<String> = p.moves(&a).iter().map(|m| a.name(m.to())).collect();
+        // Forward, diagonally forward, sideways: not c2, b2, d2.
+        assert_eq!(to.len(), 5, "{to:?}");
+        assert!(!to.contains(&"c2".to_string()));
+        // c3 to b3, then b3 may not come back to c3.
+        let mv = p.moves(&a).into_iter().find(|m| a.name(m.to()) == "b3").unwrap();
+        p.play(&mv);
+        p.to_move = White;
+        assert!(p.moves(&a).iter().all(|m| a.name(m.to()) != "c3"));
+        // On Black's back row a man moves only to take.
+        let q = board(&a, White, &[("c5", White), ("a1", Black)]);
+        assert!(q.moves(&a).is_empty());
+    }
+
+    #[test]
+    fn montgomery_only_forbids_going_back() {
+        let f = Rules::fanorona_montgomery();
+        use Side::*;
+        // c1 to d1 withdraws from b1; d1 to e1 (the same way again)
+        // approaches f1: allowed by Montgomery, not today.
+        let p = board(&f, White, &[("c1", White), ("b1", Black), ("f1", Black), ("i5", Black)]);
+        let two = |r: &Rules| p.moves(r).iter().any(|m| m.steps.len() == 2);
+        assert!(two(&f));
+        assert!(!two(&Rules::fanorona()));
+    }
+
+    #[test]
+    fn the_vela() {
+        use Side::*;
+        let v = Rules::vela();
+        let mut p = Position::new(&v);
+        // White, the loser, moves first and takes one man only.
+        let moves = p.moves(&v);
+        assert!(moves.iter().all(|m| m.captures() == 1 && m.steps.len() == 1), "{:?}", moves[0]);
+        p.play(&moves[0]);
+        // Black may not take, though he could.
+        assert!(p.moves(&v).iter().all(|m| m.captures() == 0));
+        // With five men left Black plays as usual.
+        let mut q = board(&v, Black, &[("e3", Black), ("a1", Black), ("a2", Black), ("a3", Black), ("a4", Black), ("g3", White), ("h3", White)]);
+        q.turns = 40;
+        assert!(q.moves(&v).iter().any(|m| m.captures() == 2));
     }
 
     #[test]

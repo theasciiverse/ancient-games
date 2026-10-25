@@ -41,7 +41,11 @@ as many markings (*scriptula*) as the rolling year has months"
 split in the middle; many are cut in stone, and many spell out six
 words of six letters, two to a row. One from Timgad reads VENARI
 LAVARI / LVDERE RIDERE / OCCEST VIVERE: "to hunt, to bathe, to play,
-to laugh: that is living" [@austin1934rbg1, 31]. A board found at
+to laugh: that is living" [@austin1934rbg1, 31].
+
+![Marble board for the game of twelve lines, found near the agora of
+Aphrodisias, Turkey. Photograph: wneuheisel, CC BY
+2.0.](images/tabula-xii-scripta-aphrodisias.jpg){width=70%} A board found at
 Qustul in Nubia, of about the 4th century, lay with fifteen men of
 ivory and fifteen of ebony, a dice tower and five dice
 [@bell1969, 28-29].
@@ -52,7 +56,12 @@ points of backgammon. When the middle row was given up is not known
 Didyma, Ostia and Rome [@durnagolu2025, 30]. Isidore of Seville, early in the 7th
 century, writes that "tabula is played with a dice tower, men and dice",
 three dice, and that some men move "in order", some "at random", and
-some cannot move at all [@isidore-etym, XVIII.60-67]. The game passed
+some cannot move at all [@isidore-etym, XVIII.60-67].
+
+![The Vettweiß-Froitzheim dice tower, 4th century, with Roman counters;
+its inscription reads PICTOS VICTOS HOSTIS DELETA LVDITE SECVRI.
+LVR-LandesMuseum Bonn. Photograph: Carole Raddato, CC BY-SA
+2.0.](images/tabula-dice-tower-bonn.jpg){height=8cm} The game passed
 to Byzantium as *tavli* and to medieval Europe as the game of tables,
 whose rules Alfonso X had written down in 1283 [@golladay2007, 413-495].
 
@@ -65,6 +74,12 @@ the other [@martial-14, XIV.17]. A painted wall of a tavern at Pompeii
 shows two men at a board, one crying "Exsi" (I'm out), the other "Not
 three, it's two", and the landlord telling them to fight outside
 [@bell1969, 33].
+
+![Two dice players quarrel: "Exsi" (I'm out), "Non tria, duas est"
+(not three, it's two). Wall painting from the Caupona of Salvius,
+Pompeii, before AD 79. Museo Archeologico Nazionale di Napoli, 111482.
+Photograph: ArchaiOptix, CC BY-SA
+4.0.](images/tabula-pompeii-dice-players.jpg){width=50%}
 
 **Zeno's game.** Agathias, a poet of the 6th century, wrote an epigram
 on a game the emperor Zeno (who reigned 474-491) played and lost. It
