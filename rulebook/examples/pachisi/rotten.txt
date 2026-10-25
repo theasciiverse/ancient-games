@@ -1,0 +1,2 @@
+Thrown 25, 12, 10, 3: kept 3
+Thrown 25, 12, 10, 25: kept 25, 12, 10, 25, and throws on

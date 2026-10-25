@@ -32,10 +32,10 @@ The name. Thomas Hyde, the Oxford orientalist, wrote the first European
 account of the game in 1694. He gives the name in Arabic, manqala, “commonly
 Mángala”, and explains it: it is so called “because they move the pebbles
 from place to place”, and so he calls it in Latin the game of transferring
-(Hyde 1694, 2:226). Stewart Culin, two centuries later, translates it the
-same way, “the game of transferring” (Culin 1896, 599). The word is a
-general one: R. C. Bell notes that mancala “is used as a generic noun for
-all the games of the Mankala’h type” (Bell 1969, 1:115).
+(Hyde 1694, 226). Stewart Culin, two centuries later, translates it the same
+way, “the game of transferring” (Culin 1896, 599). The word is a general
+one: R. C. Bell notes that mancala “is used as a generic noun for all the
+games of the Mankala’h type” (Bell 1969, 1:115).
 
 How old it is. Far less old than is often said. Two claims of great age have
 not held up:
@@ -57,7 +57,7 @@ not held up:
   absent from the written and pictorial record of ancient Egypt (de Voogt
   2021, 6). Already in 1694 Hyde told of the traveller Wansleb, who heard
   from Copts of a mancala board on top of the Great Pyramid and went to
-  look, but could not find any such thing (Hyde 1694, 2:232).
+  look, but could not find any such thing (Hyde 1694, 232).
 
 Boards of three rows of holes, such as the limestone block Flinders Petrie
 found at Memphis, which Bell takes for “an early form of Mankala’h” (Bell
@@ -110,10 +110,10 @@ other game fits. Hyde, in 1694, describes two Mesopotamian forms, a simple
 one and an intricate one, a box board of two rows of six holes with
 thirty-six shells, seven holes a side among the Arabs, and a board of four
 rows of eight that he learnt of from the envoy of the King of Anjouan, in
-the Comoros (Hyde 1694, 2:226-32). The first full rules come from E. W.
-Lane, who saw the game played for coffee in the coffee shops of Cairo when
-he lived in Egypt in the 1830s (Lane 1890, 315; Bell 1969, 1:113); his
-account is the source of two rule sets here.
+the Comoros (Hyde 1694, 226-32). The first full rules come from E. W. Lane,
+who saw the game played for coffee in the coffee shops of Cairo when he
+lived in Egypt in the 1830s (Lane 1890, 315; Bell 1969, 1:113); his account
+is the source of two rule sets here.
 
 Across the oceans. Rules travel with the people who play them, and games
 played the same way in two places are the best evidence that the game went
@@ -957,8 +957,8 @@ Branch of the Royal Asiatic Society, no. 49: 93-94.
 Herskovits, Melville J. 1932. ‘Wari in the New World’. Journal of the Royal
 Anthropological Institute 62: 23-37. https://doi.org/10.2307/2843876.
 
-Hyde, Thomas. 1694. Historia Nerdiludii. Vol. 2. De Ludis Orientalibus.
-Oxford: Sheldonian Theatre.
+Hyde, Thomas. 1694. Historia Nerdiludii (de Ludis Orientalibus, Liber
+Posterior). Oxford: e Theatro Sheldoniano.
 
 igGameCenter. n.d. ‘Bohnenspiel’. Accessed 22 October 2026.
 https://www.iggamecenter.com/de/rules/bohnenspiel.

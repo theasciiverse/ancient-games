@@ -987,6 +987,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "pachisi"
+version = "0.5.0"
+dependencies = [
+ "ancient-core",
+ "env_logger",
+ "log",
+ "ratatui",
+]
+
+[[package]]
 name = "palette"
 version = "0.7.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"

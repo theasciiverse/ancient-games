@@ -61,8 +61,12 @@ than these flowers” (Murray 1913, 199-200). Their books, and those of their
 pupils, give the moves, the endings and their verdicts, the openings, and
 problems (mansubat): over 1,600 in the manuscripts, about 553 of them
 different (Murray 1913, 220-339, 270). Muslim chessmen were abstract shapes,
-not figures (Murray 1913, 223-24). From Islam the game went on to Europe,
-where in time the firzan and the fil became the queen and the bishop.
+not figures (Murray 1913, 223-24).
+
+[Chess set of glazed stonepaste, Nishapur, Iran, 12th century: the abstract
+men of Islamic chess. The Metropolitan Museum of Art, New York,
+1971.193a-ff, CC0.] From Islam the game went on to Europe, where in time the
+firzan and the fil became the queen and the bishop.
 
 Chaturanga. Of the rules of the Indian game before the year 1000, only what
 al-’Adli wrote of it survives: the Persians, he says, “altered some of the
@@ -171,11 +175,11 @@ nowhere.
 - A move that bares and mates at once wins as mate.
 
 Dilaram’s problem. The most famous of the problems, as-Suli’s, copied into
-Alfonso X’s book and the source of nearly 200 problems in medieval Europe
-(Murray 1913, 311-12). A player, the story goes, had staked his favourite,
-Dilaram, on the game, and when this position came she cried out to him
-“Sacrifice your two Rooks, and not me” (Murray 1913, 311). The program
-checks every move of the solution.
+Alfonso X’s Book of Games (1283) and the source of nearly 200 problems in
+medieval Europe (Murray 1913, 311-12). A player, the story goes, had staked
+his favourite, Dilaram, on the game, and when this position came she cried
+out to him “Sacrifice your two Rooks, and not me” (Murray 1913, 311). The
+program checks every move of the solution.
 
     Red to play and win:
       8  . r . . . . k .
@@ -258,7 +262,9 @@ al-’Adli calls Indian (Murray 1913, 56-57, 60-61).
 - The elephant. Murray found three moves recorded for it in India; the
   diagonal leap of two squares “became the widest spread, and it is probable
   that it is the oldest move. It is the only one which passed westwards”
-  (Murray 1913, 59-60). This rule set uses it; the two others are the next
+  (Murray 1913, 59-60). The elephant of the ivory set once called
+  Charlemagne’s, made in southern Italy in the late 11th century, is still
+  an elephant (pictured). This rule set uses it; the two others are the next
   two rule sets.
 
 Everything else (the setup, the baidaq’s promotion, who moves first, the
