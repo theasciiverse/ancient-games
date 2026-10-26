@@ -29,8 +29,8 @@ pub struct Hits {
 }
 
 fn square_size(area: Rect) -> (u16, u16) {
-    let by_height = (area.height.saturating_sub(13) / 3).clamp(3, 7);
-    let width = (area.width.saturating_sub(2) / 10).clamp(6, 14);
+    let by_height = (area.height.saturating_sub(13) / 3).clamp(3, 14);
+    let width = (area.width.saturating_sub(2) / 10).clamp(6, 28);
     let h = by_height.min(width.div_ceil(2));
     (width.min(h * 2), h)
 }
@@ -200,8 +200,10 @@ fn draw_piece(buf: &mut Buffer, cell: Rect, side: Side) {
         Side::White => (IVORY, EBONY),
         Side::Black => (EBONY_PIECE, IVORY),
     };
-    let w = inner.width.saturating_sub(4).clamp(3, 6);
-    let h = inner.height.saturating_sub(2).clamp(1, 2);
+    // At most 6 by 2 on the screen the game is made for; about half the
+    // house on a larger one.
+    let w = inner.width.saturating_sub(4).clamp(3, 6.max(inner.width / 2));
+    let h = inner.height.saturating_sub(2).clamp(1, 2.max(inner.height / 2));
     let x = inner.x + (inner.width - w) / 2;
     let y = inner.y + (inner.height - h).div_ceil(2);
     fill(buf, Rect::new(x, y, w, h), bg);

@@ -29,8 +29,8 @@ pub struct Hits {
 /// rows, so the diagonals run at 45 degrees on the screen.
 fn spacing(rules: &Rules, area: Rect) -> (u16, u16) {
     let (gx, gy) = (rules.cols as u16 - 1, rules.rows as u16 - 1);
-    let sy = (area.height.saturating_sub(7) / gy).clamp(2, 6);
-    let sy = sy.min(area.width.saturating_sub(44) / (2 * gx)).max(2);
+    let sy = (area.height.saturating_sub(7) / gy).clamp(2, 16);
+    let sy = sy.min(area.width.saturating_sub(47) / (2 * gx)).max(2);
     (2 * sy, sy)
 }
 

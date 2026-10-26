@@ -52,8 +52,15 @@ impl Hits {
 }
 
 const PANEL: u16 = 34;
-const COL: u16 = 4;
-const STACK: u16 = 5;
+
+/// The scale of the board: 1 on the screen the game is made for, larger
+/// on a larger one. A point is `2s + 2` columns wide, and a row of points
+/// `5s` rows deep (`3s` on the three-row board).
+fn scale(area: Rect, three: bool) -> u16 {
+    let by_height = if three { area.height.saturating_sub(12) / 9 } else { area.height.saturating_sub(13) / 10 };
+    let by_width = area.width.saturating_sub(66) / 24;
+    by_height.min(by_width).clamp(1, 4)
+}
 
 fn man_colour(side: Side) -> Color {
     match side {
@@ -70,8 +77,10 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     // Rows of twelve points, each split six and six by the bar. Two rows
     // (tabula) or three (duodecim scripta); between rows a gap, which in
     // the three-row board carries the middle row's numbers.
-    let (rows, stack, sep) = if three { (3u16, 3u16, 1u16) } else { (2, STACK, 3) };
-    let bw = 12 * COL + 3 + 2;
+    let s = scale(area, three);
+    let col = 2 * s + 2;
+    let (rows, stack, sep) = if three { (3u16, 3 * s, 1u16) } else { (2, 5 * s, 3) };
+    let bw = 12 * col + 3 + 2;
     let bh = rows * stack + (rows - 1) * sep + 2;
     let total = bw + 3 + PANEL;
     let bx = area.x + area.width.saturating_sub(total) / 2;
@@ -102,12 +111,12 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
             (12 - p, 1)
         };
         let gap = if i >= 6 { 3 } else { 0 };
-        let x = bx + 1 + i as u16 * COL + gap;
+        let x = bx + 1 + i as u16 * col + gap;
         let y0 = by + 1 + row * (stack + sep);
         (x, y0, row + 1 < rows)
     };
     // The bar between the halves.
-    let bar_x = bx + 1 + 6 * COL;
+    let bar_x = bx + 1 + 6 * col;
     for y in by + 1..by + bh - 1 {
         put(buf, bar_x, y, "   ", Style::new().bg(FRAME));
     }
@@ -116,15 +125,34 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
         let colour = if p % 2 == 0 { POINT_A } else { POINT_B };
         // The row of position k from the base of the point.
         let at = |k: u16| if down { y0 + k } else { y0 + stack - 1 - k };
+        // The middle column of the point.
+        let cx = x + s;
         // The point itself, a narrowing wedge.
         for k in 0..stack {
             let tip = k + 1 == stack;
-            let glyph = match (tip, down) {
-                (false, _) => "▐█▌ ",
-                (true, true) => " ▾  ",
-                (true, false) => " ▴  ",
-            };
-            put(buf, x, at(k), glyph, Style::new().fg(colour).bg(FIELD));
+            let style = Style::new().fg(colour).bg(FIELD);
+            match (tip, down) {
+                (false, _) if s == 1 => put(buf, x, at(k), "▐█▌ ", style),
+                (false, _) => {
+                    // A triangle, in half columns: as wide as the point at
+                    // the base, narrowing evenly to the tip, about the
+                    // middle of column `cx`.
+                    let wide = 2 * s + 1;
+                    let half = (wide * (stack - k)).div_ceil(stack);
+                    let (from, to) = (2 * cx + 1 - half, 2 * cx + 1 + half);
+                    for c in from / 2..to.div_ceil(2) {
+                        let glyph = match (2 * c >= from, 2 * c + 1 < to) {
+                            (true, true) => "█",
+                            (true, false) => "▌",
+                            (false, true) => "▐",
+                            (false, false) => " ",
+                        };
+                        put(buf, c, at(k), glyph, style);
+                    }
+                }
+                (true, true) => put(buf, cx, at(k), "▾", style),
+                (true, false) => put(buf, cx, at(k), "▴", style),
+            }
         }
         let men = [shown.on_point(rules, Side::White, p), shown.on_point(rules, Side::Black, p)];
         let side = if men[0] > 0 { Some(Side::White) } else if men[1] > 0 { Some(Side::Black) } else { None };
@@ -132,23 +160,32 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
         let picked = selected == Some(p);
         for k in 0..count.min(stack) {
             let last = k + 1 == stack.min(count);
-            let text = if k + 1 == stack && count > stack { format!("{:>2}", count) } else { "●".to_string() };
             let fg = man_colour(side.unwrap());
             let bg = if picked && last { PICKED } else { colour };
-            put(buf, x + 1, at(k), &text, Style::new().fg(fg).bg(bg).add_modifier(Modifier::BOLD));
+            let style = Style::new().fg(fg).bg(bg).add_modifier(Modifier::BOLD);
+            if k + 1 == stack && count > stack {
+                put(buf, cx, at(k), &format!("{:>2}", count), style);
+            } else if s == 1 {
+                put(buf, cx, at(k), "●", style);
+            } else {
+                // A man seen from the side, a row of a stack.
+                let man = "▀".repeat(2 * s as usize - 1);
+                let fg = if picked && last { PICKED } else { fg };
+                put(buf, cx + 1 - s, at(k), &man, style.fg(fg));
+            }
         }
         if lit_spots.contains(&p) {
             let style = Style::new().fg(MARK).bg(FIELD).add_modifier(Modifier::BOLD);
             if count == 0 || game.selected.is_some() {
-                put(buf, x + 1, at(count.min(stack - 1)), "◆", style);
+                put(buf, cx, at(count.min(stack - 1)), "◆", style);
             } else {
                 put(buf, x, at(0), "▸", style);
             }
         }
         let label_y = if down { y0 - 1 } else { y0 + stack };
         let label_bg = if label_y == by || label_y == by + bh - 1 { FRAME } else { FIELD };
-        put(buf, x + 1, label_y, &format!("{p:<2}"), Style::new().fg(DIM).bg(label_bg));
-        hits.spots.push((Rect::new(x, y0, COL, stack), p));
+        put(buf, cx, label_y, &format!("{p:<2}"), Style::new().fg(DIM).bg(label_bg));
+        hits.spots.push((Rect::new(x, y0, col, stack), p));
     }
 
     // The hand, above the board, and the men off, below it.

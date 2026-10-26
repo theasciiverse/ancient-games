@@ -31,8 +31,16 @@ pub struct Hits {
     pub cells: Vec<(Rect, (u8, u8))>,
 }
 
-const W: u16 = 3;
 const PANEL: u16 = 37;
+
+/// A cell's width and height: three columns by one row on the screen the
+/// game is made for, larger on a larger one (`2s + 1` by `s`).
+fn cell_size(area: Rect) -> (u16, u16) {
+    let by_height = area.height.saturating_sub(1) / 19;
+    let by_width = (area.width.saturating_sub(PANEL + 3) / 19).saturating_sub(1) / 2;
+    let s = by_height.min(by_width).clamp(1, 4);
+    (2 * s + 1, s)
+}
 
 fn on_cross(r: u8, c: u8) -> bool {
     (8..=10).contains(&r) || (8..=10).contains(&c)
@@ -43,10 +51,12 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     hits.cells.clear();
     let rules = &game.rules;
     let p = &game.position;
-    let bw = 19 * W;
+    let (cw, ch) = cell_size(area);
+    let bw = 19 * cw;
+    let bh = 19 * ch;
     let total = bw + 3 + PANEL;
     let bx = area.x + area.width.saturating_sub(total) / 2;
-    let by = area.y + area.height.saturating_sub(20) / 2;
+    let by = area.y + area.height.saturating_sub(bh + 1) / 2;
     let lit = game.lit();
     let moving = game.moving();
     let selected = game.selected.map(|s| cell(moving, s));
@@ -72,9 +82,11 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
             if !on_cross(r, c) {
                 continue;
             }
-            let x = bx + c as u16 * W;
-            let y = by + r as u16;
-            let rect = Rect::new(x, y, W, 1);
+            let x = bx + c as u16 * cw;
+            let y = by + r as u16 * ch;
+            let rect = Rect::new(x, y, cw, ch);
+            // The middle of the cell, where a man stands.
+            let (mx, my) = (x + cw / 2, y + ch / 2);
             hits.cells.push((rect, (r, c)));
             let middle = (8..=10).contains(&r) && (8..=10).contains(&c);
             let castle = !middle && (0..68).any(|sq| rules.castle(sq) && cell(0, loop_step(sq)) == (r, c));
@@ -101,19 +113,19 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
                 Some(list) if list.len() == 1 => {
                     let (k, n) = list[0];
                     let text = if n > 1 { format!("●{n}") } else { "●".to_string() };
-                    put(buf, x + 1 - (n > 1) as u16, y, &text, Style::new().fg(colour(k)).bg(bg).add_modifier(Modifier::BOLD));
+                    put(buf, mx - (n > 1) as u16, my, &text, Style::new().fg(colour(k)).bg(bg).add_modifier(Modifier::BOLD));
                 }
                 Some(list) => {
                     for (i, &(k, _)) in list.iter().take(3).enumerate() {
-                        put(buf, x + i as u16, y, "●", Style::new().fg(colour(k)).bg(bg).add_modifier(Modifier::BOLD));
+                        put(buf, mx - 1 + i as u16, my, "●", Style::new().fg(colour(k)).bg(bg).add_modifier(Modifier::BOLD));
                     }
                 }
-                None if lit.contains(&(r, c)) => put(buf, x + 1, y, "◆", Style::new().fg(MARK).bg(bg)),
-                None if castle => put(buf, x + 1, y, "✕", Style::new().fg(SEAM).bg(bg)),
+                None if lit.contains(&(r, c)) => put(buf, mx, my, "◆", Style::new().fg(MARK).bg(bg)),
+                None if castle => put(buf, mx, my, "✕", Style::new().fg(SEAM).bg(bg)),
                 None => {}
             }
             if last_to == Some((r, c)) && game.selected.is_none() {
-                put(buf, x, y, "·", Style::new().fg(MARK).bg(bg));
+                put(buf, x, my, "·", Style::new().fg(MARK).bg(bg));
             }
         }
     }
@@ -125,22 +137,23 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
         let toward = |v: u8| (9 + (v as i8 - 9).signum()) as u8;
         let (r, k) = (toward(r), toward(k));
         if home > 0 {
-            put(buf, bx + k as u16 * W, by + r as u16, &format!("⌂{home}"), Style::new().fg(colour(c)).bg(MIDDLE).add_modifier(Modifier::BOLD));
+            put(buf, bx + k as u16 * cw + cw / 2 - 1, by + r as u16 * ch + ch / 2, &format!("⌂{home}"), Style::new().fg(colour(c)).bg(MIDDLE).add_modifier(Modifier::BOLD));
         }
     }
     let waiting = p.men[moving].iter().filter(|&&s| s == 0 || s == READY).count();
     let mid_bg = if lit.contains(&(9, 9)) { LIT } else if selected == Some((9, 9)) { PICKED } else { MIDDLE };
     if waiting > 0 {
-        fill(buf, Rect::new(bx + 9 * W, by + 9, W, 1), mid_bg);
-        put(buf, bx + 9 * W, by + 9, &format!("○{waiting}"), Style::new().fg(colour(moving)).bg(mid_bg).add_modifier(Modifier::BOLD));
+        fill(buf, Rect::new(bx + 9 * cw, by + 9 * ch, cw, ch), mid_bg);
+        put(buf, bx + 9 * cw + cw / 2 - 1, by + 9 * ch + ch / 2, &format!("○{waiting}"), Style::new().fg(colour(moving)).bg(mid_bg).add_modifier(Modifier::BOLD));
     }
     if game.human() && game.phase == Phase::Playing {
         let (r, c) = game.cursor;
-        let x = bx + c as u16 * W;
+        let x = bx + c as u16 * cw;
         let style = Style::new().fg(MARK).add_modifier(Modifier::BOLD);
-        put(buf, x.saturating_sub(1), by + r as u16, "▶", style);
+        put(buf, x.saturating_sub(1), by + r as u16 * ch + ch / 2, "▶", style);
     }
-    draw_panel(buf, Rect::new(bx + bw + 3, by, PANEL, 20.min(area.height)), game);
+    let panel_h = (bh + 1).max(20).min(area.height);
+    draw_panel(buf, Rect::new(bx + bw + 3, by, PANEL, panel_h), game);
 
     // On a terminal larger than the game is made for, in the four corners
     // beside the cross (clear of the cursor's column), the flower at the
@@ -148,7 +161,7 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     // Udaipur, about 1868 (Metropolitan Museum of Art 2019.123).
     if ornament::roomy(area) {
         for (r, c) in [(0, 0), (0, 11), (11, 0), (11, 11)] {
-            let corner = Rect::new(bx + c * W, by + r, 8 * W - 1, 8);
+            let corner = Rect::new(bx + c * cw, by + r * ch, 8 * cw - 1, 8 * ch);
             draw_flower(buf, corner.intersection(area));
         }
     }
@@ -159,7 +172,8 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
 fn draw_flower(buf: &mut Buffer, area: Rect) {
     let white = ornament::dim(LIT, BG, 0.6);
     let (cx, cy) = (area.width as i32, area.height as i32 * 2);
-    let r = (cx.min(cy) - 2) as f32;
+    // Up to 22 dots, so the flower stays behind the play.
+    let r = (cx.min(cy) - 2).min(22) as f32;
     if r < 8.0 {
         return;
     }

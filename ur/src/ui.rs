@@ -32,8 +32,8 @@ pub struct Hits {
 fn square_size(area: Rect, board: Board) -> (u16, u16) {
     let cols = board.cols() as u16;
     // The board plus eleven rows: title, names, lots, message and keys.
-    let by_height = (area.height.saturating_sub(13) / ROWS as u16).clamp(3, 7);
-    let width = (area.width.saturating_sub(2) / cols).clamp(6, 14);
+    let by_height = (area.height.saturating_sub(13) / ROWS as u16).clamp(3, 14);
+    let width = (area.width.saturating_sub(2) / cols).clamp(6, 28);
     let h = by_height.min(width.div_ceil(2));
     (width.min(h * 2), h)
 }
@@ -200,6 +200,9 @@ fn draw_margins(buf: &mut Buffer, area: Rect, board: Rect) {
     for column in ornament::beside(area, board) {
         // Petals of up to fourteen dots, with two cells free on each side.
         let r = (column.width as i32 - 4).min(14);
+        if r < 5 {
+            continue;
+        }
         let petal = |x, y| ornament::rosette(8, r as f32, x, y);
         // The petals in outline, as incised in the shell; the centre whole.
         ornament::stack(buf, column, 2 * r + 1, 2 * r + 1, |_, x, y| match petal(x, y)? {
@@ -275,20 +278,36 @@ fn draw_square(buf: &mut Buffer, cell: Rect, row: usize, col: usize, board: Boar
     let blue = Style::new().fg(LAPIS).bg(SHELL);
     if board.is_rosette(row, col) {
         if inner.height >= 3 {
-            put(buf, cx - 1, cy - 1, "╲│╱", blue);
-            put(buf, cx - 1, cy, "─", blue);
+            // Rays as long as the square allows, the diagonals at 45
+            // degrees (two columns a row).
+            let k = ((inner.height - 1) / 2).min((inner.width - 1) / 4).min(inner.height / 3).max(1);
+            for i in 1..=k {
+                let d = 2 * i - 1;
+                for y in [cy - i, cy + i] {
+                    let (l, r) = if y < cy { ("╲", "╱") } else { ("╱", "╲") };
+                    put(buf, cx - d, y, l, blue);
+                    put(buf, cx, y, "│", blue);
+                    put(buf, cx + d, y, r, blue);
+                }
+            }
+            for i in 1..=2 * k - 1 {
+                put(buf, cx - i, cy, "─", blue);
+                put(buf, cx + i, cy, "─", blue);
+            }
             put(buf, cx, cy, "✿", red);
-            put(buf, cx + 1, cy, "─", blue);
-            put(buf, cx - 1, cy + 1, "╱│╲", blue);
         } else {
             put(buf, cx, cy, "✿", red);
         }
     } else if (row + col) % 2 == 0 {
-        // Five dots, as on many of the board's squares.
+        // Five dots, as on many of the board's squares, spread with the
+        // square.
         if inner.height >= 3 {
-            put(buf, cx - 2, cy - 1, "•   •", blue);
+            let (dx, dy) = ((inner.width / 4).max(2), (inner.height / 4).max(1));
+            for y in [cy - dy, cy + dy] {
+                put(buf, cx - dx, y, "•", blue);
+                put(buf, cx + dx, y, "•", blue);
+            }
             put(buf, cx, cy, "•", red);
-            put(buf, cx - 2, cy + 1, "•   •", blue);
         } else {
             put(buf, cx - 1, cy, "•••", blue);
         }
@@ -354,8 +373,10 @@ fn draw_piece(buf: &mut Buffer, cell: Rect, side: Side, name: Option<(&str, &str
     // The piece covers the square's inlay.
     fill(buf, inner, SHELL);
     // A row free above and below, where the square's frame goes.
-    let w = (inner.width - 2).min(7).max(3);
-    let h = inner.height.saturating_sub(2).clamp(1, 3);
+    // As on the screen the game is made for, at most 7 by 3; on a larger
+    // one, about three fifths of the square.
+    let w = (inner.width - 2).min(7.max(inner.width * 3 / 5)).max(3);
+    let h = inner.height.saturating_sub(2).clamp(1, 3.max(inner.height * 3 / 5));
     let x = inner.x + (inner.width - w) / 2;
     let y = inner.y + (inner.height - h) / 2;
     fill(buf, Rect::new(x, y, w, h), bg);
@@ -369,10 +390,14 @@ fn draw_piece(buf: &mut Buffer, cell: Rect, side: Side, name: Option<(&str, &str
         return;
     }
     match h {
-        3 => {
-            put(buf, cx - 2, y, "•   •", style);
-            put(buf, cx, y + 1, "•", style);
-            put(buf, cx - 2, y + 2, "•   •", style);
+        3.. => {
+            // Five dots: the corners, a quarter in, and the middle.
+            let (dx, dy) = (w / 4, h / 4);
+            for yy in [y + dy, y + h - 1 - dy] {
+                put(buf, x + dx, yy, "•", style);
+                put(buf, x + w - 1 - dx, yy, "•", style);
+            }
+            put(buf, cx, y + h / 2, "•", style);
         }
         2 => {
             put(buf, cx - 2, y, "• • •", style);

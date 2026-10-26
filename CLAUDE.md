@@ -370,6 +370,9 @@ British Museum record and a CC0 photograph; then the other ten the same
 day, each after a museum object or document (table in ORNAMENT.md, notes
 in `~/references/ancient-games/ornament/`). Plain: Seega, Mancala, Kōnane,
 Mū tōrere, Morabaraba, Fanorona (living traditions: David's call).
+Boards grow with the terminal (2026-10-26, after David's look at 190x58):
+every game, the target 100x30 unchanged (each rulebook picture compared
+byte for byte).
 
 ## Roadmap
 

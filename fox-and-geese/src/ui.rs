@@ -26,8 +26,8 @@ pub struct Hits {
 
 /// Rows and columns between points: about twice as wide as tall.
 fn spacing(area: Rect) -> (u16, u16) {
-    let sy = (area.height.saturating_sub(8) / 6).clamp(2, 5);
-    let sx = (area.width.saturating_sub(40) / 6).clamp(4, 2 * sy);
+    let sy = (area.height.saturating_sub(8) / 6).clamp(2, 10);
+    let sx = (area.width.saturating_sub(41) / 6).clamp(4, 2 * sy);
     (sx, sy)
 }
 
@@ -162,7 +162,10 @@ fn draw_lozenge(buf: &mut Buffer, area: Rect) {
         if outline || tooth || star {
             return Some(ivory);
         }
-        ornament::rosette(8, (s - 1) as f32, x, y).map(|_| green)
+        // A large rosette in outline, or it fills in.
+        let rosette = |x, y| ornament::rosette(8, (s - 1) as f32, x, y);
+        let k = rosette(x, y)?;
+        (s < 7 || k == 0 || ornament::edge(x, y, rosette)).then_some(green)
     });
 }
 

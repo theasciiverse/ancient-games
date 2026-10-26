@@ -234,7 +234,7 @@ woven in a herringbone of short strokes, and five gold discs are drawn
 above the board [@nuttall1903]. The codex does not say what the discs
 mean, and the program does not guess. Its mat carries that weave in the
 four quarters beside the cross, and on a terminal larger than 100 by 30
-the five discs stand in the margins. Both are drawn in braille dots, in
+the five discs stand in a row above it, as in the codex. Both are drawn in braille dots, in
 dim tones, never over a stone, a highlight or a number. They come from
 the sixteenth-century pictures, not from the living Nahua tradition; the
 step-fret often put on patolli boards today is in none of the patolli

@@ -28,10 +28,12 @@ pub struct Hits {
 
 const PANEL: u16 = 36;
 
-/// A square: seven columns by three rows, or less on a small screen.
+/// A square: seven columns by three rows on the screen the game is made
+/// for, less on a smaller one, more on a larger one (about twice as wide
+/// as tall, so it looks square).
 fn cell_size(area: Rect) -> (u16, u16) {
-    let h = (area.height.saturating_sub(3) / 8).clamp(1, 3);
-    let w = (area.width.saturating_sub(PANEL + 6) / 8).clamp(3, 7);
+    let h = (area.height.saturating_sub(3) / 8).clamp(1, 8);
+    let w = (area.width.saturating_sub(PANEL + 6) / 8).clamp(3, 2 * h + 1);
     (w, h)
 }
 
@@ -125,16 +127,18 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     {
         let r = cell(mv.to as usize);
         let style = Style::new().fg(MARK).bg(CLOTH);
-        put(buf, r.x + 1, r.y + ch.div_ceil(2), "·", style);
-        put(buf, r.x + cw - 1, r.y + ch.div_ceil(2), "·", style);
+        let (left, right) = beside(r, cw);
+        put(buf, left, r.y + ch.div_ceil(2), "·", style);
+        put(buf, right, r.y + ch.div_ceil(2), "·", style);
         let f = cell(mv.from as usize);
         put(buf, f.x + cw / 2, f.y + ch.div_ceil(2), "·", style);
     }
     if game.human_to_move() {
         let r = cell(game.cursor);
         let style = Style::new().fg(Color::Rgb(24, 64, 170)).bg(CLOTH).add_modifier(Modifier::BOLD);
-        put(buf, r.x + 1, r.y + ch.div_ceil(2), "[", style);
-        put(buf, r.x + cw - 1, r.y + ch.div_ceil(2), "]", style);
+        let (left, right) = beside(r, cw);
+        put(buf, left, r.y + ch.div_ceil(2), "[", style);
+        put(buf, right, r.y + ch.div_ceil(2), "]", style);
     }
     let label = Style::new().fg(DIM).bg(BG);
     for i in 0..8u16 {
@@ -159,6 +163,13 @@ fn draw_hem(buf: &mut Buffer, hem: Rect) {
     };
     let down = |x: i32, y: i32| x % 2 == (y % 4) / 2;
     ornament::rim(buf, hem, terracotta, 8, zigzag, down);
+}
+
+/// The columns either side of a square's man for a mark or the cursor:
+/// the square's edges, or close to the man in a wide square.
+fn beside(r: Rect, cw: u16) -> (u16, u16) {
+    let mid = r.x + cw / 2;
+    if cw > 7 { (mid - 2, mid + 2) } else { (r.x + 1, r.x + cw - 1) }
 }
 
 fn draw_panel(buf: &mut Buffer, panel: Rect, game: &Game) {

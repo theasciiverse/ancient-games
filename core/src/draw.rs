@@ -81,6 +81,37 @@ pub fn outline(buf: &mut Buffer, cell: Rect, colour: Color, bold: bool) {
     }
 }
 
+/// A round disc in `colour` about the cell (`x`, `y`), `rx` columns and `ry`
+/// rows from the middle to the edge (rx about twice ry looks round). Its
+/// edge is worked in half blocks, so it is drawn at twice the rows; cells
+/// keep their background where the disc does not cover them.
+pub fn disc(buf: &mut Buffer, x: u16, y: u16, rx: f32, ry: f32, colour: Color) {
+    let inside = |dx: f32, dy: f32| (dx / rx).powi(2) + (dy / ry).powi(2) <= 1.0;
+    let (w, h) = (rx.ceil() as i32, ry.ceil() as i32);
+    for dy in -h..=h {
+        for dx in -w..=w {
+            let (cx, cy) = (x as i32 + dx, y as i32 + dy);
+            if cx < 0 || cy < 0 || !buf.area.contains((cx as u16, cy as u16).into()) {
+                continue;
+            }
+            let (top, bottom) = (inside(dx as f32, dy as f32 - 0.25), inside(dx as f32, dy as f32 + 0.25));
+            let cell = &mut buf[(cx as u16, cy as u16)];
+            match (top, bottom) {
+                (true, true) => {
+                    cell.set_char(' ').set_bg(colour);
+                }
+                (true, false) => {
+                    cell.set_char('▀').set_fg(colour);
+                }
+                (false, true) => {
+                    cell.set_char('▄').set_fg(colour);
+                }
+                _ => {}
+            }
+        }
+    }
+}
+
 /// Breaks `text` into lines of at most `width` characters.
 pub fn wrap(text: &str, width: usize) -> Vec<String> {
     if text.is_empty() {

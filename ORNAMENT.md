@@ -113,7 +113,7 @@ Shared helpers in `core/src/ornament.rs`: `rim`, `band`, `stack`,
 | Tabula | margins | half, whole and half compass rosette of the Photius board, Aphrodisias (InsAph 69). No rim: real rims are plain |
 | Alquerque | rim; margins | the inlaid edge and the castle quatrefoil of Alfonso X's alquerque pictures. Fanorona plain |
 | Pachisi | the four corners beside the cross, beyond 100x30 | the flower of Ambav's painting of Sovan Singh, Met 2019.123 |
-| Patolli | the mat's four quarters, any size; margins | the mat weave and the five discs of the Codex Magliabechiano, fol. 60r |
+| Patolli | the mat's four quarters, any size; above the mat, beyond 100x30 | the mat weave and the five discs of the Codex Magliabechiano, fol. 60r |
 
 Left plain: Seega (sand, Lane), Mancala, Kōnane, Mū tōrere (living
 traditions: sources and people first, David's call), Morabaraba and
@@ -124,5 +124,16 @@ hare board) and no Gokstad fret (it reads as a swastika); no step-fret for
 Patolli (in no patolli picture); Senet's signs in standard form, not the
 box's freehand; the lion of León too small to draw. Fixed on the way: the
 key line below the screen at some heights in Senet too.
+
+Patolli after David's look (2026-10-26): the board was a fixed size,
+tiny on a large terminal, and the discs far off in the margins. The
+compartments now grow with the terminal (`cell_size`, 3 by 1 at 100x30,
+unchanged there), ruled apart by the mat when larger; the discs stand in
+a row above the mat, as in the codex. David then asked to check all of
+them: at his 190x58 eleven boards stopped growing early (fixed sizes or
+low caps). All now grow (Ur, Senet, Mancala, Mū tōrere, Pachisi, Tabula,
+Seega, Kōnane, Fox & Geese, Shatranj, Alquerque), with pieces, pits and
+marks growing too; every rulebook picture at 100x30 is byte-identical.
+Round stones on large boards use `draw::disc` (edges in half blocks).
 
 **Next:** David to look at them in a terminal.

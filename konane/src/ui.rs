@@ -4,7 +4,8 @@
 
 use crate::app::{Game, Phase};
 use crate::rules::{Move, Rules, Side};
-use ancient_core::draw::{AMBER, BG, DIM, TEXT, fill, put, wrap};
+use ancient_core::ornament;
+use ancient_core::draw::{AMBER, BG, DIM, TEXT, disc, fill, put, wrap};
 use ancient_core::player::Player;
 use ancient_core::shell::{self, Help, Menu};
 use ratatui::buffer::Buffer;
@@ -31,13 +32,38 @@ fn spacing(rules: &Rules, area: Rect) -> (u16, u16) {
     if tall && wide { (4, 2) } else { (3, 1) }
 }
 
+/// The scale of the board: 1 on the screen the game is made for (hollows
+/// a glyph each, as `spacing` says), on a larger one hollows drawn as
+/// discs `2s + 1` wide, `4s` columns and `2s` rows apart.
+fn scale(rules: &Rules, area: Rect) -> u16 {
+    if !ornament::roomy(area) {
+        return 1;
+    }
+    let by_height = area.height.saturating_sub(3) / (2 * rules.rows as u16);
+    let by_width = area.width.saturating_sub(46) / (4 * rules.cols as u16);
+    by_height.min(by_width).clamp(1, 4)
+}
+
 pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     fill(buf, area, BG);
     hits.points.clear();
     let rules = &game.rules;
-    let (sx, sy) = spacing(rules, area);
-    let bw = rules.cols as u16 * sx + 3;
-    let bh = rules.rows as u16 * sy + 3 - sy;
+    let s = scale(rules, area);
+    let (cols, rows) = (rules.cols as u16, rules.rows as u16);
+    // A hollow's reach from its middle, in columns and rows.
+    // A disc's reach: most of the room between hollows (4s by 2s), with a
+    // column free on each side for the brackets.
+    let (hw, hh) = if s > 1 { ((8 * s + 2) / 5, 3 * s / 4) } else { (0, 0) };
+    let (sx, sy, bw, bh) = if s > 1 {
+        let (sx, sy) = (4 * s, 2 * s);
+        (sx, sy, (cols - 1) * sx + 2 * hw + 5, (rows - 1) * sy + 2 * hh + 3)
+    } else {
+        // Too many hollows for discs: on a larger terminal, glyphs spread
+        // as far apart as fit.
+        let room = (area.height.saturating_sub(4) / rows).min(area.width.saturating_sub(46) / cols / 2);
+        let (sx, sy) = if ornament::roomy(area) && room >= 2 { (2 * room, room) } else { spacing(rules, area) };
+        (sx, sy, cols * sx + 3, rows * sy + 3 - sy)
+    };
     let panel_w = 34u16;
     let total = bw + 3 + panel_w;
     let bx = area.x + area.width.saturating_sub(total) / 2 + 2;
@@ -45,7 +71,7 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     fill(buf, Rect::new(bx, by, bw, bh), LAVA);
     let at = |p: usize| {
         let (r, c) = rules.rc(p);
-        (bx + 2 + c as u16 * sx, by + 1 + r as u16 * sy)
+        (bx + 2 + hw + c as u16 * sx, by + 1 + hh + r as u16 * sy)
     };
     // The names of the columns and rows, as the messages use them.
     let label = Style::new().fg(DIM).bg(BG);
@@ -72,7 +98,7 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     };
     for p in 0..rules.len() {
         let (x, y) = at(p);
-        hits.points.push((Rect::new(x.saturating_sub(1), y, 3, 1), p));
+        hits.points.push((Rect::new(x.saturating_sub(hw + 1), y - hh, 2 * hw + 3, 2 * hh + 1), p));
         let bg = if game.selected == Some(p) {
             PICKED
         } else if lit.contains(&p) && game.position.at[p].is_some() {
@@ -87,20 +113,38 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
             None if lit.contains(&p) => ("◆", Style::new().fg(MARK).bg(bg).add_modifier(Modifier::BOLD)),
             None => ("•", Style::new().fg(HOLLOW).bg(bg)),
         };
-        put(buf, x, y, glyph, style.add_modifier(Modifier::BOLD));
+        if s > 1 {
+            // A hollow in the stone, a disc: the stone in it fills it.
+            let fill_colour = match game.position.at[p] {
+                Some(_) if doomed.contains(&p) => MARK,
+                Some(Side::Black) => BLACK,
+                Some(Side::White) => CORAL,
+                None => HOLLOW,
+            };
+            fill(buf, Rect::new(x - hw - 1, y - hh, 2 * hw + 3, 2 * hh + 1), bg);
+            // An empty hollow smaller than a stone, so the two do not look
+            // alike.
+            let size = if game.position.at[p].is_none() { 0.5 } else { 1.0 };
+            disc(buf, x, y, size * (hw as f32 + 0.4), size * (hh as f32 + 0.4), fill_colour);
+            if game.position.at[p].is_none() && lit.contains(&p) {
+                put(buf, x, y, "◆", Style::new().fg(MARK).bg(fill_colour).add_modifier(Modifier::BOLD));
+            }
+        } else {
+            put(buf, x, y, glyph, style.add_modifier(Modifier::BOLD));
+        }
     }
     if let Some(Move::Jump { path, .. }) = &game.last
         && game.selected.is_none()
     {
         let (x, y) = at(*path.last().unwrap());
-        put(buf, x - 1, y, "·", Style::new().fg(DIM).bg(LAVA));
-        put(buf, x + 1, y, "·", Style::new().fg(DIM).bg(LAVA));
+        put(buf, x - hw - 1, y, "·", Style::new().fg(DIM).bg(LAVA));
+        put(buf, x + hw + 1, y, "·", Style::new().fg(DIM).bg(LAVA));
     }
     if game.human_to_move() {
         let (x, y) = at(game.cursor);
         let style = Style::new().fg(AMBER).bg(LAVA).add_modifier(Modifier::BOLD);
-        put(buf, x - 1, y, "[", style);
-        put(buf, x + 1, y, "]", style);
+        put(buf, x - hw - 1, y, "[", style);
+        put(buf, x + hw + 1, y, "]", style);
     }
 
     draw_panel(buf, Rect::new(bx + bw + 3, by, panel_w, bh.max(16)), game);

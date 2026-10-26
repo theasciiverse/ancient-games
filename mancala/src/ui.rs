@@ -33,8 +33,15 @@ pub struct Hits {
 /// height, store width.
 fn sizes(area: Rect, pits: usize) -> (u16, u16, u16) {
     let store = 8;
-    let w = ((area.width.saturating_sub(2 * store + 6)) / pits as u16).clamp(6, 12);
-    let h = if area.height >= 34 { 6 } else { 5 };
+    // Pits as tall as leaves room for the panel below, and about twice as
+    // wide as tall (as on the screen the game is made for, 12 by 5 or 6).
+    let tall = if area.height >= 34 { (area.height - 22) / 2 } else { 5 };
+    let h = tall.clamp(5, 12);
+    let w = ((area.width.saturating_sub(2 * store + 6)) / pits as u16).clamp(6, 12.max(2 * h));
+    let h = h.min(w / 2).max(if area.height >= 34 { 6 } else { 5 });
+    // Wider stores to match larger pits, where they fit.
+    let wide = (w * 2 / 3).max(store);
+    let store = if pits as u16 * w + 2 * wide + 4 <= area.width { wide } else { store };
     (w, h, store)
 }
 
@@ -151,6 +158,24 @@ fn draw_pit(buf: &mut Buffer, cell: Rect, pos: &Position, p: u8, rim: Color, bol
     let count = seeds.to_string();
     let cx = inner.x + inner.width.saturating_sub(count.len() as u16) / 2;
     put(buf, cx, inner.y, &count, Style::new().fg(TEXT).bg(PIT).add_modifier(Modifier::BOLD));
+    // In a large pit the seeds lie apart, a column between them, the heap
+    // centred in the pit below the count.
+    if inner.height >= 6 {
+        let per_row = (inner.width as usize).div_ceil(2);
+        let rows = inner.height as usize - 2;
+        let room = per_row * rows;
+        let shown = (seeds as usize).min(room);
+        let used = shown.div_ceil(per_row);
+        let top = inner.y + 2 + ((rows - used) / 2) as u16;
+        for i in 0..shown {
+            let row = i / per_row;
+            let in_row = (shown - row * per_row).min(per_row) as u16;
+            let x = inner.x + (inner.width - (2 * in_row - 1)) / 2 + 2 * (i % per_row) as u16;
+            let glyph = if seeds as usize > room && i == shown - 1 { "+" } else { "•" };
+            put(buf, x, top + row as u16, glyph, Style::new().fg(SEED).bg(PIT));
+        }
+        return;
+    }
     // The seeds themselves, while they fit in the rows below the count.
     let rows = inner.height.saturating_sub(1);
     let room = (inner.width as usize) * rows as usize;

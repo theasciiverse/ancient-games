@@ -4,7 +4,8 @@
 
 use crate::app::{Game, Phase};
 use crate::rules::{Move, Outcome, QUIET, Rules, Side, Stage};
-use ancient_core::draw::{AMBER, BG, DIM, TEXT, fill, put, wrap};
+use ancient_core::draw::{AMBER, BG, DIM, TEXT, disc, fill, put, wrap};
+use ancient_core::ornament;
 use ancient_core::player::Player;
 use ancient_core::shell::{self, Help, Menu};
 use ratatui::buffer::Buffer;
@@ -32,22 +33,41 @@ fn colour(side: Side) -> Color {
     }
 }
 
+const PANEL: u16 = 36;
+
+/// The scale of the board: 1 on the screen the game is made for (holes a
+/// glyph each, four columns and two rows apart), on a larger one holes
+/// drawn as discs `2s + 1` wide, `4s` columns and `2s` rows apart.
+fn scale(area: Rect, n: u16) -> u16 {
+    if !ornament::roomy(area) {
+        return 1;
+    }
+    let by_height = area.height.saturating_sub(3) / (2 * n);
+    let by_width = area.width.saturating_sub(PANEL + 8) / (4 * n);
+    by_height.min(by_width).clamp(1, 4)
+}
+
 pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     fill(buf, area, BG);
     hits.points.clear();
     let rules = &game.rules;
     let n = rules.size as u16;
-    let (sx, sy) = (4u16, 2u16);
-    let bw = n * sx + 3;
-    let bh = n * sy + 1;
-    let panel_w = 36u16;
+    let s = scale(area, n);
+    let (sx, sy) = (4 * s, 2 * s);
+    // A hole's reach from its middle: columns and rows.
+    // A disc's reach: most of the room between holes (4s by 2s), with a
+    // column free on each side for the brackets.
+    let (hw, hh) = if s > 1 { ((8 * s + 2) / 5, 3 * s / 4) } else { (0, 0) };
+    let bw = (n - 1) * sx + 2 * hw + 7;
+    let bh = (n - 1) * sy + 2 * hh + 3;
+    let panel_w = PANEL;
     let total = bw + 3 + panel_w;
     let bx = area.x + area.width.saturating_sub(total) / 2 + 2;
     let by = area.y + area.height.saturating_sub(bh + 1) / 2 + 1;
     fill(buf, Rect::new(bx, by, bw, bh), EARTH);
     let at = |p: usize| {
         let (r, c) = rules.rc(p);
-        (bx + 3 + c as u16 * sx, by + 1 + r as u16 * sy)
+        (bx + 3 + hw + c as u16 * sx, by + 1 + hh + r as u16 * sy)
     };
     // The names of the columns and rows, as the messages use them.
     let label = Style::new().fg(DIM).bg(BG);
@@ -68,7 +88,7 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     };
     for p in 0..rules.len() {
         let (x, y) = at(p);
-        hits.points.push((Rect::new(x - 1, y, 3, 1), p));
+        hits.points.push((Rect::new(x - hw - 1, y - hh, 2 * hw + 3, 2 * hh + 1), p));
         let bg = if game.selected == Some(p) {
             PICKED
         } else if lit.contains(&p) && game.position.at[p].is_some() {
@@ -84,7 +104,27 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
             None if p == rules.centre() => ("◯", Style::new().fg(HOLE).bg(bg)),
             None => ("●", Style::new().fg(HOLE).bg(bg)),
         };
-        put(buf, x, y, glyph, style.add_modifier(Modifier::BOLD));
+        if s > 1 {
+            // A hole in the earth, a disc: the kelb in it fills it.
+            let fill_colour = match game.position.at[p] {
+                Some(side) if !doomed.contains(&p) => colour(side),
+                _ => HOLE,
+            };
+            fill(buf, Rect::new(x - hw - 1, y - hh, 2 * hw + 3, 2 * hh + 1), bg);
+            disc(buf, x, y, hw as f32 + 0.4, hh as f32 + 0.4, fill_colour);
+            let mark = match game.position.at[p] {
+                Some(_) if doomed.contains(&p) => Some(("✕", MARK)),
+                None if lit.contains(&p) => Some(("◆", MARK)),
+                None if game.emptied.contains(&p) => Some(("·", MARK)),
+                None if p == rules.centre() => Some(("◯", EARTH)),
+                _ => None,
+            };
+            if let Some((glyph, fg)) = mark {
+                put(buf, x, y, glyph, Style::new().fg(fg).bg(fill_colour).add_modifier(Modifier::BOLD));
+            }
+        } else {
+            put(buf, x, y, glyph, style.add_modifier(Modifier::BOLD));
+        }
     }
     // Where the last kelb went.
     let last_to = match game.last {
@@ -95,14 +135,14 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
         && game.selected.is_none()
     {
         let (x, y) = at(to);
-        put(buf, x - 1, y, "·", Style::new().fg(TEXT).bg(EARTH));
-        put(buf, x + 1, y, "·", Style::new().fg(TEXT).bg(EARTH));
+        put(buf, x - hw - 1, y, "·", Style::new().fg(TEXT).bg(EARTH));
+        put(buf, x + hw + 1, y, "·", Style::new().fg(TEXT).bg(EARTH));
     }
     if game.human_to_move() {
         let (x, y) = at(game.cursor);
         let style = Style::new().fg(AMBER).bg(EARTH).add_modifier(Modifier::BOLD);
-        put(buf, x - 1, y, "[", style);
-        put(buf, x + 1, y, "]", style);
+        put(buf, x - hw - 1, y, "[", style);
+        put(buf, x + hw + 1, y, "]", style);
     }
 
     draw_panel(buf, Rect::new(bx + bw + 3, by, panel_w, bh.max(17)), game);

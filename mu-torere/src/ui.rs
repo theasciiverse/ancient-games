@@ -89,15 +89,30 @@ fn man(side: Side) -> Style {
 /// The board's size for `area`: the ellipse's height, in rows from the
 /// middle.
 fn radius(area: Rect) -> u16 {
-    (area.height.saturating_sub(8) / 2).clamp(4, 11).min(area.width.saturating_sub(46) / 4)
+    let r = (area.height.saturating_sub(8) / 2).clamp(4, 30).min(area.width.saturating_sub(46) / 4);
+    // Room for the discs of a large board (see `disc`).
+    if r > 11 { r.min(area.width.saturating_sub(54) / 4).max(11) } else { r }
+}
+
+/// On a large board the men are discs: their size from the middle (0 on
+/// the screen the game is made for, a single glyph), and their half width
+/// on the row `dy` from the middle.
+fn disc(r: u16) -> i32 {
+    (r.saturating_sub(8) as i32 / 6).min(2)
+}
+
+fn half_width(k: i32, dy: i32) -> i32 {
+    (2.0 * ((k * k - dy * dy) as f64 + 0.5).sqrt()).round() as i32
 }
 
 pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     fill(buf, area, BG);
     hits.points.clear();
     let r = radius(area);
-    let bw = 4 * r + 9;
-    let bh = 2 * r + 3;
+    let k = disc(r);
+    // The board has room round the ring for the men's discs.
+    let bw = 4 * r + 9 + 4 * k as u16;
+    let bh = 2 * r + 3 + 2 * k as u16;
     let panel_w = 34u16;
     let total = bw + 3 + panel_w;
     let bx = area.x + area.width.saturating_sub(total) / 2;
@@ -113,26 +128,47 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     }
 
     let movable = game.movable();
+    let lift = Color::Rgb(110, 76, 30);
+    // The disc of size `k` round a point in `colour`.
+    let fill_disc = |buf: &mut Buffer, (x, y): (i32, i32), k: i32, colour: Color| {
+        ancient_core::draw::disc(buf, x as u16, y as u16, half_width(k, 0) as f32 + 0.5, k as f32 + 0.5, colour);
+    };
     for p in 0..POINTS {
         let (x, y) = (at[p].0 as u16, at[p].1 as u16);
-        hits.points.push((Rect::new(x.saturating_sub(1), y, 3, 1), p));
+        let hw = if k > 0 { half_width(k, 0) as u16 } else { 1 };
+        hits.points.push((Rect::new(x.saturating_sub(hw), y - k as u16, 2 * hw + 1, 2 * k as u16 + 1), p));
+        if k > 0
+            && let Some(side) = game.position.at[p]
+        {
+            if movable.contains(&p) {
+                fill_disc(buf, at[p], k + 1, lift);
+            }
+            let colour = match side {
+                Side::White => WHITE,
+                Side::Black => BLACK,
+            };
+            fill_disc(buf, at[p], k, colour);
+            continue;
+        }
         let (glyph, style) = match game.position.at[p] {
-            Some(side) if movable.contains(&p) => ("●", man(side).bg(Color::Rgb(110, 76, 30))),
+            Some(side) if movable.contains(&p) => ("●", man(side).bg(lift)),
             Some(side) => ("●", man(side)),
             None => ("◯", Style::new().fg(LINE).bg(WOOD)),
         };
         put(buf, x, y, glyph, style);
     }
+    // Marks beside a point: just outside its man.
+    let side_x = if k > 0 { half_width(k, 0) as u16 + 2 } else { 1 };
     if let Some(mv) = &game.last {
         let (x, y) = (at[mv.to as usize].0 as u16, at[mv.to as usize].1 as u16);
-        put(buf, x - 1, y, "·", Style::new().fg(DIM).bg(WOOD));
-        put(buf, x + 1, y, "·", Style::new().fg(DIM).bg(WOOD));
+        put(buf, x - side_x, y, "·", Style::new().fg(DIM).bg(WOOD));
+        put(buf, x + side_x, y, "·", Style::new().fg(DIM).bg(WOOD));
     }
     if game.human_to_move() {
         let (x, y) = (at[game.cursor].0 as u16, at[game.cursor].1 as u16);
         let style = Style::new().fg(AMBER).bg(WOOD).add_modifier(Modifier::BOLD);
-        put(buf, x - 1, y, "[", style);
-        put(buf, x + 1, y, "]", style);
+        put(buf, x - side_x, y, "[", style);
+        put(buf, x + side_x, y, "]", style);
     }
 
     draw_panel(buf, Rect::new(bx + bw + 3, by, panel_w, bh.max(16)), game);
