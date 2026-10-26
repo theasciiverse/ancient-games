@@ -1,6 +1,6 @@
 Fox and Geese
 Asciiverse
-2026-10-25
+2026-10-26
 
   ----------- --------------------------------------------------
   Played      Europe; perhaps medieval, certainly by the 1840s
@@ -242,6 +242,26 @@ win by trapping or capturing both officers, or by filling the fortress. An
 officer who fails to make a capture he could have made is removed (“huffed”)
 (Wikipedia 2026a).
 
+The ornament
+------------
+
+Most fox-and-geese boards that survive are plain wood with holes, such as
+the English round board of about 1850 in the Victoria and Albert Museum
+(Victoria and Albert Museum 2026b). One decorated board is the model for the
+program’s ornament: a games box in the same museum, probably made in Granada
+between 1525 and 1575, whose two loose slides carry fox and geese, merelles
+and chess (Victoria and Albert Museum 2026a). The museum’s 1900 register put
+a question mark after “Fox and Geese”; the cross of 33 points fits. In the
+four empty corners beside the cross, each fox-and-geese face has an inlaid
+ivory lozenge: a frame, a band of sawtooth, an eight-pointed star of two
+squares, and an eight-petalled rosette on a green ground.
+
+The program draws those lozenges in the four corners outside the cross, in
+braille dots and dim tones, clear of the lines and the points. The box is
+Spanish and the rules here are Bell’s English game; the ornament is one
+decorated board, not how the game’s boards usually looked. O turns it off
+and on, and fox-and-geese --plain starts without it.
+
 Playing it in the terminal
 --------------------------
 
@@ -258,6 +278,7 @@ play.
   F1 or ?                        The rules in short (F1, ? or Esc closes them)
   Enter or Space, after a game   Play again
   M, or Esc after a game         Back to the menu
+  O                              The ornament off and on
   Q                              Quit
 
 When a piece is picked up, the points it can go to are lit, and the geese a
@@ -267,7 +288,7 @@ Our choice: where several series of jumps end on the same point, the program
 offers the one that kills the most geese.
 
 fox-and-geese --demo lets the computer play both sides; --seed N repeats a
-game exactly.
+game exactly; --plain leaves out the ornament.
 
 References
 ==========
@@ -282,6 +303,13 @@ https://digital.bodleian.ox.ac.uk/objects/86e30a19-7f3c-4d82-918c-f095f2f6076a/.
 The Boy’s Own Paper. 1879. ‘The Combined Solitaire and “Fox and Geese”
 Board’. London.
 https://digital.bodleian.ox.ac.uk/objects/daf37725-bb8a-48b7-8e01-abae86fa43bf/.
+
+Victoria and Albert Museum. 2026a. ‘Games Board and Accessories, Probably
+Granada, 1525-75, Museum No. 154-1900’. 2026.
+https://collections.vam.ac.uk/item/O134094/.
+
+---. 2026b. ‘The Game of the Fox & Geese, England, 1845-1855, Museum No.
+E.788-1963’. 2026. https://collections.vam.ac.uk/item/O26125/.
 
 Wikipedia. 2026a. ‘Asalto’. 2026. https://en.wikipedia.org/wiki/Asalto.
 

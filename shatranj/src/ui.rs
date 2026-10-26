@@ -5,6 +5,7 @@
 
 use crate::app::{Game, Phase};
 use crate::rules::{Outcome, Rules, Side, fr};
+use ancient_core::ornament;
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, fill, put, wrap};
 use ancient_core::player::Player;
 use ancient_core::shell::{self, Help, Menu};
@@ -57,6 +58,13 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
         let (f, r) = fr(sq);
         Rect::new(bx + f as u16 * cw, by + (7 - r) as u16 * ch, cw + 1, ch + 1)
     };
+    // On a larger terminal the cloth has a hem, which carries the
+    // ornament; the coordinates go outside it.
+    let hem = ornament::roomy(area) && by > area.y && by + bh + 1 < area.bottom() && bx >= area.x + 4;
+    let (lx, ly) = if hem { (bx - 4, by + bh + 1) } else { (bx.saturating_sub(2), by + bh) };
+    if hem {
+        fill(buf, Rect::new(bx - 2, by - 1, bw + 4, bh + 2), CLOTH);
+    }
     fill(buf, Rect::new(bx, by, bw, bh), CLOTH);
     for sq in 0..64 {
         let rect = cell(sq);
@@ -130,10 +138,27 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     }
     let label = Style::new().fg(DIM).bg(BG);
     for i in 0..8u16 {
-        put(buf, bx + i * cw + cw / 2, by + bh, &((b'a' + i as u8) as char).to_string(), label);
-        put(buf, bx.saturating_sub(2), by + (7 - i) * ch + ch.div_ceil(2), &format!("{}", i + 1), label);
+        put(buf, bx + i * cw + cw / 2, ly, &((b'a' + i as u8) as char).to_string(), label);
+        put(buf, lx, by + (7 - i) * ch + ch.div_ceil(2), &format!("{}", i + 1), label);
     }
     draw_panel(buf, Rect::new(bx + bw + 3, by, PANEL, bh.max(20)), game);
+    if hem {
+        draw_hem(buf, Rect::new(bx - 2, by - 1, bw + 4, bh + 2));
+    }
+}
+
+/// The hem's band, after the incised base of a terracotta shah from Iran,
+/// probably Nishapur, 11th to 12th century (Metropolitan Museum of Art
+/// 1975.317): a zigzag between two lines, triangles point up and point
+/// down in turn.
+fn draw_hem(buf: &mut Buffer, hem: Rect) {
+    let terracotta = ornament::dim(Color::Rgb(139, 88, 71), CLOTH, 0.25);
+    let zigzag = |x: i32, y: i32| {
+        let t = x % 8;
+        y % 4 == if t < 4 { t } else { 7 - t }
+    };
+    let down = |x: i32, y: i32| x % 2 == (y % 4) / 2;
+    ornament::rim(buf, hem, terracotta, 8, zigzag, down);
 }
 
 fn draw_panel(buf: &mut Buffer, panel: Rect, game: &Game) {

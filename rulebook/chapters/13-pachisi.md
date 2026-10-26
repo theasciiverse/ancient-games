@@ -294,6 +294,18 @@ of 1, the *paun*, the entering throw of the cowrie game
 dice (18th or 19th century). Asian Civilisations Museum, Singapore.
 Photograph: Wuselig, CC0.](images/pachisi-set-acm.jpg){width=50%}
 
+## The ornament
+
+On a terminal larger than 100 by 30, the four corners beside the
+program's cross carry a flower from a painting in the Metropolitan
+Museum: Ambav's "Maharaja Sovan Singh playing pachisi", Udaipur, about
+1868 [@met2019123]. The square at the centre of the painted board holds a
+white flower on red: eight long pointed petals, eight short ones between
+them. It is drawn in braille dots in a dim tone, never over a man, a
+highlight or a number. No board earlier than the nineteenth century was
+found, so this is not offered as the ornament of Akbar's time. O turns
+it off and on, and `pachisi --plain` starts without it.
+
 ## Playing it in the terminal
 
 ::: brief
@@ -304,6 +316,8 @@ Photograph: Wuselig, CC0.](images/pachisi-set-acm.jpg){width=50%}
   (1* a starting 1 or grace).
 - When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (the flower of a painted pachisi board,
+  Udaipur, about 1868); `--plain` starts without it.
 :::
 
 Start `pachisi`, choose the rules, whom to play against (the computer,
@@ -320,6 +334,7 @@ partnership you play.
 | F1 or ? | The rules in short (F1, ? or Esc closes them) |
 | Enter or Space, after a game | Play again |
 | M, or Esc after a game | Back to the menu |
+| O | The ornament off and on |
 | Q | Quit |
 
 The computer plans the use of all its throws at once, trying every
@@ -330,4 +345,4 @@ each exposed man is to be hit, and plays out the next enemy turn from
 its best few plans. The throws decide much.
 
 `pachisi --demo` lets the computer play both sides; `--seed N` repeats
-a game exactly.
+a game exactly; `--plain` leaves out the ornament.

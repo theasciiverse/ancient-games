@@ -1,6 +1,6 @@
 Fox and Geese
 Asciiverse
-2026-10-25
+2026-10-26
 
 One player has a single fox, the other a flock of geese, on a cross of 33
 points joined by lines along the rows and columns (no diagonals). The fox
@@ -41,3 +41,5 @@ Playing it in the terminal
   most geese is played.
 - When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (the lozenges of a games box from Granada, in
+  the V&A); --plain starts without it.

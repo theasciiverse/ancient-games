@@ -477,6 +477,27 @@ rules two attackers are not enough to capture the king.
 ```{.example file="hnefatafl/king-two-bell"}
 ```
 
+## The ornament
+
+The program decorates the board after two tafl boards of the Viking age.
+The Ballinderry board, of yew, from a crannog in County Westmeath and now
+in the National Museum of Ireland (1932:6533), has forty-nine holes and
+"eight panels of carved interlace decoration" round its edges: plain
+interlace and Borre-style ring-chain at the corners [@nmi-ballinderry].
+On the museum's photograph the panels between them carry chevrons between
+rows of small pellets. The program's frame carries those chevrons and
+pellets (not along the bottom, where the files are lettered).
+
+The board from the Gokstad ship burial, about 900, has a tafl face and a
+morris face. Nicolaysen's drawing of 1882 shows some of the tafl face's
+squares carved with knots, among them a square holding an X-shaped knot
+with a pellet in each corner [@nicolaysen1882]. On a terminal larger than
+100 by 30, those knotted squares stand in the margins.
+
+Both are drawn in braille dots, in dim tones of the board's wood, and
+never over a piece, a highlight or a letter. O turns them off and on, and
+`hnefatafl --plain` starts without them.
+
 ## Playing it in the terminal
 
 ::: brief
@@ -484,6 +505,8 @@ rules two attackers are not enough to capture the king.
   on a lit square. Or click a piece, then a square. Esc puts it down.
 - After a game: Enter or Space plays again; M or Esc goes to the menu.
 - M: menu; F1 or ?: this help (Up, Down, PgUp, PgDn scroll); Q: quit.
+- O: the ornament off and on (after the Ballinderry and Gokstad boards);
+  `--plain` starts without it.
 :::
 
 Start `hnefatafl`, choose a rule set, whether you play against the
@@ -499,7 +522,9 @@ which side you take.
 | F1 or ? | The rules in short (F1, ? or Esc closes them) |
 | Enter or Space, after a game | Play again |
 | M, or Esc after a game | Back to the menu |
+| O | The ornament off and on |
 | Q | Quit |
 
 After a game, Enter or Space starts another. `hnefatafl --demo` lets
-the computer play both sides; `--seed N` repeats a game exactly.
+the computer play both sides; `--seed N` repeats a game exactly;
+`--plain` leaves out the ornament.

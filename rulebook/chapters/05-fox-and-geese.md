@@ -242,6 +242,25 @@ the fortress; they win by trapping or capturing both officers, or by
 filling the fortress. An officer who fails to make a capture he could
 have made is removed ("huffed") [@wiki-asalto].
 
+## The ornament
+
+Most fox-and-geese boards that survive are plain wood with holes, such
+as the English round board of about 1850 in the Victoria and Albert
+Museum [@vamE788-1963]. One decorated board is the model for the
+program's ornament: a games box in the same museum, probably made in
+Granada between 1525 and 1575, whose two loose slides carry fox and geese,
+merelles and chess [@vam154-1900]. The museum's 1900 register put a
+question mark after "Fox and Geese"; the cross of 33 points fits. In the
+four empty corners beside the cross, each fox-and-geese face has an inlaid
+ivory lozenge: a frame, a band of sawtooth, an eight-pointed star of two
+squares, and an eight-petalled rosette on a green ground.
+
+The program draws those lozenges in the four corners outside the cross,
+in braille dots and dim tones, clear of the lines and the points. The box
+is Spanish and the rules here are Bell's English game; the ornament is
+one decorated board, not how the game's boards usually looked. O turns it
+off and on, and `fox-and-geese --plain` starts without it.
+
 ## Playing it in the terminal
 
 ::: brief
@@ -252,6 +271,8 @@ have made is removed ("huffed") [@wiki-asalto].
   killing the most geese is played.
 - When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (the lozenges of a games box from Granada,
+  in the V&A); `--plain` starts without it.
 :::
 
 Start `fox-and-geese`, choose a rule set, whom to play against (the
@@ -267,6 +288,7 @@ which side you play.
 | F1 or ? | The rules in short (F1, ? or Esc closes them) |
 | Enter or Space, after a game | Play again |
 | M, or Esc after a game | Back to the menu |
+| O | The ornament off and on |
 | Q | Quit |
 
 When a piece is picked up, the points it can go to are lit, and the
@@ -276,4 +298,4 @@ Our choice: where several series of jumps end on the same point, the
 program offers the one that kills the most geese.
 
 `fox-and-geese --demo` lets the computer play both sides; `--seed N`
-repeats a game exactly.
+repeats a game exactly; `--plain` leaves out the ornament.

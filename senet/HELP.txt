@@ -1,6 +1,6 @@
 Senet
 Asciiverse
-2026-10-25
+2026-10-26
 
 Senet is a race over thirty houses: throw, then move one piece forward that
 many houses, and be the first to bring your pieces off the end. Both sides
@@ -76,3 +76,5 @@ Playing it in the terminal
 - R: rescue a piece from the water (Kendall, seven pieces).
 - After the game, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (after the faience senet box of Amenhotep III
+  in the Brooklyn Museum); --plain starts without it.

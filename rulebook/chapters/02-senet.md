@@ -348,6 +348,29 @@ chance, before any other move:
 ```{.example file="senet/bell-forced"}
 ```
 
+## The ornament
+
+Most senet boxes that survive are plain or carry only inscriptions: the
+wooden box of Taia in the Metropolitan Museum has a band of offering
+texts, and the senet side of an ivory box from Thebes there is squares
+alone [@met1218272; @met1610475]. One royal box is decorated, and the
+program's ornament follows it: the faience box inscribed for Amenhotep
+III in the Brooklyn Museum, about 1390 to 1353 BC. Its catalogue gives
+the long sides "seven panels, each with alternating ankh and ded signs"
+and the drawer's ends "glazed dark and light blue in checkerboard
+pattern" [@brooklyn4956]; both can be seen in the museum's photograph
+[@commons-brooklyn4956]. The box was "assembled from fragments", with
+"extensive scattered areas of plaster restoration" [@brooklyn4956], so
+this is one box, not how senet boards looked.
+
+The board's rim carries the drawer's checker, and on a terminal wide
+enough (about 170 columns) the margins beside the board carry the side
+panels: ankh and djed in turn, each between double rules. The signs are
+drawn in their standard forms, not the box's freehand. The ornament is
+drawn in braille dots, in dim tones, and never over a piece, a highlight
+or a number. O turns it off and on, and `senet --plain` starts without
+it.
+
 ## Playing it in the terminal
 
 ::: brief
@@ -356,6 +379,8 @@ chance, before any other move:
 - R: rescue a piece from the water (Kendall, seven pieces).
 - After the game, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (after the faience senet box of Amenhotep
+  III in the Brooklyn Museum); `--plain` starts without it.
 :::
 
 Start `senet`, choose a rule set and who plays each side: the computer
@@ -371,7 +396,8 @@ Start `senet`, choose a rule set and who plays each side: the computer
 | F1 or ? | The rules in short (F1, ? or Esc closes them) |
 | Enter or Space, after a game | Play again |
 | M, or Esc after a game | Back to the menu |
+| O | The ornament off and on |
 | Q | Quit |
 
 `senet --demo` lets the computer play both sides; `--seed N` repeats a
-game exactly.
+game exactly; `--plain` leaves out the ornament.

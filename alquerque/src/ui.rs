@@ -4,6 +4,7 @@
 
 use crate::app::{Game, Phase};
 use crate::rules::{Outcome, Rules, Side};
+use ancient_core::ornament;
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, fill, put, wrap};
 use ancient_core::player::Player;
 use ancient_core::shell::{self, Help, Menu};
@@ -133,6 +134,47 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     }
 
     draw_panel(buf, Rect::new(bx + bw + 3, by, panel_w, bh.max(18)), game);
+    // Fanorona, a living game of Madagascar, is left plain.
+    if game.rules.id.starts_with("alquerque") {
+        draw_ornament(buf, area, Rect::new(bx, by, bw, bh), bx + bw + 3 + panel_w);
+    }
+}
+
+/// Ornament after the alquerque pictures of Alfonso X's Libro de los
+/// juegos (1283, Escorial T.I.6, fols. 91v to 93v). Round the edge of the
+/// stone, the board's own edge, inlaid in dark and light wood. On a
+/// terminal larger than the game is made for, in the margins, the castle
+/// of Castile in a gold quatrefoil, as at the corners of the pictures.
+fn draw_ornament(buf: &mut Buffer, area: Rect, board: Rect, panel_end: u16) {
+    let inlay = ornament::dim(LINE, STONE, 0.4);
+    let dashes = |x: i32, y: i32| (1..=2).contains(&y) && x < 2;
+    ornament::rim(buf, board, inlay, 4, dashes, |x, y| x == 0 && y % 4 < 2);
+    if !ornament::roomy(area) {
+        return;
+    }
+    let gold = ornament::dim(Color::Rgb(212, 170, 60), BG, 0.45);
+    let left = Rect::new(area.x, board.y, board.x.saturating_sub(area.x + 2), board.height);
+    let right = Rect::new(panel_end, board.y, area.right().saturating_sub(panel_end), board.height);
+    for column in [left, right] {
+        ornament::stack(buf, column, 25, 25, |_, x, y| (quatrefoil(x, y) || castle(x, y)).then_some(gold));
+    }
+}
+
+/// A quatrefoil 25 dots across in outline: four round lobes.
+fn quatrefoil(x: i32, y: i32) -> bool {
+    let lobe = |x: i32, y: i32| {
+        [(0, -6), (6, 0), (0, 6), (-6, 0)].iter().any(|&(cx, cy)| (x - cx).pow(2) + (y - cy).pow(2) <= 42)
+    };
+    lobe(x, y) && !(lobe(x + 1, y) && lobe(x - 1, y) && lobe(x, y + 1) && lobe(x, y - 1))
+}
+
+/// The castle of Castile, 11 dots wide: a wall with a gate, three towers,
+/// the middle one higher, all crenellated.
+fn castle(x: i32, y: i32) -> bool {
+    let wall = (1..=5).contains(&y) && x.abs() <= 5 && !(x.abs() <= 1 && y >= 3);
+    let middle = (-5..=0).contains(&y) && x.abs() <= 2 && !(y == -5 && x.abs() == 1);
+    let sides = (-3..=0).contains(&y) && (3..=5).contains(&x.abs()) && !(y == -3 && x.abs() == 4);
+    wall || middle || sides
 }
 
 fn draw_panel(buf: &mut Buffer, panel: Rect, game: &Game) {

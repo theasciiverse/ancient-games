@@ -366,7 +366,10 @@ alternating):
 object, sourced like the rules. Started: `core/src/ornament.rs` (blank
 cells only; O key and `--plain` in every game), tried on Ur (rim
 lozenges; rosettes in the margins beyond 100x30), checked against the
-British Museum record and a CC0 photograph. Other games not yet.
+British Museum record and a CC0 photograph; then the other ten the same
+day, each after a museum object or document (table in ORNAMENT.md, notes
+in `~/references/ancient-games/ornament/`). Plain: Seega, Mancala, Kōnane,
+Mū tōrere, Morabaraba, Fanorona (living traditions: David's call).
 
 ## Roadmap
 

@@ -180,68 +180,33 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
 /// small shell lozenges along the edge (a bead of shell on the short ends).
 fn draw_rim(buf: &mut Buffer, board: Rect) {
     let shell = ornament::dim(SHELL, LAPIS_DARK, 0.45);
-    // Lozenges three dots wide, three apart, as many whole ones as fit,
-    // centred.
-    let row = Rect::new(board.x + 1, board.y, board.width - 2, 1);
-    let whole = row.width as i32 * 2 / 6 * 6;
-    let skip = (row.width as i32 * 2 - whole) / 2;
-    let lozenge = |x: i32, y: i32| {
-        let x = x - skip;
-        (0..whole).contains(&x)
-            && match y % 4 {
-                0 | 3 => x % 6 == 2,
-                _ => (1..=3).contains(&(x % 6)),
-            }
+    // Lozenges three dots wide, three apart.
+    let lozenge = |x: i32, y: i32| match y % 4 {
+        0 | 3 => x == 2,
+        _ => (1..=3).contains(&x),
     };
-    for y in [board.top(), board.bottom() - 1] {
-        ornament::paint(buf, Rect { y, ..row }, shell, lozenge);
-    }
-    for x in [board.left(), board.right() - 1] {
-        let column = Rect::new(x, board.y + 1, 1, board.height - 2);
-        ornament::paint(buf, column, shell, |_, y| matches!(y % 4, 1 | 2));
-    }
+    ornament::rim(buf, board, shell, 6, lozenge, |_, y| matches!(y % 4, 1 | 2));
 }
 
 /// On a terminal larger than the game is made for, the board's rosettes
 /// in the margins beside it: eight petals, red and blue in turn, a red
 /// centre, as inlaid on the five rosette squares.
 fn draw_margins(buf: &mut Buffer, area: Rect, board: Rect) {
-    if area.width <= 100 && area.height <= 30 {
-        return;
-    }
-    let margin = board.x.saturating_sub(area.x);
-    // Petals of up to fourteen dots, with two cells free on each side.
-    let r = (margin as i32 - 4).min(14);
-    if r < 5 {
-        return;
-    }
-    let rows = (2 * r + 3) as u16 / 4 + 1;
-    let count = board.height / rows;
-    if count == 0 {
+    if !ornament::roomy(area) {
         return;
     }
     let red = ornament::dim(CARNELIAN, BG, 0.5);
     let blue = ornament::dim(Color::Rgb(70, 100, 190), BG, 0.5);
-    let top = board.y + (board.height - count * rows) / 2;
-    let band = rows as i32 * 4;
-    for x in [area.x, board.right()] {
-        let column = Rect::new(x, top, margin.min(area.right() - x), count * rows);
-        // Each rosette centred in its band of the column.
-        let cx = column.width as i32;
-        let petal = |x: i32, y: i32| {
-            let cy = y / band * band + band / 2;
-            ornament::rosette(8, r as f32, x - cx, y - cy)
-        };
+    for column in ornament::beside(area, board) {
+        // Petals of up to fourteen dots, with two cells free on each side.
+        let r = (column.width as i32 - 4).min(14);
+        let petal = |x, y| ornament::rosette(8, r as f32, x, y);
         // The petals in outline, as incised in the shell; the centre whole.
-        ornament::paint_in(buf, column, |x, y| {
-            let k = petal(x, y)?;
-            let edge = [(1, 0), (-1, 0), (0, 1), (0, -1)].iter().any(|(dx, dy)| petal(x + dx, y + dy) != Some(k));
-            match k {
-                0 => Some(red),
-                _ if !edge => None,
-                k if k % 2 == 0 => Some(blue),
-                _ => Some(red),
-            }
+        ornament::stack(buf, column, 2 * r + 1, 2 * r + 1, |_, x, y| match petal(x, y)? {
+            0 => Some(red),
+            _ if !ornament::edge(x, y, petal) => None,
+            k if k % 2 == 0 => Some(blue),
+            _ => Some(red),
         });
     }
 }

@@ -1,6 +1,6 @@
 Senet
 Asciiverse
-2026-10-25
+2026-10-26
 
   ---------------- ----------------------------------------------------------
   Played           Egypt, from about 3100 BC to the Roman period
@@ -291,6 +291,29 @@ before any other move:
     after      .   ▲   .   .   .   .   .   ▲   .   .
     Moves allowed: 26 to 28.
 
+The ornament
+------------
+
+Most senet boxes that survive are plain or carry only inscriptions: the
+wooden box of Taia in the Metropolitan Museum has a band of offering texts,
+and the senet side of an ivory box from Thebes there is squares alone (The
+Metropolitan Museum of Art 2026b, 2026a). One royal box is decorated, and
+the program’s ornament follows it: the faience box inscribed for Amenhotep
+III in the Brooklyn Museum, about 1390 to 1353 BC. Its catalogue gives the
+long sides “seven panels, each with alternating ankh and ded signs” and the
+drawer’s ends “glazed dark and light blue in checkerboard pattern” (Brooklyn
+Museum 2025); both can be seen in the museum’s photograph (Brooklyn Museum
+2026). The box was “assembled from fragments”, with “extensive scattered
+areas of plaster restoration” (Brooklyn Museum 2025), so this is one box,
+not how senet boards looked.
+
+The board’s rim carries the drawer’s checker, and on a terminal wide enough
+(about 170 columns) the margins beside the board carry the side panels: ankh
+and djed in turn, each between double rules. The signs are drawn in their
+standard forms, not the box’s freehand. The ornament is drawn in braille
+dots, in dim tones, and never over a piece, a highlight or a number. O turns
+it off and on, and senet --plain starts without it.
+
 Playing it in the terminal
 --------------------------
 
@@ -307,16 +330,25 @@ normal or hard) or a person at the same keyboard.
   F1 or ?                        The rules in short (F1, ? or Esc closes them)
   Enter or Space, after a game   Play again
   M, or Esc after a game         Back to the menu
+  O                              The ornament off and on
   Q                              Quit
 
 senet --demo lets the computer play both sides; --seed N repeats a game
-exactly.
+exactly; --plain leaves out the ornament.
 
 References
 ==========
 
 Bell, R. C. 1969. Board and Table Games from Many Civilizations. 2nd ed.
 Vol. 1. London: Oxford University Press.
+
+Brooklyn Museum. 2025. ‘Gaming Board Inscribed for Amenhotep III with
+Separate Sliding Drawer, 49.56a-b’. 2025.
+https://www.brooklynmuseum.org/objects/3536.
+
+---. 2026. ‘Gaming Board Inscribed for Amenhotep III with Separate Sliding
+Drawer, 49.56a-b (Photograph)’. 2026.
+https://commons.wikimedia.org/wiki/File:Gaming_Board_Inscribed_for_Amenhotep_III_with_Separate_Sliding_Drawer,_ca._1390-1353_B.C.E.,49.56a-b.jpg.
 
 Finkel, Irving L. 2007. ‘On the Rules for the Royal Game of Ur’. In Ancient
 Board Games in Perspective, edited by Irving L. Finkel, 16-32. London:
@@ -328,6 +360,13 @@ Game Company.
 
 O’Keefe, Devin. 2026. ‘Senet, Solved’. 2026.
 https://github.com/devinokeefe/senet.
+
+The Metropolitan Museum of Art. 2026a. ‘Game Box for Playing Senet and
+Twenty Squares, 16.10.475a’. 2026.
+https://www.metmuseum.org/art/collection/search/553268.
+
+---. 2026b. ‘Game Box Inscribed for Taia and His Family, 12.182.72a, b’.
+2026. https://www.metmuseum.org/art/collection/search/548482.
 
 Walker, Damian. 2007. ‘Senet: A Game of Ancient Egypt. Rules of the Game:
 Kendall’. 2007.

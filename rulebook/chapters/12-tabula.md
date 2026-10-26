@@ -255,6 +255,26 @@ the pips of the dice [@schadler2020]. Ovid's "modo tres iactet numeros"
 ![The program playing duodecim scripta, the computer against itself.
 ](screens/tabula/duodecim.svg){width=100%}
 
+## The ornament
+
+Many Roman boards of three rows of twelve mark the middle of each row
+with a sign; Ihm, who collected them in 1890, took these signs for
+decoration only: circles, half circles, stars, branches, ivy leaves,
+three as a rule [@ihm1890]. The program's ornament follows one board: a
+marble base at Aphrodisias given "under Flavius Photius, scholasticus and
+pater", late fifth or sixth century, with "three parallel rows of twelve
+small circles, with the central point in each row marked by a rosette,
+described with calipers" [@insaph-ala069]. A photograph of it shows the
+marks: a six-petalled compass rosette in a circle in the middle row, and
+a half rosette in a half circle in each outer row
+[@commons-aphrodisias-board].
+
+On a terminal larger than 100 by 30 the margins beside the board carry
+those three marks, half, whole and half, drawn with the compass as on the
+stone, in braille dots and a dim tone. The rims of real boards are plain
+mouldings, so the program's board has none. O turns the ornament off and
+on, and `tabula --plain` starts without it.
+
 ## Playing it in the terminal
 
 ::: brief
@@ -264,6 +284,8 @@ the pips of the dice [@schadler2020]. Ovid's "modo tres iactet numeros"
 - In hand and Borne off stand above and below the board.
 - When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (the rosettes of a marble board at
+  Aphrodisias); `--plain` starts without it.
 :::
 
 Start `tabula`, choose the rules, whom to play against (the computer,
@@ -279,6 +301,7 @@ you play.
 | F1 or ? | The rules in short (F1, ? or Esc closes them) |
 | Enter or Space, after a game | Play again |
 | M, or Esc after a game | Back to the menu |
+| O | The ornament off and on |
 | Q | Quit |
 
 The computer: easy hits when it can and otherwise moves its furthest
@@ -288,4 +311,4 @@ men could reach them; hard also weighs every throw of the other side
 and its best answer.
 
 `tabula --demo` lets the computer play both sides; `--seed N` repeats a
-game exactly.
+game exactly; `--plain` leaves out the ornament.

@@ -1,6 +1,6 @@
 Patolli
 Asciiverse
-2026-10-25
+2026-10-26
 
 A cross painted on a mat, its arms divided into compartments; six stones
 each, red and blue; five black beans, each with one white hole. Cast the
@@ -43,3 +43,5 @@ Playing it in the terminal
   pool, and which way each side goes.
 - When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (the mats and discs of the Codex
+  Magliabechiano’s patolli scene); --plain starts without it.

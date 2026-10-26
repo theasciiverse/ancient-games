@@ -504,6 +504,26 @@ Twelve Men's Morris but the game of alquerque: twelve men each on a
 board of twenty-five points, capturing by jumping, as in draughts
 [@golladay2007, 623-624].
 
+## The ornament
+
+Most morris boards that survive are lines cut in stone or wood with
+nothing more. The program's ornament follows two that are decorated. The
+games box probably from Granada, 1525 to 1575, in the Victoria and Albert
+Museum has a merelles face on one of its slides: the board sits inside a
+ring of ivory and ebony bars with small green crosses round it
+[@vam154-1900]. The program draws the ebony bars, straightened, round the
+edge of its wood. The board from the Gokstad ship burial, about 900, has
+a morris face on the back of its tafl board; Nicolaysen's drawing of 1882
+shows small knots carved where the lines meet, among them a knot of four
+loops at the middle [@nicolaysen1882]. On a terminal larger than 100 by
+30, that knot stands in the margins; never on the points, which carry the
+men.
+
+Morabaraba is a living game of southern Africa, and its boards are drawn
+or scratched as players make them; the program leaves it plain. The
+ornament is drawn in braille dots, in dim tones. O turns it off and on,
+and `morris --plain` starts without it.
+
 ## Playing it in the terminal
 
 ::: brief
@@ -513,6 +533,8 @@ board of twenty-five points, capturing by jumping, as in draughts
 - After a mill, the men it may take are lit red: choose one.
 - When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (after a games box from Granada and the
+  Gokstad board; Morabaraba is left plain); `--plain` starts without it.
 :::
 
 Start `morris`, choose a rule set, whom to play against (the computer,
@@ -528,6 +550,7 @@ you play.
 | F1 or ? | The rules in short (F1, ? or Esc closes them) |
 | Enter or Space, after a game | Play again |
 | M, or Esc after a game | Back to the menu |
+| O | The ornament off and on |
 | Q | Quit |
 
 The side panel shows how many men each side has on the board and still
@@ -543,4 +566,4 @@ and hard plays both its forms perfectly: as the first player in the
 moving game it always wins.
 
 `morris --demo` lets the computer play both sides; `--seed N` repeats a
-game exactly.
+game exactly; `--plain` leaves out the ornament.

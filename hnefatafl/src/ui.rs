@@ -5,6 +5,7 @@
 
 use crate::app::{Game, Phase};
 use crate::rules::{Escape, Move, Piece, Rules, Side, Square};
+use ancient_core::ornament;
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, fill, put, wrap};
 use ancient_core::player::Player;
 use ancient_core::shell::{self, Help, Menu};
@@ -129,6 +130,50 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     }
 
     draw_panel(buf, Rect::new(bx + bw + 2, by, PANEL, bh.max(20)), game);
+    draw_ornament(buf, area, Rect::new(bx, by, bw, bh), bx + bw + 2 + PANEL);
+}
+
+/// Ornament after two Viking-age boards. Round the frame (not the bottom,
+/// where the files are), the side panels of the Ballinderry board
+/// (National Museum of Ireland 1932:6533): chevrons between two rows of
+/// pellets. On a terminal larger than the game is made for, in the
+/// margins, the knotted squares of the Gokstad board as Nicolaysen drew
+/// them in 1882: a square with an X knot and a pellet in each corner.
+fn draw_ornament(buf: &mut Buffer, area: Rect, board: Rect, panel_end: u16) {
+    let carved = ornament::dim(WOOD_A, FRAME, 0.45);
+    // Pellets on the top and bottom dot rows, a chevron between.
+    let chevrons = |x: i32, y: i32| match y {
+        0 | 3 => x % 2 == 0,
+        _ => (x % 4 < 2) == (y == 1),
+    };
+    ornament::band(buf, Rect::new(board.x + 1, board.y, board.width - 2, 1), carved, 4, chevrons);
+    for x in [board.left(), board.right() - 1] {
+        let side = Rect::new(x, board.y + 1, 1, board.height - 2);
+        ornament::paint(buf, side, carved, |x, y| x == (y / 2) % 2);
+    }
+    if !ornament::roomy(area) {
+        return;
+    }
+    let wood = ornament::dim(WOOD_A, BG, 0.55);
+    let left = Rect::new(area.x, board.y, board.x - area.x, board.height);
+    let right = Rect::new(panel_end, board.y, area.right().saturating_sub(panel_end), board.height);
+    for column in [left, right] {
+        ornament::stack(buf, column, 21, 21, |_, x, y| knot(x, y).then_some(wood));
+    }
+}
+
+/// The Gokstad board's X knot, 21 dots square about its centre: a frame,
+/// a pellet in each corner, two crossing bands drawn as double lines, and
+/// the loops they make on each side as triangles pointing in.
+fn knot(x: i32, y: i32) -> bool {
+    let (ax, ay) = (x.abs(), y.abs());
+    let frame = ax.max(ay) == 10;
+    let pellet = (ax - 8).pow(2) + (ay - 8).pow(2) <= 2;
+    let bands = (ax - ay).abs() == 2 && ax.max(ay) <= 6;
+    // The loops: a triangle on each side, its point toward the centre.
+    let (along, from) = if ax > ay { (ay, 8 - ax) } else { (ax, 8 - ay) };
+    let triangle = (from == 0 && along <= 4) || (from >= 0 && from <= 4 && along == 4 - from);
+    frame || pellet || bands || triangle
 }
 
 fn wood_at(rules: &Rules, s: Square) -> Color {

@@ -1,6 +1,6 @@
 Tabula
 Asciiverse
-2026-10-25
+2026-10-26
 
   ---------------- ----------------------------------------------------------
   Played           The Roman world: duodecim scripta from the 1st century BC,
@@ -238,6 +238,26 @@ Our choices beyond tabula’s: three dice, as Austin has it (Austin 1934a,
 numbers now) in the passage on women’s games (Ovid 2001, III.355) fits
 three.
 
+The ornament
+------------
+
+Many Roman boards of three rows of twelve mark the middle of each row with a
+sign; Ihm, who collected them in 1890, took these signs for decoration only:
+circles, half circles, stars, branches, ivy leaves, three as a rule (Ihm
+1890). The program’s ornament follows one board: a marble base at
+Aphrodisias given “under Flavius Photius, scholasticus and pater”, late
+fifth or sixth century, with “three parallel rows of twelve small circles,
+with the central point in each row marked by a rosette, described with
+calipers” (Roueché 2004). A photograph of it shows the marks: a six-petalled
+compass rosette in a circle in the middle row, and a half rosette in a half
+circle in each outer row (wneuheisel 2012).
+
+On a terminal larger than 100 by 30 the margins beside the board carry those
+three marks, half, whole and half, drawn with the compass as on the stone,
+in braille dots and a dim tone. The rims of real boards are plain mouldings,
+so the program’s board has none. O turns the ornament off and on, and
+tabula --plain starts without it.
+
 Playing it in the terminal
 --------------------------
 
@@ -253,6 +273,7 @@ normal or hard, or a friend at the same keyboard) and which side you play.
   F1 or ?                        The rules in short (F1, ? or Esc closes them)
   Enter or Space, after a game   Play again
   M, or Esc after a game         Back to the menu
+  O                              The ornament off and on
   Q                              Quit
 
 The computer: easy hits when it can and otherwise moves its furthest men,
@@ -261,7 +282,7 @@ the points it holds, the blots it leaves and how many enemy men could reach
 them; hard also weighs every throw of the other side and its best answer.
 
 tabula --demo lets the computer play both sides; --seed N repeats a game
-exactly.
+exactly; --plain leaves out the ornament.
 
 References
 ==========
@@ -294,6 +315,10 @@ Historical, Artistic and Metaphysical Dimensions of Alfonso X’s Book of
 Games’. PhD thesis, University of Arizona.
 https://repository.arizona.edu/handle/10150/194159.
 
+Ihm, Max. 1890. ‘Römische Spieltafeln’. In Bonner Studien: Aufsätze Aus Der
+Altertumswissenschaft Reinhard Kekulé Gewidmet, 223-39. Berlin: Spemann.
+https://archive.org/details/bonnerstudienauf00berl.
+
 Isidore of Seville. 1911. Etymologiarum Sive Originum Libri XX. Edited by W.
 M. Lindsay. Oxford: Clarendon Press.
 
@@ -305,8 +330,15 @@ Clarendon Press.
 Ovid. 2001. The Art of Love (Ars Amatoria). Translated by A. S. Kline.
 https://www.poetryintranslation.com.
 
+Roueché, Charlotte. 2004. ‘Aphrodisias in Late Antiquity, 2004 Edition, No.
+69: Fl. Photius Gives a Gameboard’. 2004.
+https://insaph.kcl.ac.uk/ala2004/print/eAla069.html.
+
 Schädler, Ulrich. 2020. ‘Ludus XII Scriptorum; Zeno’s Tavli’. Rule sheets of
 the ERC project Locus Ludi, University of Fribourg.
 https://locusludi.ch/play-ancient-online-games/.
 
 Suetonius. n.d. Divus Claudius.
+
+wneuheisel. 2012. ‘Roman Game of 12 Lines Board - Aphrodisias’. 2012.
+https://commons.wikimedia.org/wiki/File:Roman_Game_of_12_Lines_Board_-_Aphrodisias.jpg.

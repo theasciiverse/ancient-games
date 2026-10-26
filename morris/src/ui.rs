@@ -4,6 +4,7 @@
 
 use crate::app::{Game, Phase};
 use crate::rules::{Board, Outcome, Rules, Side};
+use ancient_core::ornament;
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, fill, put, wrap};
 use ancient_core::player::Player;
 use ancient_core::shell::{self, Help, Menu};
@@ -136,6 +137,40 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     }
 
     draw_panel(buf, Rect::new(bx + bw + 3, by, panel_w, bh.max(16)), game);
+    // Morabaraba, a living game of southern Africa, is left plain.
+    if game.rules.id != "morabaraba" {
+        draw_ornament(buf, area, Rect::new(bx, by, bw, bh), bx + bw + 3 + panel_w);
+    }
+}
+
+/// Ornament after two decorated boards. Round the edge of the wood, the
+/// ring of ivory and ebony bars round the merelles board of a games box
+/// probably from Granada, 1525 to 1575 (Victoria and Albert Museum
+/// 154-1900), straightened. On a terminal larger than the game is made
+/// for, in the margins, the four-lobed knot carved at a point of the
+/// morris face of the Gokstad board, as Nicolaysen drew it in 1882.
+fn draw_ornament(buf: &mut Buffer, area: Rect, board: Rect, panel_end: u16) {
+    // The ring's ebony bars: the ivory between them is the wood.
+    let ebony = ornament::dim(BLACK, WOOD, 0.55);
+    ornament::rim(buf, board, ebony, 2, |x, _| x == 0, |_, y| y % 2 == 0);
+    if !ornament::roomy(area) {
+        return;
+    }
+    let carved = ornament::dim(WOOD, BG, 0.5);
+    let left = Rect::new(area.x, board.y, board.x - area.x, board.height);
+    let right = Rect::new(panel_end, board.y, area.right().saturating_sub(panel_end), board.height);
+    for column in [left, right] {
+        ornament::stack(buf, column, 19, 19, |_, x, y| knot(x, y).then_some(carved));
+    }
+}
+
+/// The four-lobed knot, 19 dots across: four loops round a centre, each
+/// crossing its neighbours.
+fn knot(x: i32, y: i32) -> bool {
+    [(0, -4), (4, 0), (0, 4), (-4, 0)].iter().any(|&(cx, cy)| {
+        let d = (((x - cx).pow(2) + (y - cy).pow(2)) as f32).sqrt();
+        (d - 4.5).abs() < 0.7
+    })
 }
 
 fn draw_panel(buf: &mut Buffer, panel: Rect, game: &Game) {

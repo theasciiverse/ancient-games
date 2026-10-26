@@ -226,6 +226,21 @@ likely source of today's popular ones, could not be read
 Indias* (about 1579), as printed by Culin, 1898, plate 29. Public
 domain.](images/patolli-duran-culin-1898.jpg){width=65%}
 
+## The ornament
+
+Durán and Sahagún both say the board was painted on a mat. In the patolli
+scene of the Codex Magliabechiano (fol. 60r), the players sit on mats
+woven in a herringbone of short strokes, and five gold discs are drawn
+above the board [@nuttall1903]. The codex does not say what the discs
+mean, and the program does not guess. Its mat carries that weave in the
+four quarters beside the cross, and on a terminal larger than 100 by 30
+the five discs stand in the margins. Both are drawn in braille dots, in
+dim tones, never over a stone, a highlight or a number. They come from
+the sixteenth-century pictures, not from the living Nahua tradition; the
+step-fret often put on patolli boards today is in none of the patolli
+pictures and is not used. O turns the ornament off and on, and
+`patolli --plain` starts without it.
+
 ## Playing it in the terminal
 
 ::: brief
@@ -236,6 +251,8 @@ domain.](images/patolli-duran-culin-1898.jpg){width=65%}
   the pool, and which way each side goes.
 - When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (the mats and discs of the Codex
+  Magliabechiano's patolli scene); `--plain` starts without it.
 :::
 
 Start `patolli`, choose whom to play against (the computer, easy,
@@ -251,6 +268,7 @@ play. Who begins is cast for.
 | F1 or ? | The rules in short (F1, ? or Esc closes them) |
 | Enter or Space, after a game | Play again |
 | M, or Esc after a game | Back to the menu |
+| O | The ornament off and on |
 | Q | Quit |
 
 The computer: easy moves its furthest stone, and now and then any;
@@ -259,4 +277,4 @@ hard also weighs every cast the other side could make next, and its
 best answer.
 
 `patolli --demo` lets the computer play both sides; `--seed N` repeats
-a game exactly.
+a game exactly; `--plain` leaves out the ornament.

@@ -1,6 +1,6 @@
 Pachisi and Chaupar
 Asciiverse
-2026-10-25
+2026-10-26
 
   ---------------- ----------------------------------------------------------
   Played           India, from the 15th or 16th century; Akbar’s court about
@@ -256,6 +256,19 @@ betting and the fines he describes (Abu’l-Fazl 1873, 1:303-4). A man taken
 comes back with a die of 1, the paun, the entering throw of the cowrie game
 (Temple 1884, 1:245); no source says how.
 
+The ornament
+------------
+
+On a terminal larger than 100 by 30, the four corners beside the program’s
+cross carry a flower from a painting in the Metropolitan Museum: Ambav’s
+“Maharaja Sovan Singh playing pachisi”, Udaipur, about 1868 (The
+Metropolitan Museum of Art 2026). The square at the centre of the painted
+board holds a white flower on red: eight long pointed petals, eight short
+ones between them. It is drawn in braille dots in a dim tone, never over a
+man, a highlight or a number. No board earlier than the nineteenth century
+was found, so this is not offered as the ornament of Akbar’s time. O turns
+it off and on, and pachisi --plain starts without it.
+
 Playing it in the terminal
 --------------------------
 
@@ -273,6 +286,7 @@ play.
   F1 or ?                        The rules in short (F1, ? or Esc closes them)
   Enter or Space, after a game   Play again
   M, or Esc after a game         Back to the menu
+  O                              The ornament off and on
   Q                              Quit
 
 The computer plans the use of all its throws at once, trying every order and
@@ -283,7 +297,7 @@ hit, and plays out the next enemy turn from its best few plans. The throws
 decide much.
 
 pachisi --demo lets the computer play both sides; --seed N repeats a game
-exactly.
+exactly; --plain leaves out the ornament.
 
 References
 ==========
@@ -321,6 +335,10 @@ Macmillan.
 
 Temple, Richard Carnac. 1884. The Legends of the Panjâb. Vol. 1. Bombay:
 Education Society’s Press.
+
+The Metropolitan Museum of Art. 2026. ‘Ambav, Maharaja Sovan Singh Playing
+Pachisi, 2019.123’. 2026.
+https://www.metmuseum.org/art/collection/search/822852.
 
 Tylor, Edward B. 1879. ‘On the Game of Patolli in Ancient Mexico, and Its
 Probably Asiatic Origin’. Journal of the Anthropological Institute of Great

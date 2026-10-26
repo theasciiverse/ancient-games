@@ -1,6 +1,6 @@
 Morris
 Asciiverse
-2026-10-25
+2026-10-26
 
 Two players enter their men one at a time on the points of a board of lines,
 then move them along the lines. Three men of one colour in a row along a
@@ -85,3 +85,5 @@ Playing it in the terminal
 - After a mill, the men it may take are lit red: choose one.
 - When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (after a games box from Granada and the Gokstad
+  board; Morabaraba is left plain); --plain starts without it.

@@ -1,6 +1,6 @@
 Mehen
 Asciiverse
-2026-10-25
+2026-10-26
 
 A race along a coiled snake, moved by guessing. Each team has one, two or
 three pharaohs; the side to move hides 1 to 5 marbles and the other side
@@ -40,3 +40,5 @@ Playing it in the terminal
   too.
 - Two people at one keyboard: the guessing team looks away, then Enter.
 - After a game: Enter plays again. M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (the scales of the serpent’s tail, after the
+  alabaster board in Chicago); --plain starts without it.

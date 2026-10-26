@@ -1,6 +1,6 @@
 Hnefatafl
 Asciiverse
-2026-10-25
+2026-10-26
 
 Two unequal sides: the king and his defenders in the middle, twice as many
 attackers round the edges. The attackers move first. Every piece moves like
@@ -88,3 +88,5 @@ Playing it in the terminal
   lit square. Or click a piece, then a square. Esc puts it down.
 - After a game: Enter or Space plays again; M or Esc goes to the menu.
 - M: menu; F1 or ?: this help (Up, Down, PgUp, PgDn scroll); Q: quit.
+- O: the ornament off and on (after the Ballinderry and Gokstad boards);
+  --plain starts without it.

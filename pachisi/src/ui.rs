@@ -5,6 +5,7 @@
 
 use crate::app::{Game, Phase};
 use crate::rules::{COLOURS, HOME, READY, Rules, TEAMS, Throws, cell, loop_square};
+use ancient_core::ornament;
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, fill, put, wrap};
 use ancient_core::player::Player;
 use ancient_core::shell::{self, Help, Menu};
@@ -140,6 +141,44 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
         put(buf, x.saturating_sub(1), by + r as u16, "▶", style);
     }
     draw_panel(buf, Rect::new(bx + bw + 3, by, PANEL, 20.min(area.height)), game);
+
+    // On a terminal larger than the game is made for, in the four corners
+    // beside the cross (clear of the cursor's column), the flower at the
+    // centre of the board in "Maharaja Sovan Singh playing pachisi",
+    // Udaipur, about 1868 (Metropolitan Museum of Art 2019.123).
+    if ornament::roomy(area) {
+        for (r, c) in [(0, 0), (0, 11), (11, 0), (11, 11)] {
+            let corner = Rect::new(bx + c * W, by + r, 8 * W - 1, 8);
+            draw_flower(buf, corner.intersection(area));
+        }
+    }
+}
+
+/// The flower: eight long pointed petals, eight short ones between them,
+/// a ring at the middle.
+fn draw_flower(buf: &mut Buffer, area: Rect) {
+    let white = ornament::dim(LIT, BG, 0.6);
+    let (cx, cy) = (area.width as i32, area.height as i32 * 2);
+    let r = (cx.min(cy) - 2) as f32;
+    if r < 8.0 {
+        return;
+    }
+    ornament::paint(buf, area, white, |x, y| {
+        let (x, y) = ((x - cx) as f32, (y - cy) as f32);
+        let d = (x * x + y * y).sqrt();
+        let step = std::f32::consts::TAU / 16.0;
+        let angle = x.atan2(-y).rem_euclid(std::f32::consts::TAU);
+        let k = ((angle + step / 2.0) / step) as usize % 16;
+        let off = angle - k as f32 * step;
+        let (along, across) = (d * off.cos(), d * off.sin());
+        // Long petals on the even spokes, short ones on the odd.
+        let (from, to, width) = if k % 2 == 0 { (0.2, 1.0, 0.13) } else { (0.55, 0.85, 0.09) };
+        let (mid, half) = (r * (from + to) / 2.0, r * (to - from) / 2.0);
+        let u = (along - mid) / half;
+        let petal = u * u + (across / (r * width)).powi(2) <= 1.0;
+        let ring = (d - r * 0.12).abs() < 0.6;
+        petal || ring
+    });
 }
 
 /// Red's step for loop square `sq`.

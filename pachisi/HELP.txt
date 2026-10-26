@@ -1,6 +1,6 @@
 Pachisi and Chaupar
 Asciiverse
-2026-10-25
+2026-10-26
 
 A cross of four arms, each three columns by eight rows, round a square in
 the middle. Four colours, four men each, one colour to an arm; partners sit
@@ -79,3 +79,5 @@ Playing it in the terminal
   starting 1 or grace).
 - When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (the flower of a painted pachisi board,
+  Udaipur, about 1868); --plain starts without it.

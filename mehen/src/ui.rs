@@ -4,6 +4,7 @@
 
 use crate::app::{Game, Phase, lion_word};
 use crate::rules::{GRID, HOME, LIONS, Lion, Rules, SQUARES, Team, coil};
+use ancient_core::ornament;
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, centre, fill, put, wrap};
 use ancient_core::player::Player;
 use ancient_core::shell::{self, Help, Menu};
@@ -146,6 +147,13 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
 
     draw_hand(buf, Rect::new(bx, by + bh + 1, bw, 6), game, hits);
     draw_panel(buf, Rect::new(bx + bw + 2, top, PANEL, total_h.max(22)), game);
+
+    // The scales of the serpent's tail round the rim, after the alabaster
+    // board in Chicago (ISAC E16950): a lattice of small lozenges cut in
+    // two sets of diagonals. Last, so it only goes where nothing else is.
+    let scales = ornament::dim(INCISED, DISC, 0.35);
+    let lattice = |x: i32, y: i32| (x + y) % 4 == 0 || (x - y).rem_euclid(4) == 0;
+    ornament::rim(buf, Rect::new(bx, by, bw, bh), scales, 4, lattice, lattice);
 }
 
 /// Thin bars down both sides of a square.

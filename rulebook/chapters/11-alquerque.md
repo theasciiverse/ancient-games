@@ -306,6 +306,23 @@ hunters on the alquerque board [@golladay2007, 625], and *fanoron-telo*
 on three by three, which some books make a capture game and others a
 game of three in a row.
 
+## The ornament
+
+The alquerque rule sets are decorated after the pictures of the game in
+Alfonso X's book of 1283 (fols. 91v to 93v). In the first, the board
+itself is "edged in alternating dark and white woods" [@golladay2007,
+1024]; in the following pictures, quatrefoils of gold stand at the
+corners of the frame, holding the castle of Castile and the lion of León
+[@golladay2007, 760; @rengeek-alfonso]. The program's stone carries the
+inlaid edge, and on a terminal larger than 100 by 30 the margins carry
+the castle in its quatrefoil (the lion is too small to draw in dots).
+
+Fanorona is a living game of Madagascar; its boards are lines on a
+chopping block or a winnowing platter, cut in rock or in paving
+[@montgomery1886]. The Fanorona rule sets are left plain. The ornament is
+drawn in braille dots, in dim tones, never over a man, a highlight or a
+line. O turns it off and on, and `alquerque --plain` starts without it.
+
 ## Playing it in the terminal
 
 ::: brief
@@ -318,6 +335,8 @@ game of three in a row.
 - The men a step would take are marked ✕ when the cursor is on where it
   goes. When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (after Alfonso X's book of games; the
+  Fanorona rule sets are left plain); `--plain` starts without it.
 :::
 
 Start `alquerque`, choose the rules, whom to play against (the
@@ -333,6 +352,7 @@ which side you play.
 | F1 or ? | The rules in short (F1, ? or Esc closes them) |
 | Enter or Space, after a game | Play again |
 | M, or Esc after a game | Back to the menu |
+| O | The ornament off and on |
 | Q | Quit |
 
 The computer searches ahead and judges a position by the men each side
@@ -341,4 +361,4 @@ move: easy one turn ahead and now and then any move at all, normal
 three, hard as deep as it can in a second and a half.
 
 `alquerque --demo` lets the computer play both sides; `--seed N`
-repeats a game exactly.
+repeats a game exactly; `--plain` leaves out the ornament.

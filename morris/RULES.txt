@@ -1,6 +1,6 @@
 Morris
 Asciiverse
-2026-10-25
+2026-10-26
 
   ---------------- ----------------------------------------------------------
   Played           Rome by the first century AD; all Europe in the Middle
@@ -553,6 +553,26 @@ Alquerque de doze. The game of twelve in Alfonso’s book is not Twelve Men’s
 Morris but the game of alquerque: twelve men each on a board of twenty-five
 points, capturing by jumping, as in draughts (Golladay 2007, 623-24).
 
+The ornament
+------------
+
+Most morris boards that survive are lines cut in stone or wood with nothing
+more. The program’s ornament follows two that are decorated. The games box
+probably from Granada, 1525 to 1575, in the Victoria and Albert Museum has a
+merelles face on one of its slides: the board sits inside a ring of ivory
+and ebony bars with small green crosses round it (Victoria and Albert Museum
+2026). The program draws the ebony bars, straightened, round the edge of its
+wood. The board from the Gokstad ship burial, about 900, has a morris face
+on the back of its tafl board; Nicolaysen’s drawing of 1882 shows small
+knots carved where the lines meet, among them a knot of four loops at the
+middle (Nicolaysen 1882). On a terminal larger than 100 by 30, that knot
+stands in the margins; never on the points, which carry the men.
+
+Morabaraba is a living game of southern Africa, and its boards are drawn or
+scratched as players make them; the program leaves it plain. The ornament is
+drawn in braille dots, in dim tones. O turns it off and on, and
+morris --plain starts without it.
+
 Playing it in the terminal
 --------------------------
 
@@ -580,6 +600,8 @@ normal or hard, or a friend at the same keyboard) and which side you play.
 
   M, or Esc after a game                Back to the menu
 
+  O                                     The ornament off and on
+
   Q                                     Quit
   ---------------------------------------------------------------------------
 
@@ -595,7 +617,7 @@ solve when the game starts, a few thousand positions, and hard plays both
 its forms perfectly: as the first player in the moving game it always wins.
 
 morris --demo lets the computer play both sides; --seed N repeats a game
-exactly.
+exactly; --plain leaves out the ornament.
 
 References
 ==========
@@ -625,6 +647,10 @@ Mind Sports South Africa. 2007. ‘Morabaraba/Umlabalaba: The Generally
 Accepted Rules’. 2007.
 http://www.mindsportssa.freeservers.com/rules-morabaraba.htm.
 
+Nicolaysen, N. 1882. Langskibet Fra Gokstad Ved Sandefjord: The Viking-Ship
+Discovered at Gokstad in Norway. Kristiania: Alb. Cammermeyer.
+https://www.nb.no/items/URN:NBN:no-nb_digibok_2014090338016.
+
 Ovid. 2001. The Art of Love (Ars Amatoria). Translated by A. S. Kline.
 https://www.poetryintranslation.com.
 
@@ -641,6 +667,10 @@ Shakespeare, William. n.d. A Midsummer Night’s Dream.
 Strutt, Joseph. 1845. The Sports and Pastimes of the People of England. New
 edition by William Hone. London: Thomas Tegg.
 https://www.gutenberg.org/ebooks/48983.
+
+Victoria and Albert Museum. 2026. ‘Games Board and Accessories, Probably
+Granada, 1525-75, Museum No. 154-1900’. 2026.
+https://collections.vam.ac.uk/item/O134094/.
 
 Viking Ship Museum, Roskilde. n.d. ‘Nine Mens Morris and Tic Tac Toe’.
 Accessed 23 October 2026.

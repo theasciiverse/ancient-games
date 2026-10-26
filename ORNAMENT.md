@@ -90,6 +90,39 @@ against sources. Check each object and pattern before using it.
 - Found on the way: Ur's layout put the key line one row below the screen
   at some heights (120x34); fixed.
 
-**Next:** David to look at it in a terminal (`royal-ur`, a large window;
-O toggles). Then Hnefatafl (knotwork, after the Ballinderry board) or the
-rest one by one, each checked against its object first.
+David looked at Ur in his terminal (2026-10-26: "Lovely"), then asked
+for the other games.
+
+## The other games (2026-10-26)
+
+Researched by four subagents from museum records and photographs (notes,
+images and BibTeX in `~/references/ancient-games/ornament/<game>/`),
+each picture looked at again before drawing. Each chapter has "The
+ornament" with its sources; each F1 help names it under the keys.
+Shared helpers in `core/src/ornament.rs`: `rim`, `band`, `stack`,
+`beside`, `edge`, `roomy`.
+
+| Game | Where | What, after |
+| --- | --- | --- |
+| Senet | rim; margins (about 170 columns) | the drawer's checker and the ankh and djed panels of the faience box of Amenhotep III, Brooklyn 49.56a-b |
+| Mehen | rim | the cross-hatched scales of the tail, alabaster board, Chicago ISAC E16950 |
+| Hnefatafl | rim (not the lettered bottom); margins | Ballinderry's chevrons between pellets (NMI 1932:6533); Gokstad's X knot (Nicolaysen 1882) |
+| Fox & Geese | the four corners beside the cross, any size | the ivory lozenges of the Granada games box, V&A 154-1900 |
+| Morris | rim; margins | the ebony bars of the same box's merelles ring; Gokstad's four-lobed knot. Morabaraba plain |
+| Shatranj | a hem round the cloth, only beyond 100x30 | the triangle band of a terracotta shah, Met 1975.317 |
+| Tabula | margins | half, whole and half compass rosette of the Photius board, Aphrodisias (InsAph 69). No rim: real rims are plain |
+| Alquerque | rim; margins | the inlaid edge and the castle quatrefoil of Alfonso X's alquerque pictures. Fanorona plain |
+| Pachisi | the four corners beside the cross, beyond 100x30 | the flower of Ambav's painting of Sovan Singh, Met 2019.123 |
+| Patolli | the mat's four quarters, any size; margins | the mat weave and the five discs of the Codex Magliabechiano, fol. 60r |
+
+Left plain: Seega (sand, Lane), Mancala, Kōnane, Mū tōrere (living
+traditions: sources and people first, David's call), Morabaraba and
+Fanorona (living games).
+
+Choices made on the way: no hexagram (Shatranj's Libro folio, Alquerque's
+hare board) and no Gokstad fret (it reads as a swastika); no step-fret for
+Patolli (in no patolli picture); Senet's signs in standard form, not the
+box's freehand; the lion of León too small to draw. Fixed on the way: the
+key line below the screen at some heights in Senet too.
+
+**Next:** David to look at them in a terminal.

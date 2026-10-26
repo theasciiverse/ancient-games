@@ -1,6 +1,6 @@
 Tabula
 Asciiverse
-2026-10-25
+2026-10-26
 
 The Roman ancestor of backgammon. Each side has fifteen men, all in hand at
 the start, and three dice. Each die moves one man that many points along its
@@ -62,3 +62,5 @@ Playing it in the terminal
 - In hand and Borne off stand above and below the board.
 - When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (the rosettes of a marble board at
+  Aphrodisias); --plain starts without it.

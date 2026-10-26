@@ -4,6 +4,7 @@
 
 use crate::app::{Game, Phase};
 use crate::rules::{Layout, Rules, Side};
+use ancient_core::ornament;
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, fill, put, wrap};
 use ancient_core::player::Player;
 use ancient_core::shell::{self, Help, Menu};
@@ -182,6 +183,47 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
         }
     }
     draw_panel(buf, Rect::new(bx + bw + 3, by - 2, PANEL, bh + 4), game);
+    draw_margins(buf, area, by + bh / 2, bx.saturating_sub(1), bx + bw + 3 + PANEL);
+}
+
+/// On a terminal larger than the game is made for, the dividing marks of
+/// the marble board given by Flavius Photius at Aphrodisias (Roueche,
+/// InsAph 69): six-petalled compass rosettes in circles, a half rosette
+/// above and below a whole one, down each margin.
+fn draw_margins(buf: &mut Buffer, area: Rect, middle: u16, left_end: u16, right_start: u16) {
+    if !ornament::roomy(area) {
+        return;
+    }
+    let marble = ornament::dim(FIELD, BG, 0.55);
+    // Three marks, as on the stone, each in eight rows, about the board's
+    // middle.
+    let h = 24.min(area.height);
+    let top = middle.saturating_sub(h / 2).max(area.y);
+    let left = Rect::new(area.x, top, left_end.saturating_sub(area.x), h);
+    let right = Rect::new(right_start, top, area.right().saturating_sub(right_start), h);
+    for column in [left, right] {
+        ornament::stack(buf, column, 25, 25, |i, x, y| {
+            // A half (the lower half, petals up, as on the stone) above and
+            // below the whole.
+            let mark = if i % 2 == 0 { y >= -6 && compass(x, y + 6) } else { compass(x, y) };
+            mark.then_some(marble)
+        });
+    }
+}
+
+/// A compass rosette of radius 12 dots: the circle, and inside it the
+/// six arcs of the same radius centred on it, which make six petals.
+fn compass(x: i32, y: i32) -> bool {
+    const R: f32 = 12.0;
+    let (x, y) = (x as f32, y as f32);
+    let on = |cx: f32, cy: f32| ((((x - cx).powi(2) + (y - cy).powi(2)).sqrt()) - R).abs() < 0.6;
+    let inside = x * x + y * y <= R * R + 0.5;
+    on(0.0, 0.0)
+        || inside
+            && (0..6).any(|k| {
+                let a = std::f32::consts::FRAC_PI_3 * k as f32;
+                on(R * a.sin(), -R * a.cos())
+            })
 }
 
 fn die_face(d: u8) -> &'static str {

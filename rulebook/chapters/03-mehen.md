@@ -316,6 +316,20 @@ gives moves too short to be satisfying [@masters-mehen-play, 77].
 
 None of these is in the program.
 
+## The ornament
+
+The rim of the program's board carries the serpent's scales, after the
+alabaster mehen board in the Institute for the Study of Ancient Cultures,
+Chicago (E16950). Masters lists it with 127 spaces in four coils; it was
+bought in Luxor in 1932 and has no provenance, though he argues for its
+authenticity [@masters-mehen-evidence]. In a photograph of it, the
+outermost band, outside the track, is not cut into spaces but
+cross-hatched: two sets of fine diagonal lines crossing in small
+lozenges, the scales of the serpent's tail [@commons-chicago-mehen]. The
+program draws that lattice round the rim in braille dots, in a dim tone,
+never over a piece, a highlight or a number. O turns it off and on, and
+`mehen --plain` starts without it.
+
 ## Playing it in the terminal
 
 ::: brief
@@ -326,6 +340,8 @@ None of these is in the program.
   answers too.
 - Two people at one keyboard: the guessing team looks away, then Enter.
 - After a game: Enter plays again. M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (the scales of the serpent's tail, after
+  the alabaster board in Chicago); `--plain` starts without it.
 :::
 
 Start `mehen`, choose two, four or six players and who plays each team:
@@ -341,7 +357,8 @@ the computer (easy, normal or hard) or a person at the same keyboard.
 | F1 or ? | The rules in short (F1, ? or Esc closes them) |
 | Enter or Space, after a game | Play again |
 | M, or Esc after a game | Back to the menu |
+| O | The ornament off and on |
 | Q | Quit |
 
 `mehen --demo` lets the computer play both teams; `--seed N` repeats a
-game exactly.
+game exactly; `--plain` leaves out the ornament.

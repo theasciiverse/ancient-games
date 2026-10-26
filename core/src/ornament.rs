@@ -104,6 +104,83 @@ pub fn dim(colour: Color, bg: Color, t: f32) -> Color {
     }
 }
 
+/// Whether `area` is larger than the games are made for (100 by 30): only
+/// then do the margins carry ornament, so the target size stays as it is.
+pub fn roomy(area: Rect) -> bool {
+    area.width > crate::capture::WIDTH || area.height > crate::capture::HEIGHT
+}
+
+/// A band round a frame one cell wide: `along` on the top and bottom rows,
+/// a pattern `period` dots long drawn as many whole times as fit, centred;
+/// `down` on the left and right columns (two dots wide), from the top.
+pub fn rim(
+    buf: &mut Buffer,
+    frame: Rect,
+    colour: Color,
+    period: i32,
+    along: impl Fn(i32, i32) -> bool,
+    down: impl Fn(i32, i32) -> bool,
+) {
+    if frame.width < 3 || frame.height < 3 {
+        return;
+    }
+    for y in [frame.top(), frame.bottom() - 1] {
+        band(buf, Rect::new(frame.x + 1, y, frame.width - 2, 1), colour, period, &along);
+    }
+    for x in [frame.left(), frame.right() - 1] {
+        paint(buf, Rect::new(x, frame.y + 1, 1, frame.height - 2), colour, &down);
+    }
+}
+
+/// A pattern `period` dots long along `row`, drawn as many whole times as
+/// fit, centred.
+pub fn band(buf: &mut Buffer, row: Rect, colour: Color, period: i32, along: impl Fn(i32, i32) -> bool) {
+    let whole = row.width as i32 * 2 / period * period;
+    let skip = (row.width as i32 * 2 - whole) / 2;
+    paint(buf, row, colour, |x, y| (0..whole).contains(&(x - skip)) && along((x - skip) % period, y));
+}
+
+/// Motifs `w` by `h` dots, one above another down `column`, as many as
+/// fit with a row between them, the stack centred; `motif` is given the
+/// motif's number from the top and each dot from its centre. Nothing if
+/// `column` is too narrow (a cell free on each side).
+pub fn stack(
+    buf: &mut Buffer,
+    column: Rect,
+    w: i32,
+    h: i32,
+    motif: impl Fn(i32, i32, i32) -> Option<Color>,
+) {
+    if column.width as i32 * 2 < w + 4 {
+        return;
+    }
+    let rows = (h as u16).div_ceil(4) + 1;
+    let count = column.height / rows;
+    if count == 0 {
+        return;
+    }
+    let top = column.y + (column.height - count * rows) / 2;
+    let band = rows as i32 * 4;
+    let cx = column.width as i32;
+    let area = Rect::new(column.x, top, column.width, count * rows);
+    paint_in(buf, area, |x, y| motif(y / band, x - cx, y - (y / band * band + band / 2)));
+}
+
+/// The free columns beside `board` within `area`, as tall as the board:
+/// left and right.
+pub fn beside(area: Rect, board: Rect) -> [Rect; 2] {
+    let left = Rect::new(area.x, board.y, board.x.saturating_sub(area.x), board.height);
+    let right = Rect::new(board.right(), board.y, area.right().saturating_sub(board.right()), board.height);
+    [left, right]
+}
+
+/// Whether the dot (`x`, `y`) of a region lies on its edge: a neighbour
+/// belongs to another region (to draw shapes in outline).
+pub fn edge<K: PartialEq>(x: i32, y: i32, region: impl Fn(i32, i32) -> Option<K>) -> bool {
+    let here = region(x, y);
+    [(1, 0), (-1, 0), (0, 1), (0, -1)].iter().any(|(dx, dy)| region(x + dx, y + dy) != here)
+}
+
 /// A rosette of `petals` petals of length `r` dots around its centre, the
 /// first pointing up: for the dot (`x`, `y`) from the centre, `Some(0)` in
 /// the centre's disc, `Some(1 + k)` in petal k, or none.

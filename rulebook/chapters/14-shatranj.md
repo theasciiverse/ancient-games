@@ -285,6 +285,20 @@ Bengal about 1500, gives more of it
 how the two dice are used, how pawns promote, how the game ends) that
 it is not offered here.
 
+## The ornament
+
+On a terminal larger than 100 by 30 the program's cloth has a hem, and
+the hem carries a band after a chess piece of the shatranj's own world: a
+terracotta shah in the Metropolitan Museum, attributed to Iran, probably
+Nishapur, 11th to 12th century [@met1975317]. A band runs round its foot
+between two incised lines; on the front it holds a row of triangles,
+point up and point down in turn. The program draws that zigzag round the
+hem in braille dots, in a dim tone of the terracotta. No Islamic chess
+board with ornament was found, and the shah's band shows triangles on one
+face only (the back has leaf scrolls), so this is a band from one piece,
+not the decoration of a board. O turns it off and on, and
+`shatranj --plain` starts without it.
+
 ## Playing it in the terminal
 
 ::: brief
@@ -294,6 +308,8 @@ it is not offered here.
   =F for a baidaq made firzan, + for check.
 - When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (the band of a terracotta shah from Iran,
+  on the cloth's hem); `--plain` starts without it.
 :::
 
 Start `shatranj`, choose the rules, whom to play against (the computer,
@@ -309,6 +325,7 @@ you play.
 | F1 or ? | The rules in short (F1, ? or Esc closes them) |
 | Enter or Space, after a game | Play again |
 | M, or Esc after a game | Back to the menu |
+| O | The ornament off and on |
 | Q | Quit |
 
 The computer searches ahead, captures to the end, and judges a position
@@ -320,4 +337,4 @@ move; normal looks at a move and the reply; hard two moves of each side.
 (A search deeper than that, with this judgement, did not play better.)
 
 `shatranj --demo` lets the computer play both sides; `--seed N` repeats
-a game exactly.
+a game exactly; `--plain` leaves out the ornament.

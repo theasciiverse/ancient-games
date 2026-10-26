@@ -1,6 +1,6 @@
 Shatranj
 Asciiverse
-2026-10-25
+2026-10-26
 
 Chess before the queen and the bishop. Eight by eight squares; each side has
 a shah (king), a firzan (counsellor), two fils (elephants), two faras
@@ -63,3 +63,5 @@ Playing it in the terminal
   a baidaq made firzan, + for check.
 - When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (the band of a terracotta shah from Iran, on
+  the cloth’s hem); --plain starts without it.

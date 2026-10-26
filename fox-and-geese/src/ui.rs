@@ -4,6 +4,7 @@
 
 use crate::app::{Game, Phase};
 use crate::rules::{Point, Rules, SIZE, Side, on_board, points};
+use ancient_core::ornament;
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, fill, put, wrap};
 use ancient_core::shell::{self, Help, Menu};
 use ancient_core::player::Player;
@@ -123,6 +124,46 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     }
 
     draw_panel(buf, Rect::new(bx + bw + 2, by, panel_w, bh), game);
+
+    // In the four corners outside the cross, the inlaid lozenges of the
+    // fox-and-geese boards in a games box probably from Granada, 1525 to
+    // 1575 (Victoria and Albert Museum 154-1900). Clear of the lines and
+    // of the brackets beside the points.
+    let (w, h) = (2 * sx - 1, 2 * sy);
+    let right = bx + 2 + 4 * sx + 2;
+    let bottom = by + 1 + 4 * sy + 1;
+    for (x, y) in [(bx, by), (right, by), (bx, bottom), (right, bottom)] {
+        draw_lozenge(buf, Rect::new(x, y, w, h));
+    }
+}
+
+/// A lozenge after the Granada box: an ivory outline, a ring of
+/// sawtooth, an eight-pointed star of two squares, and a rosette of eight
+/// petals on green in the middle.
+fn draw_lozenge(buf: &mut Buffer, area: Rect) {
+    let ivory = ornament::dim(GOOSE, WOOD, 0.7);
+    let green = ornament::dim(Color::Rgb(110, 160, 100), WOOD, 0.45);
+    let (cx, cy) = (area.width as i32, area.height as i32 * 2);
+    let r = cx.min(cy) - 2;
+    if r < 7 {
+        return;
+    }
+    ornament::paint_in(buf, area, |x, y| {
+        let (x, y) = (x - cx, y - cy);
+        let d = x.abs() + y.abs();
+        let along = x.abs() - y.abs();
+        let outline = d == r || d == r - 4;
+        // The sawtooth between the two lines, as a zigzag.
+        let tooth = d > r - 4 && d < r && along.rem_euclid(6).min(6 - along.rem_euclid(6)) == r - 1 - d;
+        let s = (r - 5) * 5 / 9;
+        let square = x.abs().max(y.abs()) == s;
+        let diamond = d == s * 7 / 5;
+        let star = (square && d <= s * 7 / 5) || (diamond && x.abs().max(y.abs()) <= s);
+        if outline || tooth || star {
+            return Some(ivory);
+        }
+        ornament::rosette(8, (s - 1) as f32, x, y).map(|_| green)
+    });
 }
 
 fn draw_panel(buf: &mut Buffer, panel: Rect, game: &Game) {

@@ -1,6 +1,6 @@
 Patolli
 Asciiverse
-2026-10-25
+2026-10-26
 
   ---------------- ----------------------------------------------------------
   Played           The Aztecs of central Mexico, before and just after the
@@ -213,6 +213,21 @@ fig. 17b): almost everything in it but the route would be our own invention.
 Kendall’s and Mateos Higuera’s rules, the likely source of today’s popular
 ones, could not be read (Kendall 1980; Mateos Higuera 1930).
 
+The ornament
+------------
+
+Durán and Sahagún both say the board was painted on a mat. In the patolli
+scene of the Codex Magliabechiano (fol. 60r), the players sit on mats woven
+in a herringbone of short strokes, and five gold discs are drawn above the
+board (Nuttall 1903). The codex does not say what the discs mean, and the
+program does not guess. Its mat carries that weave in the four quarters
+beside the cross, and on a terminal larger than 100 by 30 the five discs
+stand in the margins. Both are drawn in braille dots, in dim tones, never
+over a stone, a highlight or a number. They come from the sixteenth-century
+pictures, not from the living Nahua tradition; the step-fret often put on
+patolli boards today is in none of the patolli pictures and is not used. O
+turns the ornament off and on, and patolli --plain starts without it.
+
 Playing it in the terminal
 --------------------------
 
@@ -240,6 +255,8 @@ is cast for.
 
   M, or Esc after a game                Back to the menu
 
+  O                                     The ornament off and on
+
   Q                                     Quit
   ---------------------------------------------------------------------------
 
@@ -248,7 +265,7 @@ judges the race and the purses, and likes the rounded ends; hard also weighs
 every cast the other side could make next, and its best answer.
 
 patolli --demo lets the computer play both sides; --seed N repeats a game
-exactly.
+exactly; --plain leaves out the ornament.
 
 References
 ==========
@@ -273,6 +290,12 @@ López de Gómara, Francisco. 1870. Conquista de Méjico. México.
 
 Mateos Higuera, Salvador. 1930. Breve Monografía y Reglas Del Patolli.
 México.
+
+Nuttall, Zelia. 1903. The Book of the Life of the Ancient Mexicans,
+Containing an Account of Their Rites and Superstitions: An Anonymous
+Hispano-Mexican Manuscript Preserved at the Biblioteca Nazionale Centrale,
+Florence, Italy. Berkeley: University of California.
+https://archive.org/details/codex-of-magliabechiano.
 
 Sahagún, Bernardino de. 1829. Historia General de Las Cosas de Nueva España.
 Edited by Carlos María de Bustamante. Vol. 2. México: Imprenta del ciudadano

@@ -1,6 +1,6 @@
 Alquerque and Fanorona
 Asciiverse
-2026-10-25
+2026-10-26
 
   ---------------- ----------------------------------------------------------
   Played           Alquerque: Spain and the Mediterranean, written down in
@@ -318,6 +318,24 @@ on the alquerque board (Golladay 2007, 625), and fanoron-telo on three by
 three, which some books make a capture game and others a game of three in a
 row.
 
+The ornament
+------------
+
+The alquerque rule sets are decorated after the pictures of the game in
+Alfonso X’s book of 1283 (fols. 91v to 93v). In the first, the board itself
+is “edged in alternating dark and white woods” (Golladay 2007, 1024); in the
+following pictures, quatrefoils of gold stand at the corners of the frame,
+holding the castle of Castile and the lion of León (Golladay 2007, 760;
+Historic Games 2003). The program’s stone carries the inlaid edge, and on a
+terminal larger than 100 by 30 the margins carry the castle in its
+quatrefoil (the lion is too small to draw in dots).
+
+Fanorona is a living game of Madagascar; its boards are lines on a chopping
+block or a winnowing platter, cut in rock or in paving (Montgomery 1886).
+The Fanorona rule sets are left plain. The ornament is drawn in braille
+dots, in dim tones, never over a man, a highlight or a line. O turns it off
+and on, and alquerque --plain starts without it.
+
 Playing it in the terminal
 --------------------------
 
@@ -344,6 +362,8 @@ normal or hard, or a friend at the same keyboard) and which side you play.
 
   M, or Esc after a game                Back to the menu
 
+  O                                     The ornament off and on
+
   Q                                     Quit
   ---------------------------------------------------------------------------
 
@@ -353,7 +373,7 @@ turn ahead and now and then any move at all, normal three, hard as deep as
 it can in a second and a half.
 
 alquerque --demo lets the computer play both sides; --seed N repeats a game
-exactly.
+exactly; --plain leaves out the ornament.
 
 References
 ==========
@@ -384,6 +404,9 @@ Golladay, Sonja Musser. 2007. ‘Los Libros de Acedrex Dados e Tablas:
 Historical, Artistic and Metaphysical Dimensions of Alfonso X’s Book of
 Games’. PhD thesis, University of Arizona.
 https://repository.arizona.edu/handle/10150/194159.
+
+Historic Games. 2003. ‘Alphonso x Book of Games: A Game Researcher’s
+Resource’. 2003. https://games.rengeekcentral.com/.
 
 Montgomery, W. 1886. ‘The Malagasy Game of “Fanorona”’. The Antananarivo
 Annual and Madagascar Magazine 3 (10): 148-56.

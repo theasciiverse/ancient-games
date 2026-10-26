@@ -1,6 +1,6 @@
 Mehen
 Asciiverse
-2026-10-25
+2026-10-26
 
   ----------- --------------------------------------------
   Played      Egypt, about 3000 to 2200 BC
@@ -268,6 +268,20 @@ short to be satisfying (Masters 2024a, 77).
 
 None of these is in the program.
 
+The ornament
+------------
+
+The rim of the program’s board carries the serpent’s scales, after the
+alabaster mehen board in the Institute for the Study of Ancient Cultures,
+Chicago (E16950). Masters lists it with 127 spaces in four coils; it was
+bought in Luxor in 1932 and has no provenance, though he argues for its
+authenticity (Masters 2024b). In a photograph of it, the outermost band,
+outside the track, is not cut into spaces but cross-hatched: two sets of
+fine diagonal lines crossing in small lozenges, the scales of the serpent’s
+tail (Daderot 2014). The program draws that lattice round the rim in braille
+dots, in a dim tone, never over a piece, a highlight or a number. O turns it
+off and on, and mehen --plain starts without it.
+
 Playing it in the terminal
 --------------------------
 
@@ -284,16 +298,22 @@ computer (easy, normal or hard) or a person at the same keyboard.
   F1 or ?                        The rules in short (F1, ? or Esc closes them)
   Enter or Space, after a game   Play again
   M, or Esc after a game         Back to the menu
+  O                              The ornament off and on
   Q                              Quit
 
 mehen --demo lets the computer play both teams; --seed N repeats a game
-exactly.
+exactly; --plain leaves out the ornament.
 
 References
 ==========
 
 Bell, R. C. 1969. Board and Table Games from Many Civilizations. 2nd ed.
 Vol. 1. London: Oxford University Press.
+
+Daderot. 2014. ‘Snake (Mehen) Game, Egypt, Old Kingdom, Dynasties 3-6, c.
+2750-2250 BC, Alabaster, Pigment - Oriental Institute Museum, University of
+Chicago’. 2014.
+https://commons.wikimedia.org/wiki/File:Snake_(mehen)_game,_Egypt,_Old_Kingdom,_Dynasties_3-6,_c._2750-2250_BC,_alabaster,_pigment_-_Oriental_Institute_Museum,_University_of_Chicago_-_DSC07928.JPG.
 
 Kendall, Timothy. 2007. ‘Mehen’. In Ancient Board Games in Perspective,
 edited by Irving L. Finkel, 33-45. London: British Museum Press.

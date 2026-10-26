@@ -7,6 +7,7 @@ use crate::rules::{
     self, Action, BEAUTY, HORUS, OFF, RE_ATOUM, REBIRTH, Rules, Side, THREE_TRUTHS, Variant, WATER,
 };
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, centre, fill, outline, put};
+use ancient_core::ornament;
 use ancient_core::shell::{self, Help, Menu};
 use ancient_core::player::Player;
 use ratatui::buffer::Buffer;
@@ -57,7 +58,8 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
     let board_w = sw * 10 + 2;
     let board_h = sh * 3 + 2;
     let bx = area.x + area.width.saturating_sub(board_w) / 2;
-    let top = area.y + area.height.saturating_sub(board_h + 9) / 2;
+    // Three rows above the board, eight below: names, throw, message, keys.
+    let top = area.y + area.height.saturating_sub(board_h + 11) / 2;
     let by = top + 3;
 
     centre(buf, area, top, "SENET", Style::new().fg(AMBER).bg(BG).add_modifier(Modifier::BOLD));
@@ -116,6 +118,57 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
         _ => "F1: help   Q: quit",
     };
     centre(buf, area, ly + 5, keys, Style::new().fg(DIM).bg(BG));
+
+    // Last, so it only goes where nothing else is.
+    let board = Rect::new(bx, by, board_w, board_h);
+    draw_ornament(buf, area, board);
+}
+
+/// Ornament after the faience senet box inscribed for Amenhotep III
+/// (Brooklyn Museum 49.56a-b): the checker of light and dark blue on its
+/// drawer's ends round the rim, and on a terminal larger than the game is
+/// made for, the panels of its long sides beside the board, ankh and djed
+/// in turn, each between double rules.
+fn draw_ornament(buf: &mut Buffer, area: Rect, board: Rect) {
+    let glaze = ornament::dim(Color::Rgb(70, 150, 230), EBONY, 0.5);
+    // Squares of two by two dots, two rows of them in a cell.
+    let checker = |x: i32, y: i32| (x / 2 + y / 2) % 2 == 0;
+    ornament::rim(buf, board, glaze, 4, checker, |_, y| (y / 2) % 2 == 0);
+    if !ornament::roomy(area) {
+        return;
+    }
+    let faience = ornament::dim(Color::Rgb(70, 150, 230), BG, 0.5);
+    let line = ornament::dim(FAIENCE, BG, 0.3);
+    for column in ornament::beside(area, board) {
+        ornament::stack(buf, column, 17, 24, |i, x, y| {
+            // The panel: double rules at the sides, a rule above and below.
+            let side = matches!(x.abs(), 7 | 8) && y.abs() <= 11;
+            let end = y.abs() == 11 && x.abs() <= 8;
+            if side || end {
+                return Some(line);
+            }
+            let sign = if i % 2 == 0 { ankh(x, y) } else { djed(x, y) };
+            sign.then_some(faience)
+        });
+    }
+}
+
+/// The ankh, 11 by 19 dots about its centre: a loop, the arms, the stem
+/// widening downward.
+fn ankh(x: i32, y: i32) -> bool {
+    let (fx, fy) = (x as f32 / 3.4, (y + 5) as f32 / 4.4);
+    let ring = fx * fx + fy * fy;
+    let arms = (0..=1).contains(&y) && x.abs() <= 5;
+    let stem = (2..=9).contains(&y) && x.abs() <= 1 + (y - 2) / 5;
+    (0.45..=1.3).contains(&ring) || arms || stem
+}
+
+/// The djed: four bars at the top of a pillar on a base.
+fn djed(x: i32, y: i32) -> bool {
+    let bar = matches!(y, -9 | -7 | -5 | -3) && x.abs() <= 5;
+    let pillar = (-9..=8).contains(&y) && x.abs() <= 1;
+    let base = (8..=9).contains(&y) && x.abs() <= 3;
+    bar || pillar || base
 }
 
 fn cell_of(bx: u16, by: u16, sw: u16, sh: u16, house: u8) -> Rect {

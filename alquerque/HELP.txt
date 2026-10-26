@@ -1,6 +1,6 @@
 Alquerque and Fanorona
 Asciiverse
-2026-10-25
+2026-10-26
 
 Two games on boards of points joined by lines: along every row and column,
 and along the diagonals through every other point. A man moves one step
@@ -87,3 +87,5 @@ Playing it in the terminal
 - The men a step would take are marked ✕ when the cursor is on where it
   goes. When the game is over, Enter plays again.
 - M: menu; F1: this help; Q: quit.
+- O: the ornament off and on (after Alfonso X’s book of games; the Fanorona
+  rule sets are left plain); --plain starts without it.

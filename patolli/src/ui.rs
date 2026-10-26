@@ -5,6 +5,7 @@
 
 use crate::app::{Game, Phase};
 use crate::rules::{HAND, Kind, OFF, Outcome, RING, Rules, STONES, Side, cell, kind};
+use ancient_core::ornament;
 use ancient_core::draw::{AMBER, BG, DIM, TEXT, fill, put, wrap};
 use ancient_core::player::Player;
 use ancient_core::shell::{self, Help, Menu};
@@ -111,6 +112,40 @@ pub fn draw_game(buf: &mut Buffer, area: Rect, game: &Game, hits: &mut Hits) {
         hits.off = Some(r);
     }
     draw_panel(buf, Rect::new(bx + bw + 3, by, PANEL, 20.min(area.height)), game);
+    draw_ornament(buf, area, bx, by, bx + bw + 3 + PANEL);
+}
+
+/// Ornament after the patolli scene of the Codex Magliabechiano (fol. 60r).
+/// Durán and Sahagún say the board was painted on a mat; in the four
+/// quarters beside the cross, the weave of the mats the players sit on, a
+/// herringbone of short strokes. On a terminal larger than the game is
+/// made for, in the margins, the five gold discs drawn over the board.
+fn draw_ornament(buf: &mut Buffer, area: Rect, bx: u16, by: u16, panel_end: u16) {
+    let reed = ornament::dim(MIDDLE, MAT, 0.55);
+    let weave = |x: i32, y: i32| {
+        if x % 16 < 8 { (x + y) % 4 == 0 } else { (x - y).rem_euclid(4) == 0 }
+    };
+    // Clear of the arms (grid rows and columns 7 and 8) and of the cursor
+    // beside a square.
+    let (left, right) = (Rect::new(bx, by, 21, 8), Rect::new(bx + 28, by, 22, 8));
+    for quarter in [left, right, Rect { y: by + 10, ..left }, Rect { y: by + 10, ..right }] {
+        ornament::paint(buf, quarter, reed, weave);
+    }
+    if !ornament::roomy(area) {
+        return;
+    }
+    let gold = ornament::dim(Color::Rgb(226, 180, 50), BG, 0.45);
+    // Five discs, three rows each, about the mat's middle.
+    let top = (by + 9).saturating_sub(7).max(area.y);
+    let left = Rect::new(area.x, top, bx.saturating_sub(area.x + 1), 15);
+    let right = Rect::new(panel_end, top, area.right().saturating_sub(panel_end), 15);
+    for column in [left, right] {
+        // A ring seven dots across round a dot.
+        ornament::stack(buf, column, 7, 7, |_, x, y| {
+            let d = x * x + y * y;
+            ((5..=10).contains(&d) || d == 0).then_some(gold)
+        });
+    }
 }
 
 fn draw_panel(buf: &mut Buffer, panel: Rect, game: &Game) {
