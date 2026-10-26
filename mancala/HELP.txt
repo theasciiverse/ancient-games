@@ -1,6 +1,6 @@
 Mancala
 Asciiverse
-2026-10-25
+2026-10-26
 
 Every game here is sown the same way: lift all the seeds of one of your pits
 and drop them one by one into the pits that follow. Where the last seed

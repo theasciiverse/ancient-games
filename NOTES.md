@@ -8,6 +8,13 @@ changing its rules or its computer player.
 
 ## Release history
 
+Version 0.6.0 (2026-10-26): the braille ornament after each game's real
+object (O and `--plain`) and boards that grow with the terminal; tag
+v0.6.0-av.1, GitHub release with the rulebook PDF only; previews of all
+fifteen re-recorded with the same seeds and lengths, local Linux builds in
+the website's dev-releases/ancient-games, built from a fresh clone of the
+tag with --remap-path-prefix.
+
 All five games first planned are in, Mancala since 2026-10-22 and
 Morris, Mū tōrere and Kōnane since 2026-10-23. On the website mockup as fifteen separate titles in the collection
 `ancient-games` (hub's collections.toml; entries in the mockup's

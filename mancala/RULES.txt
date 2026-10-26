@@ -1,6 +1,6 @@
 Mancala
 Asciiverse
-2026-10-25
+2026-10-26
 
   ---------------- ----------------------------------------------------------
   Played           Africa, the Middle East, South and Southeast Asia, the
