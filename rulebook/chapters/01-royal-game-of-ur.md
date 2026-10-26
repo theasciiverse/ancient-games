@@ -488,6 +488,26 @@ Two more routes for the Ur board are described by James Masters
   other side: 16 squares, bearing off on the 17th. Three lots read as 0
   = 4, 1, 2, 3; rosettes give another throw; exact throws to bear off.
 
+## The ornament
+
+The program decorates the board after the one in the British Museum,
+found by Woolley in the Royal Cemetery [@bm-ur-board; @commons-ur-board].
+The museum describes its top as "inlaid with 20 square shell plaques,
+some with rosettes" and its edges "with small plaques and strips, some
+with an eye"; the triangles of red shell on the back are part of a modern
+reconstruction [@bm-ur-board]. The rosettes have eight petals, inlaid red
+and blue in turn around a red centre, and a row of small shell lozenges
+runs along the top's border [@commons-ur-board]. Woolley's account,
+quoted by the museum, speaks of the "fine mosaic border" and of "red and
+blue spots inlaid in the shell plaques and petals of the flowers".
+
+So the board's rim carries a row of shell lozenges, and on a terminal
+larger than 100 by 30 the margins beside the board carry the rosettes of
+the rosette squares, in outline, red and blue in turn. The ornament is
+drawn in braille dots, in dim tones, and never over a piece, a highlight
+or a number. Some fonts draw braille thin or spaced apart: O turns the
+ornament off and on, and `royal-ur --plain` starts without it.
+
 ## Playing it in the terminal
 
 ::: brief
@@ -498,6 +518,8 @@ Two more routes for the Ur board are described by James Masters
   the throw pass.
 - Game over: Enter plays again, M goes to the menu.
 - M: menu; F1 or ?: this help; Q: quit.
+- O: the ornament off and on (rosettes and lozenges after the board in
+  the British Museum); `--plain` starts without it.
 :::
 
 Start `royal-ur`, choose a rule set and who plays each side: the computer
@@ -513,7 +535,8 @@ Start `royal-ur`, choose a rule set and who plays each side: the computer
 | F1 or ? | The rules in short (F1, ? or Esc closes them) |
 | Enter or Space, after a game | Play again |
 | M, or Esc after a game | Back to the menu |
+| O | The ornament off and on |
 | Q | Quit |
 
 `royal-ur --demo` lets the computer play both sides; `--seed N` repeats a
-game exactly.
+game exactly; `--plain` leaves out the ornament.

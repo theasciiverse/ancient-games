@@ -360,6 +360,14 @@ alternating):
   worth less than the firzan it becomes; the capture search tries every
   move when in check. Only as-Suli's rule set measured this way.
 
+## Ornament
+
+`ORNAMENT.md` (2026-10-26): braille ornament after each game's real
+object, sourced like the rules. Started: `core/src/ornament.rs` (blank
+cells only; O key and `--plain` in every game), tried on Ur (rim
+lozenges; rosettes in the margins beyond 100x30), checked against the
+British Museum record and a CC0 photograph. Other games not yet.
+
 ## Roadmap
 
 `ROADMAP.md` (2026-10-22): ancient games from around the world that could

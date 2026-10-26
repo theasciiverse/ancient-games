@@ -60,9 +60,16 @@ pub fn play_and_draw(program: &mut impl Program, seconds: f64) -> Buffer {
     draw(program)
 }
 
-/// Draws `program` into a buffer of the standard size.
+/// Draws `program` into a buffer of the standard size, or the size given
+/// as `--size WxH` (to see a game on a larger terminal).
 pub fn draw(program: &mut impl Program) -> Buffer {
-    let mut terminal = Terminal::new(TestBackend::new(WIDTH, HEIGHT)).expect("test backend");
+    let (w, h) = crate::shell::arg("--size")
+        .and_then(|s| {
+            let (w, h) = s.split_once('x')?;
+            Some((w.parse().ok()?, h.parse().ok()?))
+        })
+        .unwrap_or((WIDTH, HEIGHT));
+    let mut terminal = Terminal::new(TestBackend::new(w, h)).expect("test backend");
     terminal.draw(|frame| program.draw(frame)).expect("draw");
     terminal.backend().buffer().clone()
 }
@@ -140,6 +147,17 @@ fn block(symbol: &str) -> Option<(u8, u8, u8, u8)> {
         "▔" => (0, 0, 8, 1),
         _ => return None,
     })
+}
+
+/// Each bit of a braille character's dots, as (column, row), in the
+/// order of the bits.
+const BRAILLE_DOTS: [(u32, u32); 8] = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (0, 3), (1, 3)];
+
+/// The dots of a braille character, if it is one.
+fn braille(symbol: &str) -> Option<u32> {
+    let mut chars = symbol.chars();
+    let c = chars.next()? as u32;
+    (chars.next().is_none() && (0x2801..=0x28ff).contains(&c)).then(|| c - 0x2800)
 }
 
 fn escape(s: &str) -> String {
@@ -234,6 +252,21 @@ pub fn svg(buf: &Buffer) -> String {
                 );
                 continue;
             }
+            // Braille ornament as round dots, two columns of four, evenly
+            // spaced as in most terminal fonts.
+            if let Some(bits) = braille(symbol) {
+                for (i, (dx, dy)) in BRAILLE_DOTS.iter().enumerate() {
+                    if bits & (1 << i) != 0 {
+                        let _ = writeln!(
+                            out,
+                            r#"<circle cx="{}.5" cy="{}.5" r="1.7" fill="{fg}"/>"#,
+                            left + 2 + dx * 5,
+                            top + 2 + dy * 5
+                        );
+                    }
+                }
+                continue;
+            }
             if symbol.trim().is_empty() {
                 continue;
             }
@@ -267,5 +300,9 @@ mod tests {
         assert!(svg.contains("&lt;"));
         assert!(svg.contains(r##"<rect x="20" y="20" width="10" height="20" fill="#0000ff"/>"##), "{svg}");
         assert_eq!(text(&buf), "A<\n  █\n");
+        buf[(3, 0)].set_char('⢁');
+        let svg = super::svg(&buf);
+        assert!(svg.contains(r#"<circle cx="32.5" cy="2.5""#), "{svg}");
+        assert!(svg.contains(r#"<circle cx="37.5" cy="17.5""#), "{svg}");
     }
 }

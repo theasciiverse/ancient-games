@@ -95,3 +95,5 @@ Playing it in the terminal
   throw pass.
 - Game over: Enter plays again, M goes to the menu.
 - M: menu; F1 or ?: this help; Q: quit.
+- O: the ornament off and on (rosettes and lozenges after the board in the
+  British Museum); --plain starts without it.

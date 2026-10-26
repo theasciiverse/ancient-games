@@ -330,6 +330,11 @@ pub fn run(program: &mut impl Program) -> io::Result<()> {
                         if key.code == KeyCode::Char('c') && key.modifiers.contains(KeyModifiers::CONTROL) {
                             break;
                         }
+                        // O turns the ornament on and off, in every game.
+                        if matches!(key.code, KeyCode::Char('o') | KeyCode::Char('O')) {
+                            crate::ornament::toggle();
+                            continue;
+                        }
                         program.key(key.code, Instant::now());
                     }
                     Event::Mouse(mouse) if mouse.kind == MouseEventKind::Down(MouseButton::Left) => {

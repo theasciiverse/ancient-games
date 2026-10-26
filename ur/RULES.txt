@@ -440,6 +440,27 @@ Two more routes for the Ur board are described by James Masters (Masters
   squares, bearing off on the 17th. Three lots read as 0 = 4, 1, 2, 3;
   rosettes give another throw; exact throws to bear off.
 
+The ornament
+------------
+
+The program decorates the board after the one in the British Museum, found
+by Woolley in the Royal Cemetery (British Museum 2026; Wikimedia Commons
+2026). The museum describes its top as “inlaid with 20 square shell plaques,
+some with rosettes” and its edges “with small plaques and strips, some with
+an eye”; the triangles of red shell on the back are part of a modern
+reconstruction (British Museum 2026). The rosettes have eight petals, inlaid
+red and blue in turn around a red centre, and a row of small shell lozenges
+runs along the top’s border (Wikimedia Commons 2026). Woolley’s account,
+quoted by the museum, speaks of the “fine mosaic border” and of “red and
+blue spots inlaid in the shell plaques and petals of the flowers”.
+
+So the board’s rim carries a row of shell lozenges, and on a terminal larger
+than 100 by 30 the margins beside the board carry the rosettes of the
+rosette squares, in outline, red and blue in turn. The ornament is drawn in
+braille dots, in dim tones, and never over a piece, a highlight or a number.
+Some fonts draw braille thin or spaced apart: O turns the ornament off and
+on, and royal-ur --plain starts without it.
+
 Playing it in the terminal
 --------------------------
 
@@ -456,10 +477,11 @@ Start royal-ur, choose a rule set and who plays each side: the computer
   F1 or ?                        The rules in short (F1, ? or Esc closes them)
   Enter or Space, after a game   Play again
   M, or Esc after a game         Back to the menu
+  O                              The ornament off and on
   Q                              Quit
 
 royal-ur --demo lets the computer play both sides; --seed N repeats a game
-exactly.
+exactly; --plain leaves out the ornament.
 
 References
 ==========
@@ -469,6 +491,9 @@ Vol. 1. London: Oxford University Press.
 
 Bottéro, J. 1956. ‘Deux curiosités assyriologiques (avec une note de Pierre
 Hamelin)’. Syria 33: 17-35.
+
+British Museum. 2026. ‘Game-Board, Museum Number 120834’. 2026.
+https://www.britishmuseum.org/collection/object/W_1928-1009-378.
 
 Finkel, Irving L. 2007. ‘On the Rules for the Royal Game of Ur’. In Ancient
 Board Games in Perspective, edited by Irving L. Finkel, 16-32. London:
@@ -487,6 +512,9 @@ https://www.youtube.com/watch?v=WZskjLq040I.
 
 Weidner, E. 1956. ‘Ein Losbuch in Keilschrift aus der Seleukidenzeit’. Syria
 33: 175-83.
+
+Wikimedia Commons. 2026. ‘British Museum Royal Game of Ur.jpg’. 2026.
+https://commons.wikimedia.org/wiki/File:British_Museum_Royal_Game_of_Ur.jpg.
 
 Wikipedia. 2026. ‘Royal Game of Ur’. 2026.
 https://en.wikipedia.org/wiki/Royal_Game_of_Ur.
