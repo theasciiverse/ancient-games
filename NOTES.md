@@ -32,7 +32,7 @@ the Senet water fix and the title page; v0.1.0-av.1 was the first five. Release 
 archive per game for static musl Linux, macOS and Windows, x86-64 and
 ARM64; Actions billing blocks builds, so the GitHub releases (made by
 hand) hold only the rulebook PDF. The workflow adds to an existing
-release since `a17e246`, which v0.5.0-av.1 includes, so once Actions runs
+release since `84fb351`, which v0.5.0-av.1 includes, so once Actions runs
 again a re-run for that tag adds its archives; v0.4.0-av.1's copy of the
 workflow predates the fix, and v0.5.0-av.1 supersedes it anyway. Licence: not chosen; David chooses licences case by case
 (2026-10-20), so the Cargo.toml files name none until he does. Own git repo, branch `main`, private at github.com/theasciiverse/ancient-games.
