@@ -32,8 +32,7 @@ dev-releases/ancient-games. Release workflow `.github/workflows/release.yml`
 (one archive per game, static musl Linux, macOS, Windows, x86-64 and
 ARM64); Actions billing blocks builds, so the GitHub releases hold only
 the rulebook PDF until a re-run of v0.6.0-av.1 adds the archives.
-Licence: not chosen; David chooses licences case by case (2026-10-20),
-so the Cargo.toml files name none until he does. Own git repo, branch
+Licence: GPL-3.0-or-later for the whole workspace (David, 2026-10-27). Own git repo, branch
 `main`, private at github.com/theasciiverse/ancient-games.
 
 ## Ornament

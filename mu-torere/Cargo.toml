@@ -3,6 +3,7 @@ name = "mu-torere"
 version = "0.6.0"
 description = "Mū tōrere, the Māori game of the eight-pointed star, in the terminal"
 edition.workspace = true
+license.workspace = true
 repository.workspace = true
 
 [[bin]]

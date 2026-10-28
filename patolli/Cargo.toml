@@ -3,6 +3,7 @@ name = "patolli"
 version = "0.6.0"
 description = "Patolli, the Aztec race and betting game, in the terminal"
 edition.workspace = true
+license.workspace = true
 repository.workspace = true
 
 [[bin]]

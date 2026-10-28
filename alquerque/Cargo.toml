@@ -3,6 +3,7 @@ name = "alquerque"
 version = "0.6.0"
 description = "Alquerque and Fanorona, the leaping and line-taking games, in the terminal"
 edition.workspace = true
+license.workspace = true
 repository.workspace = true
 
 [[bin]]

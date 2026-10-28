@@ -69,7 +69,7 @@ jobs:
           mkdir -p dist
           for game in $GAMES; do
             rm -rf stage && mkdir stage
-            cp README.md stage/
+            cp README.md LICENSE stage/
             # the game's rulebook chapter, if it has one (rulebook/build.sh)
             crate=$(dirname "$(grep -l "^name = \"$game\"" */Cargo.toml)")
             if [ -f "$crate/RULES.txt" ]; then cp "$crate/RULES.txt" stage/; fi

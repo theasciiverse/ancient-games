@@ -3,6 +3,7 @@ name = "shatranj"
 version = "0.6.0"
 description = "Shatranj, the chess of Persia and the caliphate, in the terminal"
 edition.workspace = true
+license.workspace = true
 repository.workspace = true
 
 [[bin]]

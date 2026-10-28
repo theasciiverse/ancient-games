@@ -3,6 +3,7 @@ name = "pachisi"
 version = "0.6.0"
 description = "Pachisi and chaupar, the cross-shaped race games of India, in the terminal"
 edition.workspace = true
+license.workspace = true
 repository.workspace = true
 
 [[bin]]

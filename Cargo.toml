@@ -3,6 +3,7 @@ resolver = "3"
 members = ["alquerque", "core", "fox-and-geese", "hnefatafl", "konane", "mancala", "mehen", "morris", "mu-torere", "pachisi", "patolli", "seega", "senet", "shatranj", "tabula", "ur"]
 
 [workspace.package]
+license = "GPL-3.0-or-later"
 edition = "2024"
 repository = "https://github.com/theasciiverse/ancient-games"
 

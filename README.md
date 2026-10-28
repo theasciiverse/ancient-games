@@ -38,3 +38,8 @@ Options: `--seed N`, `--demo` (the computer plays both sides),
 Build: `cargo build --release` (Rust 1.88 or newer).
 
 Part of [Asciiverse](https://asciiverse.sh).
+
+## Licence
+
+GNU General Public License, version 3 or (at your option) any later
+version; see [LICENSE](LICENSE).

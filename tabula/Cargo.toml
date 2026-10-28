@@ -3,6 +3,7 @@ name = "tabula"
 version = "0.6.0"
 description = "Tabula, the Roman ancestor of backgammon, in the terminal"
 edition.workspace = true
+license.workspace = true
 repository.workspace = true
 
 [[bin]]

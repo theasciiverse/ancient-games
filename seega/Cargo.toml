@@ -3,6 +3,7 @@ name = "seega"
 version = "0.6.0"
 description = "Seega, the Egyptian game of placing and taking, in the terminal"
 edition.workspace = true
+license.workspace = true
 repository.workspace = true
 
 [[bin]]

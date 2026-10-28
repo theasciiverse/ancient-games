@@ -3,6 +3,7 @@ name = "morris"
 version = "0.6.0"
 description = "The morris games in the terminal: Three, Six, Nine and Twelve Men's Morris"
 edition.workspace = true
+license.workspace = true
 repository.workspace = true
 
 [[bin]]

@@ -3,6 +3,7 @@ name = "senet"
 version = "0.6.0"
 description = "Senet, the game of passing, in the terminal, with every honest rule set"
 edition.workspace = true
+license.workspace = true
 repository.workspace = true
 
 [[bin]]
