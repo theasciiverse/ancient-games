@@ -2,7 +2,7 @@
 # title, so every target gets one archive per game, named
 # <id>-<target>.tar.gz (Linux, macOS) or .zip (Windows), plus one SHA256SUMS
 # for them all, attached to a GitHub release (hub/catalog/SCHEMA.md,
-# release.source = "github"). Tags look like v0.4.0-av.1.
+# release.source = "github"). Tags look like v0.4.0.
 #
 # The games need nothing but a terminal, so Linux builds are static musl.
 
@@ -10,7 +10,7 @@ name: release
 
 on:
   push:
-    tags: ["*-av.*"]
+    tags: ["v*"]
   workflow_dispatch:
     inputs:
       tag:
