@@ -23,7 +23,7 @@ at three strengths.
 | Patolli | `patolli` | R. C. Bell's suggested rules, on Durán's equipment |
 
 Every game: play the computer (easy, normal or hard) or a friend at the
-same keyboard; keys and mouse; F1 for the rules, where each one comes
+same keyboard; keys and mouse; F1 or ? for the rules, where each one comes
 from, and what is known of the game. Made for terminals of 100x30 and
 up, with true colour and UTF-8.
 
@@ -32,6 +32,7 @@ PDF and HTML book); a game whose chapter is written shows it under F1
 and ships it as `RULES.txt` beside the program.
 
 Options: `--seed N`, `--demo` (the computer plays both sides),
+`--plain` (no braille ornament; O turns it on and off in play),
 `--quit-after SECONDS`. For a session log:
 `RUST_LOG=debug <binary> 2>game.log`.
 
