@@ -24,14 +24,14 @@ Pachisi and chaupar (`pachisi/`), Shatranj (`shatranj/`), Patolli
 (`patolli/`).
 
 Version 0.6.0 (2026-10-26: the ornament and boards that grow with the
-terminal), tag v0.6.0-av.1. On the website mockup as fifteen titles
+terminal), tag v0.6.0. On the website mockup as fifteen titles
 in the collection `ancient-games`, previews from each game's `--demo` by
 `asciiverse/record-preview.sh` (seed 3, Mehen 4; one take each, David:
 do not overdo the recordings), local Linux builds in the website's
 dev-releases/ancient-games. Release workflow `.github/workflows/release.yml`
 (one archive per game, static musl Linux, macOS, Windows, x86-64 and
 ARM64); Actions billing blocks builds, so the GitHub releases hold only
-the rulebook PDF until a re-run of v0.6.0-av.1 adds the archives.
+the rulebook PDF until a re-run of v0.6.0 adds the archives.
 Licence: GPL-3.0-or-later for the whole workspace (David, 2026-10-27). Own git repo, branch
 `main`, private at github.com/theasciiverse/ancient-games.
 
